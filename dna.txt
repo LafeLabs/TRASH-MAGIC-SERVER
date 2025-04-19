@@ -1,0 +1,41 @@
+{
+    "html": [
+        "README.md",
+        "branch.html",
+        "delete-html.html",
+        "delete-php.html",
+        "dna.txt",
+        "edit-html.html",
+        "edit-index.html",
+        "edit-php.html",
+        "edit-qrcode-list.html",
+        "freebox.html",
+        "geometron-squares.html",
+        "geometron.js",
+        "index.html",
+        "qrcode-list.html",
+        "qrcode-list.txt",
+        "qrcode-page.html",
+        "qrcode.html",
+        "readme.html",
+        "squares.html",
+        "trashmagic.css",
+        "trashmagic.js",
+        "wall.txt"
+    ],
+    "php": [
+        "branch.txt",
+        "compile-php.txt",
+        "delete-branch.txt",
+        "delete-file.txt",
+        "generate-dna.txt",
+        "list-branches.txt",
+        "list-files.txt",
+        "load-file.txt",
+        "local-replicator.txt",
+        "replicator.txt",
+        "save-file.txt",
+        "save-png.txt",
+        "upload-image.txt"
+    ]
+}
