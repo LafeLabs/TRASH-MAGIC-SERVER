@@ -1,6 +1,7 @@
 {
     "html": [
         "README.md",
+        "album.html",
         "branch.html",
         "delete-html.html",
         "delete-php.html",
@@ -19,6 +20,7 @@
         "qrcode.html",
         "readme.html",
         "squares.html",
+        "track-list.js",
         "trash-magic.html",
         "trashmagic.css",
         "trashmagic.js",
