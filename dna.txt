@@ -19,6 +19,7 @@
         "qrcode.html",
         "readme.html",
         "squares.html",
+        "trash-magic.html",
         "trashmagic.css",
         "trashmagic.js",
         "wall.txt"
