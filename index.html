@@ -44,20 +44,19 @@ CAPS LOCK ALWAYS ON!
 </style>
 <body>    
 
-    <A HREF = "readme.html">readme.html</A>
     <div id = "qrcode"></div>
+    <H1>TRASH MAGIC SERVER!</H1>
 
     <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
     <a href = "branch.html">branch.html</a>
     <div id = "tree"></div>
-    <a href = "https://github.com/LafeLabs/CARDBOARD-HYPERTEXT/">REPLICATE!</a>
+    <a href = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">REPLICATE TRASH MAGIC SERVER!</a>
+    <A HREF = "readme.html">readme.html</A>
+    <a href = "edit-index.html">edit-index.html</a>
 
-    <H1>CARDBOARD HYPERTEXT!</H1>
 
     <P>TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE WORLD WIDE WEB!</P>
 
-    <a href = "https://github.com/LafeLabs/CARDBOARD-HYPERTEXT/">REPLICATE!</a>
-    <a href = "edit-index.html">edit-index.html</a>
     <A href = "qrcode.html">qrcode.html</A>
     <A HREF = "qrcode-page.html">qrcode-page.html</A>
     <a href = "qrcode-list.html">qrcode-list.html</a>
@@ -74,6 +73,11 @@ CAPS LOCK ALWAYS ON!
 <H1>WRITE ON THE WALL BELOW!</H1>
 
     <textarea id = "wall"></textarea>
+
+<H1>FULL SET OF .HTML FILES</H1>
+
+<DIV ID = "HTMLSET"></DIV>
+
 
 <script>
 
@@ -170,6 +174,29 @@ var httpc = new XMLHttpRequest();
 
 httpc.open("GET", "list-branches.php", true);
 httpc.send();
+
+
+pages = [];
+var httpc666 = new XMLHttpRequest();
+httpc666.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        pages = JSON.parse(this.responseText);
+        for(var index = 0;index < pages.length;index++){
+            if(pages[index].substring(pages[index].length-5,pages[index].length) == ".html" || pages[index].substring(pages[index].length-5,pages[index].length) == ".HTML"){
+                var newa = document.createElement("A");
+                newa.href = pages[index];
+                newa.innerHTML = pages[index];
+                document.getElementById("HTMLSET").appendChild(newa);
+
+            }
+
+        }
+        rainbow(document.getElementsByTagName("a"));       
+    }
+};
+
+httpc666.open("GET", "list-files.php", true);
+httpc666.send();
 
 </script>
 </body>

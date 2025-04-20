@@ -14,6 +14,8 @@
         "geometron-squares.html",
         "geometron.js",
         "index.html",
+        "math.html",
+        "pdf-library.html",
         "qrcode-list.html",
         "qrcode-list.txt",
         "qrcode-page.html",
@@ -24,11 +26,13 @@
         "trash-magic.html",
         "trashmagic.css",
         "trashmagic.js",
-        "wall.txt"
+        "wall.txt",
+        "web.html"
     ],
     "php": [
         "branch.txt",
         "compile-php.txt",
+        "copy.txt",
         "delete-branch.txt",
         "delete-file.txt",
         "generate-dna.txt",

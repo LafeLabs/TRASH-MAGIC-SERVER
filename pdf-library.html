@@ -53,12 +53,12 @@ CAPS LOCK ALWAYS ON!
 </style>
 <body>
     <div id = "qrcode"></div>
-    <H1>TRASH MAGIC ALBUM!</H1>
+    <H1>TRASH MAGIC PDF LIBRARY!</H1>
     <P>TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE WORLD WIDE WEB!</P>
     <div id = "freebox"></div>
-    <div id = "tracklist"></div>
+    <div id = "library"></div>
     <textarea id = "wall"></textarea>
-    <A HREF = "index.html">index.html</A>
+
     <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
     <a href = "edit-index.html">edit-index.html</a>
     <a href = "freebox.html">freebox.html</a>
@@ -72,27 +72,22 @@ CAPS LOCK ALWAYS ON!
 <script>
 
 
-tracks = [];
+pdfs = [];
 var httpc = new XMLHttpRequest();
 httpc.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        tracks = JSON.parse(this.responseText);
-        listhtml = "<track-list>\n";
-        listhtml += "  <ol slot = \"tracks\">\n";
-        for(var index = 0;index < tracks.length;index++){
-            if(tracks[index].substring(tracks[index].length-4,tracks[index].length) == ".mp3" || tracks[index].substring(tracks[index].length-4,tracks[index].length) == ".wav"){
-                listhtml += "    <li>\n";
-                listhtml += "      <strong>" + tracks[index] + "</strong>\n";
-            listhtml += "      <audio controls src = \"" + tracks[index] + "\"></audio>\n";
-                listhtml += "    </li>\n";                
+        pdfs = JSON.parse(this.responseText);
+        for(var index = 0;index < pdfs.length;index++){
+            if(pdfs[index].substring(pdfs[index].length-4,pdfs[index].length) == ".pdf" || pdfs[index].substring(pdfs[index].length-4,pdfs[index].length) == ".PDF"){
+                var newa = document.createElement("A");
+                newa.href = pdfs[index];
+                newa.innerHTML = pdfs[index];
+                document.getElementById("library").appendChild(newa);
+
             }
 
         }
-        listhtml += "  </ol>\n";
-        listhtml += "</track-list>";
-        document.getElementById("tracklist").innerHTML = listhtml;
-        rainbow(document.getElementsByTagName("li"));
-
+        rainbow(document.getElementsByTagName("a"));
     }
 };
 

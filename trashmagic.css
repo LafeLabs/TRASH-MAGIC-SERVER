@@ -1,6 +1,7 @@
 body{
     overflow:scroll;
-    background-color:#9f8767;
+    /*background-color:#9f8767;*/
+    background-color:#404040;    
     font-family:Arial;
 }
 pre{
