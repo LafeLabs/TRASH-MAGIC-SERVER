@@ -21,11 +21,13 @@
         "qrcode-page.html",
         "qrcode.html",
         "readme.html",
+        "set.html",
         "squares.html",
         "track-list.js",
         "trash-magic.html",
         "trashmagic.css",
         "trashmagic.js",
+        "trashset.txt",
         "wall.txt",
         "web.html"
     ],
