@@ -105,8 +105,7 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
 ## REPLICATE A TRASH MAGIC SERVER
 
 
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/qrcode.png)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/qrcode-page.png)
+
 ![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/laptop1.jpg)
 
 ## WHAT YOU NEED FOR THIS:
@@ -317,22 +316,5 @@ USE FREE MEDIA TO GROW COMMUNITY!
 
 1. EVERYTHING FREE FOR EVERYONE EVERYWHERE RIGHT NOW!
 2. NO ONE IS FREE UNTIL EVERYONE IS FREE!
-
-## CONTENT SCREENSHOTS
-
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/ALBUMCOVER1.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/EBOOKS.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER2.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER3.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER4.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER5.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MAPLINK.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MAP.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/FREEDOM-PLAZA-QRCODE.PNG)
-
-
-
-
-
 
 
