@@ -57,6 +57,7 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
  - PHYSICAL SERVERS BUILT FROM RASPBERRY PI
  - PHYSICAL SERVERS ON PRIVATE COMPUTERS ON PRIVATE NETWORKS
 
+
 ## HTML AND TEXT FILES:
 
   - [README.md](README.md)
@@ -73,17 +74,22 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
   - [geometron-squares.html](geometron-squares.html)
   - [geometron.js](geometron.js)
   - [index.html](index.html)
+  - [math.html](math.html)
+  - [pdf-library.html](pdf-library.html)
   - [qrcode-list.html](qrcode-list.html)
   - [qrcode-list.txt](qrcode-list.txt)
   - [qrcode-page.html](qrcode-page.html)
   - [qrcode.html](qrcode.html)
   - [readme.html](readme.html)
+  - [set.html](set.html)
   - [squares.html](squares.html)
   - [track-list.js](track-list.js)
   - [trash-magic.html](trash-magic.html)
   - [trashmagic.css](trashmagic.css)
   - [trashmagic.js](trashmagic.js)
+  - [trashset.txt](trashset.txt)
   - [wall.txt](wall.txt)
+  - [web.html](web.html)
 
 ## PHP CODE AS RAW TEXT:
 
