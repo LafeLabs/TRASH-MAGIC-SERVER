@@ -8,6 +8,8 @@ this program generates the file dna.txt which lists the files to replicate
 <br>
 <a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "edit-php.html">edit-php.html</a>
 <br>
+<a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "edit-book.html">edit-book.html</a>
+<br>
 
 
 <br/>
