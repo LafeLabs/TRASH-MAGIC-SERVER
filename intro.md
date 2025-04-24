@@ -1,4 +1,6 @@
-##  [The Trash Magic Handbook](read-markdown-file.php?filename=book.md)
+## [Edit this file](edit-markdown-file.php?filename=intro.md)
+
+##  [The Trash Magic Book](read-markdown-file.php?filename=book.md)
 
 # What Is Trash Magic?
 
@@ -29,4 +31,11 @@ Trash Magicians are the people who follow trash magic as a way of life.  We lear
 
 The set of files which make up Trash Magic effectively form an [Operating System](https://en.wikipedia.org/wiki/Operating_system) which we use entirely from the client side of the web browser.  We can build a whole civilizaion this way, with almost no direct command line interaction with the host OS on which the server software runs.  As long as we can get [PHP](https://en.wikipedia.org/wiki/PHP) to work, the whole system works.
 
+## Trash Magic is a book
+
+This book, the [Trash Magic Book](read-markdown-file.php?filename=book.md).  This is both an ebook and a system for making ebooks. It is also a physical book which we print out from this online book and then illstrate and distribute along the physical networks.  This is a self-replicating book.  It contains the means to relicate itself as well as to replicate all the technology it documents and which hosts it and which it was written on.  This is a living book, it is organic media which is co-created by the readers and writers in the trash magic network. 
+
+## Trash Magic is a Reality
+
+In Trash Magic we believe that we live in a society which forms a network on two physical layers: the Street and the Watershed.  
 

@@ -1,4 +1,6 @@
-[edit-markdown-file.php?filename=organic-web.md](edit-markdown-file.php?filename=organic-web.md)
+[Return to Book](read-markdown-file.php?filename=book.md)
+
+[Edit this page](edit-markdown-file.php?filename=organic-web.md)
 
 # The Organic Web
 

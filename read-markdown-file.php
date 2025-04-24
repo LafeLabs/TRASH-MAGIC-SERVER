@@ -189,6 +189,12 @@ body{
     background-color:#9f8767;
     font-family:Comic Sans MS;
 }
+h1{
+    width:90%;
+    border-radius:1em;
+    margin:auto;
+    background-color:#404040;
+}
 input{
     display:block;
     margin:auto;

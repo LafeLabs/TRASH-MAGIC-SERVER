@@ -1,10 +1,10 @@
 [edit-book.html](edit-book.html)
 
-# The Trash Magic Handbook
+# The Trash Magic Book
 
  1. [What is Trash Magic?](read-markdown-file.php?filename=intro.md)
  4. [The Organic Web](read-markdown-file.php?filename=organic-web.md)
- 5. [Private Server Build](read-markdown-file.php?filename=)
+ 5. [Private Server Build](read-markdown-file.php?filename=private-server.md)
  6. [Full Stack Trash Magic Build](read-markdown-file.php?filename=)
  7. [Physical Hypertext](read-markdown-file.php?filename=)
  8. [The Trash Magic Cart](read-markdown-file.php?filename=)
