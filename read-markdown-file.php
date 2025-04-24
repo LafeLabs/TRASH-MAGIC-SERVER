@@ -15,6 +15,7 @@ convert markdown +latext to html via showdown.js and mathjax.js
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+   <script src = "trashmagic.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
@@ -89,6 +90,12 @@ function loadscroll(scrollname){
             rawhtml = converter.makeHtml(scroll);
             document.getElementById("scrollscroll").innerHTML = rawhtml;
             MathJax.Hub.Typeset();//tell Mathjax to update the math
+            
+            titles = document.getElementsByTagName("H1");
+            for(var index = 0;index < titles.length;index++){
+                rainbowstring(titles[index]);    
+            }
+
         }
     };
     httpc666.open("GET", "load-file.php?filename=" + scrollname, true);
@@ -111,7 +118,7 @@ function modeswitch(){
     if(mode == "dark"){
         mode = "light";
         document.body.style.backgroundColor = "#9f8767";
-        document.getElementById("scrollscroll").style.backgroundColor = "#9f8767";
+        document.getElementById("scrollscroll").style.backgroundColor = "#eeeeee";
         document.getElementById("scrollscroll").style.color = "black";
 
 

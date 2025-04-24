@@ -22,8 +22,7 @@
     <META NAME="robots" CONTENT="noindex,nofollow">
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<!--       un comment to use math
+   <script src = "trashmagic.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
@@ -36,7 +35,6 @@
                 }
             });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
         </script>
-    -->
 
 <link rel="stylesheet" href="trashbook.css">    
 </head>
@@ -72,8 +70,8 @@ var converter = new showdown.Converter();
 converter.setOption('literalMidWordUnderscores', 'true');
 converter.setOption('tables', 'true')
     
-filename = "README.md";
-loadscroll("README.md");
+filename = "book.md";
+loadscroll("book.md");
 
 localfile = true;
 
@@ -89,9 +87,15 @@ function loadscroll(scrollname){
             scroll = this.responseText;
             rawhtml = converter.makeHtml(scroll);
             document.getElementById("scrollscroll").innerHTML = rawhtml;
-            convertscrollinks();
-            //			MathJax.Hub.Typeset();//tell Mathjax to update the math
-    //			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        	MathJax.Hub.Typeset();//tell Mathjax to update the math
+                   	
+            titles = document.getElementsByTagName("H1");
+            for(var index = 0;index < titles.length;index++){
+                rainbowstring(titles[index]);    
+            }           
+
+
+            
         }
     };
     httpc666.open("GET", "load-file.php?filename=" + scrollname, true);
@@ -105,7 +109,7 @@ function modeswitch(){
     if(mode == "dark"){
         mode = "light";
         document.body.style.backgroundColor = "#9f8767";
-        document.getElementById("scrollscroll").style.backgroundColor = "#9f8767";
+        document.getElementById("scrollscroll").style.backgroundColor = "#eeeeee";
         document.getElementById("scrollscroll").style.color = "black";
 
         document.getElementById("scrollsbox").style.backgroundColor = "#9f8767";
