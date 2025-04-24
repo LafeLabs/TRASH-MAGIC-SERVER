@@ -3,7 +3,7 @@
 # The Trash Magic Handbook
 
  1. [What is Trash Magic?](read-markdown-file.php?filename=intro.md)
- 4. [The Organic Web](read-markdown-file.php?filename=)
+ 4. [The Organic Web](read-markdown-file.php?filename=organic-web.md)
  5. [Private Server Build](read-markdown-file.php?filename=)
  6. [Full Stack Trash Magic Build](read-markdown-file.php?filename=)
  7. [Physical Hypertext](read-markdown-file.php?filename=)

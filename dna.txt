@@ -22,6 +22,7 @@
         "javascript.md",
         "markdown.md",
         "math.html",
+        "organic-web.md",
         "pdf-library.html",
         "php.md",
         "qrcode-list.html",

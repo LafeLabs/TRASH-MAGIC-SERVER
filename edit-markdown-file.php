@@ -37,9 +37,17 @@ else{
 
 ?></div>
 <body>
-
+<style>
+    a{
+        font-family:Comic Sans MS;
+        color:#ff2cb4;
+        font-size:2em;
+        z-index:10;
+    }
+</style>
 <div id = "lightdarkbutton" class = "button">LIGHT MODE</div>
 
+<a id = "readlink" style = "position:absolute;left:1em;top:1em;"></a>
 <a href=  "read-book.html" style = "position:absolute;right:5px;top:1.5em;font-size:2em;font-family:Comic Sans MS">read-book.html</a>
 
 <a href=  "generate-dna.php" style = "position:absolute;right:5px;top:3.5em;font-size:2em;font-family:Comic Sans MS">generate-dna.php</a>
@@ -80,6 +88,9 @@ httpc.onreadystatechange = function() {
         setmode();
         editor.setValue(filedata);
         document.getElementById("currentfilename").innerHTML = currentFile;
+        document.getElementById("readlink").innerHTML = currentFile;
+        document.getElementById("readlink").href =  "read-markdown-file.php?filename=" + currentFile;
+        
     }
 };
 httpc.open("GET", "load-file.php?filename=" + currentFile, true);
@@ -119,6 +130,8 @@ httpc8.onreadystatechange = function() {
                     httpc.send();
                     
                     document.getElementById("currentfilename").innerHTML = currentFile;
+                    document.getElementById("readlink").innerHTML = currentFile;
+                    document.getElementById("readlink").href =  "read-markdown-file.php?filename=" + currentFile;
                     
                 }
                 
