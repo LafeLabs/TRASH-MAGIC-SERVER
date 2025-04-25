@@ -16,6 +16,7 @@ convert markdown +latext to html via showdown.js and mathjax.js
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
    <script src = "trashmagic.js"></script>
+<link rel="stylesheet" href="trashbook.css">    
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
@@ -28,6 +29,7 @@ convert markdown +latext to html via showdown.js and mathjax.js
                 }
             });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
         </script>
+
 </head>
 <body>    
 <div class = "data" id = "filenamediv"><?php
@@ -178,144 +180,7 @@ qrcode.makeCode(globalurl);
 
 </script>
 <style>
-.editlinks{
-/*    display:none;*/
-}
-pre{
-  overflow:scroll;
-}
-body{
-    overflow:hidden;
-    background-color:#9f8767;
-    font-family:Comic Sans MS;
-}
-h1{
-    width:90%;
-    border-radius:1em;
-    margin:auto;
-    background-color:#404040;
-}
-input{
-    display:block;
-    margin:auto;
-    width:90%;
-    font-family:courier;
-    font-size:1.2em;
-    background-color:#9f8767;
-    color:black;
-    border-color:blue;
-    border-width:8px;
-}
-.boxlink{
-    padding-left:1em;
-    cursor:pointer;
-    color:blue;
-}
-.boxlink:hover{
-    background-color:#808080;
-}
 
-.scrolllink{
-    color:blue;
-    cursor:pointer;
-}
-.scrolllink:hover{
-    background-color:#ff2cb490;
-}
-
-#scrollscroll{
-    text-align:justify;
-    padding-left:1em;
-    padding-right:1em;
-    position:absolute;
-    overflow:scroll;
-    background-color:black;
-    color:#00ff00;
-    font-size:2em;
-}
-#scrollscroll a{
-    color:blue;
-}
-#scrollscroll img{
-    max-width:80%;
-    display:block;
-    margin:auto;
-    background-color:none;
-}
-.data{
-    display:none;
-}
-h1,h2,h3,h4{
-    text-align:center;
-}
-.button{
-    cursor:pointer;
-}
-.button:hover{
-    background-color:green;
-}
-.button:active{
-    background-color:yellow;
-}
-#scrollsbox{
-    position:absolute;
-    background-color:#9f8767;
-    color:black;
-    overflow:scroll;
-}
-
-
-@media only screen and (orientation: landscape) {
-    
-    #scrollsbox{
-        right:0px;
-        top:0px;
-        bottom:0px;
-    }
-    #scrollscroll{
-        top:0px;
-        bottom:0px;
-    }   
-    #landscapelinks{
-        position:absolute;
-        left:0px;
-        top:0px;
-    }
-    #portraitlinks{
-        display:none;
-    }
-
-}
-
-@media only screen and (orientation: portrait) {
-    .button{
-        font-size:2em;
-    }
-    #scrollsbox{
-        height:30%;
-        right:0px;
-        left:0px;
-        bottom:0px;
-        display:none;
-    }
-    #scrollscroll{
-        top:70px;
-        left:10px;
-        right:10px;
-        bottom:10px;
-    }   
-    #landscapelinks{
-        display:none;
-    }
-    #portraitlinks{
-        position:absolute;
-        left:0px;
-        top:0px;
-    }
-    table img{
-        max-width:60px;
-    }
-}
 </style>
 </body>
 </html>
