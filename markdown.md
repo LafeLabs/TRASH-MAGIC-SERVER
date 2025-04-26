@@ -1,2 +1,2 @@
-# Markdown
+# Markdown and Trash Magic
 

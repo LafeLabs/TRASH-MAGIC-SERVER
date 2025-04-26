@@ -23,28 +23,27 @@ https://cloud9-sdk.readme.io/docs/language-mode
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
 
-<title>MARKDOWN CODE EDITOR!</title>
+<title>HTML CODE EDITOR!</title>
 
 </head>
 <body>
 
 <div id = "lightdarkbutton" class = "button">LIGHT MODE</div>
 
-<a href=  "read-book.html" style = "position:absolute;right:5px;top:1.5em;font-size:2em;font-family:Comic Sans MS">read-book.html</a>
+<a id = "homelink" href=  "index.html" style = "position:absolute;right:5px;top:1.5em;font-size:2em;font-family:Comic Sans MS">HOME</a>
 
-<a href=  "generate-dna.php" style = "position:absolute;right:5px;top:3.5em;font-size:2em;font-family:Comic Sans MS">generate-dna.php</a>
+<a id = "homelink" href=  "compile-php.php" style = "position:absolute;right:5px;top:3em;font-size:2em;font-family:Comic Sans MS">COMPILE PHP CODE!</a>
 
-<a href=  "delete-markdown.html" style = "position:absolute;right:5px;top:5.5em;font-size:2em;font-family:Comic Sans MS">delete-markdown.html</a>
+<a id = "homelink" href=  "generate-dna.php" style = "position:absolute;right:5px;top:4.5em;font-size:2em;font-family:Comic Sans MS">GENERATE DNA!</a>
+
 
 <table id = "inputtable">
     <tr>
         <td>Current File Name:</td>
-        <td>
-            <a id = "currentfilename"></a>
-        </td>
+        <td id = "currentfilename"></td>
     </tr>
     <tr>
-        <td>New File Name(end with .md):</td>
+        <td>New .txt file in php/:</td>
         <td><input id = "newscrollinput"/></td>
     </tr>
 </table>
@@ -63,12 +62,12 @@ prototypescroll = "name";
 editor = ace.edit("maineditor");
 editor.setTheme("ace/theme/github");
 //editor.setTheme("ace/theme/vibrant_ink");
-editor.getSession().setMode("ace/mode/markdown");
+editor.getSession().setMode("ace/mode/php");
 editor.getSession().setUseWrapMode(true);
 editor.$blockScrolling = Infinity;
 editor.setTheme("ace/theme/vibrant_ink");
 
-currentFile = "book.md";
+currentFile = "php/replicator.txt";
 var httpc = new XMLHttpRequest();
 httpc.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -76,14 +75,10 @@ httpc.onreadystatechange = function() {
         setmode();
         editor.setValue(filedata);
         document.getElementById("currentfilename").innerHTML = currentFile;
-        document.getElementById("currentfilename").href = "read-markdown-file.php?filename=" + currentFile;
     }
 };
 httpc.open("GET", "load-file.php?filename=" + currentFile, true);
 httpc.send();
-
-
-
 
 
 scrolls = [];
@@ -92,13 +87,12 @@ httpc8.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         scrolls = JSON.parse(this.responseText);
         for(var index = 0;index < scrolls.length;index++) {    
-            if(scrolls[index].substring(scrolls[index].length - 3,scrolls[index].length) == ".md" || scrolls[index].substring(scrolls[index].length - 3,scrolls[index].length) == ".MD"){
+            if(scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".txt"){
              
                 var newscrollbutton = document.createElement("div");
                 newscrollbutton.classList.add("file");
                 newscrollbutton.classList.add("html");
-
-                newscrollbutton.innerHTML =  scrolls[index];
+                newscrollbutton.innerHTML =   "php/" + scrolls[index];
                 document.getElementById("filescroll").appendChild(newscrollbutton);
                 newscrollbutton.onclick = function(){
                     currentFile = this.innerHTML;
@@ -118,7 +112,6 @@ httpc8.onreadystatechange = function() {
                     httpc.send();
                     
                     document.getElementById("currentfilename").innerHTML = currentFile;
-                    document.getElementById("currentfilename").href = "read-markdown-file.php?filename=" + currentFile;
                     
                 }
                 
@@ -127,7 +120,7 @@ httpc8.onreadystatechange = function() {
     }
 };
 
-httpc8.open("GET", "list-files.php", true);
+httpc8.open("GET", "list-files.php?directoryname=php", true);
 httpc8.send();
 
 
@@ -157,12 +150,18 @@ document.getElementById("newscrollinput").value = "";
 name = "";
 document.getElementById("newscrollinput").onchange = function(){
     name = this.value;
-    currentFile = name;
+    if(name.substring(0,4) != "php/"){
+        currentFile =   "php/" + name;
+    }
+    else{
+        currentFile =  name;
+    }
+    
     scroll = editor.getSession().getValue();
 
     setmode();
     editor.setValue(scroll);  
-    data = encodeURIComponent("# New File\n");
+    data = encodeURIComponent(scroll);
     var httpc = new XMLHttpRequest();
     var url = "save-file.php";        
     httpc.open("POST", url, true);
@@ -173,12 +172,11 @@ document.getElementById("newscrollinput").onchange = function(){
 
 }
 
-
 function addcodelink(codename){
     var newscrollbutton = document.createElement("div");
     newscrollbutton.classList.add("file");
     newscrollbutton.classList.add("html");
-    newscrollbutton.innerHTML = codename;
+    newscrollbutton.innerHTML = "php/" + codename;
     document.getElementById("filescroll").appendChild(newscrollbutton);
     newscrollbutton.onclick = function(){
         currentFile = this.innerHTML;
@@ -248,9 +246,11 @@ document.getElementById("lightdarkbutton").onclick = function(){
         document.getElementById("lightdarkbutton").style.borderColor = "black";
         
         document.getElementById("filescroll").style.backgroundColor = "white";
+        document.getElementById("homelink").style.color = "blue";
 
         document.getElementById("filescroll").style.color = "black";        
-
+        document.getElementById("currentfilename").style.backgroundColor = "#eeeeee";
+        document.getElementById("currentfilename").style.color = "black";
         document.getElementById("newscrollinput").style.color = "black";
         document.getElementById("newscrollinput").style.backgroundColor = "white";
         document.body.style.backgroundColor = "#b0b0b0";
@@ -270,11 +270,13 @@ document.getElementById("lightdarkbutton").onclick = function(){
         
         document.body.style.backgroundColor = "#404040";
         document.body.style.color = "white";
-
+        document.getElementById("homelink").style.color = "#ff2cb4";
+        
         document.getElementById("filescroll").style.backgroundColor = "#101010";        
         document.getElementById("filescroll").style.color = "white";        
         
-
+        document.getElementById("currentfilename").style.backgroundColor = "#101010";        
+        document.getElementById("currentfilename").style.color = "white"
         document.getElementById("newscrollinput").style.color = "white";
         document.getElementById("newscrollinput").style.backgroundColor = "black";        
         document.getElementById("lightdarkbutton").innerHTML = "LIGHT MODE";        

@@ -39,9 +39,7 @@ https://cloud9-sdk.readme.io/docs/language-mode
 <table id = "inputtable">
     <tr>
         <td>Current File Name:</td>
-        <td>
-            <a id = "currentfilename"></a>
-        </td>
+        <td id = "currentfilename"></td>
     </tr>
     <tr>
         <td>New File Name(end with .md):</td>
@@ -76,7 +74,6 @@ httpc.onreadystatechange = function() {
         setmode();
         editor.setValue(filedata);
         document.getElementById("currentfilename").innerHTML = currentFile;
-        document.getElementById("currentfilename").href = "read-markdown-file.php?filename=" + currentFile;
     }
 };
 httpc.open("GET", "load-file.php?filename=" + currentFile, true);
@@ -118,7 +115,6 @@ httpc8.onreadystatechange = function() {
                     httpc.send();
                     
                     document.getElementById("currentfilename").innerHTML = currentFile;
-                    document.getElementById("currentfilename").href = "read-markdown-file.php?filename=" + currentFile;
                     
                 }
                 
@@ -250,7 +246,8 @@ document.getElementById("lightdarkbutton").onclick = function(){
         document.getElementById("filescroll").style.backgroundColor = "white";
 
         document.getElementById("filescroll").style.color = "black";        
-
+        document.getElementById("currentfilename").style.backgroundColor = "#eeeeee";
+        document.getElementById("currentfilename").style.color = "black";
         document.getElementById("newscrollinput").style.color = "black";
         document.getElementById("newscrollinput").style.backgroundColor = "white";
         document.body.style.backgroundColor = "#b0b0b0";
@@ -274,7 +271,8 @@ document.getElementById("lightdarkbutton").onclick = function(){
         document.getElementById("filescroll").style.backgroundColor = "#101010";        
         document.getElementById("filescroll").style.color = "white";        
         
-
+        document.getElementById("currentfilename").style.backgroundColor = "#101010";        
+        document.getElementById("currentfilename").style.color = "white"
         document.getElementById("newscrollinput").style.color = "white";
         document.getElementById("newscrollinput").style.backgroundColor = "black";        
         document.getElementById("lightdarkbutton").innerHTML = "LIGHT MODE";        
