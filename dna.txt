@@ -66,6 +66,7 @@
         "list-files.txt",
         "load-file.txt",
         "local-replicator.txt",
+        "read-markdown-file-mathjax.txt",
         "read-markdown-file.txt",
         "replicator.txt",
         "save-file.txt",

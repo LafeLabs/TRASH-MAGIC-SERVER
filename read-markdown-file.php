@@ -18,6 +18,7 @@ convert markdown +latext to html via showdown.js and mathjax.js
    <script src = "trashmagic.js"></script>
 <link rel="stylesheet" href="trashbook.css">    
 
+<!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
@@ -29,6 +30,7 @@ convert markdown +latext to html via showdown.js and mathjax.js
                 }
             });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
         </script>
+-->
 
 </head>
 <body>    
@@ -91,7 +93,7 @@ function loadscroll(scrollname){
             scroll = this.responseText;
             rawhtml = converter.makeHtml(scroll);
             document.getElementById("scrollscroll").innerHTML = rawhtml;
-            MathJax.Hub.Typeset();//tell Mathjax to update the math
+            //MathJax.Hub.Typeset();//tell Mathjax to update the math
             
             titles = document.getElementsByTagName("H1");
             for(var index = 0;index < titles.length;index++){
