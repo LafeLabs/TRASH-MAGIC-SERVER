@@ -3,7 +3,6 @@
         "README.md",
         "album.html",
         "book.md",
-        "book.txt",
         "branch.html",
         "delete-html.html",
         "delete-markdown.html",

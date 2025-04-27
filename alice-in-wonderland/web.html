@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC NETWORK</title>    
+
+
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   
+   
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+
+    <div id = "qrcode"></div>
+
+    <H1>THE WORLD WIDE WEB</H1>
+
+    <a href = "index.html">HOME</a> 
+    
+    <a href = "https://en.wikipedia.org/wiki/World_Wide_Web">THE WORLD WIDE WEB ON WIKIPEDIA</a>
+    <A HREF = "https://en.wikipedia.org/wiki/Hypertext">HYPERTEXT ON WIKIPEDIA</A>
+    <a href = "https://en.wikipedia.org/wiki/HTML">HTML ON WIKIPEDIA</a>
+    <a href = "https://developer.mozilla.org/en-US/">MOXILLA DEVELOPER NETWORK</a>
+    <A HREF = "https://www.w3schools.com/html/">W3SCHOOLS HTML COURSE</A>
+    <A HREF = "https://en.wikipedia.org/wiki/CSS">CSS ON WIKIPEDIA</A>
+    <A HREF = "https://www.w3schools.com/css/">W3SCHOOLS CSS COURSE</A>
+    <A HREF = "https://en.wikipedia.org/wiki/JavaScript">JAVASCRIPT ON WIKIPEDIA</A>
+    <A HREF = "https://www.w3schools.com/js/">W3SCHOOLS JAVASCRIPT COURSE</A>
+    <A HREF = "https://codepen.io">CODEPEN.IO</A>
+    <a href = "trashmagic.js">trashmagic.js</a>
+    <a href = "trashmagic.css">trashmagic.css</a>
+    <a href = "https://en.wikipedia.org/wiki/PHP">PHP ON WIKIPEDIA</a>
+    <a href = "https://www.php.net/">PHP.NET</a>
+    <A HREF = "https://www.w3schools.com/php/">W3SCHOOLS PHP COURSE</A>
+    <a href = "php/replicator.txt">php/replicator.php(replicator script)</a>
+    <A HREF = "https://en.wikipedia.org/wiki/JSON">JSON ON WIKIPEDIA</A>
+    <a href = "data/dna.txt">data/dna.txt(JSON of self-replicating set)</a>
+    <a href = "webeditor.html">CODE EDITOR</a>
+
+
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+</script>
+</body>
+</html>
+
+

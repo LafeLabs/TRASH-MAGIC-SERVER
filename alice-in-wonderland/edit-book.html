@@ -87,8 +87,6 @@ httpc.send();
 
 
 scrolls = [];
-book = [];
-
 var httpc8 = new XMLHttpRequest();
 httpc8.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -99,7 +97,7 @@ httpc8.onreadystatechange = function() {
                 var newscrollbutton = document.createElement("div");
                 newscrollbutton.classList.add("file");
                 newscrollbutton.classList.add("html");
-                book.push(scrolls[index]);
+
                 newscrollbutton.innerHTML =  scrolls[index];
                 document.getElementById("filescroll").appendChild(newscrollbutton);
                 newscrollbutton.onclick = function(){
@@ -126,23 +124,11 @@ httpc8.onreadystatechange = function() {
                 
             }
         }
-        
-        savebook();
-        
     }
 };
 
 httpc8.open("GET", "list-files.php", true);
 httpc8.send();
-
-function savebook(){
-    var url = "save-file.php";        
-    var httpc = new XMLHttpRequest();
-    httpc.open("POST", url, true);
-    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpc.send("data="+encodeURIComponent(JSON.stringify(book,null,"    "))+"&filename=book.txt");//send text to save-file.php
-
-}
 
 
 document.getElementById("currentfilename").innerHTML = currentFile;
