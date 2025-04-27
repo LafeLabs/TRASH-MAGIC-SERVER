@@ -214,4 +214,6 @@ So she set to work, and very soon finished off the cake.
 
 *      *      *      *      *      *      *
 
-## [chapter II](scrolls/ii)
+
+## [Chapter II. The Pool of Tears](read-markdown-file.php?filename=ii.md)
+ 

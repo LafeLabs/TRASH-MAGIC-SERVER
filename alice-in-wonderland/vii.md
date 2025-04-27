@@ -341,3 +341,5 @@ high: then she walked down the little passage: and _then_—she found
 herself at last in the beautiful garden, among the bright flower-beds
 and the cool fountains.
   
+## [Chapter VIII. The Queen’s Croquet-Ground](read-markdown-file.php?filename=viii.md)
+ 

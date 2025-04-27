@@ -322,5 +322,5 @@ to about two feet high: even then she walked up towards it rather
 timidly, saying to herself “Suppose it should be raving mad after all!
 I almost wish I’d gone to see the Hatter instead!”
  
-
-## [Chapter VII](scrolls/vii) 
+## [Chapter VII. A Mad Tea-Party](read-markdown-file.php?filename=vii.md)
+ 
