@@ -10,6 +10,8 @@
  - [edit-php.html](edit-php.html)
  - [qrcode.html](qrcode.html)
  - [global replicator link](https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/alice-in-wonderland/php/replicator.txt)
+ - [global book JSON url](https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/alice-in-wonderland/book.txt)
+ - [local book set JSON url](book.txt)
 
 Self-relicacating book
 
