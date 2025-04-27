@@ -59,6 +59,7 @@
     "php": [
         "branch.txt",
         "compile-php.txt",
+        "copy-book.txt",
         "copy.txt",
         "delete-branch.txt",
         "delete-file.txt",
