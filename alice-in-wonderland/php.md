@@ -1,2 +1,0 @@
-# PHP and Trash Magic
-

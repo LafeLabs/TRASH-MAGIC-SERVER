@@ -1,27 +1,24 @@
-[edit book.md](edit-markdown-file.php?filename=book.md)
+## [Back up to library page](../) 
 
-[edit-book.html](edit-book.html)
+## [readme.html](readme.html)
 
-# The Trash Magic Book
+# Alice In Wonderland
 
- 1. [What is Trash Magic?](read-markdown-file.php?filename=intro.md)
- 4. [The Organic Web](read-markdown-file.php?filename=organic-web.md)
- 5. [Private Server Build](read-markdown-file.php?filename=private-server.md)
- 6. [Build Trash Magic Server](read-markdown-file.php?filename=trash-magic-server.md)
- 7. [Physical Hypertext](read-markdown-file.php?filename=physical-hypertext.md)
- 8. [The Trash Magic Cart](read-markdown-file.php?filename=trash-magic-cart.md)
- 9. [Trash Magic Media Distro](read-markdown-file.php?filename=trash-magic-media-distro.md)
- 10. [Trash Magic Social Media](read-markdown-file.php?filename=trash-magic-social-media.md)
- 11. [Trash Magic App Development](read-markdown-file.php?filename=trash-magic-app-development.md)
- 12. [The Voice of the Soil](read-markdown-file.php?filename=voice-of-the-soil.md)
- 13. [The Path of the Trash Magician](read-markdown-file.php?filename=trash-magician.md)
- 14. [The Global Trash Magic Revolution](read-markdown-file.php?filename=revolution.md)
- 
+ - [Chapter I. Down the Rabbit-Hole](read-markdown-file.php?filename=i.md)
+ - [Chapter II. The Pool of Tears](read-markdown-file.php?filename=ii.md)
+ - [Chapter III. A Caucus-Race and a Long Tale](read-markdown-file.php?filename=iii.md)
+ - [Chapter IV. The Rabbit Sends in a Little Bill](read-markdown-file.php?filename=iv.md)
+ - [Chapter V. Advice from a Caterpillar](read-markdown-file.php?filename=v.md)
+ - [Chapter VI. Pig and Pepper](read-markdown-file.php?filename=vi.md)
+ - [Chapter VII. A Mad Tea-Party](read-markdown-file.php?filename=vii.md)
+ - [Chapter VIII. The Queen’s Croquet-Ground](read-markdown-file.php?filename=viii.md)
+ - [Chapter IX. The Mock Turtle’s Story](read-markdown-file.php?filename=ix.md)
+ - [Chapter X. The Lobster Quadrille](read-markdown-file.php?filename=x.md)
+ - [Chapter XI. Who Stole the Tarts?](read-markdown-file.php?filename=xi.md)
+ - [Chapter XII. Alice’s Evidence](read-markdown-file.php?filename=xii.md)
 
-## Trash Magic Action Links
+# Trash Magic Utility
 
  - [edit-html.html](edit-html.html)
- - [edit-php.html](edit-php.html)
- - [index.html](index.html)
+ - [edit-book.html](edit-book.html)
  - [qrcode.html](qrcode.html)
- - [branch.html](branch.html)

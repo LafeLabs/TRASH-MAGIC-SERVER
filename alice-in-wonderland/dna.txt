@@ -3,6 +3,7 @@
         "README.md",
         "album.html",
         "book.md",
+        "book.txt",
         "branch.html",
         "delete-html.html",
         "delete-markdown.html",
@@ -58,6 +59,7 @@
     "php": [
         "branch.txt",
         "compile-php.txt",
+        "copy-book.txt",
         "copy.txt",
         "delete-branch.txt",
         "delete-file.txt",
