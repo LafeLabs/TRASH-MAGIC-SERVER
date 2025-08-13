@@ -1,0 +1,166 @@
+ <!doctype html>
+<html>
+<head>
+ <!-- 
+
+MATH!
+
+-->
+
+<!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+    
+<!--favicon source: https://www.favicon.cc/?action=icon&file_id=560661-->
+<link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAD/AAAAAAAAAP8AAAAAAAAA/wAAAAAAAAAAAAAA/wAAAAAAAAAAAAAA/wAAAAAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAAAAAAD/AAAA/wAAAP8AAAAAAAAAAAAAAP8AAAAAAAAAAAAAAP8AAAD/AAAA/wAAAP8AAAD/qqqqVAAAAP8AAAAAAAAAAAAAAP8AAAAAAAAAAAAAAP8AAAD/AAAA/wAAAAAAAAD/AAAAAAAAAP////8A////AP///wD///8A////AP///wD///8A////ACMFqP////8A////AP///wD///8A////AP///wD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMFqP8jBaj/IwWo/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMFqP8jBaj/Mg3U/zIN1P8jBaj/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMFqP8jBaj/Mg3U/zIN1P8yDdT/Mg3U/zIN1P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMFqP8jBaj/Mg3U/zIN1P8yDdT/Mg3U/zIN1P8yDdT/Mg3U/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMFqP8yDdT/Mg3U/zIN1P8yDdT/Mg3U/zIN1P86Eub/Mg3U/zIN1P82Edb/AAAAAAAAAAAAAAAAAAAAACMFqP8jBaj/Mg3U/zIN1P8yDdT/Mg3U/zoS5v86Eub/OhLm/zoS5v8yDdT/Mg3U/zYR1v8AAAAAAAAAACMFqP8jBaj/Mg3U/zIN1P8yDdT/Mg3U/zIN1P86Eub/OhLm/zoS5v86Eub/OhLm/zIN1P8yDdT/NhHW/wAAAAAjBaj/NhHW/zIN1P8yDdT/Mg3U/zIN1P8yDdT/Mg3U/zoS5v86Eub/OhLm/zoS5v86Eub/Mg3U/zYR1v8AAAAAIwWo/zIN1P8yDdT/Mg3U/zIN1P8yDdT/Mg3U/zIN1P88Feb/PBXm/zoS5v86Eub/OhLm/zoS5v82Edb/AAAAACMFqP8jBaj/Mg3U/zIN1P8yDdT/Mg3U/zIN1P8AAAAANhHW/zwV5v86Eub/OhLm/zoS5v86Eub/NhHW/wAAAAAAAAAAIwWo/yMFqP8yDdT/Mg3U/zIN1P8jBaj/AAAAADYR1v8yDdT/Mg3U/zIN1P8yDdT/NhHW/wAAAAAAAAAAAAAAAAAAAAAjBaj/IwWo/yMFqP8jBaj/AAAAAAAAAAAAAAAANhHW/zYR1v82Edb/NhHW/wAAAAAAAAAAatoAAAjYAAAtigAA/38AAP4/AAD8HwAA+A8AAPAHAADgAwAAwAEAAIAAAACAAAAAgAAAAICAAADAgQAA4cMAAA==" rel="icon" type="image/x-icon">
+
+    
+<!--
+ace.js project home:
+https://ace.c9.io/
+
+list of languages:
+https://cloud9-sdk.readme.io/docs/language-mode
+
+-->    
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.33.1/plotly.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        processClass: "mathjax",
+        ignoreClass: "no-mathjax"
+        }
+    });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<title>MATH</title>
+</head>
+<body>
+<h1>{MATH}</h1>
+<style>
+    #plotlydiv{
+        width:50%;
+    }
+</style>
+
+<div id = "displayscroll"></div>
+
+<script>
+squaresize = innerWidth*0.48;
+
+function setup(){
+    createCanvas(innerWidth*0.48,innerHeight- 100);
+    stroke(0);
+    strokeWeight(30);        
+}
+
+timeindex = 0;
+pulsePeriod = 200;
+function draw(){
+  clear();
+  circle(mouseX,mouseY,100*Math.cos(2*Math.PI*timeindex/pulsePeriod));
+
+  timeindex++;
+  if(timeindex > 1e5){
+      timeindex = 0;
+  }
+  sigma = mouseY;
+  x0 = mouseX;
+  
+  noFill();
+  beginShape();
+  for (let x = 0; x < squaresize; x += 1)  {
+      y = squaresize - 0.5*squaresize*exp(-(x - x0)*(x - x0)/(sigma*sigma)) - 10;
+      vertex(x,y);
+  }
+  endShape();
+  
+}
+
+var converter = new showdown.Converter();
+// for more on options see here:
+// https://github.com/showdownjs/showdown/wiki/Showdown-Options
+converter.setOption('literalMidWordUnderscores', 'true');
+converter.setOption('tables', 'true')
+    
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        markdownfiledata = this.responseText;
+        rawhtml = converter.makeHtml(markdownfiledata);
+        document.getElementById("displayscroll").innerHTML = rawhtml;
+        MathJax.Hub.Typeset();//tell Mathjax to update the math
+    }
+};
+httpc.open("GET", "load-file.php?filename=README.md", true);
+httpc.send();
+
+</script>
+<style>
+main{
+    position:absolute;
+    left:1em;
+    bottom:1em;
+}
+main canvas{
+    border:solid;
+}
+body{
+    overflow:hidden;
+    font-family:COMIC SANS MS;
+    background-color:#9f8767;
+}
+input{
+    font-family:COMIC SANS MS;
+    color:white;
+}
+h1{
+    text-align:center;
+}
+A{
+    color:blue;
+}
+#displayscroll{
+    position:absolute;
+    left:55%;
+    right:1em;
+    bottom:1EM;
+    font-family:COMIC SANS MS;
+    font-size:1.5em;
+    top:5em;
+    border:solid;
+    border-width:3px;
+    overflow:scroll;
+    padding: 1em 1em 1em 1em;
+    background-color:#EEEEEE;
+}
+#displayscroll img{
+    max-width:70%;
+    display:block;
+    margin:auto;
+}
+pre{
+    background-color:#e0e0e0;
+    padding:1em 1em 1em 1em;
+    font-family:courier;
+    overflow:scroll;
+}
+.button{
+    cursor:pointer;
+    background-color:white;
+    
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+
+</style>
+
+</body>
+</html>

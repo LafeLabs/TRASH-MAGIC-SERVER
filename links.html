@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>DIRT WIZRD!</title>    
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+    #wall{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+    #motd{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:Courier;
+        BACKGROUND-COLOR:black;
+        color:#00ff00;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+
+    #freebox img{
+        border:solid;
+        border-radius:1em;
+        border-width:5px;
+    }
+    .link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    cursor:pointer;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:0.7em;
+}
+.CARDBOARD-SIGN A{
+    COLOR:BLUE;
+}
+.CARDBOARD-SIGN{
+    MAX-WIDTH:90%;   
+    MARGIN:AUTO;
+    MARGIN-TOP:1EM;
+    MARGIN-BOTTOM:1EM;
+    OVERFLOW:SCROLL;
+    FONT-SIZE:1EM;
+}
+.CARDBOARD-SIGN TEXTAREA{
+    MAX-WIDTH:100%;
+    FONT-SIZE:1EM;
+    HEIGHT:10EM;
+    DISPLAY:NONE;
+}
+.timestampdata{
+    display:none;
+}
+table, form{
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+}
+#fileToUpload{
+    cursor:pointer;
+}
+#submitinput{
+    cursor:pointer;
+}
+#newlinkinput{
+    background-color:black;
+    color:#00ff00;
+    font-family:Courier;
+    font-size:1em;
+}
+</style>
+<body>    
+    <a HREF = "index.html">HOME</a>
+    <div id = "qrcode"></div>
+    <h1>TRASH MAGIC LINK FEED</h1>
+    <table>
+        <tr>
+            <td>ENTER NEW LINK:</td>
+            <TD>
+                <INPUT ID = "newlinkinput">
+            </TD>
+        </tr>
+    </table>
+    <div id = "cardboard_sign_feed"></div>
+
+
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+document.getElementById("newlinkinput").value = "";
+document.getElementById("newlinkinput").onchange = function(){
+    var newlink = {};
+    newlink.url = this.value;
+    newlink.text = "";
+    newlink.timestamp = Math.round((new Date().getTime())/1000);
+    
+    links.push(newlink);
+    drawlinkfeed();
+    savelinks();
+}
+
+function drawlinkfeed(){
+    document.getElementById("cardboard_sign_feed").innerHTML = "";
+    for(var index = links.length - 1;index >= 0;index--){
+        var new_cardboard_sign = document.createElement("DIV");
+        new_cardboard_sign.classList.add("CARDBOARD");
+        new_cardboard_sign.classList.add("CARDBOARD-SIGN");
+        document.getElementById("cardboard_sign_feed").appendChild(new_cardboard_sign);
+        var new_qrcode = document.createElement("SPAN");
+        
+        qrcode = new QRCode(new_qrcode, {
+        	text: links[index].url,
+        	width: 200,
+        	height: 200,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+
+        var new_link = document.createElement("A");
+        new_link.innerHTML = links[index].url;
+        new_link.href = links[index].url;
+        var new_wall = document.createElement("TEXTAREA");
+        new_wall.value = links[index].text;
+        new_wall.classList.add("CARDBOARD");
+        var new_delete_button = document.createElement("SPAN");
+        new_delete_button.classList.add("button");
+        new_delete_button.classList.add("link-delete-button");
+        new_delete_button.innerHTML = "DELETE";
+        new_delete_button.onclick = function(){
+            var newtimestamp = parseInt(this.parentElement.getElementsByClassName("timestampdata")[0].innerHTML);
+            var newlinks = [];
+            for(var lindex = 0;lindex < links.length;lindex++){
+                if(links[lindex].timestamp != newtimestamp){
+                    newlinks.push(links[lindex]);
+                }
+            }
+            links = newlinks;
+            drawlinkfeed();
+            savelinks();
+        }
+        new_cardboard_sign.appendChild(new_delete_button);
+        new_cardboard_sign.appendChild(new_qrcode);
+        new_cardboard_sign.appendChild(new_link);
+        new_cardboard_sign.appendChild(new_wall);
+        var newtimestampdata = document.createElement("SPAN");
+        newtimestampdata.classList.add("timestampdata");
+        newtimestampdata.innerHTML = links[index].timestamp.toString();
+        new_cardboard_sign.appendChild(newtimestampdata);
+        rainbow(document.getElementsByTagName("A"));
+
+    }
+}
+
+function savelinks(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(links,null,"    "))+"&filename=links.json");//send text to save-file.php
+}
+
+var httpclinks = new XMLHttpRequest();
+httpclinks.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        links = JSON.parse(this.responseText);    
+        drawlinkfeed();
+    }
+};
+httpclinks.open("GET", "load-file.php?filename=links.json", true);
+httpclinks.send();
+
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

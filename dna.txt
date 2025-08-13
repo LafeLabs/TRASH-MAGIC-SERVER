@@ -2,6 +2,8 @@
     "html": [
         "README.md",
         "album.html",
+        "apps.html",
+        "black-flag.html",
         "book.md",
         "book.txt",
         "branch.html",
