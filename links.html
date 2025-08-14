@@ -142,13 +142,9 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
 
 
 document.getElementById("newlinkinput").value = "";
+document.getElementById("newlinkinput").select();
 document.getElementById("newlinkinput").onchange = function(){
-    var newlink = {};
-    newlink.url = this.value;
-    newlink.text = "";
-    newlink.timestamp = Math.round((new Date().getTime())/1000);
-    
-    links.push(newlink);
+    links.push(this.value);
     drawlinkfeed();
     savelinks();
 }
@@ -163,7 +159,7 @@ function drawlinkfeed(){
         var new_qrcode = document.createElement("SPAN");
         
         qrcode = new QRCode(new_qrcode, {
-        	text: links[index].url,
+        	text: links[index],
         	width: 200,
         	height: 200,
         	colorDark : "#000000",
@@ -172,20 +168,18 @@ function drawlinkfeed(){
         });
 
         var new_link = document.createElement("A");
-        new_link.innerHTML = links[index].url;
-        new_link.href = links[index].url;
-        var new_wall = document.createElement("TEXTAREA");
-        new_wall.value = links[index].text;
-        new_wall.classList.add("CARDBOARD");
+        new_link.innerHTML = links[index];
+        new_link.href = links[index];
+
         var new_delete_button = document.createElement("SPAN");
         new_delete_button.classList.add("button");
         new_delete_button.classList.add("link-delete-button");
         new_delete_button.innerHTML = "DELETE";
         new_delete_button.onclick = function(){
-            var newtimestamp = parseInt(this.parentElement.getElementsByClassName("timestampdata")[0].innerHTML);
+            var newindex = parseInt(this.parentElement.getElementsByClassName("timestampdata")[0].innerHTML);
             var newlinks = [];
             for(var lindex = 0;lindex < links.length;lindex++){
-                if(links[lindex].timestamp != newtimestamp){
+                if(lindex != newindex){
                     newlinks.push(links[lindex]);
                 }
             }
@@ -196,11 +190,10 @@ function drawlinkfeed(){
         new_cardboard_sign.appendChild(new_delete_button);
         new_cardboard_sign.appendChild(new_qrcode);
         new_cardboard_sign.appendChild(new_link);
-        new_cardboard_sign.appendChild(new_wall);
-        var newtimestampdata = document.createElement("SPAN");
-        newtimestampdata.classList.add("timestampdata");
-        newtimestampdata.innerHTML = links[index].timestamp.toString();
-        new_cardboard_sign.appendChild(newtimestampdata);
+        var indexdata = document.createElement("SPAN");
+        indexdata.classList.add("timestampdata");
+        indexdata.innerHTML = index.toString();
+        new_cardboard_sign.appendChild(indexdata);
         rainbow(document.getElementsByTagName("A"));
 
     }

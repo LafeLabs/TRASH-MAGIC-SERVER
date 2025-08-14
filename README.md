@@ -1,8 +1,6 @@
 ![](qrcode.png)
 ![](qrcode-page.png)
 
-## [read-book.html](read-book.html)
-
 # [TRASH MAGIC SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 
 TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE [WORLD WIDE WEB](https://en.wikipedia.org/wiki/World_Wide_Web). SETS OF FILES REPLICATE FROM WEB SERVER TO WEB SERVER, SPREADING MEDIA AND THE TECHNOLOGY WHICH SUPPORTS THE MEDIA TOGETHER AS A UNIFIED WHOLE.  [PHP](https://en.wikipedia.org/wiki/PHP) SCRIPTS COMMUNICATE WITH THE SERVER SIDE FILE SYSTEM, [LOADING](php/load-file.txt), [SAVING](php/save-file.txt), [LISTING](php/list-files.txt), AND [DELETING](php/delete-file.txt)  FILES OF ALL KINDS, INCLUDING THE PHP SCRIPTS THEMSELVES. 

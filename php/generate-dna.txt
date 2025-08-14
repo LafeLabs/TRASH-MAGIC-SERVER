@@ -42,7 +42,7 @@ this program generates the file dna.txt which lists the files to replicate
 
     echo json_encode($dna,JSON_PRETTY_PRINT);
 
-    $file = fopen("dna.txt","w");// create new file with this name
+    $file = fopen("dna.json","w");// create new file with this name
     fwrite($file,json_encode($dna,JSON_PRETTY_PRINT)); //write data to file
     fclose($file);  //close file
 

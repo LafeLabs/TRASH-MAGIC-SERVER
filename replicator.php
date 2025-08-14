@@ -1,5 +1,5 @@
 <?php
-$dnaurl = "https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/dna.txt";
+$dnaurl = "https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/dna.json";
 
 if(isset($_GET["dna"])){
     $dnaurl = $_GET["dna"];
