@@ -181,9 +181,13 @@ input{
 <div id = "highway">
         
     <div id = "qrcode"></div>
-    
-    <h1>TRASH MAGIC WALL:</h1>
-    <textarea id = "wall" class = "CARDBOARD"></textarea>
+    <div id = "link-list">
+        <a href = "apps.html">TRASH MAGIC APPS</a>
+        <a href = "index.html">HOME</a>
+        <a href = "edit-font.html">EDIT FONT</a>
+        <a href = "metaflag.json">metaflag.json</a>
+        <a href = "black-flag-font.json">black-flag-font.json</a>
+    </div>
     <H1>FLAG GEOMETRY CONTROLS:</H1>
     <TABLE id = "flag-geometry-table">
         <TR>
@@ -223,32 +227,7 @@ input{
     </TABLE>
     <H1>FLAG FEED</H1>
     <div id = "flag-feed"></div>
-    <h1>UPLOAD IMAGE FEED</h1>
-    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
-                <span id ="uploadspan">UPLOAD:</span>
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
-    </form>
-    <div id = "image-feed"></div>
-    <h1>LINK FEED</h1>
-    <table>
-        <tr>
-            <td>ENTER NEW LINK:</td>
-            <TD>
-                <INPUT ID = "newlinkinput">
-            </TD>
-        </tr>
-    </table>
-    <div id = "cardboard_sign_feed"></div>
 
-    <H1>LINK LIST</H1>
-    <div id = "link-list">
-        <a href = "edit-font.html">EDIT FONT</a>
-        <a href = "edit-index.html">EDIT INDEX</a> 
-        <a href = "edit-html.html">EDIT CODE SET</a>
-        <a href = "readme.html">README</a>
-        <a href = "qrcode.html">QR CODE</a>
-    </div>
 </div>
 <script>
 
@@ -483,7 +462,7 @@ function loadimagefeed(){
                 document.getElementById("flag-feed").appendChild(newuploadbox);
             }
             else{
-                document.getElementById("image-feed").appendChild(newuploadbox);
+
             }
     
             var newdiv = document.createElement("DIV");

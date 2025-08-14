@@ -1,9 +1,9 @@
 {
-    "text": "TRASH    MAGIC   IS REAL",
-    "left_margin": 0.05,
-    "top_margin": 0.07,
+    "text": "SEATTLE  .PINK",
+    "left_margin": 0.1,
+    "top_margin": 0.25,
     "horizontal_gap": 0.015,
-    "vertical_gap": 0.22,
+    "vertical_gap": 0.2,
     "number_of_columns": 8,
-    "rainbow": true
+    "rainbow": false
 }
