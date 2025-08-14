@@ -24,38 +24,7 @@ CAPS LOCK ALWAYS ON!
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <style>
-    #wall{
-        width:80%;
-        display:block;
-        margin:auto;
-        border:solid;
-        FONT-FAMILY:COMIC SANS MS;
-        BACKGROUND-COLOR:#9f8767;
-        font-size:2em;
-        height:20em;
-        padding:0.5em 0.5em 0.5em 0.5em;
-        border-radius:0.5em;
-    }
-    #motd{
-        width:80%;
-        display:block;
-        margin:auto;
-        border:solid;
-        FONT-FAMILY:Courier;
-        BACKGROUND-COLOR:black;
-        color:#00ff00;
-        font-size:2em;
-        height:20em;
-        padding:0.5em 0.5em 0.5em 0.5em;
-        border-radius:0.5em;
-    }
-
-    #freebox img{
-        border:solid;
-        border-radius:1em;
-        border-width:5px;
-    }
-    .link-delete-button{
+.link-delete-button{
     border:solid;
     border-radius:5px;
     border-color:red;
@@ -63,7 +32,10 @@ CAPS LOCK ALWAYS ON!
     color:red;
     text-align:center;
     width:40%;
-    font-size:0.7em;
+    font-size:2em;
+    position:relative;
+    top:5em;
+    left:5em;
 }
 .CARDBOARD-SIGN A{
     COLOR:black;
@@ -71,10 +43,20 @@ CAPS LOCK ALWAYS ON!
 .CARDBOARD-SIGN{
     MAX-WIDTH:90%;   
     MARGIN:AUTO;
-    MARGIN-TOP:1EM;
+    MARGIN-TOP:2EM;
+    border-top:solid;
     MARGIN-BOTTOM:1EM;
     OVERFLOW:SCROLL;
     FONT-SIZE:1EM;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
 }
 .timestampdata{
     display:none;
