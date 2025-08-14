@@ -220,6 +220,7 @@ sudo apt install apache2 -y
 sudo apt install php libapache2-mod-php -y
 cd /var/www/html
 sudo rm index.html
+sudo apt-get install curl
 sudo curl -o replicator.php https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/php/replicator.txt
 cd ..
 sudo chmod -R 0777 *

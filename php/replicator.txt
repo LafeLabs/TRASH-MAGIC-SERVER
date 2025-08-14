@@ -5,7 +5,7 @@ if(isset($_GET["dna"])){
     $dnaurl = $_GET["dna"];
 }
 
-$baseurl = explode("dna.txt",$dnaurl)[0];
+$baseurl = explode("dna.json",$dnaurl)[0];
 $dnaraw = file_get_contents($dnaurl);
 $dna = json_decode($dnaraw);
 

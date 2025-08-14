@@ -66,7 +66,7 @@ CAPS LOCK ALWAYS ON!
     font-size:0.7em;
 }
 .CARDBOARD-SIGN A{
-    COLOR:BLUE;
+    COLOR:black;
 }
 .CARDBOARD-SIGN{
     MAX-WIDTH:90%;   
@@ -75,12 +75,6 @@ CAPS LOCK ALWAYS ON!
     MARGIN-BOTTOM:1EM;
     OVERFLOW:SCROLL;
     FONT-SIZE:1EM;
-}
-.CARDBOARD-SIGN TEXTAREA{
-    MAX-WIDTH:100%;
-    FONT-SIZE:1EM;
-    HEIGHT:10EM;
-    DISPLAY:NONE;
 }
 .timestampdata{
     display:none;
@@ -104,6 +98,9 @@ table, form{
 </style>
 <body>    
     <a HREF = "index.html">HOME</a>
+    <a href = "media.html">MEDIA</a>
+    <a href = "apps.html">TRASH MAGIC APPS</a>
+    
     <div id = "qrcode"></div>
     <h1>TRASH MAGIC LINK FEED</h1>
     <table>
@@ -194,9 +191,9 @@ function drawlinkfeed(){
         indexdata.classList.add("timestampdata");
         indexdata.innerHTML = index.toString();
         new_cardboard_sign.appendChild(indexdata);
-        rainbow(document.getElementsByTagName("A"));
-
     }
+    rainbow(document.getElementsByTagName("A"));
+    
 }
 
 function savelinks(){

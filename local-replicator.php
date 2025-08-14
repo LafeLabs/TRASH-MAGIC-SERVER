@@ -1,6 +1,6 @@
 <?php
 
-$dnaraw = file_get_contents("../dna.txt");
+$dnaraw = file_get_contents("../dna.json");
 $dna = json_decode($dnaraw);
 $baseurl = "../";
 
