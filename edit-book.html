@@ -140,7 +140,7 @@ function savebook(){
     var httpc = new XMLHttpRequest();
     httpc.open("POST", url, true);
     httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpc.send("data="+encodeURIComponent(JSON.stringify(book,null,"    "))+"&filename=book.txt");//send text to save-file.php
+    httpc.send("data="+encodeURIComponent(JSON.stringify(book,null,"    "))+"&filename=book.json");//send text to save-file.php
 
 }
 

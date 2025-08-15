@@ -7,7 +7,7 @@ TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE [WORLD WIDE WEB](https://en.wikiped
 
 THE [SET](https://en.wikipedia.org/wiki/Set_(mathematics)) OF FILES CONTIANED HERE REPRESENTS A SELF-REPLICATING SET. THAT SET INLUDES THE PHYSICAL SERVERS, THE SOFTWARE WHICH RUNS ON THOSE SERVERS, THE PEOPLE WHO REPLICATE THE SERVERS, THE MEDIA WHICH TELLS PEOPLE HOW TO REPLICATE THE SERVERS, AND THE SOCIAL STRUCTURES WHICH SUPPORT REPLICATION.  WE TAKE "SET" TO BE AN ABSTRACT COLLECTION OF ELEMENTS IN THE MOST GENERAL MATHEMATICAL SENS HERE.  THAT IS TO SAY, TRASH MAGIC IS A MATHEMATICAL FRAMEWORK FOR INTERACTING WITH SELF-REPLICATING SETS OF WHICH WE ARE ELEMENTS!
 
-A PHP [SCRIPT CALLLED generate-dna.php](php/generate-dna.txt) GENERATES A [JSON](https://en.wikipedia.org/wiki/JSON) FILE CALLED THE DNA([dna.txt](dna.txt)), WHICH LISTS ALL THE FILES IN THE SET.  THIS JSON FILE IS USED BY THE PHP SCRIPT [replicator.php](php/replicator.txt), WHICH USES THAT LIST OF FILES TO COPY THE WHOLE SET FROM SERVER TO SERVER USING ONLY CLIENT SIDE ACTIONS! 
+A PHP [SCRIPT CALLLED generate-dna.php](php/generate-dna.txt) GENERATES A [JSON](https://en.wikipedia.org/wiki/JSON) FILE CALLED THE DNA([dna.json](dna.json)), WHICH LISTS ALL THE FILES IN THE SET.  THIS JSON FILE IS USED BY THE PHP SCRIPT [replicator.php](php/replicator.txt), WHICH USES THAT LIST OF FILES TO COPY THE WHOLE SET FROM SERVER TO SERVER USING ONLY CLIENT SIDE ACTIONS! 
 
 VARIUS EDITOR APPLICATIONS EDIT EVERY ELEMENT OF THE SET OF FILES.  THE MAIN FILE [index.html](index.html) IS EDITED USING AN HTML EDITOR [edit-index.html](edit-index.html), THE WHOLE SET OF FILES IN THE MAIN FOLDER ARE EDITED USING [edit-html.html](edit-html.html), AND THE PHP FILES ARE EDITED IN THE [php/](php/) FOLDER WITH [edit-php.html](edit-php.html).
 
@@ -27,10 +27,11 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
 
 ## OPERATING SYSTEM ELEMENTS OF TRASH MAGIC SERVERS
 
- - [UBUNTU STUDIO FREE MEDIA OPERATING SYSTEM](https://ubuntustudio.org/)
+ - [UBUNTU FREE OPERATING SYSTEM](https://ubuntu.com/download/desktop)
  - [XAMPP LOCAL PRIVATE WEB SERVER SOFTWARE](https://www.apachefriends.org/)
  - [CLOUD HOSTING AT EASYDNS.COM](https://easydns.com/)
  - [LOCAL SERVERS ON ANDROID WITH KSWEB](https://play.google.com/store/apps/details?id=ru.kslabs.ksweb&hl=en_US)
+ - [BALENA ETCHER TO FLASH UBUNTU INSTALL DISKS](https://etcher.balena.io/)
  - [RASPBERRY PI SERVERS](https://www.raspberrypi.com/)
  - [APACHE WEB SERVER](https://www.apache.org/)
 
@@ -57,52 +58,76 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
  - PHYSICAL SERVERS BUILT FROM RASPBERRY PI
  - PHYSICAL SERVERS ON PRIVATE COMPUTERS ON PRIVATE NETWORKS
 
-
 ## HTML AND TEXT FILES:
 
   - [README.md](README.md)
   - [album.html](album.html)
+  - [apps.html](apps.html)
+  - [black-flag.html](black-flag.html)
+  - [book.md](book.md)
   - [branch.html](branch.html)
+  - [cardboard-sign.html](cardboard-sign.html)
+  - [cardboard-sign.txt](cardboard-sign.txt)
+  - [cyber-tarot.html](cyber-tarot.html)
   - [delete-html.html](delete-html.html)
+  - [delete-markdown.html](delete-markdown.html)
   - [delete-php.html](delete-php.html)
-  - [dna.txt](dna.txt)
+  - [edit-book.html](edit-book.html)
+  - [edit-font.html](edit-font.html)
   - [edit-html.html](edit-html.html)
   - [edit-index.html](edit-index.html)
   - [edit-php.html](edit-php.html)
   - [edit-qrcode-list.html](edit-qrcode-list.html)
   - [freebox.html](freebox.html)
   - [geometron-squares.html](geometron-squares.html)
+  - [geometron.html](geometron.html)
   - [geometron.js](geometron.js)
+  - [image-feed.html](image-feed.html)
   - [index.html](index.html)
+  - [links.html](links.html)
   - [math.html](math.html)
+  - [media.html](media.html)
+  - [oscilloscope.html](oscilloscope.html)
   - [pdf-library.html](pdf-library.html)
   - [qrcode-list.html](qrcode-list.html)
-  - [qrcode-list.txt](qrcode-list.txt)
   - [qrcode-page.html](qrcode-page.html)
   - [qrcode.html](qrcode.html)
+  - [read-book-mathjax.html](read-book-mathjax.html)
+  - [read-book.html](read-book.html)
   - [readme.html](readme.html)
+  - [riff-o-tron.html](riff-o-tron.html)
   - [set.html](set.html)
   - [squares.html](squares.html)
+  - [tarot.js](tarot.js)
+  - [the-matrix.html](the-matrix.html)
+  - [the-matrix.txt](the-matrix.txt)
   - [track-list.js](track-list.js)
   - [trash-magic.html](trash-magic.html)
+  - [trash-tarot.html](trash-tarot.html)
+  - [trashbook.css](trashbook.css)
   - [trashmagic.css](trashmagic.css)
+  - [trashmagic.html](trashmagic.html)
   - [trashmagic.js](trashmagic.js)
-  - [trashset.txt](trashset.txt)
   - [wall.txt](wall.txt)
   - [web.html](web.html)
+  - [write-cardboard-sign.html](write-cardboard-sign.html)
 
 ## PHP CODE AS RAW TEXT:
 
   - [php/branch.txt](php/branch.txt)
   - [php/compile-php.txt](php/compile-php.txt)
+  - [php/copy-book.txt](php/copy-book.txt)
   - [php/copy.txt](php/copy.txt)
   - [php/delete-branch.txt](php/delete-branch.txt)
   - [php/delete-file.txt](php/delete-file.txt)
+  - [php/edit-markdown-file.txt](php/edit-markdown-file.txt)
   - [php/generate-dna.txt](php/generate-dna.txt)
   - [php/list-branches.txt](php/list-branches.txt)
   - [php/list-files.txt](php/list-files.txt)
   - [php/load-file.txt](php/load-file.txt)
   - [php/local-replicator.txt](php/local-replicator.txt)
+  - [php/read-markdown-file-mathjax.txt](php/read-markdown-file-mathjax.txt)
+  - [php/read-markdown-file.txt](php/read-markdown-file.txt)
   - [php/replicator.txt](php/replicator.txt)
   - [php/save-file.txt](php/save-file.txt)
   - [php/save-png.txt](php/save-png.txt)
@@ -152,10 +177,10 @@ WE USE BOTH COLORS AS A REJECTION OF THE BLUE PILL/RED PILL BINARY PRESENTED IN 
 
 ![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/redandblue.png)
 
-## STEP 3: DOWNLOAD IMAGE FOR INSTALLING UBUNTU STUDIO!
+## STEP 3: DOWNLOAD IMAGE FOR INSTALLING UBUNTU DESKTOP!
 
 
-### [CLICK HERE FOR DOWNLOAD PAGE!](https://ubuntustudio.org/download/)
+### [CLICK HERE FOR DOWNLOAD PAGE!](https://ubuntu.com/download/desktop)
 
 YOU CAN JUST DOWNLOAD IT TO YOUR "DOWNLOADS" FOLDER AND LEAVE IT THERE, SINCE THAT'S EASY TO FIND!
 
@@ -186,7 +211,7 @@ THIS IS NOW THE SEED THAT WILL MAKE TRASH(OLD COMPUTERS) INTO MAGIC!
 
 MAKE AS MANY AS YOU WANT!
 
-## STEP 5: INSTALL UBUNTU STUDIO!
+## STEP 5: INSTALL UBUNTU!
 
 LAST CHANCE TO SAVE ANY DATA FROM THE OLD MACHINE!
 
@@ -200,7 +225,9 @@ MAKE THE USERNAME GENERIC AND NOT YOUR ACTUAL NAME OR IDENTIFYING PRIVATE INFORM
 
 EXAMPLE: MAKE THE USERNAME "TRASHMAGIC" AND THE PASSWORD "TRASHMAGIC"!
 
-UBUNTU STUDIO IS A FREE SYSTEM OF FREE SOFTWARE FOR MAKING FREE MEDIA! ALL FREE! NO MONEY!
+MANY UBUNTU MACHINES USE LOGIN UBUNTU AND PASSWORD UBUNTU!
+
+UBUNTU IS A FREE SYSTEM OF FREE SOFTWARE FOR MAKING FREE MEDIA! ALL FREE! NO MONEY!
 
 BE SURE TO WRITE THE LOGIN AND PASSWORD IN BIG LETTERS IN PAINT PEN ON THE MACHINE IN MORE THAN ONE PLACE!
 
