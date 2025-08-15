@@ -10,10 +10,32 @@
     </head>
 <body>
     
-    <a id ="homelink" href = "apps.html">APPS</a>
+    <a id ="homelink" href = "index.html">HOME</a>
+    <a id ="rightlink" href = "apps.html">APPS</a>
     
     <h1 id = "title">THE MATRIX HAS YOU</h1>
 <textarea id = "maintextarea"></textarea>
+<div id = "postbutton">PUBLISH CURRENT MATRIX AS TEXT FILE</div>
+<STYLE>
+    #postbutton{
+        position:absolute;
+        left:5px;
+        bottom:5px;
+        color:#00ff00;
+        border:solid;
+        border-color:#00ff00;
+        border-radius:0.5em;
+        font-family:Courier;
+        font-size:1.5em;
+        cursor:pointer;
+    }
+    #postbutton:hover{
+        background-color:green;
+    }
+    #postbutton:active{
+        background-color:yellow;
+    }
+</STYLE>
 
 <script>
 
@@ -43,6 +65,29 @@ document.getElementById("maintextarea").onkeyup = function() {
 
 
 
+document.getElementById("postbutton").onclick = function(){
+    var timestamp = Math.round((new Date().getTime()));
+    foo = new Date(timestamp)
+    datestring = (foo.getFullYear()).toString() + "-" + (foo.getMonth() + 1).toString() + "-" + (foo.getDate()).toString();
+    
+    if(foo.getHours() < 10){
+        timestring =  "0" + (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+    }
+    else{
+        timestring = (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+    }
+    filename = "the-matrix-" + datestring + "-" + timestring + ".txt";
+    console.log(filename);
+    data =document.getElementById("maintextarea").value;
+    var httpc2 = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc2.send("data="+data+"&filename=" + filename);//send text to filesaver.php
+    
+}
+
+
 </script>
 <style>
 body{
@@ -55,7 +100,7 @@ body{
     z-index:-1;
     width:100%;
     text-align:center;
-    font-family:Comic Sans MS;
+        font-family:Courier;
     
 }
 a{
@@ -82,7 +127,17 @@ a{
     left:0px;
     top:0px;
     font-size:2em;
-    font-family:Comic Sans MS;
+        font-family:Courier;
+    font-size:4em;
+    color:#ff2cb4;
+    
+}
+#rightlink{
+    position:absolute;
+    right:0px;
+    top:0px;
+    font-size:2em;
+        font-family:Courier;
     font-size:4em;
     color:#ff2cb4;
     

@@ -21,19 +21,123 @@ CAPS LOCK ALWAYS ON!
    <title>TRASH MAGIC!</title>    
    <script src = "trashmagic.js"></script>
    <link rel="stylesheet" href="trashmagic.css">
+   <script type="module" src="track-list.js"></script>   
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>    
-
-    <div id = "qrcode"></div>
     <H1>TRASH MAGIC SERVER!</H1>
-    <a href = "media.html">MEDIA</a>
-    <A HREF = "links.html">LINK FEED</A>
-    <a href = "apps.html">TRASH MAGIC APPS</a>
-    <a href = "edit-index.html">EDIT</a>
-    <a href = "branch.html">BRANCH</a>
-    <a href = "readme.html">REPLICATE SERVER</a>
-
+    <div id = "qrcode"></div>
+    <H1>LINK FEED</H1>
+    <table>
+        <tr>
+            <td>ENTER NEW LINK:</td>
+            <TD>
+                <INPUT ID = "newlinkinput">
+            </TD>
+        </tr>
+    </table>
+    <div id = "cardboard_sign_feed"></div>
+    <A href = "#apps">TRASH MAGIC APPS</A>
+    <H1>PDF FILES</H1>
+    <div id = "pdf-feed"></div>
+    <H1>TEXT FILES</H1>
+    <div id = "text-feed"></div>
+    <H1>AUDIO TRACKS</H1>
+    <div id = "track-list"></div>
+    <H1>IMAGES</H1>  
+    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+            <span id ="uploadspan">UPLOAD:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+    </form>
+    <div id = "image-feed"></div>
+    <H1 id = "apps">TRASH MAGIC APPS</H1>
+    <div id = "trash-magic-apps">
+        <a href = "cardboard-sign.html">DRAW CARDBOARD SIGN</a>
+        <a href = "write-cardboard-sign.html">WRITE CARDBOARD SIGN</a>
+        <a href = "black-flag.html">BLACK FLAG</a>
+        <A href ="image-feed.html">IMAGE FEED</A>
+        <a href = "the-matrix.html">THE MATRIX</a>
+        <a href = "trash-tarot.html">QUANTUM TRASH TAROT</a>
+        <a href = "cyber-tarot.html">QUANTUM CYBER TAROT</a>
+        <a href = "riff-o-tron.html">RIFF-O-TRON</a>
+        <a href = "geometron.html">GEOMETRON</a>
+        <a href = "oscilloscope.html">OSCILLOSCOPE</a>
+        <a href= "read-book.html">TRASH MAGIC E-BOOK</a>
+        <a href = "qrcode.html">QR CODE</a>
+        <a href = "readme.html">README</a>
+        <a href = "edit-index.html">HOME PAGE EDITOR</a>
+        <a href = "edit-html.html">APP CODE EDITOR</a>
+        <a href = "branch.html">TRASH MAGIC BRANCH</a>
+    </div>
+<style>
+    #image-feed img{
+        border:solid;
+        border-radius:1em;
+        border-width:5px;
+    }
+    button{
+        font-size:2em;
+    }
+    li{
+        margin-top:0.25em;
+        margin-bottom:0.25em;
+        border-radius:0.125em;
+    }
+    .link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    cursor:pointer;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:2em;
+    position:relative;
+    top:5em;
+    left:5em;
+}
+.CARDBOARD-SIGN A{
+    COLOR:black;
+}
+.CARDBOARD-SIGN{
+    MAX-WIDTH:90%;   
+    MARGIN:AUTO;
+    MARGIN-TOP:2EM;
+    border-top:solid;
+    MARGIN-BOTTOM:1EM;
+    OVERFLOW:SCROLL;
+    FONT-SIZE:1EM;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.timestampdata{
+    display:none;
+}
+table, form{
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+}
+#fileToUpload{
+    cursor:pointer;
+}
+#submitinput{
+    cursor:pointer;
+}
+#newlinkinput{
+    background-color:black;
+    color:#00ff00;
+    font-family:Courier;
+    font-size:1em;
+}
+</style>
 <script>
 
 titles = document.getElementsByTagName("H1");
@@ -56,6 +160,149 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
 	correctLevel : QRCode.CorrectLevel.H
 });
 
+files = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        loadfiles();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+function loadfiles(){
+    listhtml = "<track-list>\n";
+    listhtml += "  <ol slot = \"tracks\">\n";
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".mp3" || files[index].substring(files[index].length-4,files[index].length) == ".wav"){
+            listhtml += "    <li>\n";
+            listhtml += "      <strong>" + files[index] + "</strong>\n";
+        listhtml += "      <audio controls src = \"" + files[index] + "\"></audio>\n";
+            listhtml += "    </li>\n";                
+        }
+
+    }
+    listhtml += "  </ol>\n";
+    listhtml += "</track-list>";
+    document.getElementById("track-list").innerHTML = listhtml;
+    rainbow(document.getElementsByTagName("li"));
+
+    for(var index = 0;index < files.length;index++) {
+        if(files[index].includes(".png") || files[index].includes(".PNG") || files[index].includes(".jpg") || files[index].includes(".JPG") ||files[index].includes(".jpeg")||files[index].includes(".SVG") ||files[index].includes(".svg") || files[index].includes(".gif") ||files[index].includes(".GIF")){
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = files[index];
+            newimg.classList.add("uploadimage");
+            newuploadbox.appendChild(newimg);
+            document.getElementById("image-feed").appendChild(newuploadbox);
+    
+        }
+    }    
+
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".pdf" || files[index].substring(files[index].length-4,files[index].length) == ".PDF"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("pdf-feed").appendChild(newa);
+        }
+
+    }
+    rainbow(document.getElementById("pdf-feed").getElementsByTagName("a"));
+
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".txt" || files[index].substring(files[index].length-4,files[index].length) == ".TXT"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("text-feed").appendChild(newa);
+        }
+
+    }
+    rainbow(document.getElementById("text-feed").getElementsByTagName("a"));
+
+}
+
+
+
+document.getElementById("newlinkinput").value = "";
+document.getElementById("newlinkinput").select();
+document.getElementById("newlinkinput").onchange = function(){
+    links.push(this.value);
+    drawlinkfeed();
+    savelinks();
+}
+
+function drawlinkfeed(){
+    document.getElementById("cardboard_sign_feed").innerHTML = "";
+    for(var index = links.length - 1;index >= 0;index--){
+        var new_cardboard_sign = document.createElement("DIV");
+        new_cardboard_sign.classList.add("CARDBOARD");
+        new_cardboard_sign.classList.add("CARDBOARD-SIGN");
+        document.getElementById("cardboard_sign_feed").appendChild(new_cardboard_sign);
+        var new_qrcode = document.createElement("SPAN");
+        
+        qrcode = new QRCode(new_qrcode, {
+        	text: links[index],
+        	width: 200,
+        	height: 200,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+
+        var new_link = document.createElement("A");
+        new_link.innerHTML = links[index];
+        new_link.href = links[index];
+
+        var new_delete_button = document.createElement("SPAN");
+        new_delete_button.classList.add("button");
+        new_delete_button.classList.add("link-delete-button");
+        new_delete_button.innerHTML = "DELETE";
+        new_delete_button.onclick = function(){
+            var newindex = parseInt(this.parentElement.getElementsByClassName("timestampdata")[0].innerHTML);
+            var newlinks = [];
+            for(var lindex = 0;lindex < links.length;lindex++){
+                if(lindex != newindex){
+                    newlinks.push(links[lindex]);
+                }
+            }
+            links = newlinks;
+            drawlinkfeed();
+            savelinks();
+        }
+        new_cardboard_sign.appendChild(new_delete_button);
+        new_cardboard_sign.appendChild(new_qrcode);
+        new_cardboard_sign.appendChild(new_link);
+        var indexdata = document.createElement("SPAN");
+        indexdata.classList.add("timestampdata");
+        indexdata.innerHTML = index.toString();
+        new_cardboard_sign.appendChild(indexdata);
+    }
+    rainbow(document.getElementsByTagName("A"));
+    
+}
+
+function savelinks(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(links,null,"    "))+"&filename=links.json");//send text to save-file.php
+}
+
+var httpclinks = new XMLHttpRequest();
+httpclinks.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        links = JSON.parse(this.responseText);    
+        drawlinkfeed();
+    }
+};
+httpclinks.open("GET", "load-file.php?filename=links.json", true);
+httpclinks.send();
 </script>
 </body>
 </html>

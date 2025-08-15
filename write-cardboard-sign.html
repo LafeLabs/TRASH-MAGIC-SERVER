@@ -11,10 +11,29 @@
 <body>
     
     <a id ="homelink" href = "apps.html">APPS</a>
+    <a id ="rightlink" href = "index.html">HOME</a>
     
     <h1 id = "title">WRITE CARDBOARD SIGN</h1>
 <textarea id = "maintextarea"></textarea>
 
+<div id = "postbutton">PUBLISH CURRENT CARDBOARD SIGN AS TEXT FILE</div>
+<STYLE>
+    #postbutton{
+        position:absolute;
+        left:5px;
+        bottom:5px;
+        border:solid;
+        font-family:Comic Sans MS;
+        font-size:1.5em;
+        cursor:pointer;
+    }
+    #postbutton:hover{
+        background-color:green;
+    }
+    #postbutton:active{
+        background-color:yellow;
+    }
+</STYLE>
 <script>
 
 currentfile = "cardboard-sign.txt";
@@ -41,7 +60,27 @@ document.getElementById("maintextarea").onkeyup = function() {
     httpc.send("data="+data+"&filename=" + currentfile);//send text to filesaver.php
 }
 
-
+document.getElementById("postbutton").onclick = function(){
+    var timestamp = Math.round((new Date().getTime()));
+    foo = new Date(timestamp)
+    datestring = (foo.getFullYear()).toString() + "-" + (foo.getMonth() + 1).toString() + "-" + (foo.getDate()).toString();
+    
+    if(foo.getHours() < 10){
+        timestring =  "0" + (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+    }
+    else{
+        timestring = (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+    }
+    filename = "cardboard-sign-" + datestring + "-" + timestring + ".txt";
+    console.log(filename);
+    data =document.getElementById("maintextarea").value;
+    var httpc2 = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc2.send("data="+data+"&filename=" + filename);//send text to filesaver.php
+    
+}
 
 </script>
 <style>
@@ -78,6 +117,16 @@ a{
 #homelink{
     position:absolute;
     left:0px;
+    top:0px;
+    font-size:2em;
+    font-family:Comic Sans MS;
+    font-size:4em;
+    color:blue;
+    
+}
+#rightlink{
+    position:absolute;
+    right:0px;
     top:0px;
     font-size:2em;
     font-family:Comic Sans MS;
