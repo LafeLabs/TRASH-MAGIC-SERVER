@@ -254,6 +254,7 @@ sudo chmod -R 0777 *
 cd html
 php replicator.php
 sudo chmod -R 0777 *
+ln -s /var/www/html ~/Desktop/html
 ```
 COMPLETE THE INSTALLATION BY APPLYING PERMANENT PAINT WITH PAINT PENS OR ANY OTHER PAINT AS LONG AS YOU DON'T JAM THE KEYBOARD OR BLOCK THE SCREEN! 
 

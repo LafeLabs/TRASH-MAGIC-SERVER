@@ -318,14 +318,13 @@ var httpc2 = new XMLHttpRequest();
         newa.innerHTML = "UP A LEVEL ../";
         newa.href = "../";
         document.getElementById("branches").appendChild(newa);
-
         for(var index = 0;index < directories.length;index++) {
             var newa = document.createElement("A");
             newa.innerHTML = directories[index] + "/";
             newa.href = directories[index] + "/";
             document.getElementById("branches").appendChild(newa);
-            rainbow(document.getElementById("branches").getElementsByTagName("a"));
         }
+        rainbow(document.getElementById("branches").getElementsByTagName("a"));
     }
 };
 
