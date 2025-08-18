@@ -57,7 +57,7 @@ $phpfiles = scandir(getcwd()."/php");
 echo "\n## HTML AND TEXT FILES:\n\n";
 
 foreach($files as $value){
-    if(substr($value,-4) == ".txt" || substr($value,-4) == ".css" || substr($value,-5) == ".html" || substr($value,-3) == ".md" || substr($value,-3) == ".py" || substr($value,-3) == ".sh" || substr($value,-3) == ".js"){
+    if(substr($value,-4) == ".txt" || substr($value,-4) == ".css" || substr($value,-5) == ".html" || substr($value,-5) == ".json" || substr($value,-3) == ".md" || substr($value,-3) == ".py" || substr($value,-3) == ".sh" || substr($value,-3) == ".js"){
         echo "  - [".$value."](".$value.")\n";
     }
 }
