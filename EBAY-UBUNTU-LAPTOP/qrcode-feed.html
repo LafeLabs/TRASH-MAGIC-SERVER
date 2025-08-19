@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREBERAREREBEQEAEBEREQARAQAQEREAAAEBERAREQAAAAAAABERAAABERERERERABEREREREREBEREREREREREREREREREREREAAAAREQAAAAEREBERAREQAQAQEREBABABABAREQEAEAEREBERAREQAAAAEREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+   <title>QRCODE!</title>    
+   <!--
+   QR CODE GENERATOR 
+   -->
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+
+<h1>
+    <a id = "url">QRCODE</a>
+</h1>
+
+    <div id = "qrcode"></div>   
+    <input id = "urlinput">
+    <textarea id = "note"></textarea>
+    <div id = "feed"></div>
+    <div id = "links">
+        <a href = "index.html">index.html</a>
+    </div>
+<style>
+h1{
+    font-family:Comic Sans MS;
+    font-size:2em;
+    text-align:center;
+}
+#feed div{
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    margin:auto;
+    display:block;
+    border:solid;
+    font-family:Comic Sans MS;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+    cursor:pointer;
+} 
+#feed div span:hover{
+    background-color:green;
+}
+#feed div span:active{
+    background-color:yellow;
+}
+
+#links a{
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    margin:auto;
+    display:block;
+
+    font-family:Comic Sans MS;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+    
+}
+#note{
+    width:90%;
+    height:8em;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    width:90%;   
+    margin-left:4%;
+}
+a{
+    color:#300030;
+    display:block;
+    font-family:Comic Sans MS;
+    
+}
+input{
+    font-size:2em;
+    width:90%;   
+    margin-left:4%;
+    margin-top:1.5em;
+
+}
+#qrcode img{
+    margin:auto;
+}
+.delete{
+    color:red;
+    border-color:red;
+    border:solid;
+    border-radius:10px;
+    border-width:5px;
+}
+.delete:hover{
+    background-color:green;
+}
+</style>
+<script>
+
+
+feed = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        feed = JSON.parse(this.responseText);
+        loadfeed();
+    }
+};
+httpc.open("GET", "load-file.php?filename=qrcode-feed.json", true);
+httpc.send();
+
+    
+if(innerWidth > innerHeight){
+    codesquaresize = innerHeight - 200;
+}
+else{
+    codesquaresize = innerWidth - 200;
+}
+url = window.location.href;
+document.getElementById("url").innerHTML = url;    
+document.getElementById("url").href = url;    
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: url,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+document.getElementById("urlinput").value = "";
+document.getElementById("urlinput").select();
+document.getElementById("urlinput").onchange = function(){
+    url = this.value;
+    this.value = "";
+    qrcode.makeCode(url);
+    document.getElementById("url").innerHTML = url;    
+    document.getElementById("url").href = url;    
+
+    var newlink = {};
+    newlink.url = url;
+    newlink.note = document.getElementById("note").value;
+    feed.push(newlink);
+    savefeed();
+    loadfeed();
+}
+
+
+loadfeed();
+
+function loadfeed(){
+    document.getElementById("feed").innerHTML = "";
+    for(var index = feed.length - 1;index >= 0;index--){
+        var newdiv = document.createElement("DIV");
+        var newspan = document.createElement("SPAN");
+        newspan.innerHTML = feed[index].url;
+        newspan.onclick = function(){
+            document.getElementById("url").innerHTML = this.parentNode.getElementsByTagName("SPAN")[0].innerHTML;
+            document.getElementById("url").href = this.parentNode.getElementsByTagName("SPAN")[0].innerHTML;
+            document.getElementById("note").value = this.parentNode.getElementsByTagName("SPAN")[1].innerHTML;
+            url = this.parentNode.getElementsByTagName("SPAN")[0].innerHTML;
+            qrcode.makeCode(url);
+
+        }
+        newdiv.appendChild(newspan);
+        document.getElementById("feed").appendChild(newdiv);
+        var newspan = document.createElement("SPAN");
+        newspan.style.display = "none";
+        newspan.innerHTML = feed[index].note;
+        newdiv.appendChild(newspan);
+        var newspan = document.createElement("SPAN");
+        newspan.innerHTML = "X";
+        newspan.className = "delete";
+        newdiv.appendChild(newspan);
+        newspan.onclick = function(){
+
+            thisurl = this.parentNode.getElementsByTagName("SPAN")[0].innerHTML;
+            var newfeed = [];
+            for(var index = 0;index < feed.length;index++){
+                if(feed[index].url != thisurl){
+                    newfeed.push(feed[index]);
+                }
+            }
+            feed = newfeed;
+            savefeed();
+            loadfeed();
+        }
+    }
+}
+
+function savefeed(){
+    data = encodeURIComponent(JSON.stringify(feed,null,"    "));
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=qrcode-feed.json");//send text to save-file.php
+}
+
+</script>
+</body>
+</html>
+
+
+    
+    

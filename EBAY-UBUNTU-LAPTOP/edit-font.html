@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+     <meta charset="utf-8"/>
+     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADf+wAA3/sAAAfgAACv9QAAoAUAAK/1AACv9QAAqBUAAK/1AACoFQAAr/UAAKAFAACv9QAAB+AAAN/7AADf+wAA" rel="icon" type="image/x-icon" />
+        
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script> 
+    </head>
+<body>
+<style>
+    body{
+        background-color:#9f8767;
+        font-family:Comic Sans MS;
+        font-size:2em;
+    }
+    a{
+        display:block;
+    }
+    main{
+        position:absolute;
+        left:0px;
+        top:0px;
+    }
+    #scroll{
+        position:absolute;
+        right:0px;
+        top:0px;
+        bottom:0px;
+        overflow:scroll;
+        padding-left:1em;
+    }
+</style>    
+<div id = "scroll">
+    <A HREF = "index.html">index.html</A>
+    <div id = "letterbox"></div>
+</div>
+
+<script>
+
+ascii = [];
+aindex = 0101;// capital A
+letter = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        ascii = JSON.parse(this.responseText);
+        letter = ascii[aindex];
+    }
+};
+httpc.open("GET", "load-file.php?filename=black-flag-font.json", true);
+httpc.send();
+
+
+
+function saveascii(){
+
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(ascii,null,"    "))+"&filename=black-flag-font.json");//send text to filesaver.php
+    
+}
+
+
+unit = 100;
+letter  = [];
+glyph = [];
+function setup(){
+    if(innerWidth > innerHeight){
+        unit = innerHeight - 50;
+        document.getElementById("scroll").style.left  = unit.toString() + "px";
+    }
+    else{
+        unit = innerWidth - 50;
+    }
+    createCanvas(unit, unit);
+    background(0);
+    stroke(0);
+}
+
+quantum = 0.02;
+
+function draw() {
+  
+    background(0);
+    stroke("red");
+    fill("red");
+    x = mouseX;
+    y = mouseY;
+    x = quantum*Math.round(x/(quantum*unit))
+    y = quantum*Math.round(y/(quantum*unit))
+    
+    character = String.fromCharCode(aindex);
+    document.getElementById("letterbox").innerHTML = character;
+    
+    stroke("#ff2cb4");
+    fill("#ff2cb4");
+    beginShape();
+    for(var index = 0;index < letter.length;index++){
+        vertex(letter[index].x*unit,letter[index].y*unit);
+    }
+    vertex(x*unit,y*unit);
+    endShape(CLOSE);
+    
+    circle(x*unit,y*unit,5);
+
+}
+
+function mouseClicked() {   
+    var point = {
+        "x":x,
+        "y":y
+    }
+    letter.push(point);
+}
+
+glyph = [];
+
+function keyPressed() {
+  if (keyCode  === DELETE) {
+        letter.pop();
+  }
+  if(key == ' '){
+    var point = {
+        "x":x,
+        "y":y
+    }
+    letter.push(point);
+  }
+  if(keyCode === RETURN){
+      ascii[aindex] = letter;
+      saveascii();
+  }
+  if(keyCode === DOWN_ARROW){
+      aindex++;
+      if(aindex > 0177){
+          aindex = 040;
+      }
+      letter = ascii[aindex];
+  }
+  if(keyCode === UP_ARROW){
+      aindex--;
+      if(aindex < 040){
+          aindex = 0177;
+      }
+      letter = ascii[aindex];
+  }
+
+    
+}
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;
+}
+#title{
+    position:absolute;
+    z-index:-1;
+    width:100%;
+    text-align:center;
+    font-family:Comic Sans MS;
+    
+}
+a{
+}
+#maintextarea{
+    position:absolute;
+    left:10%;
+    right:10%;
+    top:10%;
+    bottom:10%;
+    width:80%;
+    height:75%;
+    padding:1em 1em 1em 1em ;
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+    font-size:1.5em;
+    overflow:scroll;
+    border:solid;
+    border-width:10px;
+}
+#homelink{
+    position:absolute;
+    left:0px;
+    top:0px;
+    font-size:2em;
+    font-family:Comic Sans MS;
+    font-size:4em;
+    color:blue;
+    
+}
+
+        </style>
+    </body>
+</html>

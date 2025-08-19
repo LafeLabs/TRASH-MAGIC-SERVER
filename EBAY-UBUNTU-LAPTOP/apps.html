@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC!</title>    
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+    <a href = "media.html">MEDIA</a>
+    <a href = "index.html">HOME</a>
+    <a href = "links.html">LINKS</a>
+    <div id = "qrcode"></div>
+    <h1>TRASH MAGIC APPS!</h1>
+    <a href = "cardboard-sign.html">DRAW CARDBOARD SIGN</a>
+    <a href = "write-cardboard-sign.html">WRITE CARDBOARD SIGN</a>
+    <a href = "black-flag.html">BLACK FLAG</a>
+    <A href ="image-feed.html">IMAGE FEED</A>
+    <a href = "the-matrix.html">THE MATRIX</a>
+    <a href = "trash-tarot.html">QUANTUM TRASH TAROT</a>
+    <a href = "cyber-tarot.html">QUANTUM CYBER TAROT</a>
+    <a href = "riff-o-tron.html">RIFF-O-TRON</a>
+    <a href = "geometron.html">GEOMETRON</a>
+    <a href = "oscilloscope.html">OSCILLOSCOPE</a>
+    <a href= "read-book.html">TRASH MAGIC E-BOOK</a>
+    <a href = "qrcode.html">QR CODE</a>
+    <a href = "readme.html">README</a>
+    <a href = "edit-html.html">APP CODE EDITOR</a>
+ 
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+</script>
+</body>
+</html>
+
+
+    
+    
