@@ -10,3 +10,4 @@ sudo chmod -R 0777 *
 cd html
 php replicator.php
 sudo chmod -R 0777 *
+ln -s /var/www/html ~/Desktop/html

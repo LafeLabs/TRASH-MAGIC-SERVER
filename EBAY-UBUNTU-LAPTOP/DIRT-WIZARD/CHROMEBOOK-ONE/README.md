@@ -3,6 +3,14 @@
 # https://trashrobot.net/TRASH-MAGIC-SERVER/EBAY-UBUNTU-LAPTOP/DIRT-WIZARD/CHROMEBOOK-ONE/
 ![](qrcode-trashrobot.png)
 
+# AS ABOVE, SO BELOW 
+
+![](hexagram.png)
+
+![](CHROMEBOOK-ONE-PHOTO1.PNG)
+![](CHROMEBOOK-ONE-PHOTO2.PNG)
+![](CHROMEBOOK-ONE-PHOTO3.PNG)
+
 ## [TRASH MAGIC SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 ## EBAY UBUNTU LAPTOP
 ## DIRT WIZARD
@@ -18,3 +26,9 @@ TO REPLICATE THE SERVER, USE THE INSTRUCTIONS AT THE [MAIN GITHUB REPOSITORY](ht
  - [index.html](index.html)
  - [edit-index.html](edit-index.html)
  - [image-feed.html](image-feed.html)
+ - [qrcode-feed.html](qrcode-feed.html)
+ - [SEND TEXT MESSAGE TO THE DIRT WIZARD TO ARRANGE TO RENDESVOUS IN PARK FOR SERVER ACCESS](sms:303-817-8283)
+ - [TUNNEL BY HIGHWAY WITH SERVER WHEN DIRT WIZARD IS THERE](https://www.openstreetmap.org/#map=19/39.858571/-105.055666)
+ - [PARK TO MEET THE DIRT WIZARD](https://www.openstreetmap.org/#map=19/39.858668/-105.060534)
+ - [BOULDER TUNNEL 1](https://www.openstreetmap.org/#map=19/40.000372/-105.262555)
+ - [BOULDER TUNNEL 2](https://www.openstreetmap.org/#map=19/40.007283/-105.274824)
