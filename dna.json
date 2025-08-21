@@ -26,6 +26,8 @@
         "geometron.js",
         "image-feed.html",
         "index.html",
+        "link-feed.html",
+        "link-feed.json",
         "links.html",
         "links.json",
         "math.html",
