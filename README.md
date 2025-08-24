@@ -8,25 +8,26 @@
 
 TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE [WORLD WIDE WEB](https://en.wikipedia.org/wiki/World_Wide_Web). SETS OF FILES REPLICATE FROM WEB SERVER TO WEB SERVER, SPREADING MEDIA AND THE TECHNOLOGY WHICH SUPPORTS THE MEDIA TOGETHER AS A UNIFIED WHOLE.  [PHP](https://en.wikipedia.org/wiki/PHP) SCRIPTS COMMUNICATE WITH THE SERVER SIDE FILE SYSTEM, [LOADING](php/load-file.txt), [SAVING](php/save-file.txt), [LISTING](php/list-files.txt), AND [DELETING](php/delete-file.txt)  FILES OF ALL KINDS, INCLUDING THE PHP SCRIPTS THEMSELVES. 
 
-THE [SET](https://en.wikipedia.org/wiki/Set_(mathematics)) OF FILES CONTIANED HERE REPRESENTS A SELF-REPLICATING SET. THAT SET INLUDES THE PHYSICAL SERVERS, THE SOFTWARE WHICH RUNS ON THOSE SERVERS, THE PEOPLE WHO REPLICATE THE SERVERS, THE MEDIA WHICH TELLS PEOPLE HOW TO REPLICATE THE SERVERS, AND THE SOCIAL STRUCTURES WHICH SUPPORT REPLICATION.  WE TAKE "SET" TO BE AN ABSTRACT COLLECTION OF ELEMENTS IN THE MOST GENERAL MATHEMATICAL SENS HERE.  THAT IS TO SAY, TRASH MAGIC IS A MATHEMATICAL FRAMEWORK FOR INTERACTING WITH SELF-REPLICATING SETS OF WHICH WE ARE ELEMENTS!
+THE [SET](https://en.wikipedia.org/wiki/Set_(mathematics)) OF FILES CONTAINED HERE REPRESENTS A SELF-REPLICATING SET. THAT SET INLUDES THE PHYSICAL SERVERS, THE SOFTWARE WHICH RUNS ON THOSE SERVERS, THE PEOPLE WHO REPLICATE THE SERVERS, THE MEDIA WHICH TELLS PEOPLE HOW TO REPLICATE THE SERVERS, AND THE SOCIAL STRUCTURES WHICH SUPPORT REPLICATION.  WE TAKE "SET" TO BE AN ABSTRACT COLLECTION OF ELEMENTS IN THE MOST GENERAL MATHEMATICAL SENSE HERE.  THAT IS TO SAY, TRASH MAGIC IS A MATHEMATICAL FRAMEWORK FOR INTERACTING WITH SELF-REPLICATING SETS OF WHICH WE ARE ELEMENTS!
 
 A PHP [SCRIPT CALLLED generate-dna.php](php/generate-dna.txt) GENERATES A [JSON](https://en.wikipedia.org/wiki/JSON) FILE CALLED THE DNA([dna.json](dna.json)), WHICH LISTS ALL THE FILES IN THE SET.  THIS JSON FILE IS USED BY THE PHP SCRIPT [replicator.php](php/replicator.txt), WHICH USES THAT LIST OF FILES TO COPY THE WHOLE SET FROM SERVER TO SERVER USING ONLY CLIENT SIDE ACTIONS! 
 
-VARIUS EDITOR APPLICATIONS EDIT EVERY ELEMENT OF THE SET OF FILES.  THE MAIN FILE [index.html](index.html) IS EDITED USING AN HTML EDITOR [edit-index.html](edit-index.html), THE WHOLE SET OF FILES IN THE MAIN FOLDER ARE EDITED USING [edit-html.html](edit-html.html), AND THE PHP FILES ARE EDITED IN THE [php/](php/) FOLDER WITH [edit-php.html](edit-php.html).
+VARIOUS EDITOR APPLICATIONS EDIT EVERY ELEMENT OF THE SET OF FILES.  THE MAIN FILE [index.html](index.html) IS EDITED USING AN HTML EDITOR [edit-index.html](edit-index.html), THE WHOLE SET OF FILES IN THE MAIN FOLDER ARE EDITED USING [edit-html.html](edit-html.html), AND THE PHP FILES ARE EDITED IN THE [php/](php/) FOLDER WITH [edit-php.html](edit-php.html). CODE EDITORS US THE JAVASCRIPT LIBRARY [ACE.JS](https://ace.c9.io/) FOR SYNTAX HIGHLIGHTING.
 
-TRASH MAGIC SERVERS ARE USED TO SPREAD FREE MEDIA ON FREE SOFTWARE THAT RUNS ON FREE HARDWARE VIA THE PHYSICAL NETWORKS OF THE WORLD. WE TAKE OLD COMPUTERS MADE USELESS BY THE PLANNED OBSOLESCENCE OF BIG TECH AND PUT FREE SOFTWARE ON THEM WHICH BOTH CREATES AND SHARES MEDIA ON LOCAL NETWORKS. WE THEN DISRIBUTE THESE SERVERS FROM CARTS ALONG THE STREETS AND HIGHWAYS AND TRASNSIT LINES OF THE WORLD.  
+TRASH MAGIC SERVERS ARE USED TO SPREAD FREE MEDIA ON FREE SOFTWARE THAT RUNS ON FREE HARDWARE VIA THE PHYSICAL NETWORKS OF THE WORLD. WE TAKE OLD COMPUTERS MADE USELESS BY THE [PLANNED OBSOLESCENCE](https://en.wikipedia.org/wiki/Planned_obsolescence) OF [BIG TECH](https://en.wikipedia.org/wiki/Big_Tech) AND PUT FREE SOFTWARE ON THEM WHICH BOTH CREATES AND SHARES MEDIA ON LOCAL NETWORKS. WE THEN DISRIBUTE THESE SERVERS FROM CARTS ALONG THE STREETS AND HIGHWAYS AND TRASNSIT LINES OF THE WORLD.  
 
 THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING CODE.
-
 
 ## LANGUAGE ELEMENTS OF TRASH MAGIC SERVERS
 
  - [HTML](https://en.wikipedia.org/wiki/HTML)
- - [PHP](https://en.wikipedia.org/wiki/PHP)
- - [JAVASCRIPT](https://en.wikipedia.org/wiki/JavaScript)
  - [CSS](https://en.wikipedia.org/wiki/CSS)
- - [JSON](https://en.wikipedia.org/wiki/JSON)
+ - [JAVASCRIPT](https://en.wikipedia.org/wiki/JavaScript)
  - [MARKDOWN](https://en.wikipedia.org/wiki/Markdown)
+ - [JSON](https://en.wikipedia.org/wiki/JSON)
+ - [PHP](https://en.wikipedia.org/wiki/PHP)
+ - [LATEX](https://en.wikipedia.org/wiki/LaTeX)
+ - [TEXT](https://en.wikipedia.org/wiki/Text_file)
 
 ## OPERATING SYSTEM ELEMENTS OF TRASH MAGIC SERVERS
 
@@ -38,12 +39,6 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
  - [RASPBERRY PI SERVERS](https://www.raspberrypi.com/)
  - [APACHE WEB SERVER](https://www.apache.org/)
 
-## LIVE LINKS OF TRASH MAGIC ON LOCAL INSTANCES
-
- - [index.html](index.html)
- - [qrcode.html](qrcode.html)
- - [edit-html.html](edit-html.html)
- 
 ## PHYSICAL ELEMENTS OF SERVER NETWORK
 
  - BOOK SHOPS
@@ -61,81 +56,6 @@ THIS IS A PHYSICAL NETWORK OF FREE MEDIA DISTRIBUTION USING SELF-REPLICATING COD
  - PHYSICAL SERVERS BUILT FROM RASPBERRY PI
  - PHYSICAL SERVERS ON PRIVATE COMPUTERS ON PRIVATE NETWORKS
 
-## HTML AND TEXT FILES:
-
-  - [README.md](README.md)
-  - [album.html](album.html)
-  - [apps.html](apps.html)
-  - [black-flag.html](black-flag.html)
-  - [book.md](book.md)
-  - [branch.html](branch.html)
-  - [cardboard-sign.html](cardboard-sign.html)
-  - [cardboard-sign.txt](cardboard-sign.txt)
-  - [cyber-tarot.html](cyber-tarot.html)
-  - [delete-html.html](delete-html.html)
-  - [delete-markdown.html](delete-markdown.html)
-  - [delete-php.html](delete-php.html)
-  - [edit-book.html](edit-book.html)
-  - [edit-font.html](edit-font.html)
-  - [edit-html.html](edit-html.html)
-  - [edit-index.html](edit-index.html)
-  - [edit-php.html](edit-php.html)
-  - [edit-qrcode-list.html](edit-qrcode-list.html)
-  - [freebox.html](freebox.html)
-  - [geometron-squares.html](geometron-squares.html)
-  - [geometron.html](geometron.html)
-  - [geometron.js](geometron.js)
-  - [image-feed.html](image-feed.html)
-  - [index.html](index.html)
-  - [links.html](links.html)
-  - [math.html](math.html)
-  - [media.html](media.html)
-  - [oscilloscope.html](oscilloscope.html)
-  - [pdf-library.html](pdf-library.html)
-  - [qrcode-list.html](qrcode-list.html)
-  - [qrcode-page.html](qrcode-page.html)
-  - [qrcode.html](qrcode.html)
-  - [read-book-mathjax.html](read-book-mathjax.html)
-  - [read-book.html](read-book.html)
-  - [readme.html](readme.html)
-  - [riff-o-tron.html](riff-o-tron.html)
-  - [set.html](set.html)
-  - [squares.html](squares.html)
-  - [tarot.js](tarot.js)
-  - [the-matrix.html](the-matrix.html)
-  - [the-matrix.txt](the-matrix.txt)
-  - [track-list.js](track-list.js)
-  - [trash-magic.html](trash-magic.html)
-  - [trash-tarot.html](trash-tarot.html)
-  - [trashbook.css](trashbook.css)
-  - [trashmagic.css](trashmagic.css)
-  - [trashmagic.html](trashmagic.html)
-  - [trashmagic.js](trashmagic.js)
-  - [wall.txt](wall.txt)
-  - [web.html](web.html)
-  - [write-cardboard-sign.html](write-cardboard-sign.html)
-
-## PHP CODE AS RAW TEXT:
-
-  - [php/branch.txt](php/branch.txt)
-  - [php/compile-php.txt](php/compile-php.txt)
-  - [php/copy-book.txt](php/copy-book.txt)
-  - [php/copy.txt](php/copy.txt)
-  - [php/delete-branch.txt](php/delete-branch.txt)
-  - [php/delete-file.txt](php/delete-file.txt)
-  - [php/edit-markdown-file.txt](php/edit-markdown-file.txt)
-  - [php/generate-dna.txt](php/generate-dna.txt)
-  - [php/list-branches.txt](php/list-branches.txt)
-  - [php/list-files.txt](php/list-files.txt)
-  - [php/load-file.txt](php/load-file.txt)
-  - [php/local-replicator.txt](php/local-replicator.txt)
-  - [php/read-markdown-file-mathjax.txt](php/read-markdown-file-mathjax.txt)
-  - [php/read-markdown-file.txt](php/read-markdown-file.txt)
-  - [php/replicator.txt](php/replicator.txt)
-  - [php/save-file.txt](php/save-file.txt)
-  - [php/save-png.txt](php/save-png.txt)
-  - [php/upload-image.txt](php/upload-image.txt)
-
 ## INSTALL TRASH MAGIC ON PRIVATE MACHINE
 
 TO INSTALL TRASH MAGIC ON A WINDOWS OR MAC MACHINE RATHER THAN A LIBERATED LINUX MACHINE, WE WILL USE XAMPP, A LOCAL WEB SERVER WHICH HAS PHP SUPPORT BUILT IN. 
@@ -150,7 +70,7 @@ TO BUILD YOUR OWN TRASH MAGIC CODE REPOSITORIES, INCLUDING CLONES OF THIS ONE, S
 
 ## REPLICATE A TRASH MAGIC SERVER
 
-THIS IS HOW WE BUILD THE REAL SERVERS THAT WILL MAKE UP THE SCALABLE NETWORK THAT EXISTS OUTSIDE OF THE SYSTEM OF PRIVATE PROPERTY!  THESE ARE LIBERATED SYSTEMS THAT HAVE NO USERS, NO PRIVATE DATA, NO INFORMATION OTHER THAN WHAT WE ARE TRYING TO SHARE IN ORDER TO BUILD A TRULY FREE NETWORK OF FREE INFORMATION! THIS IS A NETWORK OF PEOPLE, MACHINES AND MEDIA WITHOUT PROPERTY!
+THIS IS HOW WE BUILD THE SERVERS THAT WILL MAKE UP THE SCALABLE NETWORK THAT EXISTS OUTSIDE OF THE SYSTEM OF PRIVATE PROPERTY!  THESE ARE LIBERATED SYSTEMS THAT HAVE NO USERS, NO PRIVATE DATA, NO INFORMATION OTHER THAN WHAT WE ARE TRYING TO SHARE IN ORDER TO BUILD A TRULY FREE NETWORK OF FREE INFORMATION! THIS IS A NETWORK OF PEOPLE, MACHINES AND MEDIA WITHOUT PROPERTY!
 
 ![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/laptop1.jpg)
 
@@ -195,7 +115,6 @@ BALENA ETCHER IS FREE SOFTWARE THAT RUNS ON ALL MAJOR OPERATING SYSTEMS THAT CAN
 
 DOWNLOAD AND INSTALL THE SOFTWARE! IF YOU'RE ON AN EXISTING TRASH MAGIC SERVER(WHICH RUNS UBUNTU LINUX) YOU CAN JUST UNZIP THE FILE YOU DOWNLOAD AND THEN RUN THE PROGRAM BY CLICKING ON THE FILE CALLED "balena etcher" IN THE UNZIPPED FOLDER!
 
-
 ## STEP 4: FLASH INSTALL IMAGE ONTO RED THUMB DRIVE
 
 PLACE RED PAINTED THUMB DRIVE INTO THE USB SLOT OF YOUR EXISTING COMPUTER!
@@ -228,7 +147,7 @@ MAKE THE USERNAME GENERIC AND NOT YOUR ACTUAL NAME OR IDENTIFYING PRIVATE INFORM
 
 EXAMPLE: MAKE THE USERNAME "TRASHMAGIC" AND THE PASSWORD "TRASHMAGIC"!
 
-MANY UBUNTU MACHINES USE LOGIN UBUNTU AND PASSWORD UBUNTU!
+MANY UBUNTU MACHINES USE LOGIN UBUNTU AND PASSWORD UBUNTU(LOWERCASE)!
 
 UBUNTU IS A FREE SYSTEM OF FREE SOFTWARE FOR MAKING FREE MEDIA! ALL FREE! NO MONEY!
 
@@ -277,9 +196,9 @@ ONCE THIS IS ALIVE YOU CAN EDIT THE SYSTEM IN THE BROWSER!
 
 THERE IS A LINK TO EDIT!
 
-THERE IS A LINK TO FORK!
+THERE IS A LINK TO BRANCH!
 
-ALL WEB PAGES CAN ALL BE EDITED AND FORKED!
+ALL WEB PAGES CAN ALL BE EDITED AND BRANCHED!
 
 BUILD A WHOLE WORLD OF LOCAL WEB PAGES!
 
@@ -292,13 +211,19 @@ IF YOU DON'T KNOW HTML, YOU CAN LEARN WITH ANY OF VARIOUS TOOLS, BUT WE LIKE [W3
 
 MAKE WEB PAGES FOR ALL THE CONTENT CREATORS WHICH HAVE THEIR CONTACT INFO, SOCIALS, PAYMENT LINKS, ARTIST STATEMENTS, SO THAT WE CAN ALL SUPPORT EACH OTHER AS THE COMMUNITY GROWS!
 
-TO MAKE A PLAYLIST OF SONGS OR PODCAST EPISODES, PUT TRACKS IN THE "TRACKS" FOLDER AND CLICK THE LINK TO THE PLAYER!
-
-TO ADD IMAGES, USE THE FREESTORE LINK AND NOTE THAT IMAGE CAN BE VERY EASILY DELETED!
-
-IF YOU SEE ANY IMAGES YOU DON'T WANT JUST DELETE THEM IMMEDIATELY!
+IF YOU SEE ANY IMAGES YOU DON'T WANT JUST DELETE THEM IMMEDIATELY USING THE IMAGE FEED APP!
 
 WANT TO POST WITHOUT CODE? JUST POST ON PAPER OR CARDBOARD, PHOTOGRAPH, AND UPLOAD! THIS IS AN EASY WAY TO POST THINGS!
+
+PUT CONTENT INTO FOLDERS AND IT WILL LOAD IN THE PAGE REPRESENTED BY THAT FOLDER!
+
+MANY TIMES, WHEN REPEATING THIS PROCESS, IT IS USEFUL TO GO BACK TO THE TERMINAL AND ENTER :
+
+```
+cd /var/www
+sudo chmod -R 0777 *
+```
+TO MAKE SURE AL WEB FILES ARE FULLY FREE TO EDIT AND DELETE AS WELL AS READ!
 
 ## STEP 8: CREATE THE CONTENT THUMB DRIVE!
 
@@ -358,17 +283,10 @@ USE COMMUNITY TO GROW FREE MEDIA!
 
 USE FREE MEDIA TO GROW COMMUNITY!
 
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/QRCODE-FACTORY-GLUE.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/PENTAGRAM-SIGN.PNG)
-![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MEDIUM-IS-THE-MESSAGE.PNG)
-
 ## THE LAWS OF TRASH:
 
 1. EVERYTHING FREE FOR EVERYONE EVERYWHERE RIGHT NOW!
 2. NO ONE IS FREE UNTIL EVERYONE IS FREE!
-
-
-
 
 # [TRASH MAGIC SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 # [CODE/](https://github.com/LafeLabs/TRASH-MAGIC-SERVER/tree/main/CODE/)
@@ -386,24 +304,34 @@ THE LANGUAGES OF THE SET ARE:
  - [LATEX](https://en.wikipedia.org/wiki/LaTeX)
  - [TEXT](https://en.wikipedia.org/wiki/Text_file)
 
+
 # HTML FILES
 
+ - [black-flag.html](black-flag.html)
  - [branch.html](branch.html)
+ - [cardboard-sign.html](cardboard-sign.html)
+ - [cyber-tarot.html](cyber-tarot.html)
  - [delete-html.html](delete-html.html)
  - [delete-markdown.html](delete-markdown.html)
  - [delete-php.html](delete-php.html)
+ - [edit-font.html](edit-font.html)
  - [edit-html.html](edit-html.html)
  - [edit-index.html](edit-index.html)
  - [edit-markdown.html](edit-markdown.html)
  - [edit-php.html](edit-php.html)
+ - [geometron.html](geometron.html)
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
+ - [oscilloscope.html](oscilloscope.html)
  - [qrcode-page.html](qrcode-page.html)
  - [qrcode.html](qrcode.html)
  - [read-markdown-latex.html](read-markdown-latex.html)
  - [read-markdown.html](read-markdown.html)
  - [readme.html](readme.html)
+ - [riff-o-tron.html](riff-o-tron.html)
+ - [trash-tarot.html](trash-tarot.html)
  - [trashmagic.html](trashmagic.html)
+ - [write-a-note.html](write-a-note.html)
 
 # CSS FILES
 
@@ -413,23 +341,29 @@ THE LANGUAGES OF THE SET ARE:
 # JAVASCRIPT FILES
 
  - [geometron.js](geometron.js)
+ - [tarot.js](tarot.js)
  - [track-list.js](track-list.js)
  - [trashmagic.js](trashmagic.js)
 
 # JSON FILES
 
- - [book.json](book.json)
+ - [black-flag-font.json](black-flag-font.json)
  - [dna.json](dna.json)
  - [links.json](links.json)
+ - [metaflag.json](metaflag.json)
  - [qrcode-feed.json](qrcode-feed.json)
 
 # MARKDOWN FILES
 
  - [README.md](README.md)
+ - [files.md](files.md)
  - [markdown.md](markdown.md)
 
 # TEXT FILES
 
+ - [note-2025-8-24-09：6：53.txt](note-2025-8-24-09：6：53.txt)
+ - [note.txt](note.txt)
+ - [terminal.txt](terminal.txt)
  - [wall.txt](wall.txt)
 
 # PHP FILES AS TEXT
