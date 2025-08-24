@@ -1,5 +1,5 @@
-![](qrcode.png)
-![](qrcode-page.png)
+[![](qrcode.png)](qrcode.png)
+[![](qrcode-page.png)](qrcode-page.png)
 
 # [TRASH MAGIC SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 
