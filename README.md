@@ -365,3 +365,87 @@ USE FREE MEDIA TO GROW COMMUNITY!
 2. NO ONE IS FREE UNTIL EVERYONE IS FREE!
 
 
+
+
+# [TRASH MAGIC SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
+# [CODE/](https://github.com/LafeLabs/TRASH-MAGIC-SERVER/tree/main/CODE/)
+
+THE LANGUAGES OF THE SET ARE:
+
+# THE TRASH MAGIC LANGUAGES
+
+ - [HTML](https://en.wikipedia.org/wiki/HTML)
+ - [CSS](https://en.wikipedia.org/wiki/CSS)
+ - [JAVASCRIPT](https://en.wikipedia.org/wiki/JavaScript)
+ - [MARKDOWN](https://en.wikipedia.org/wiki/Markdown)
+ - [JSON](https://en.wikipedia.org/wiki/JSON)
+ - [PHP](https://en.wikipedia.org/wiki/PHP)
+ - [LATEX](https://en.wikipedia.org/wiki/LaTeX)
+ - [TEXT](https://en.wikipedia.org/wiki/Text_file)
+
+# HTML FILES
+
+ - [branch.html](branch.html)
+ - [delete-html.html](delete-html.html)
+ - [delete-markdown.html](delete-markdown.html)
+ - [delete-php.html](delete-php.html)
+ - [edit-html.html](edit-html.html)
+ - [edit-index.html](edit-index.html)
+ - [edit-markdown.html](edit-markdown.html)
+ - [edit-php.html](edit-php.html)
+ - [image-feed.html](image-feed.html)
+ - [index.html](index.html)
+ - [qrcode-page.html](qrcode-page.html)
+ - [qrcode.html](qrcode.html)
+ - [read-markdown-latex.html](read-markdown-latex.html)
+ - [read-markdown.html](read-markdown.html)
+ - [readme.html](readme.html)
+ - [trashmagic.html](trashmagic.html)
+
+# CSS FILES
+
+ - [markdown.css](markdown.css)
+ - [trashmagic.css](trashmagic.css)
+
+# JAVASCRIPT FILES
+
+ - [geometron.js](geometron.js)
+ - [track-list.js](track-list.js)
+ - [trashmagic.js](trashmagic.js)
+
+# JSON FILES
+
+ - [book.json](book.json)
+ - [dna.json](dna.json)
+ - [links.json](links.json)
+ - [qrcode-feed.json](qrcode-feed.json)
+
+# MARKDOWN FILES
+
+ - [README.md](README.md)
+ - [markdown.md](markdown.md)
+
+# TEXT FILES
+
+ - [wall.txt](wall.txt)
+
+# PHP FILES AS TEXT
+
+ - [php/branch.txt](php/branch.txt)
+ - [php/compile-php.txt](php/compile-php.txt)
+ - [php/copy.txt](php/copy.txt)
+ - [php/delete-branch.txt](php/delete-branch.txt)
+ - [php/delete-file.txt](php/delete-file.txt)
+ - [php/edit-markdown-file.txt](php/edit-markdown-file.txt)
+ - [php/generate-dna.txt](php/generate-dna.txt)
+ - [php/list-branches.txt](php/list-branches.txt)
+ - [php/list-files.txt](php/list-files.txt)
+ - [php/load-file.txt](php/load-file.txt)
+ - [php/local-replicator.txt](php/local-replicator.txt)
+ - [php/read-markdown-file-latex.txt](php/read-markdown-file-latex.txt)
+ - [php/read-markdown-file.txt](php/read-markdown-file.txt)
+ - [php/replicator.txt](php/replicator.txt)
+ - [php/save-file.txt](php/save-file.txt)
+ - [php/save-png.txt](php/save-png.txt)
+ - [php/upload-image.txt](php/upload-image.txt)
+

@@ -26,8 +26,10 @@ CAPS LOCK ALWAYS ON!
 </head>
 <body>    
     <H1>TRASH MAGIC SERVER!</H1>
+    <A HREF = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">REPLICATOR SCROLL</A>
+    <a HREF= "readme.html">LOCAL README FILE</a>
+    <a href = "#apps">TRASH MAGIC APPS</a>
     <div id = "qrcode"></div>
-    <A href = "#apps">TRASH MAGIC APPS</A>
     <A HREF = "edit-index.html">HOME PAGE EDITOR</A>
     <H1>TRASH MAGIC TREE BRANCHES</H1>
     <DIV ID = "branches"></DIV>
@@ -54,27 +56,31 @@ CAPS LOCK ALWAYS ON!
         <input type="submit" value="Upload Image" name="submit" id ="submitinput">
     </form>
     <div id = "image-feed"></div>
+
+    <H1>WALL</H1>
+    <TEXTAREA ID = "wall"></TEXTAREA>
+    <H1>TERMINAL</H1>
+    <TEXTAREA ID = "terminal"></TEXTAREA>
+
     <H1 id = "apps">TRASH MAGIC APPS</H1>
-    <div id = "trash-magic-apps">
-        <a href = "cardboard-sign.html">DRAW CARDBOARD SIGN</a>
-        <a href = "write-cardboard-sign.html">WRITE CARDBOARD SIGN</a>
-        <a href = "black-flag.html">BLACK FLAG</a>
-        <A href ="image-feed.html">IMAGE FEED</A>
-        <a href = "the-matrix.html">THE MATRIX</a>
-        <a href = "trash-tarot.html">QUANTUM TRASH TAROT</a>
-        <a href = "cyber-tarot.html">QUANTUM CYBER TAROT</a>
-        <a href = "riff-o-tron.html">RIFF-O-TRON</a>
-        <a href = "geometron.html">GEOMETRON</a>
-        <a href = "oscilloscope.html">OSCILLOSCOPE</a>
-        <a href= "read-book.html">TRASH MAGIC E-BOOK</a>
-        <a href = "qrcode.html">QR CODE</a>
-        <a HREF="qrcode-feed.html">QR CODE FEED</a>
-        <a href = "link-feed.html">LINK FEED</a>
-        <a href = "readme.html">README</a>
-        <a href = "edit-index.html">HOME PAGE EDITOR</a>
-        <a href = "edit-html.html">SYSTEM CODE EDITOR</a>
-        <a href = "branch.html">TRASH MAGIC BRANCH</a>
-    </div>
+    
+    <A HREF= "cardboard-sign.html">CARDBOARD SIGN!</A>
+    <A HREF= "geometron.html">GEOMETRON!</A>
+    <a href= "qrcode.html">QR CODE GENERATOR!</a>
+    <a HREF = "write-a-note.html">WRITE A NOTE!</a>
+    <A HREF = "black-flag.html">FLY THE BLACK FLAG!</A>
+    <a href= "image-feed.html">IMAGE FEED!</a>
+    <A HREF = "trash-tarot.html">QUANTUM TRASH TAROT!</A>
+    <A HREF = "cyber-tarot.html">QUANTUM CYBER TAROT!</A>
+    <A HREF= "riff-o-tron.html">RIFF-O-TRON!</A>
+    <A HREF = "oscilloscope.html">OSCILLOSCOPE!</A>
+    <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
+    <A href= "edit-html.html">HTML FILE EDITOR!</A>
+    <a href = "edit-markdown.html">MARKDOWN FILE EDITOR!</a>
+    <A HREF= "read-markdown.html">MARKDOWN FILE READER!</A>
+    <a href = "read-markdown-file.php?filename=files.md">SCROLL OF THE FILES IN THE SYSTEM</a>
+
+
 <style>
     #image-feed img{
         border:solid;
@@ -142,6 +148,31 @@ table, form{
     font-family:Courier;
     font-size:1em;
 }
+    #wall{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+    #terminal{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:Courier;
+        BACKGROUND-COLOR:black;
+        color:#00ff00;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
 </style>
 <script>
 
@@ -332,6 +363,50 @@ var httpc2 = new XMLHttpRequest();
 
 httpc2.open("GET", "list-branches.php", true);
 httpc2.send();
+
+
+
+wall = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        wall = this.responseText;
+        document.getElementById("wall").value = wall;  
+    }
+};
+httpc.open("GET", "load-file.php?filename=wall.txt", true);
+httpc.send();
+
+document.getElementById("wall").onkeyup = function() {
+    wall = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=wall.txt");//send text to save-file.php
+}
+
+terminal = "";
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        terminal = this.responseText;
+        document.getElementById("terminal").value = terminal;  
+    }
+};
+httpc2.open("GET", "load-file.php?filename=terminal.txt", true);
+httpc2.send();
+
+document.getElementById("terminal").onkeyup = function() {
+    terminal = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=terminal.txt");//send text to save-file.php
+}
 
 </script>
 </body>
