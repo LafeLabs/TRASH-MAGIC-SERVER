@@ -15,9 +15,7 @@
         "index.html",
         "qrcode.html",
         "read-markdown-files.html",
-        "read-markdown-latex-files.html",
-        "read-markdown-latex.html",
-        "read-markdown.html"
+        "read-markdown-latex-files.html"
     ],
     "json": [
         "dna.json",

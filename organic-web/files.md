@@ -17,8 +17,6 @@
  - [qrcode.html](qrcode.html)
  - [read-markdown-files.html](read-markdown-files.html)
  - [read-markdown-latex-files.html](read-markdown-latex-files.html)
- - [read-markdown-latex.html](read-markdown-latex.html)
- - [read-markdown.html](read-markdown.html)
 
 # CSS FILES
 
