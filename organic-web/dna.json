@@ -1,0 +1,55 @@
+{
+    "html": [
+        "branch.html",
+        "delete-markdown-files.html",
+        "delete-php-files.html",
+        "delete-text-files.html",
+        "delete-web-files.html",
+        "edit-index.html",
+        "edit-markdown-files.html",
+        "edit-php-files.html",
+        "edit-readme.html",
+        "edit-text-files.html",
+        "edit-web-files.html",
+        "image-feed.html",
+        "index.html",
+        "qrcode.html",
+        "read-markdown-files.html",
+        "read-markdown-latex-files.html",
+        "read-markdown-latex.html",
+        "read-markdown.html"
+    ],
+    "json": [
+        "dna.json",
+        "links.json"
+    ],
+    "css": [
+        "markdown.css"
+    ],
+    "js": [
+        "track-list.js"
+    ],
+    "md": [
+        "README.md",
+        "files.md",
+        "markdown.md"
+    ],
+    "text": [
+        "wall.txt"
+    ],
+    "php": [
+        "branch.txt",
+        "compile-php.txt",
+        "delete-branch.txt",
+        "delete-file.txt",
+        "generate-dna.txt",
+        "list-branches.txt",
+        "list-files.txt",
+        "load-file.txt",
+        "local-replicator.txt",
+        "replicator.txt",
+        "save-file.txt",
+        "save-png.txt",
+        "upload-image.txt"
+    ]
+}

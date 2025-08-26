@@ -1,53 +1,42 @@
+# Organic Web README.md
 
-# HTML FILES
+# Edit files
 
- - [black-flag.html](black-flag.html)
- - [branch.html](branch.html)
- - [cardboard-sign.html](cardboard-sign.html)
- - [cyber-tarot.html](cyber-tarot.html)
- - [delete-html.html](delete-html.html)
- - [delete-markdown.html](delete-markdown.html)
- - [delete-php.html](delete-php.html)
- - [dual-tone-mobile.html](dual-tone-mobile.html)
- - [dual-tone.html](dual-tone.html)
- - [edit-font.html](edit-font.html)
- - [edit-html.html](edit-html.html)
  - [edit-index.html](edit-index.html)
- - [edit-markdown.html](edit-markdown.html)
- - [edit-php.html](edit-php.html)
- - [geometron.html](geometron.html)
+ - [edit-web-files.html](edit-web-files.html)
+ - [edit-text-files.html](edit-text-files.html)
+ - [edit-markdown-files.html](edit-markdown-files.html)
+ - [edit-php-files.html](edit-php-files.html)
+
+# Delete files:
+
+ - [delete-web-files.html](delete-web-files.html)
+ - [delete-text-files.html](delete-text-files.html)
+ - [delete-markdown-files.html](delete-markdown-files.html)
+ - [delete-php-files.html](delete-php-files.html)
+
+# Other HTML
+
+ - [branch.html](branch.html)
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
- - [oscilloscope.html](oscilloscope.html)
- - [qrcode-page.html](qrcode-page.html)
  - [qrcode.html](qrcode.html)
- - [read-markdown-latex.html](read-markdown-latex.html)
- - [read-markdown.html](read-markdown.html)
  - [readme.html](readme.html)
- - [riff-o-tron.html](riff-o-tron.html)
- - [trash-tarot.html](trash-tarot.html)
- - [trashmagic.html](trashmagic.html)
- - [write-a-note.html](write-a-note.html)
+ - [read-markdown-files.html](read-markdown-files.html)
+ - [read-markdown-latex-files.html](read-markdown-latex-files.html)
 
 # CSS FILES
 
  - [markdown.css](markdown.css)
- - [trashmagic.css](trashmagic.css)
 
 # JAVASCRIPT FILES
 
- - [geometron.js](geometron.js)
- - [tarot.js](tarot.js)
  - [track-list.js](track-list.js)
- - [trashmagic.js](trashmagic.js)
 
 # JSON FILES
 
- - [black-flag-font.json](black-flag-font.json)
  - [dna.json](dna.json)
  - [links.json](links.json)
- - [metaflag.json](metaflag.json)
- - [qrcode-feed.json](qrcode-feed.json)
 
 # MARKDOWN FILES
 
