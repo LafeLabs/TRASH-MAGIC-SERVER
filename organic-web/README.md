@@ -1,5 +1,9 @@
 # Organic Web README.md
 
+$$
+\frac{-\hbar^2}{2m}\nabla^2\Psi + V\Psi = i\hbar\frac{\partial \Psi}{\partial t}
+$$
+
 # Edit files
 
  - [edit-index.html](edit-index.html)
@@ -7,6 +11,13 @@
  - [edit-text-files.html](edit-text-files.html)
  - [edit-markdown-files.html](edit-markdown-files.html)
  - [edit-php-files.html](edit-php-files.html)
+ - [edit-readme.html](edit-readme.html)
+
+# Read markdown and text files
+
+ - [read-markdown-files.html](read-markdown-files.html)
+ - [read-markdown-latex-files.html](read-markdown-latex-files.html)
+ - [read-text-files.html](read-text-files.html)
 
 # Delete files:
 
@@ -14,6 +25,7 @@
  - [delete-text-files.html](delete-text-files.html)
  - [delete-markdown-files.html](delete-markdown-files.html)
  - [delete-php-files.html](delete-php-files.html)
+ - [delete-images.html](delete-images.html)
 
 # Other HTML
 
@@ -21,9 +33,6 @@
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
  - [qrcode.html](qrcode.html)
- - [readme.html](readme.html)
- - [read-markdown-files.html](read-markdown-files.html)
- - [read-markdown-latex-files.html](read-markdown-latex-files.html)
 
 # CSS FILES
 

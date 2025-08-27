@@ -1,61 +1,54 @@
 
-# HTML FILES
+# Web Files
 
  - [branch.html](branch.html)
- - [delete-images.html](delete-images.html)
+ - [branch.php](branch.php)
+ - [compile-php.php](compile-php.php)
+ - [delete-branch.php](delete-branch.php)
+ - [delete-file.php](delete-file.php)
  - [delete-markdown-files.html](delete-markdown-files.html)
  - [delete-php-files.html](delete-php-files.html)
  - [delete-text-files.html](delete-text-files.html)
  - [delete-web-files.html](delete-web-files.html)
+ - [dna.json](dna.json)
  - [edit-index.html](edit-index.html)
  - [edit-markdown-files.html](edit-markdown-files.html)
  - [edit-php-files.html](edit-php-files.html)
  - [edit-readme.html](edit-readme.html)
  - [edit-text-files.html](edit-text-files.html)
  - [edit-web-files.html](edit-web-files.html)
+ - [generate-dna.php](generate-dna.php)
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
+ - [links.json](links.json)
+ - [list-branches.php](list-branches.php)
  - [list-files.html](list-files.html)
+ - [list-files.php](list-files.php)
+ - [load-file.php](load-file.php)
+ - [local-replicator.php](local-replicator.php)
+ - [markdown.css](markdown.css)
  - [qrcode.html](qrcode.html)
  - [read-markdown-files.html](read-markdown-files.html)
  - [read-markdown-latex-files.html](read-markdown-latex-files.html)
-
-# CSS FILES
-
- - [markdown.css](markdown.css)
-
-# JAVASCRIPT FILES
-
+ - [replicator.php](replicator.php)
+ - [save-file.php](save-file.php)
+ - [save-png.php](save-png.php)
  - [track-list.js](track-list.js)
+ - [upload-image.php](upload-image.php)
 
-# JSON FILES
+# Images
 
- - [dna.json](dna.json)
- - [links.json](links.json)
+# RACOON3.png
 
-# MARKDOWN FILES
+![](RACOON3.png)
+
+# All other files
 
  - [README.md](README.md)
  - [file-list.md](file-list.md)
  - [files.md](files.md)
- - [latex.md](latex.md)
-
-# TEXT FILES
-
  - [wall.txt](wall.txt)
 
-# PHP FILES AS TEXT
+# Folders
 
- - [php/branch.txt](php/branch.txt)
- - [php/compile-php.txt](php/compile-php.txt)
- - [php/delete-branch.txt](php/delete-branch.txt)
- - [php/delete-file.txt](php/delete-file.txt)
- - [php/generate-dna.txt](php/generate-dna.txt)
- - [php/list-branches.txt](php/list-branches.txt)
- - [php/list-files.txt](php/list-files.txt)
- - [php/load-file.txt](php/load-file.txt)
- - [php/local-replicator.txt](php/local-replicator.txt)
- - [php/replicator.txt](php/replicator.txt)
- - [php/save-file.txt](php/save-file.txt)
- - [php/save-png.txt](php/save-png.txt)
- - [php/upload-image.txt](php/upload-image.txt)
+ - [foobar/](foobar/)

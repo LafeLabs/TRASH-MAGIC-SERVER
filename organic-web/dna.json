@@ -1,6 +1,7 @@
 {
     "html": [
         "branch.html",
+        "delete-images.html",
         "delete-markdown-files.html",
         "delete-php-files.html",
         "delete-text-files.html",
@@ -13,6 +14,7 @@
         "edit-web-files.html",
         "image-feed.html",
         "index.html",
+        "list-files.html",
         "qrcode.html",
         "read-markdown-files.html",
         "read-markdown-latex-files.html"
@@ -29,7 +31,9 @@
     ],
     "md": [
         "README.md",
-        "files.md"
+        "file-list.md",
+        "files.md",
+        "latex.md"
     ],
     "text": [
         "wall.txt"
