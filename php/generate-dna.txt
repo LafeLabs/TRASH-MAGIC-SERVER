@@ -1,14 +1,14 @@
 <!-- 
 this program generates the file dna.txt which lists the files to replicate 
 -->
-<a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "index.html">index.html</a>
+<a style ="font-family:Arial;color:blue;font-size:1.5em;" href = "index.html">index.html</a>
 
 <br>
-<a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "edit-html.html">edit-html.html</a>
+<a style ="font-family:Arial;color:blue;font-size:1.5em;" href = "edit-web-files.html">edit-web-files.html</a>
 <br>
-<a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "edit-php.html">edit-php.html</a>
+<a style ="font-family:Arial;color:blue;font-size:1.5em;" href = "edit-php-files.html">edit-php-files.html</a>
 <br>
-<a style ="font-family:Comic Sans MS;color:blue;font-size:1.5em;" href = "edit-markdown.html">edit-markdown.html</a>
+<a style ="font-family:Arial;color:blue;font-size:1.5em;" href = "edit-markdown-files.html">edit-markdown-files.html</a>
 <br>
 
 

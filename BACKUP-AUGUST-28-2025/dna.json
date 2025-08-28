@@ -1,0 +1,77 @@
+{
+    "html": [
+        "black-flag.html",
+        "branch.html",
+        "cardboard-sign.html",
+        "cyber-tarot.html",
+        "delete-html.html",
+        "delete-markdown.html",
+        "delete-php.html",
+        "dual-tone-mobile.html",
+        "dual-tone.html",
+        "edit-font.html",
+        "edit-html.html",
+        "edit-index.html",
+        "edit-markdown.html",
+        "edit-php.html",
+        "geometron.html",
+        "image-feed.html",
+        "index.html",
+        "oscilloscope.html",
+        "qrcode-page.html",
+        "qrcode.html",
+        "read-markdown-latex.html",
+        "read-markdown.html",
+        "readme.html",
+        "riff-o-tron.html",
+        "trash-tarot.html",
+        "trashmagic.html",
+        "write-a-note.html"
+    ],
+    "json": [
+        "black-flag-font.json",
+        "dna.json",
+        "links.json",
+        "metaflag.json",
+        "qrcode-feed.json"
+    ],
+    "css": [
+        "markdown.css",
+        "trashmagic.css"
+    ],
+    "js": [
+        "geometron.js",
+        "tarot.js",
+        "track-list.js",
+        "trashmagic.js"
+    ],
+    "md": [
+        "README.md",
+        "files.md",
+        "markdown.md"
+    ],
+    "text": [
+        "note.txt",
+        "terminal.txt",
+        "wall.txt"
+    ],
+    "php": [
+        "branch.txt",
+        "compile-php.txt",
+        "copy.txt",
+        "delete-branch.txt",
+        "delete-file.txt",
+        "edit-markdown-file.txt",
+        "generate-dna.txt",
+        "list-branches.txt",
+        "list-files.txt",
+        "load-file.txt",
+        "local-replicator.txt",
+        "read-markdown-file-latex.txt",
+        "read-markdown-file.txt",
+        "replicator.txt",
+        "save-file.txt",
+        "save-png.txt",
+        "upload-image.txt"
+    ]
+}

@@ -12,4 +12,4 @@ foreach ($files1 as $value) {
     }
 }
 
-?><a style = "font-size:10em;font-family:Comic Sans MS" href = "edit-php.html">edit-php.html</a>
+?><a style = "font-size:10em;font-family:Arial" href = "edit-php-files.html">edit-php-files.html</a>
