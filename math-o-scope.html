@@ -11,7 +11,7 @@
         MO MINING 
         NO PROPERTY
         LOOK AT THE INSECTS
-        LOOK AT THE FUNGI
+        LOOK AT THE FUNGI   
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
@@ -44,7 +44,7 @@
 
 <div id = "feedscroll">
     
-    <h1>OSCILLOSCOPE</h1>
+    <h1>MATH-O-SCOPE</h1>
     
     <div id = "savebutton">POST</div>
     
@@ -56,7 +56,7 @@
 
 <script>
 
-
+oscon = false;
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -95,18 +95,32 @@ function setup() {
   
   mic.start();
   analyzer.setInput(mic);
+  osc = new p5.SinOsc(); // set frequency and type
+  osc.amp(1.0);   
+ // osc.freq(sampleRate()/32);  
+  osc.freq(sampleRate()/64);  
     
 }
 
 
+gain = 1000;
+
+x1 = 0;//cosine component of f0 = 750 Hz mode
+y1 = 0;//  sine component of f0 = 750 Hz mode
+x2 = 0;//cosine component of 2*f0 = 1500 Hz mode
+y2 = 0;//  sine component of 2*f0 = 1500 Hz mode
 
 function draw(){
 
   frameRate(30);
   
-
+  if(oscon){
+      if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+        osc.amp((height - mouseY)/height); 
+      }
+  }
   background(159,135,103);
-
+    noFill();
   // get a buffer of 1024 samples over time.
   samples = analyzer.waveform();
   var bufLen = samples.length;
@@ -114,6 +128,7 @@ function draw(){
   // draw snapshot of the samples
   strokeWeight(4);
   stroke("red");
+/*
   beginShape();
   for (var x = 0; x < 1024; x++){
     var y = 100*Math.sin(2*Math.PI*x/128);
@@ -126,8 +141,44 @@ function draw(){
     vertex(x, y + height/2);
   }
   endShape();
+  */
 
+  x1 = 0;  
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.cos(2*Math.PI*x/64);
+    vertex(x, gain*y*samples[x] + height/2);
+    x1 += y*samples[x];
+  }
+  endShape();
+  
+  y1 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.sin(2*Math.PI*x/64);
+    vertex(x, gain*y*samples[x] + height/2);
+    y1 += y*samples[x];
+  }
+  endShape();
   stroke("blue");
+  x2 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.sin(2*Math.PI*x/32);
+    vertex(x, gain*y*samples[x] + height/2);
+    x2 += y*samples[x];
+  }
+  endShape();
+  y2 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.cos(2*Math.PI*x/32);
+    vertex(x, gain*y*samples[x] + height/2);
+    y2 += y*samples[x];
+  }
+  endShape();
+
+/*
   beginShape();
   for (var x = 0; x < 1024; x++){
     var y = 100*Math.sin(2*Math.PI*x/64);
@@ -140,18 +191,34 @@ function draw(){
     vertex(x, y + height/2);
   }
   endShape();
-
+*/
 
   beginShape();
   stroke(0);
-  for (var i = 0; i < bufLen; i++){
-    var x = map(i, 0, bufLen, 0, width);
-    var y = map(samples[i], -1, 1, -height/2, height/2);
+  for (var x = 0; x < 1024; x++){
+    var y = map(samples[x], -1, 1, -height/2, height/2);
     vertex(x, y + height/2);
-    
   }
   endShape();
+  strokeWeight(1);
+  color("red");
+  fill("red");
+  textSize(50);
+  text("p1 = " + (Math.round(x1*x1 + y1*y1)).toString(),width - 300,100);
+  text("x1 = " + (Math.round(x1)).toString(),10,100);
+  text("y1 = " + (Math.round(y1)).toString(),10,200);
+  text("theta1 = " + (Math.round(Math.atan(y1/x1)*180/Math.PI)).toString() + " deg",width - 400,200);
+  
+  color("blue");
+  fill("blue");
+  text("p2 = " + (Math.round((x2*x2 + y2*y2)*100)/100).toString(),width - 300,height - 100);
 
+  text("x2 = " + (Math.round(x2*100)/100).toString(),10,height - 100);
+  text("y2 = " + (Math.round(y2*100)/100).toString(),10,height - 200);
+  text("theta2 = " + (Math.round(Math.atan(y2/x2)*180/Math.PI)).toString() + " deg",width - 400,height - 200);
+  
+  
+    
 }
 
 
@@ -212,6 +279,23 @@ function keyPressed() {
         post();
     }
 
+}
+
+function mouseClicked() {
+ 
+ if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+      if(!oscon){
+          osc.start();
+
+      }
+      else{
+          osc.stop();
+
+      }
+      oscon = !oscon;     
+  } 
+
+    
 }
 
 
