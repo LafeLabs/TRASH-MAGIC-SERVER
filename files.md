@@ -22,6 +22,7 @@
  - [geometron.html](geometron.html)
  - [index.html](index.html)
  - [list-files.html](list-files.html)
+ - [math-o-scope.html](math-o-scope.html)
  - [organic-web-home.html](organic-web-home.html)
  - [oscilloscope.html](oscilloscope.html)
  - [qrcode.html](qrcode.html)
