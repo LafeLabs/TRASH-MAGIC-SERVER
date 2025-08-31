@@ -49,9 +49,15 @@
     <div id = "savebutton">POST</div>
     
     <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
-    
-<p>Time domain signal</p>
-
+    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "cardboard-sign.html">CARDBOARD SIGN</a></h1>    
+    <p>CLICK SCREEN TO PLAY TONE!</p>
+    <P>
+        MOVE MOUSE POINTER UP AND DOWN TO CONTROL AMPLITUDE!
+    </P>
+    <P>TONE IS AT 750 HZ!</P>
+    <P>RED IS AT TONE FREQ!</P>
+    <P>BLUE IS AT DOUBLE TONE FREQ!</P>
+    <P>SEND SIGNAL THRU SYSTEM TO PROBE DOUBLING OF SYSTEM!</P>
 </div>
 
 <script>
@@ -109,6 +115,19 @@ x1 = 0;//cosine component of f0 = 750 Hz mode
 y1 = 0;//  sine component of f0 = 750 Hz mode
 x2 = 0;//cosine component of 2*f0 = 1500 Hz mode
 y2 = 0;//  sine component of 2*f0 = 1500 Hz mode
+
+
+frameindex =0;
+
+jsondata = {};
+jsondata.p1 = [];
+jsondata.p2 = [];
+jsondata.x1 = [];
+jsondata.x2 = [];
+jsondata.y1 = [];
+jsondata.y2 = [];
+jsondata.theta1 = [];
+jsondata.theta2 = [];
 
 function draw(){
 
@@ -201,7 +220,7 @@ function draw(){
   }
   endShape();
   strokeWeight(1);
-  color("red");
+  stroke("red");
   fill("red");
   textSize(50);
   text("p1 = " + (Math.round(x1*x1 + y1*y1)).toString(),width - 300,100);
@@ -209,15 +228,50 @@ function draw(){
   text("y1 = " + (Math.round(y1)).toString(),10,200);
   text("theta1 = " + (Math.round(Math.atan(y1/x1)*180/Math.PI)).toString() + " deg",width - 400,200);
   
-  color("blue");
+  jsondata.p1.push(Math.round(x1*x1 + y1*y1));
+  noFill();
+  stroke("red");
+  beginShape();
+  for (var index = 0; index < jsondata.p1.length; index++){
+    vertex(index, height - 5 - jsondata.p1[index]);
+    console.log(jsondata.p1[index]);
+  }
+  endShape();
+
+  
+  
+  stroke("blue");
   fill("blue");
   text("p2 = " + (Math.round((x2*x2 + y2*y2)*100)/100).toString(),width - 300,height - 100);
+  jsondata.p2.push(Math.round(x2*x2 + y2*y2));
+
 
   text("x2 = " + (Math.round(x2*100)/100).toString(),10,height - 100);
   text("y2 = " + (Math.round(y2*100)/100).toString(),10,height - 200);
   text("theta2 = " + (Math.round(Math.atan(y2/x2)*180/Math.PI)).toString() + " deg",width - 400,height - 200);
   
+   jsondata.p2.push(Math.round(x2*x2 + y2*y2));
+  noFill();
+  stroke("blue");
+  beginShape();
+  for (var index = 0; index < jsondata.p2.length; index++){
+    vertex(index, height - 5 - jsondata.p2[index]);
+  }
+  endShape();
+ 
   
+  frameindex++;
+  if(frameindex >= 1024){
+    frameindex = 0;
+    jsondata.p1 = [];
+    jsondata.p2 = [];
+    jsondata.x1 = [];
+    jsondata.x2 = [];
+    jsondata.y1 = [];
+    jsondata.y2 = [];
+    jsondata.theta1 = [];
+    jsondata.theta2 = [];
+  }
     
 }
 
