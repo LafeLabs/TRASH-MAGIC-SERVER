@@ -7,21 +7,7 @@
 Markdown file reader
     -->
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADw8OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAEAAAAQAAEAERAAABARAQEREQAAEBEBAAEAAAAREREAAQAAABEAEQABAAAAEQARAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA3u8AAN7HAADSgwAA0u8AAMDvAADM7wAAzO8AAP//AAD//wAA//8AAP//AAD//wAA" rel="icon" type="image/x-icon">
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        processEscapes: true,
-        processClass: "mathjax",
-        ignoreClass: "no-mathjax"
-        }
-    });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
-</script>
-<link rel="stylesheet" href="markdown.css">    
+<link rel="stylesheet" href="text.css">    
 </head>
 <body>    
 <style>
@@ -38,7 +24,9 @@ Markdown file reader
 <div id  = "scrollsbox">
     <div id = "menubutton" class = "button">MENU MAX</div>
     <div id = "lightdarkbutton" class = "button">LIGHT/DARK</div>
-    <a href = "edit-markdown-files.html">edit-markdown-files.html</a><br>
+    <a href = "edit-text-files.html">edit-text-files.html</a><br>
+    <a href = "delete-text-files.html">delete-text-files.html</a><br>
+
 </div>
 
 <script>
@@ -72,14 +60,9 @@ mode = "dark";
 
 scroll = "";
 rawhtml = "";
-var converter = new showdown.Converter();
-// for more on options see here:
-// https://github.com/showdownjs/showdown/wiki/Showdown-Options
-converter.setOption('literalMidWordUnderscores', 'true');
-converter.setOption('tables', 'true')
-    
-filename = "README.md";
-loadscroll("README.md");
+
+filename = "wall.txt";
+loadscroll("wall.txt");
 
 localfile = true;
 
@@ -93,11 +76,10 @@ function loadscroll(scrollname){
     httpc666.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             scroll = this.responseText;
-            rawhtml = converter.makeHtml(scroll);
+            rawhtml = scroll;
             document.getElementById("scrollscroll").innerHTML = rawhtml;
-        	MathJax.Hub.Typeset();//tell Mathjax to update the math
-            convertlinks();
-            
+        //	MathJax.Hub.Typeset();//tell Mathjax to update the math
+
         }
     };
     httpc666.open("GET", "load-file.php?filename=" + scrollname, true);
@@ -105,30 +87,6 @@ function loadscroll(scrollname){
     //MathJax.Hub.Typeset();//tell Mathjax to update the math
 }
 
-function convertlinks(){
-    links = document.getElementsByTagName("A");
-    for(var index = 0;index < links.length;index++){
-        if(links[index].innerHTML.substring(links[index].innerHTML.length - 3,links[index].innerHTML.length) == ".md"){
-            
-            var newspan = document.createElement("SPAN");
-            newspan.innerHTML = links[index].innerHTML;
-            var dataspan = document.createElement("SPAN");
-            dataspan.className = "data";
-            dataspan.innerHTML  = links[index].href;
-            newspan.appendChild(dataspan);
-            newspan.className = "scrolllink";
-            links[index].parentNode.insertBefore(newspan,links[index]);
-            links[index].style.display = "none";
-            
-            newspan.onclick = function(){
-                var localscroll = this.getElementsByClassName("data")[0].innerHTML;
-                loadscroll(localscroll);
-            }
-
-            
-        }
-    }
-}
 
 modeswitch();
 document.getElementById("lightdarkbutton").onclick = function(){
@@ -183,7 +141,7 @@ httpc9.onreadystatechange = function() {
         scrolls = JSON.parse(this.responseText);
 
         for(var index = 0;index < scrolls.length;index++) {
-            if(scrolls[index].includes(".md") || scrolls[index].includes(".MD")){
+            if(scrolls[index].includes(".txt") || scrolls[index].includes(".TXT")){
                     var newscrollbutton = document.createElement("P");
                     newscrollbutton.className = "boxlink";
                     newscrollbutton.innerHTML = scrolls[index];

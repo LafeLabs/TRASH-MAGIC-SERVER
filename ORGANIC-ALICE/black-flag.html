@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAw8OYAprbEAHh4gAADAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIiAAIiAAIiIiIiIiIiIiIiIiIiIiIiERERERERERERETMzMzMRERERMzMzMxEREREzMzMzERERETMzMzMRERERMzMzMxEREREzMzMzERERETMzMzMRERERMzMzMxEREREzMzMzEREREREREREREREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+   <title>FLY THE BLACK FLAG!</title>    
+   <!--
+FLY THE BLACK FLAG DOWN BY THE HIGIHWAY!
+   -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script> 
+<script src="trashmagic.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body> 
+<style>
+body{
+    FONT-FAMILY: COMIC SANS MS;
+}
+#highway{
+    position:absolute;
+    background-color:#807E78;
+    right:0px;
+    bottom:0px;
+    overflow:scroll;
+}
+#link-list a{
+    text-align:center;
+    width:80%;
+    margin:auto;
+    display:block;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+#highway h1{
+    text-align:center;
+}
+#highway img{
+    display:block;
+    max-width:80%;
+    margin:auto;
+}
+#tunnel{
+    position:absolute;
+    background-color:#CCC9C0;
+    left:0px;
+    top:0px;
+    overflow:hidden;
+}
+main{
+    position:absolute;
+    left:50px;
+    top:50px;
+}
+#textinput{
+    font-size:1em;
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:40em;
+}
+#wall{
+     width:90%;
+     margin-left:4.5%;
+     border:solid;
+     height:8em;
+     font-size:1em;
+}
+.CARDBOARD{
+    FONT-FAMILY: COMIC SANS MS;
+    FONT-SIZE:3EM;
+    BACKGROUND-COLOR:#9f8767;
+}
+#qrcode img{
+    border:solid;
+    border-color:#9f8767;
+    border-width:50px;
+    display:block;
+    margin-left:auto;
+    margin-top:1em;
+    margin-bottom:5em;
+}    
+#buttontable{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+}
+.filelabel{
+    display:none;   
+}
+.deletebutton{
+    border:solid;
+    border-color:red;
+    color:red;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:yellow;
+}
+.button:active{
+    background-color:green;
+}
+.imagebox{
+    border-top:solid;
+    border-width:10px;
+    border-color:white;
+    padding-bottom:1em;
+    padding-top:1em;
+    padding-left:1em;
+    border-top-style: dashed;
+}
+#buttontable{
+    width:100%;
+}
+#buttontable td{
+    border:solid;
+    border-radius:5px;
+    text-align:center;
+    width:20%;
+    font-size:1em;
+}
+input{
+    BACKGROUND-COLOR:#9f8767;
+    FONT-FAMILY: COMIC SANS MS;
+}
+#edit_geometry_button{
+    border:solid;
+    text-align:center;
+}
+#rainbowbutton{
+    border:solid;
+}
+.link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:0.7em;
+}
+.CARDBOARD-SIGN A{
+    COLOR:BLUE;
+}
+.CARDBOARD-SIGN{
+    MAX-WIDTH:90%;   
+    MARGIN:AUTO;
+    MARGIN-TOP:1EM;
+    MARGIN-BOTTOM:1EM;
+    OVERFLOW:SCROLL;
+    FONT-SIZE:1EM;
+}
+.CARDBOARD-SIGN TEXTAREA{
+    MAX-WIDTH:100%;
+    FONT-SIZE:1EM;
+    HEIGHT:10EM;
+    DISPLAY:NONE;
+}
+.timestampdata{
+    display:none;
+}
+</style>
+<div id = "tunnel">
+    <input class = "CARDBOARD" id = "textinput">
+    <table id = "buttontable">
+        <tr>
+            <td id = "postbutton" class = "button">POST</td>
+        </tr>
+    </table>
+</div>
+<div id = "highway">
+        
+    <div id = "qrcode"></div>
+    <div id = "link-list">
+        <a href = "index.html">HOME</a>
+        <a href = "edit-font.html">EDIT FONT</a>
+        <a href = "metaflag.json">metaflag.json</a>
+        <a href = "black-flag-font.json">black-flag-font.json</a>
+    </div>
+    <H1>FLAG GEOMETRY CONTROLS:</H1>
+    <TABLE id = "flag-geometry-table">
+        <TR>
+            <TD>LEFT MARGIN:</TD>
+            <TD>
+                <INPUT ID= "left_margin_input">
+            </TD>
+        </TR>
+        <TR>
+            <TD>TOP MARGIN:</TD>
+            <TD>
+                <INPUT ID= "top_margin_input">
+            </TD>
+        </TR>
+        <TR>
+            <TD>HORIZONTAL GAP:</TD>
+            <TD>
+                <INPUT ID= "horizontal_gap_input">
+            </TD>
+        </TR>
+        <TR>
+            <TD>VERTICAL GAP:</TD>
+            <TD>
+                <INPUT ID= "vertical_gap_input">
+            </TD>
+        </TR>
+        <TR>
+            <TD>NUMBER OF COLUMNS:</TD>
+            <TD>
+                <INPUT ID= "number_of_columns_input">
+            </TD>
+        </TR>
+        <TR>
+            <TD class = "button" id = "rainbowbutton">RAINBOW ON/OFF</TD>
+            <td id = "rainbowindicator"></td>
+        </TR>
+    </TABLE>
+    <H1>FLAG FEED</H1>
+    <div id = "flag-feed"></div>
+
+</div>
+<script>
+
+unit = 100;
+flag = [];
+ascii = [];
+links = [];
+
+
+flagtext = "";
+rainbow_colors = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple"
+];
+
+
+if(innerWidth > innerHeight){
+    
+    unit = innerHeight - 100;
+    document.getElementById("tunnel").style.right = (innerWidth - innerHeight).toString() + "px";
+    document.getElementById("tunnel").style.bottom = "0px";
+    
+    document.getElementById("highway").style.left = innerHeight.toString() + "px";
+    document.getElementById("highway").style.top = "0px";
+    
+}
+else{
+    unit = innerWidth - 100;
+    document.getElementById("tunnel").style.bottom = (innerHeight - innerWidth).toString() + "px";
+    document.getElementById("tunnel").style.right = "0px";
+    
+    document.getElementById("highway").style.left = "0px";
+    document.getElementById("highway").style.top = innerWidth.toString() + "px";
+}
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        metaflag = JSON.parse(this.responseText);    
+        var httpc2 = new XMLHttpRequest();
+        httpc2.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                ascii = JSON.parse(this.responseText);
+                if(innerWidth > innerHeight){
+                    unit = innerHeight - 100;
+                }
+                else{
+                    unit = innerWidth - 100;
+                }
+                createCanvas(unit, unit);
+                background(0);
+                stroke(0);
+                strokeWeight(0.1);
+                drawflag();
+            }
+        };
+        httpc2.open("GET", "load-file.php?filename=black-flag-font.json", true);
+        httpc2.send();
+
+    }
+};
+httpc.open("GET", "load-file.php?filename=metaflag.json", true);
+httpc.send();
+
+
+function drawflag(){
+        document.getElementById("left_margin_input").value = metaflag.left_margin.toString();   
+        document.getElementById("top_margin_input").value = metaflag.top_margin.toString();   
+        document.getElementById("number_of_columns_input").value = metaflag.number_of_columns.toString();   
+        document.getElementById("horizontal_gap_input").value = metaflag.horizontal_gap.toString();   
+        document.getElementById("vertical_gap_input").value = metaflag.vertical_gap.toString();   
+        
+        if(metaflag.rainbow == true){
+            document.getElementById("rainbowindicator").innerHTML = "RAINBOW";
+            rainbowstring(document.getElementById("rainbowindicator"));
+        }
+        else{
+            document.getElementById("rainbowindicator").innerHTML = "RAINBOW";
+            document.getElementById("rainbowindicator").style.color = "#ff2cb4";
+            document.getElementById("rainbowindicator").innerHTML = "HOT PINK";
+        }    
+    
+    flag = [];
+    for(var index = 0;index < metaflag.text.length;index++){
+        var letter = {};
+        letter.color = "#ff2cb4";
+        letter.x = (metaflag.left_margin + 0.05) + 0.1*(index%metaflag.number_of_columns) + metaflag.horizontal_gap*(index%metaflag.number_of_columns);
+        letter.y = (metaflag.top_margin + 0.05) + Math.floor(index/metaflag.number_of_columns)*0.1 + metaflag.vertical_gap*Math.floor(index/metaflag.number_of_columns);
+        letter.width = 0.1;
+        letter.character = metaflag.text.charAt(index);
+        flag.push(letter);
+    }       
+    if(metaflag.rainbow){
+        cycleindex = 0;
+        for(var index = 0;index < flag.length;index++){
+            if(flag[index].character != " "){
+                flag[index].color = rainbow_colors[cycleindex%6];
+                cycleindex++;
+            }
+        }
+    }
+    else{
+        for(var index = 0;index < flag.length;index++){
+            flag[index].color = "#ff2cb4";
+        }
+    }
+    background(0);
+    strokeWeight(1);
+    for(var index = 0;index < flag.length;index++){
+        var glyph = ascii[flag[index].character.charCodeAt(0)];
+        fill(flag[index].color);
+        stroke(flag[index].color);
+        blocksize = unit*flag[index].width;
+        beginShape();
+        for(var gindex = 0;gindex < glyph.length;gindex++){
+            vertex(flag[index].x*unit - 0.5*blocksize + glyph[gindex].x*blocksize,flag[index].y*unit - 0.5*blocksize + glyph[gindex].y*blocksize);
+        }
+        endShape(CLOSE);
+    }
+    document.getElementById("textinput").value = metaflag.text;
+    strokeWeight(6);
+    stroke("#ff2cb4");
+    noFill();
+    savemetaflag();
+}
+
+
+document.getElementById("textinput").onchange = function(){
+    metaflag.text = this.value;
+    drawflag();
+}
+
+
+
+codesquaresize = 400;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: window.location.href,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+deletemode = true;
+//deletemode = false;
+
+uploadImages = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        uploadImages = JSON.parse(this.responseText);
+        loadimagefeed();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+document.getElementById("left_margin_input").onchange = function(){
+    metaflag.left_margin = parseFloat(this.value);
+    drawflag();
+    
+}
+document.getElementById("top_margin_input").onchange = function(){
+    metaflag.top_margin = parseFloat(this.value);
+    drawflag();
+}
+document.getElementById("horizontal_gap_input").onchange = function(){
+    metaflag.horizontal_gap = parseFloat(this.value);
+    drawflag();
+}
+document.getElementById("vertical_gap_input").onchange = function(){
+    metaflag.vertical_gap = parseFloat(this.value);
+    drawflag();
+}
+document.getElementById("number_of_columns_input").onchange = function(){
+    metaflag.number_of_columns = parseInt(this.value);
+    drawflag();
+}
+
+document.getElementById("rainbowbutton").onclick = function(){
+    metaflag.rainbow = !metaflag.rainbow;    
+    if(metaflag.rainbow == true){
+        document.getElementById("rainbowindicator").innerHTML = "RAINBOW";
+        rainbowstring(document.getElementById("rainbowindicator"));
+    }
+    else{
+        document.getElementById("rainbowindicator").innerHTML = "HOT PINK";
+        document.getElementById("rainbowindicator").style.color = "#ff2cb4";
+    }
+    drawflag();
+}
+
+function loadimagefeed(){
+
+    for(var index = uploadImages.length - 1;index >= 0;index--) {
+        
+        if(uploadImages[index].includes(".SVG") || uploadImages[index].includes(".svg") ){
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = uploadImages[index];
+            newimg.classList.add("uploadimage");
+            if(uploadImages[index].substring(0,4) == "flag"){
+                newimg.onclick = function(){
+                    var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+                    imagefilename = imageurl.split("/")[imageurl.split("/").length-1];
+
+                    var httpc = new XMLHttpRequest();
+                    httpc.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var svgraw = this.responseText;
+                            jsonraw = svgraw.split("<json>")[1].split("</json>")[0];
+                            metaflag = JSON.parse(jsonraw);
+                            drawflag();
+                        }
+                    };
+                    httpc.open("GET", "load-file.php?filename=" + imagefilename, true);
+                    httpc.send();
+
+
+                }
+            }
+            newuploadbox.appendChild(newimg);
+            if(uploadImages[index].substring(0,4) == "flag"){
+                document.getElementById("flag-feed").appendChild(newuploadbox);
+            }
+            else{
+
+            }
+    
+            var newdiv = document.createElement("DIV");
+            newdiv.innerHTML = uploadImages[index];
+            newdiv.className = "filelabel";
+            newuploadbox.appendChild(newdiv);
+            
+            if(deletemode){
+                var newspan = document.createElement("SPAN");
+                newspan.innerHTML = "DELETE";
+                newuploadbox.appendChild(newspan);
+                newspan.classList.add("button");
+                newspan.classList.add("deletebutton");
+                newspan.onclick = function(){
+                    var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+                    imagefilename = imageurl.split("/")[imageurl.split("/").length-1];
+                    console.log("imagefilename");
+                    var httpc = new XMLHttpRequest();
+                    var url = "delete-file.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=" + imagefilename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }   
+            }   
+            
+            
+        }
+    }    
+}
+
+function savemetaflag(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(metaflag,null,"    "))+"&filename=metaflag.json");//send text to save-file.php
+}
+
+
+
+function setup(){
+
+}
+
+
+function draw() {
+  
+}
+
+function mouseClicked() {   
+
+    
+}
+
+
+
+
+document.getElementById("postbutton").onclick = function(){
+    
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var flagsvgstring = "<svg width=\"" + unit.toString() + "\" height=\"" + unit.toString() + "\" viewbox = \"0 0 " + unit.toString() + " " + unit.toString() + "\"  xmlns=\"http://www.w3.org/2000/svg\">\n";
+    flagsvgstring += "\n<!--<json>" + JSON.stringify(metaflag,null,"    ") + "</json>-->\n";
+    flagsvgstring += "<path d = \"M 0 0 L" + unit.toString() + " 0 L" + unit.toString() + " " + unit.toString() +" L0 " + unit.toString() + " L0 0 Z\" stroke = \"black\" stroke-width = \"1\" fill = \"black\" />";
+    for(var index = 0;index < flag.length;index++){
+        var glyph = ascii[flag[index].character.charCodeAt(0)];
+        blocksize = unit*flag[index].width;
+        if(glyph.length > 0){
+            flagsvgstring += "\n<path d = \"M" + (flag[index].x*unit - 0.5*blocksize + glyph[0].x*blocksize).toString() + " " + (flag[index].y*unit - 0.5*blocksize + glyph[0].y*blocksize).toString();
+            
+            
+            for(var gindex = 1;gindex < glyph.length;gindex++){
+                    
+                flagsvgstring += "L " + (flag[index].x*unit - 0.5*blocksize + glyph[gindex].x*blocksize).toString() + " " + (flag[index].y*unit - 0.5*blocksize + glyph[gindex].y*blocksize).toString() + " ";
+                
+            }
+            flagsvgstring += "Z\" stroke = \"" + flag[index].color + "\" stroke-width = \"1\" fill = \"" + flag[index].color + "\" />";            
+        }
+
+
+    }
+    flagsvgstring += "</svg>";
+    
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data=" + encodeURIComponent(flagsvgstring)+"&filename=flag" + timestamp + ".svg");//send text to save-file.php     
+
+}
+
+rainbow(document.getElementById("link-list").getElementsByTagName("A"));
+
+rainbowstring(document.getElementById("rainbowbutton"));
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+
+</script>
+</body>
+</html>
+
+
+    
+    

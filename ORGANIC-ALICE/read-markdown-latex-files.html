@@ -114,7 +114,7 @@ function convertlinks(){
             newspan.innerHTML = links[index].innerHTML;
             var dataspan = document.createElement("SPAN");
             dataspan.className = "data";
-            dataspan.innerHTML  = links[index].href;
+            dataspan.innerHTML  = links[index].innerHTML;
             newspan.appendChild(dataspan);
             newspan.className = "scrolllink";
             links[index].parentNode.insertBefore(newspan,links[index]);

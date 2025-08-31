@@ -1,0 +1,213 @@
+ <!doctype html>
+<html>
+<head>
+ <!-- 
+
+-->
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADw8OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAEAAAAQAAEAERAAABARAQEREQAAEBEBAAEAAAAREREAAQAAABEAEQABAAAAEQARAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA3u8AAN7HAADSgwAA0u8AAMDvAADM7wAAzO8AAP//AAD//wAA//8AAP//AAD//wAA" rel="icon" type="image/x-icon">
+
+    
+<!--
+ace.js project home:
+https://ace.c9.io/
+
+list of languages:
+https://cloud9-sdk.readme.io/docs/language-mode
+
+
+-->    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        processClass: "mathjax",
+        ignoreClass: "no-mathjax"
+        }
+    });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+<title>README.md EDITOR</title>
+</head>
+<body>
+
+<h1>README.md</h1>
+
+<div id = "lightdarkbutton" class = "button">--> DARK MODE <--</div>
+<div id = "maineditor" contenteditable="true" spellcheck="false"></div>
+<div id = "displayscroll"></div>
+
+<script>
+
+editor = ace.edit("maineditor");
+editor.setTheme("ace/theme/github");
+//editor.setTheme("ace/theme/vibrant_ink");
+//editor.getSession().setMode("ace/mode/html");
+editor.getSession().setMode("ace/mode/markdown");
+
+editor.getSession().setUseWrapMode(true);
+editor.$blockScrolling = Infinity;
+
+var converter = new showdown.Converter();
+// for more on options see here:
+// https://github.com/showdownjs/showdown/wiki/Showdown-Options
+converter.setOption('literalMidWordUnderscores', 'true');
+converter.setOption('tables', 'true')
+    
+
+
+currentFile = "README.md";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        filedata = this.responseText;
+        rawhtml = converter.makeHtml(filedata);
+        document.getElementById("displayscroll").innerHTML = rawhtml;
+        MathJax.Hub.Typeset();//tell Mathjax to update the math
+        editor.setValue(filedata);
+    }
+};
+httpc.open("GET", "load-file.php?filename=" + currentFile, true);
+httpc.send();
+
+
+
+document.getElementById("maineditor").onkeyup = function(){
+    data = encodeURIComponent(editor.getSession().getValue());
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename="+currentFile);//send text to save-file.php
+    var fileType = currentFile.split("/")[0]; 
+    var fileName = currentFile.split("/")[1];
+}
+
+
+lightmode = true;
+document.getElementById("lightdarkbutton").style.color = "black";
+document.getElementById("lightdarkbutton").style.borderColor = "black";
+
+document.getElementById("displayscroll").style.backgroundColor = "#ffffff";
+document.getElementById("displayscroll").style.color = "black";        
+document.getElementById("lightdarkbutton").innerHTML = "DARK MODE";
+editor.setTheme("ace/theme/github");
+var links = document.getElementById("displayscroll").getElementsByTagName("a");
+for(var index = 0;index < links.length;index++){
+    links[index].style.color = "blue";
+}
+
+document.getElementById("lightdarkbutton").onclick = function(){
+    lightmode = !lightmode;
+    if(lightmode){
+        document.getElementById("lightdarkbutton").style.color = "black";
+        document.getElementById("lightdarkbutton").style.borderColor = "black";
+        document.getElementById("lightdarkbutton").style.backgroundColor = "#eeeeee";
+        document.getElementById("displayscroll").style.backgroundColor = "#ffffff";
+        document.getElementById("displayscroll").style.color = "black";        
+        document.getElementById("lightdarkbutton").innerHTML = "DARK MODE";
+        editor.setTheme("ace/theme/github");
+        var links = document.getElementById("displayscroll").getElementsByTagName("a");
+        for(var index = 0;index < links.length;index++){
+            links[index].style.color = "blue";
+        }
+    }
+    else{
+
+        document.getElementById("lightdarkbutton").style.color = "white";
+        document.getElementById("lightdarkbutton").style.borderColor = "white";
+        document.getElementById("lightdarkbutton").style.backgroundColor = "#101010";
+        document.getElementById("displayscroll").style.backgroundColor = "#101010";        
+        document.getElementById("displayscroll").style.color = "white";        
+        document.getElementById("lightdarkbutton").innerHTML = "LIGHT MODE";        
+        editor.setTheme("ace/theme/vibrant_ink");
+
+        var links = document.getElementById("displayscroll").getElementsByTagName("a");
+        for(var index = 0;index < links.length;index++){
+            links[index].style.color = "#ff2cb4";
+        }        
+    }
+}
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    font-family:Arial;
+    background-color:#eeeeee;
+}
+input{
+    font-family:Arial;
+    color:white;
+}
+h1{
+    text-align:center;
+}
+A{
+    color:blue;
+}
+#maineditor{
+    position:absolute;  
+    left:1em;
+    top:5em;
+    right:50%;
+    bottom:1em;
+    font-size:1em;
+    border:solid;
+    
+}
+#displayscroll{
+    position:absolute;
+    left:55%;
+    right:1em;
+    bottom:1em;
+    font-family:Arial;
+    top:5em;
+    border:solid;
+    border-width:3px;
+    overflow:scroll;
+    padding: 1em 1em 1em 1em;
+    background-color:#ffffff;
+}
+#displayscroll img{
+    max-width:70%;
+    display:block;
+    margin:auto;
+}
+pre{
+    background-color:#e0e0e0;
+    padding:1em 1em 1em 1em;
+    font-family:courier;
+    overflow:scroll;
+}
+.button{
+    cursor:pointer;
+    background-color:white;
+    
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+#lightdarkbutton{
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:10em;
+    text-align:center;
+    border:solid;
+    border-radius:3px;
+    font-size:2em;
+    color:black;
+}
+
+</style>
+
+</body>
+</html>
