@@ -20,6 +20,7 @@
  - [edit-text-files.html](edit-text-files.html)
  - [edit-web-files.html](edit-web-files.html)
  - [geometron.html](geometron.html)
+ - [image-feed.html](image-feed.html)
  - [index.html](index.html)
  - [list-files.html](list-files.html)
  - [math-o-scope.html](math-o-scope.html)
