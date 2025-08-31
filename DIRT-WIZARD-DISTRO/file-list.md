@@ -1,15 +1,21 @@
 
-# HTML FILES
+# Web Files
 
+ - [black-flag-font.json](black-flag-font.json)
  - [black-flag.html](black-flag.html)
  - [branch.html](branch.html)
+ - [branch.php](branch.php)
  - [cardboard-sign.html](cardboard-sign.html)
+ - [compile-php.php](compile-php.php)
  - [cyber-tarot.html](cyber-tarot.html)
+ - [delete-branch.php](delete-branch.php)
+ - [delete-file.php](delete-file.php)
  - [delete-images.html](delete-images.html)
  - [delete-markdown-files.html](delete-markdown-files.html)
  - [delete-php-files.html](delete-php-files.html)
  - [delete-text-files.html](delete-text-files.html)
  - [delete-web-files.html](delete-web-files.html)
+ - [dna.json](dna.json)
  - [dual-tone-mobile.html](dual-tone-mobile.html)
  - [dual-tone.html](dual-tone.html)
  - [edit-font.html](edit-font.html)
@@ -19,67 +25,58 @@
  - [edit-readme.html](edit-readme.html)
  - [edit-text-files.html](edit-text-files.html)
  - [edit-web-files.html](edit-web-files.html)
+ - [generate-dna.php](generate-dna.php)
  - [geometron.html](geometron.html)
+ - [geometron.js](geometron.js)
  - [index.html](index.html)
+ - [links.json](links.json)
+ - [list-branches.php](list-branches.php)
  - [list-files.html](list-files.html)
- - [math-o-scope.html](math-o-scope.html)
- - [math-o-tron.html](math-o-tron.html)
+ - [list-files.php](list-files.php)
+ - [load-file.php](load-file.php)
+ - [local-replicator.php](local-replicator.php)
+ - [markdown.css](markdown.css)
+ - [metaflag.json](metaflag.json)
  - [organic-web-home.html](organic-web-home.html)
  - [oscilloscope.html](oscilloscope.html)
  - [qrcode.html](qrcode.html)
  - [read-markdown-files.html](read-markdown-files.html)
  - [read-markdown-latex-files.html](read-markdown-latex-files.html)
  - [read-text-files.html](read-text-files.html)
+ - [replicator.php](replicator.php)
  - [riff-o-tron.html](riff-o-tron.html)
+ - [save-file.php](save-file.php)
+ - [save-png.php](save-png.php)
+ - [tarot.js](tarot.js)
+ - [text.css](text.css)
+ - [track-list.js](track-list.js)
  - [trash-tarot.html](trash-tarot.html)
+ - [trashmagic.css](trashmagic.css)
  - [trashmagic.html](trashmagic.html)
+ - [trashmagic.js](trashmagic.js)
+ - [upload-image.php](upload-image.php)
  - [write-a-note.html](write-a-note.html)
 
-# CSS FILES
+# Images
 
- - [markdown.css](markdown.css)
- - [text.css](text.css)
- - [trashmagic.css](trashmagic.css)
 
-# JAVASCRIPT FILES
-
- - [geometron.js](geometron.js)
- - [tarot.js](tarot.js)
- - [track-list.js](track-list.js)
- - [trashmagic.js](trashmagic.js)
-
-# JSON FILES
-
- - [black-flag-font.json](black-flag-font.json)
- - [dna.json](dna.json)
- - [links.json](links.json)
- - [metaflag.json](metaflag.json)
-
-# MARKDOWN FILES
+# All other files
 
  - [README.md](README.md)
+ - [The Last Poet - Hip Hop Baby - 01 Intro feat. Who's Los.mp3](The Last Poet - Hip Hop Baby - 01 Intro feat. Who's Los.mp3)
  - [file-list.md](file-list.md)
  - [files.md](files.md)
  - [latex.md](latex.md)
-
-# TEXT FILES
-
  - [note.txt](note.txt)
  - [terminal.txt](terminal.txt)
  - [wall.txt](wall.txt)
 
-# PHP FILES AS TEXT
+# Folders
 
- - [php/branch.txt](php/branch.txt)
- - [php/compile-php.txt](php/compile-php.txt)
- - [php/delete-branch.txt](php/delete-branch.txt)
- - [php/delete-file.txt](php/delete-file.txt)
- - [php/generate-dna.txt](php/generate-dna.txt)
- - [php/list-branches.txt](php/list-branches.txt)
- - [php/list-files.txt](php/list-files.txt)
- - [php/load-file.txt](php/load-file.txt)
- - [php/local-replicator.txt](php/local-replicator.txt)
- - [php/replicator.txt](php/replicator.txt)
- - [php/save-file.txt](php/save-file.txt)
- - [php/save-png.txt](php/save-png.txt)
- - [php/upload-image.txt](php/upload-image.txt)
+ - [BACKUP-AUGUST-28-2025/](BACKUP-AUGUST-28-2025/)
+ - [CODE/](CODE/)
+ - [EBAY-UBUNTU-LAPTOP/](EBAY-UBUNTU-LAPTOP/)
+ - [GEOMETRON/](GEOMETRON/)
+ - [alice-in-wonderland/](alice-in-wonderland/)
+ - [organic-web/](organic-web/)
+ - [trash-magic-server/](trash-magic-server/)

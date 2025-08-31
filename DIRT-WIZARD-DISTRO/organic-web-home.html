@@ -3,86 +3,103 @@
 <head>
    <meta charset="utf-8">
    <!--
-
-TRASH MAGIC!
-
-PUBLIC DOMAIN NO COPYRIGHT!
-
-SELF-REPLICATING HTML!
-
-CAPS LOCK ALWAYS ON!
-
+    Organic Web Home page
    -->
-   <!--Stop Google:-->
-   <META NAME="robots" CONTENT="noindex,nofollow">
 
-<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
-   <title>TRASH MAGIC!</title>    
-   <script src = "trashmagic.js"></script>
-   <link rel="stylesheet" href="trashmagic.css">
+   <title>Organic web home page</title>    
    <script type="module" src="track-list.js"></script>   
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>    
-    <H1>TRASH MAGIC SERVER!</H1>
-    <A HREF = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">REPLICATOR SCROLL!</A>
-    <a HREF= "edit-readme.html">LOCAL README FILE!</a>
-    <a href = "#apps">TRASH MAGIC APPS!</a>
-    <div id = "qrcode"></div>
-    <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
-    <H1>TRASH MAGIC TREE BRANCHES!</H1>
-    <a href = "branch.html">BRANCH!</a>
-    <DIV ID = "branches"></DIV>
-    <H1>LINK FEED!</H1>
-    <table>
+    <H1>Organic Web</H1>
+    <H1>Link feed</H1>
+    <table STYLE = "font-size:2em">
         <tr>
-            <td>ENTER NEW LINK:</td>
+            <td>Enter link:</td>
             <TD>
                 <INPUT ID = "newlinkinput">
             </TD>
         </tr>
     </table>
     <div id = "cardboard_sign_feed"></div>
-    <H1>PDF DOCUMENTS!</H1>
+
+    <div id = "qrcode"></div>
+
+    <H1>Branches</H1>
+    <DIV ID = "branches"></DIV>
+    <H1>PDF documents</H1>
     <div id = "pdf-feed"></div>
-    <H1>TEXT DOCUMENTS!</H1>
+    <H1>Text documents</H1>
     <div id = "text-feed"></div>
-    <H1>AUDIO TRACKS!</H1>
+    <h1>HTML documents</h1>
+    <div id = "html-feed"></div>
+    
+    <H1>Audio tracks</H1>
     <div id = "track-list"></div>
-    <H1>IMAGES!</H1>  
+    <H1>Images</H1>  
     <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
-            <span id ="uploadspan">UPLOAD:</span>
+            <span id ="uploadspan">Upload:</span>
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit" id ="submitinput">
     </form>
     <div id = "image-feed"></div>
 
-    <H1>WALL!</H1>
+    <H1>Wall</H1>
     <TEXTAREA ID = "wall"></TEXTAREA>
-    <H1>TERMINAL!</H1>
-    <TEXTAREA ID = "terminal"></TEXTAREA>
-
-    <H1 id = "apps">TRASH MAGIC APPS!</H1>
-    
-    <A HREF= "cardboard-sign.html">CARDBOARD SIGN!</A>
-    <A HREF= "geometron.html">GEOMETRON!</A>
-    <a href= "qrcode.html">QR CODE GENERATOR!</a>
-    <a HREF = "write-a-note.html">WRITE A NOTE!</a>
-    <A HREF = "black-flag.html">FLY THE BLACK FLAG!</A>
-    <a href= "delete-images.html">DELETE/UPLOAD/VIEW IMAGES!</a>
-    <A HREF = "trash-tarot.html">QUANTUM TRASH TAROT!</A>
-    <A HREF = "cyber-tarot.html">QUANTUM CYBER TAROT!</A>
-    <A HREF= "riff-o-tron.html">RIFF-O-TRON!</A>
-    <A HREF = "oscilloscope.html">OSCILLOSCOPE!</A>
-    <A HREF = "math-o-scope.html">MATH-O-SCOPE!</A>
-    <a href = "dual-tone.html">DUAL TONE MULTI FREQUENCY GENERATOR!</a>
-    <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
-    <A href= "edit-web-files.html">WEB(HTML/CSS/JS/JSON) FILE EDITOR!</A>
-    <A HREF= "read-markdown-files.html">MARKDOWN FILE READER!</A>
-
 
 <style>
+body{
+    font-family:Arial;
+}
+    pre{
+    font-family:courier;
+    overflow:scroll;
+}
+h1{
+    text-align:center;
+    font-size:4em;
+}
+p{
+    text-align:justify;
+    padding:1em 1em 1em 1em;
+    font-size:1.5em;
+    border:solid;
+    display:block;
+    border-color:white;
+    border-width:10px;
+    border-radius:1em;
+    background-color:#0000ff;
+    color:white;
+    width:80%;
+    margin:auto;
+    margin-top:1em;
+
+}
+a{
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    margin:auto;
+    display:block;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+img{
+    display:block;
+    max-width:50%;
+    margin:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+    background-color:#B0916E;
+}
+
     #image-feed img{
         border:solid;
         border-radius:1em;
@@ -96,7 +113,7 @@ CAPS LOCK ALWAYS ON!
         margin-bottom:0.25em;
         border-radius:0.125em;
     }
-    .link-delete-button{
+.link-delete-button{
     border:solid;
     border-radius:5px;
     border-color:red;
@@ -121,21 +138,11 @@ CAPS LOCK ALWAYS ON!
     OVERFLOW:SCROLL;
     FONT-SIZE:1EM;
 }
-.button{
-    cursor:pointer;
-}
-.button:hover{
-    background-color:green;
-}
-.button:active{
-    background-color:yellow;
-}
 .timestampdata{
-    display:none;
+    DISPLAY:NONE;
 }
 table, form{
-    FONT-FAMILY:COMIC SANS MS;
-    BACKGROUND-COLOR:#9f8767;
+    FONT-FAMILY:Arial;
 }
 #fileToUpload{
     cursor:pointer;
@@ -144,31 +151,16 @@ table, form{
     cursor:pointer;
 }
 #newlinkinput{
-    background-color:black;
-    color:#00ff00;
     font-family:Courier;
     font-size:1em;
 }
+    
     #wall{
         width:80%;
         display:block;
         margin:auto;
         border:solid;
-        FONT-FAMILY:COMIC SANS MS;
-        BACKGROUND-COLOR:#9f8767;
-        font-size:2em;
-        height:20em;
-        padding:0.5em 0.5em 0.5em 0.5em;
-        border-radius:0.5em;
-    }
-    #terminal{
-        width:80%;
-        display:block;
-        margin:auto;
-        border:solid;
-        FONT-FAMILY:Courier;
-        BACKGROUND-COLOR:black;
-        color:#00ff00;
+        FONT-FAMILY:Arial;
         font-size:2em;
         height:20em;
         padding:0.5em 0.5em 0.5em 0.5em;
@@ -177,11 +169,6 @@ table, form{
 </style>
 <script>
 
-titles = document.getElementsByTagName("H1");
-for(var index = 0;index < titles.length;index++){
-    rainbowstring(titles[index]);    
-}
-rainbow(document.getElementsByTagName("A"));
 
 codesquaresize = 170;
 marginsize = 40;
@@ -224,7 +211,6 @@ function loadfiles(){
     listhtml += "  </ol>\n";
     listhtml += "</track-list>";
     document.getElementById("track-list").innerHTML = listhtml;
-    rainbow(document.getElementsByTagName("li"));
 
     for(var index = 0;index < files.length;index++) {
         if(files[index].includes(".png") || files[index].includes(".PNG") || files[index].includes(".jpg") || files[index].includes(".JPG") ||files[index].includes(".jpeg")||files[index].includes(".SVG") ||files[index].includes(".svg") || files[index].includes(".gif") ||files[index].includes(".GIF")){
@@ -249,7 +235,6 @@ function loadfiles(){
         }
 
     }
-    rainbow(document.getElementById("pdf-feed").getElementsByTagName("a"));
 
     for(var index = 0;index < files.length;index++){
         if(files[index].substring(files[index].length-4,files[index].length) == ".txt" || files[index].substring(files[index].length-4,files[index].length) == ".TXT"){
@@ -258,9 +243,16 @@ function loadfiles(){
             newa.innerHTML = files[index];
             document.getElementById("text-feed").appendChild(newa);
         }
-
     }
-    rainbow(document.getElementById("text-feed").getElementsByTagName("a"));
+    
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-5,files[index].length) == ".html"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("html-feed").appendChild(newa);
+        }
+    }    
 
 }
 
@@ -320,8 +312,7 @@ function drawlinkfeed(){
         indexdata.innerHTML = index.toString();
         new_cardboard_sign.appendChild(indexdata);
     }
-    rainbow(document.getElementsByTagName("A"));
-    
+
 }
 
 function savelinks(){
@@ -358,13 +349,11 @@ var httpc2 = new XMLHttpRequest();
             newa.href = directories[index] + "/";
             document.getElementById("branches").appendChild(newa);
         }
-        rainbow(document.getElementById("branches").getElementsByTagName("a"));
     }
 };
 
 httpc2.open("GET", "list-branches.php", true);
 httpc2.send();
-
 
 
 wall = "";
@@ -388,26 +377,6 @@ document.getElementById("wall").onkeyup = function() {
     httpc.send("data="+data+"&filename=wall.txt");//send text to save-file.php
 }
 
-terminal = "";
-var httpc2 = new XMLHttpRequest();
-httpc2.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        terminal = this.responseText;
-        document.getElementById("terminal").value = terminal;  
-    }
-};
-httpc2.open("GET", "load-file.php?filename=terminal.txt", true);
-httpc2.send();
-
-document.getElementById("terminal").onkeyup = function() {
-    terminal = this.value;
-    data = encodeURIComponent(this.value);
-    var httpc = new XMLHttpRequest();
-    var url = "save-file.php";        
-    httpc.open("POST", url, true);
-    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-    httpc.send("data="+data+"&filename=terminal.txt");//send text to save-file.php
-}
 
 </script>
 </body>

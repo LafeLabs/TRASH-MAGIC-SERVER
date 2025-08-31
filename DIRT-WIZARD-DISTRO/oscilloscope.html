@@ -11,11 +11,11 @@
         MO MINING 
         NO PROPERTY
         LOOK AT THE INSECTS
-        LOOK AT THE FUNGI   
+        LOOK AT THE FUNGI
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>MATH-O-SCOPE</title>
+        <title>OSCILLOSCOPE</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -44,29 +44,23 @@
 
 <div id = "feedscroll">
     
-    <h1>MATH-O-SCOPE</h1>
+    <h1>OSCILLOSCOPE</h1>
     
     <div id = "savebutton">POST</div>
     
     <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
-    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "cardboard-sign.html">CARDBOARD SIGN</a></h1>    
-    <p>CLICK SCREEN TO PLAY TONE!</p>
-    <P>
-        MOVE MOUSE POINTER UP AND DOWN TO CONTROL AMPLITUDE!
-    </P>
-    <P>TONE IS AT 750 HZ!</P>
-    <P>RED IS AT TONE FREQ!</P>
-    <P>BLUE IS AT DOUBLE TONE FREQ!</P>
-    <P>SEND SIGNAL THRU SYSTEM TO PROBE DOUBLING OF SYSTEM!</P>
+    
+<p>Time domain signal</p>
+
 </div>
 
 <script>
 
-oscon = true;
+
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
-    document.getElementById("feedscroll").style.right =  (1025).toString()+ "px";    
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
 }
 else{
     squaresize = innerWidth - 50;
@@ -88,7 +82,7 @@ var currentSource = "mic";
 
 function setup() {
 
-  createCanvas(1024, innerHeight);    
+  createCanvas(squaresize, squaresize);    
   strokeWeight(2);  
   background(159,135,103);
   noFill();
@@ -101,191 +95,33 @@ function setup() {
   
   mic.start();
   analyzer.setInput(mic);
-  osc = new p5.SinOsc(); // set frequency and type
-  osc.amp(1.0);   
- // osc.freq(sampleRate()/32);  
-  osc.freq(sampleRate()/64);  
-              osc.start();
-
+    
 }
 
 
-gain = 1000;
-
-x1 = 0;//cosine component of f0 = 750 Hz mode
-y1 = 0;//  sine component of f0 = 750 Hz mode
-x2 = 0;//cosine component of 2*f0 = 1500 Hz mode
-y2 = 0;//  sine component of 2*f0 = 1500 Hz mode
-
-
-frameindex =0;
-
-jsondata = {};
-jsondata.p1 = [];
-jsondata.p2 = [];
-jsondata.x1 = [];
-jsondata.x2 = [];
-jsondata.y1 = [];
-jsondata.y2 = [];
-jsondata.theta1 = [];
-jsondata.theta2 = [];
-
-amp_modulation_period = 60;
-
-power_plot_gain = 0.25;
-power_plot_gain2 = 100;
 
 function draw(){
 
   frameRate(30);
   
-  if(oscon){
-      if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
-        osc.amp((height - mouseY)/height); 
-      }
-      else{
-//          osc.amp(frameindex/4096);
-          osc.amp(0.1 + 0.25*Math.sin(frameindex/amp_modulation_period)*Math.sin(frameindex/amp_modulation_period));
-      }
-  }
+
   background(159,135,103);
-    noFill();
+
   // get a buffer of 1024 samples over time.
   samples = analyzer.waveform();
   var bufLen = samples.length;
 
   // draw snapshot of the samples
   strokeWeight(4);
-  stroke("red");
-/*
   beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = 100*Math.sin(2*Math.PI*x/128);
+  for (var i = 0; i < bufLen; i++){
+    var x = map(i, 0, bufLen, 0, width);
+    var y = map(samples[i], -1, 1, -height/2, height/2);
     vertex(x, y + height/2);
-  }
-  endShape();
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = 100*Math.cos(2*Math.PI*x/128);
-    vertex(x, y + height/2);
-  }
-  endShape();
-  */
-
-  x1 = 0;  
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = Math.cos(2*Math.PI*x/64);
-    vertex(x, gain*y*samples[x] + height/2);
-    x1 += y*samples[x];
-  }
-  endShape();
-  
-  y1 = 0;
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = Math.sin(2*Math.PI*x/64);
-    vertex(x, gain*y*samples[x] + height/2);
-    y1 += y*samples[x];
-  }
-  endShape();
-  stroke("blue");
-  x2 = 0;
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = Math.sin(2*Math.PI*x/32);
-    vertex(x, gain*y*samples[x] + height/2);
-    x2 += y*samples[x];
-  }
-  endShape();
-  y2 = 0;
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = Math.cos(2*Math.PI*x/32);
-    vertex(x, gain*y*samples[x] + height/2);
-    y2 += y*samples[x];
-  }
-  endShape();
-
-/*
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = 100*Math.sin(2*Math.PI*x/64);
-    vertex(x, y + height/2);
-  }
-  endShape();
-  beginShape();
-  for (var x = 0; x < 1024; x++){
-    var y = 100*Math.cos(2*Math.PI*x/64);
-    vertex(x, y + height/2);
-  }
-  endShape();
-*/
-
-  beginShape();
-  stroke(0);
-  for (var x = 0; x < 1024; x++){
-    var y = map(samples[x], -1, 1, -height/2, height/2);
-    vertex(x, y + height/2);
-  }
-  endShape();
-  strokeWeight(1);
-  stroke("red");
-  fill("red");
-  textSize(50);
-  text("p1 = " + (Math.round(x1*x1 + y1*y1)).toString(),width - 300,100);
-  text("x1 = " + (Math.round(x1)).toString(),10,100);
-  text("y1 = " + (Math.round(y1)).toString(),10,200);
-  text("theta1 = " + (Math.round(Math.atan(y1/x1)*180/Math.PI)).toString() + " deg",width - 400,200);
-  
-  jsondata.p1.push(Math.round(x1*x1 + y1*y1));
-  noFill();
-  stroke("red");
-
-  strokeWeight(10);
-  beginShape();
-  for (var index = 0; index < jsondata.p1.length; index++){
-    vertex(index, height - 5 - power_plot_gain*jsondata.p1[index]);
-    //console.log(jsondata.p1[index]);
-  }
-  endShape();
-
-  
-  
-  stroke("blue");
-  fill("blue");
-    strokeWeight(4);
-
-  text("p2 = " + (Math.round((x2*x2 + y2*y2)*100)/100).toString(),width - 300,height - 100);
-  jsondata.p2.push(Math.round(x2*x2 + y2*y2));
-
-  text("x2 = " + (Math.round(x2*100)/100).toString(),10,height - 100);
-  text("y2 = " + (Math.round(y2*100)/100).toString(),10,height - 200);
-  text("theta2 = " + (Math.round(Math.atan(y2/x2)*180/Math.PI)).toString() + " deg",width - 400,height - 200);
-  
-  noFill();
-  stroke("blue");
-  beginShape();
-  strokeWeight(10);
-  for (var index = 0; index < jsondata.p2.length; index++){
-    vertex(index, height - 5 - power_plot_gain2*jsondata.p2[index]);
-  }
-  endShape();
- 
-  
-  frameindex++;
-  if(frameindex >= 1024){
-    frameindex = 0;
-    jsondata.p1 = [];
-    jsondata.p2 = [];
-    jsondata.x1 = [];
-    jsondata.x2 = [];
-    jsondata.y1 = [];
-    jsondata.y2 = [];
-    jsondata.theta1 = [];
-    jsondata.theta2 = [];
-  }
     
+  }
+  endShape();
+
 }
 
 
@@ -346,23 +182,6 @@ function keyPressed() {
         post();
     }
 
-}
-
-function mouseClicked() {
- 
- if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
-      if(!oscon){
-          osc.start();
-
-      }
-      else{
-          osc.stop();
-
-      }
-      oscon = !oscon;     
-  } 
-
-    
 }
 
 
@@ -428,8 +247,8 @@ body{
 }
 main{
     position:absolute;
-    right:0px;
-    top:0px;
+    right:25px;
+    top:25px;
     border-left:solid;
     border-width:10px
 }
