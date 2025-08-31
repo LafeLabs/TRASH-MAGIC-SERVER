@@ -7,9 +7,9 @@
  - [DIRT WIZARD DISTRO DROP](https://www.openstreetmap.org/#map=19/39.857299/-105.054201)
  - [qrcode.html](qrcode.html)
 
-## SERVER
+## [SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 ![](DIRT-WIZARD-DISTRO-SERVER-PHOTO.PNG)
-## GITHUB
+## [GITHUB](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 ![](GITHUB-QRCODE-QRCODE.png)
-## LIVE TRASH MAGIC
+## [LIVE TRASH MAGIC SERVER](https://trashrobot.net/TRASH-MAGIC-SERVER/DIRT-WIZARD-DISTRO/)
 ![](LIVE-TRASH-MAGIC-QRCODE.PNG)
