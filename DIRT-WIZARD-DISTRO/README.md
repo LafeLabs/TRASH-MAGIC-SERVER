@@ -1,4 +1,4 @@
-# DIRT WIZARD DISTRO
+# [DIRT WIZARD DISTRO](https://github.com/LafeLabs/TRASH-MAGIC-SERVER/tree/main/DIRT-WIZARD-DISTRO)
 
  - [https://trashrobot.net/TRASH-MAGIC-SERVER/DIRT-WIZARD-DISTRO/](https://trashrobot.net/TRASH-MAGIC-SERVER/DIRT-WIZARD-DISTRO/)
  - [http://localhost/trash-magic-server/DIRT-WIZARD-DISTRO/](http://localhost/trash-magic-server/DIRT-WIZARD-DISTRO/)
@@ -8,7 +8,7 @@
  - [qrcode.html](qrcode.html)
 
 ## [SERVER](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
-![](DIRT-WIZARD-DISTRO-SERVER-PHOTO.PNG)
+![](DIRT-WIZARD-DISTRO-TRASH-MAGIC-SERVER-PHOTOGRAPH.PNG)
 ## [GITHUB](https://github.com/lafelabs/TRASH-MAGIC-SERVER)
 ![](GITHUB-QRCODE-QRCODE.png)
 ## [LIVE TRASH MAGIC SERVER](https://trashrobot.net/TRASH-MAGIC-SERVER/DIRT-WIZARD-DISTRO/)
