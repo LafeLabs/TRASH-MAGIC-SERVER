@@ -123,12 +123,9 @@ frameindex =0;
 jsondata = {};
 jsondata.p1 = [];
 jsondata.p2 = [];
-jsondata.x1 = [];
-jsondata.x2 = [];
-jsondata.y1 = [];
-jsondata.y2 = [];
-jsondata.theta1 = [];
-jsondata.theta2 = [];
+jsondata.theta = [];
+jsondata.voltage_offset = [];
+jsondata.am_amplitude = [];
 
 amp_modulation_period = 60;
 
@@ -238,6 +235,8 @@ function draw(){
   text("y1 = " + (Math.round(y1)).toString(),10,200);
   text("theta1 = " + (Math.round(Math.atan(y1/x1)*180/Math.PI)).toString() + " deg",width - 400,200);
   
+  theta = (Math.atan(y1/x1)*180/Math.PI) - (Math.atan(y2/x2)*180/Math.PI);
+  jsondata.theta.push(theta);
   jsondata.p1.push(Math.round(x1*x1 + y1*y1));
   noFill();
   stroke("red");
@@ -271,24 +270,30 @@ function draw(){
     vertex(index, height - 5 - power_plot_gain2*jsondata.p2[index]);
   }
   endShape();
- 
+  
+  
   
   frameindex++;
   if(frameindex >= 1024){
     frameindex = 0;
+    savejson();
     jsondata.p1 = [];
     jsondata.p2 = [];
-    jsondata.x1 = [];
-    jsondata.x2 = [];
-    jsondata.y1 = [];
-    jsondata.y2 = [];
-    jsondata.theta1 = [];
-    jsondata.theta2 = [];
+    jsondata.theta = [];
+    jsondata.voltage_offset = [];
+    jsondata.am_amplitude = [];
   }
     
 }
 
 
+function savejson(){
+    timestamp = Math.round((new Date().getTime()));
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(jsondata,null,"    "))+"&filename=jsondata-" + timestamp.toString() + ".json");//send text to save-file.php
+}
 
 
 function post(){

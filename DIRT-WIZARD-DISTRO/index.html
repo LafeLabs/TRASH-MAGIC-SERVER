@@ -18,22 +18,22 @@ CAPS LOCK ALWAYS ON!
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
-   <title>TRASH MAGIC!</title>    
+   <title>DIRT WIZARD DISTRO!</title>    
    <script src = "trashmagic.js"></script>
    <link rel="stylesheet" href="trashmagic.css">
    <script type="module" src="track-list.js"></script>   
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>    
-    <H1>TRASH MAGIC SERVER!</H1>
-    <A HREF = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">REPLICATOR SCROLL!</A>
-    <a HREF= "edit-readme.html">LOCAL README FILE!</a>
-    <a href = "#apps">TRASH MAGIC APPS!</a>
     <div id = "qrcode"></div>
-    <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
-    <H1>TRASH MAGIC TREE BRANCHES!</H1>
-    <a href = "branch.html">BRANCH!</a>
-    <DIV ID = "branches"></DIV>
+    <H1>DIRT WIZARD DISTRO!</H1>
+    <IMG SRC = "https://raw.githubusercontent.com/LafeLabs/TRASH-MAGIC-SERVER/refs/heads/main/DIRT-WIZARD-DISTRO/DIRT-WIZARD-DISTRO-TRASH-MAGIC-SERVER-PHOTOGRAPH.PNG">
+    <A HREF= "https://www.openstreetmap.org/#map=19/39.857299/-105.054201">SERVER DROP WESTMINSTER PARK N RIDE LITTLE FREE LIBRARY!</A>
+    <A HREF ="https://github.com/LafeLabs/TRASH-MAGIC-SERVER/tree/main/DIRT-WIZARD-DISTRO">DIRT WIZARD DISTRO REPLICATOR SCROLL AT GITHUB.COM!</A>
+    <a HREF= "edit-readme.html">LOCAL README FILE!</a>
+    <A HREF = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">SERVER REPLICATOR SCROLL AT GITHUB.COM!</A>
+    <H1>WALL</H1>
+    <TEXTAREA ID = "wall"></TEXTAREA>
     <H1>LINK FEED!</H1>
     <table>
         <tr>
@@ -44,43 +44,11 @@ CAPS LOCK ALWAYS ON!
         </tr>
     </table>
     <div id = "cardboard_sign_feed"></div>
-    <H1>PDF DOCUMENTS!</H1>
-    <div id = "pdf-feed"></div>
-    <H1>TEXT DOCUMENTS!</H1>
-    <div id = "text-feed"></div>
-    <H1>AUDIO TRACKS!</H1>
-    <div id = "track-list"></div>
-    <H1>IMAGES!</H1>  
-    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
-            <span id ="uploadspan">UPLOAD:</span>
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
-    </form>
-    <div id = "image-feed"></div>
 
-    <H1>WALL!</H1>
-    <TEXTAREA ID = "wall"></TEXTAREA>
     <H1>TERMINAL!</H1>
     <TEXTAREA ID = "terminal"></TEXTAREA>
 
-    <H1 id = "apps">TRASH MAGIC APPS!</H1>
-    
-    <A HREF= "cardboard-sign.html">CARDBOARD SIGN!</A>
-    <A HREF= "geometron.html">GEOMETRON!</A>
-    <a href= "qrcode.html">QR CODE GENERATOR!</a>
-    <a HREF = "write-a-note.html">WRITE A NOTE!</a>
-    <A HREF = "black-flag.html">FLY THE BLACK FLAG!</A>
-    <a href= "delete-images.html">DELETE/UPLOAD/VIEW IMAGES!</a>
-    <A HREF = "trash-tarot.html">QUANTUM TRASH TAROT!</A>
-    <A HREF = "cyber-tarot.html">QUANTUM CYBER TAROT!</A>
-    <A HREF= "riff-o-tron.html">RIFF-O-TRON!</A>
-    <A HREF = "oscilloscope.html">OSCILLOSCOPE!</A>
-    <A HREF = "math-o-scope.html">MATH-O-SCOPE!</A>
-    <a href = "dual-tone.html">DUAL TONE MULTI FREQUENCY GENERATOR!</a>
     <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
-    <A href= "edit-web-files.html">WEB(HTML/CSS/JS/JSON) FILE EDITOR!</A>
-    <A HREF= "read-markdown-files.html">MARKDOWN FILE READER!</A>
-
 
 <style>
     #image-feed img{
@@ -197,74 +165,6 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
 	correctLevel : QRCode.CorrectLevel.H
 });
 
-files = [];
-
-var httpcUpload = new XMLHttpRequest();
-httpcUpload.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        files = JSON.parse(this.responseText);
-        loadfiles();
-    }
-};
-httpcUpload.open("GET", "list-files.php", true);
-httpcUpload.send();
-
-function loadfiles(){
-    listhtml = "<track-list>\n";
-    listhtml += "  <ol slot = \"tracks\">\n";
-    for(var index = 0;index < files.length;index++){
-        if(files[index].substring(files[index].length-4,files[index].length) == ".mp3" || files[index].substring(files[index].length-4,files[index].length) == ".wav"){
-            listhtml += "    <li>\n";
-            listhtml += "      <strong>" + files[index] + "</strong>\n";
-        listhtml += "      <audio controls src = \"" + files[index] + "\"></audio>\n";
-            listhtml += "    </li>\n";                
-        }
-
-    }
-    listhtml += "  </ol>\n";
-    listhtml += "</track-list>";
-    document.getElementById("track-list").innerHTML = listhtml;
-    rainbow(document.getElementsByTagName("li"));
-
-    for(var index = 0;index < files.length;index++) {
-        if(files[index].includes(".png") || files[index].includes(".PNG") || files[index].includes(".jpg") || files[index].includes(".JPG") ||files[index].includes(".jpeg")||files[index].includes(".SVG") ||files[index].includes(".svg") || files[index].includes(".gif") ||files[index].includes(".GIF")){
-            
-            var newuploadbox = document.createElement("DIV");
-            newuploadbox.classList.add("imagebox");
-            var newimg = document.createElement("IMG");
-            newimg.src = files[index];
-            newimg.classList.add("uploadimage");
-            newuploadbox.appendChild(newimg);
-            document.getElementById("image-feed").appendChild(newuploadbox);
-    
-        }
-    }    
-
-    for(var index = 0;index < files.length;index++){
-        if(files[index].substring(files[index].length-4,files[index].length) == ".pdf" || files[index].substring(files[index].length-4,files[index].length) == ".PDF"){
-            var newa = document.createElement("A");
-            newa.href = files[index];
-            newa.innerHTML = files[index];
-            document.getElementById("pdf-feed").appendChild(newa);
-        }
-
-    }
-    rainbow(document.getElementById("pdf-feed").getElementsByTagName("a"));
-
-    for(var index = 0;index < files.length;index++){
-        if(files[index].substring(files[index].length-4,files[index].length) == ".txt" || files[index].substring(files[index].length-4,files[index].length) == ".TXT"){
-            var newa = document.createElement("A");
-            newa.href = files[index];
-            newa.innerHTML = files[index];
-            document.getElementById("text-feed").appendChild(newa);
-        }
-
-    }
-    rainbow(document.getElementById("text-feed").getElementsByTagName("a"));
-
-}
-
-
 
 document.getElementById("newlinkinput").value = "";
 document.getElementById("newlinkinput").select();
@@ -340,31 +240,6 @@ httpclinks.onreadystatechange = function() {
 };
 httpclinks.open("GET", "load-file.php?filename=links.json", true);
 httpclinks.send();
-
-
-directories = [];
-var httpc2 = new XMLHttpRequest();
-    httpc2.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        directories = JSON.parse(this.responseText);
-
-        var newa = document.createElement("A");
-        newa.innerHTML = "UP A LEVEL ../";
-        newa.href = "../";
-        document.getElementById("branches").appendChild(newa);
-        for(var index = 0;index < directories.length;index++) {
-            var newa = document.createElement("A");
-            newa.innerHTML = directories[index] + "/";
-            newa.href = directories[index] + "/";
-            document.getElementById("branches").appendChild(newa);
-        }
-        rainbow(document.getElementById("branches").getElementsByTagName("a"));
-    }
-};
-
-httpc2.open("GET", "list-branches.php", true);
-httpc2.send();
-
 
 
 wall = "";
