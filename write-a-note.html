@@ -65,10 +65,10 @@ document.getElementById("postbutton").onclick = function(){
     datestring = (foo.getFullYear()).toString() + "-" + (foo.getMonth() + 1).toString() + "-" + (foo.getDate()).toString();
     
     if(foo.getHours() < 10){
-        timestring =  "0" + (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+        timestring =  "0" + (foo.getHours()).toString() + "_" + (foo.getMinutes()).toString() + "_" + (foo.getSeconds()).toString();        
     }
     else{
-        timestring = (foo.getHours()).toString() + "：" + (foo.getMinutes()).toString() + "：" + (foo.getSeconds()).toString();        
+        timestring = (foo.getHours()).toString() + "_" + (foo.getMinutes()).toString() + "_" + (foo.getSeconds()).toString();        
     }
     filename = "note-" + datestring + "-" + timestring + ".txt";
     console.log(filename);

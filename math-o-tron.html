@@ -51,9 +51,7 @@
     <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
     <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "cardboard-sign.html">CARDBOARD SIGN</a></h1>    
     <p>CLICK SCREEN TO PLAY TONE!</p>
-    <P>
-        MOVE MOUSE POINTER UP AND DOWN TO CONTROL AMPLITUDE!
-    </P>
+    <P>MOVE MOUSE POINTER UP AND DOWN TO CONTROL AMPLITUDE!</P>
     <P>TONE IS AT 750 HZ!</P>
     <P>RED IS AT TONE FREQ!</P>
     <P>BLUE IS AT DOUBLE TONE FREQ!</P>
@@ -105,7 +103,7 @@ function setup() {
   osc.amp(1.0);   
  // osc.freq(sampleRate()/32);  
   osc.freq(sampleRate()/64);  
-              osc.start();
+  osc.start();
 
 }
 
@@ -116,7 +114,6 @@ x1 = 0;//cosine component of f0 = 750 Hz mode
 y1 = 0;//  sine component of f0 = 750 Hz mode
 x2 = 0;//cosine component of 2*f0 = 1500 Hz mode
 y2 = 0;//  sine component of 2*f0 = 1500 Hz mode
-
 
 frameindex =0;
 
@@ -249,8 +246,6 @@ function draw(){
   }
   endShape();
 
-  
-  
   stroke("blue");
   fill("blue");
     strokeWeight(4);
