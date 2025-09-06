@@ -106,9 +106,8 @@ function rainbowstring(localelement){
         newspan.style.color = color;
         localelement.appendChild(newspan);
     }
-    
-
 }
+
 function rainbow(localarray){
     n = localarray.length;
     theta = 0;

@@ -51,6 +51,7 @@
     ],
     "js": [
         "geometron.js",
+        "rainbow.js",
         "tarot.js",
         "track-list.js",
         "trashmagic.js"

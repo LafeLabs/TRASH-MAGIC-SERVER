@@ -45,6 +45,7 @@
 # JAVASCRIPT FILES
 
  - [geometron.js](geometron.js)
+ - [rainbow.js](rainbow.js)
  - [tarot.js](tarot.js)
  - [track-list.js](track-list.js)
  - [trashmagic.js](trashmagic.js)
