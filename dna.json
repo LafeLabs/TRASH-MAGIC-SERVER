@@ -18,6 +18,7 @@
         "edit-readme.html",
         "edit-text-files.html",
         "edit-web-files.html",
+        "feel.html",
         "geometron.html",
         "image-feed.html",
         "index.html",
@@ -31,6 +32,8 @@
         "read-markdown-latex-files.html",
         "read-text-files.html",
         "riff-o-tron.html",
+        "see.html",
+        "touch.html",
         "trash-tarot.html",
         "trashmagic.html",
         "write-a-note.html"
@@ -42,7 +45,8 @@
         "jsondata-1756684173908.json",
         "jsondata-1756684208046.json",
         "links.json",
-        "metaflag.json"
+        "metaflag.json",
+        "wheel.json"
     ],
     "css": [
         "markdown.css",

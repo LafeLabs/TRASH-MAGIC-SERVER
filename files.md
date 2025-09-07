@@ -19,6 +19,7 @@
  - [edit-readme.html](edit-readme.html)
  - [edit-text-files.html](edit-text-files.html)
  - [edit-web-files.html](edit-web-files.html)
+ - [feel.html](feel.html)
  - [geometron.html](geometron.html)
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
@@ -32,6 +33,8 @@
  - [read-markdown-latex-files.html](read-markdown-latex-files.html)
  - [read-text-files.html](read-text-files.html)
  - [riff-o-tron.html](riff-o-tron.html)
+ - [see.html](see.html)
+ - [touch.html](touch.html)
  - [trash-tarot.html](trash-tarot.html)
  - [trashmagic.html](trashmagic.html)
  - [write-a-note.html](write-a-note.html)
@@ -59,6 +62,7 @@
  - [jsondata-1756684208046.json](jsondata-1756684208046.json)
  - [links.json](links.json)
  - [metaflag.json](metaflag.json)
+ - [wheel.json](wheel.json)
 
 # MARKDOWN FILES
 
