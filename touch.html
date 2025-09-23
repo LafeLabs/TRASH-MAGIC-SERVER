@@ -71,9 +71,13 @@ function setup() {
 
   if(innerWidth > innerHeight){
       squaresize = innerHeight;
+      createCanvas(innerWidth, innerHeight);    
+      
   }
   else{
       squaresize = innerWidth;
+      createCanvas(innerWidth-10, innerHeight-100);    
+
   }
   createCanvas(innerWidth, innerHeight);    
   textSize(50);
