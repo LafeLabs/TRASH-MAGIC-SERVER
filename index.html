@@ -50,14 +50,6 @@ CAPS LOCK ALWAYS ON!
     <div id = "text-feed"></div>
     <H1>AUDIO TRACKS!</H1>
     <div id = "track-list"></div>
-    <H1>IMAGES!</H1>  
-    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
-            <span id ="uploadspan">UPLOAD:</span>
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
-    </form>
-    <div id = "image-feed"></div>
-
     <H1>WALL!</H1>
     <TEXTAREA ID = "wall"></TEXTAREA>
     <H1>TERMINAL!</H1>
@@ -82,7 +74,15 @@ CAPS LOCK ALWAYS ON!
     <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
     <A href= "edit-web-files.html">WEB(HTML/CSS/JS/JSON) FILE EDITOR!</A>
     <A HREF= "read-markdown-files.html">MARKDOWN FILE READER!</A>
-
+    <A HREF = "edit-readme.html">README.MD</A>
+    
+    <H1>IMAGES!</H1>  
+    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+            <span id ="uploadspan">UPLOAD:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+    </form>
+    <div id = "image-feed"></div>
 
 <style>
     #image-feed img{
