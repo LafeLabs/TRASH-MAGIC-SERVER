@@ -23,7 +23,9 @@
         "geometron.html",
         "image-feed.html",
         "index.html",
+        "link-feed.html",
         "list-files.html",
+        "map-feed.html",
         "math-o-scope.html",
         "math-o-tron.html",
         "organic-web-home.html",
@@ -46,6 +48,7 @@
         "jsondata-1756684173908.json",
         "jsondata-1756684208046.json",
         "links.json",
+        "map-feed.json",
         "metaflag.json",
         "wheel.json"
     ],

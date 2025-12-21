@@ -24,7 +24,9 @@
  - [geometron.html](geometron.html)
  - [image-feed.html](image-feed.html)
  - [index.html](index.html)
+ - [link-feed.html](link-feed.html)
  - [list-files.html](list-files.html)
+ - [map-feed.html](map-feed.html)
  - [math-o-scope.html](math-o-scope.html)
  - [math-o-tron.html](math-o-tron.html)
  - [organic-web-home.html](organic-web-home.html)
@@ -62,6 +64,7 @@
  - [jsondata-1756684173908.json](jsondata-1756684173908.json)
  - [jsondata-1756684208046.json](jsondata-1756684208046.json)
  - [links.json](links.json)
+ - [map-feed.json](map-feed.json)
  - [metaflag.json](metaflag.json)
  - [wheel.json](wheel.json)
 
