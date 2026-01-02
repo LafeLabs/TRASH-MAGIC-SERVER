@@ -1,6 +1,7 @@
 
 # HTML FILES
 
+ - [album.html](album.html)
  - [black-flag.html](black-flag.html)
  - [branch.html](branch.html)
  - [cardboard-sign.html](cardboard-sign.html)
@@ -26,17 +27,20 @@
  - [index.html](index.html)
  - [link-feed.html](link-feed.html)
  - [list-files.html](list-files.html)
+ - [local-index.html](local-index.html)
  - [map-feed.html](map-feed.html)
  - [math-o-scope.html](math-o-scope.html)
  - [math-o-tron.html](math-o-tron.html)
  - [organic-web-home.html](organic-web-home.html)
  - [oscilloscope.html](oscilloscope.html)
+ - [pdf-library.html](pdf-library.html)
  - [qrcode.html](qrcode.html)
  - [read-markdown-files.html](read-markdown-files.html)
  - [read-markdown-latex-files.html](read-markdown-latex-files.html)
  - [read-text-files.html](read-text-files.html)
  - [riff-o-tron.html](riff-o-tron.html)
  - [see.html](see.html)
+ - [text-library.html](text-library.html)
  - [touch.html](touch.html)
  - [trash-tarot.html](trash-tarot.html)
  - [trashmagic.html](trashmagic.html)
@@ -60,9 +64,6 @@
 
  - [black-flag-font.json](black-flag-font.json)
  - [dna.json](dna.json)
- - [jsondata-1756682554803.json](jsondata-1756682554803.json)
- - [jsondata-1756684173908.json](jsondata-1756684173908.json)
- - [jsondata-1756684208046.json](jsondata-1756684208046.json)
  - [links.json](links.json)
  - [map-feed.json](map-feed.json)
  - [metaflag.json](metaflag.json)
