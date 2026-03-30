@@ -39,18 +39,23 @@
         "read-text-files.html",
         "riff-o-tron.html",
         "see.html",
+        "sign-factory.html",
         "text-library.html",
         "touch.html",
+        "trash-magic.html",
         "trash-tarot.html",
         "trashmagic.html",
         "write-a-note.html"
     ],
     "json": [
+        "backgroundimage.json",
         "black-flag-font.json",
         "dna.json",
         "links.json",
         "map-feed.json",
         "metaflag.json",
+        "sign.json",
+        "signfeed.json",
         "wheel.json"
     ],
     "css": [

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+...
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC!</title>    
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+    <DIV ID  ="qrcode"></DIV>
+    <TEXTAREA ID = "wall"></TEXTAREA>
+    <A HREF="https://trashrobot.net/VULPIBUS/">VULPIBUS!</A>
+    <a href="cardboard-sign.html">CARDBOARD SIGN</a>
+    <div id = "imagefeed"></div>
+     <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+            <span id ="uploadspan">UPLOAD:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+    </form>
+    
+<style>
+#image-feed img{
+    border:solid;
+    border-radius:1em;
+    border-width:5px;
+}
+button{
+    font-size:2em;
+}
+li{
+    margin-top:0.25em;
+    margin-bottom:0.25em;
+    border-radius:0.125em;
+}
+.link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    cursor:pointer;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:2em;
+    position:relative;
+    top:5em;
+    left:5em;
+}
+.CARDBOARD-SIGN A{
+    COLOR:black;
+}
+.CARDBOARD-SIGN{
+    MAX-WIDTH:90%;   
+    MARGIN:AUTO;
+    MARGIN-TOP:2EM;
+    border-top:solid;
+    MARGIN-BOTTOM:1EM;
+    OVERFLOW:SCROLL;
+    FONT-SIZE:1EM;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.timestampdata{
+    display:none;
+}
+table, form{
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+}
+#fileToUpload{
+    cursor:pointer;
+}
+#submitinput{
+    cursor:pointer;
+}
+#newlinkinput{
+    background-color:black;
+    color:#00ff00;
+    font-family:Courier;
+    font-size:1em;
+}
+#wall{
+    width:80%;
+    display:block;
+    margin:auto;
+    border:solid;
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+    font-size:2em;
+    height:10em;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    border-radius:0.5em;
+}
+#wall2{
+    width:80%;
+    display:block;
+    margin:auto;
+    border:solid;
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+    font-size:2em;
+    height:20em;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    border-radius:0.5em;
+}
+.deletebutton{
+    width:2em;
+    background-color:#808080;
+    border:solid;
+    border-radius:5px;
+    border-width:5px;
+    border-color:red;
+    font-family:helvetica;
+    font-size:2em;
+    color:red;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{ 
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+.filelabel{
+    color:#ff2cb4;
+    font-size:2em;
+}
+#terminal{
+    width:80%;
+    display:block;
+    margin:auto;
+    border:solid;
+    FONT-FAMILY:Courier;
+    BACKGROUND-COLOR:black;
+    color:#00ff00;
+    font-size:2em;
+    height:20em;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    border-radius:0.5em;
+}
+</style>
+<script>
+
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+wall = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        wall = this.responseText;
+        document.getElementById("wall").value = wall;  
+    }
+};
+httpc.open("GET", "load-file.php?filename=wall.txt", true);
+httpc.send();
+
+document.getElementById("wall").onkeyup = function() {
+    wall = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=wall.txt");//send text to save-file.php
+}
+
+
+
+deletemode = true;
+//deletemode = false;
+
+uploadImages = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        uploadImages = JSON.parse(this.responseText);
+        loadimagefeed();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+function loadimagefeed(){
+
+    for(var index = uploadImages.length - 1;index >= 0;index--) {
+        if(uploadImages[index].includes(".SVG") || uploadImages[index].includes(".svg") || uploadImages[index].includes(".png") || uploadImages[index].includes(".PNG") || uploadImages[index].includes(".jpg") || uploadImages[index].includes(".JPG") ||uploadImages[index].includes(".jpeg") || uploadImages[index].includes(".gif") ||uploadImages[index].includes(".GIF")){
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = uploadImages[index];
+            newimg.classList.add("uploadimage");
+            newuploadbox.appendChild(newimg);
+            document.getElementById("imagefeed").appendChild(newuploadbox);
+    
+            var newdiv = document.createElement("DIV");
+            newdiv.innerHTML = uploadImages[index];
+            newdiv.className = "filelabel";
+            newuploadbox.appendChild(newdiv);
+        
+            if(deletemode){
+                var newspan = document.createElement("SPAN");
+                newspan.innerHTML = "DELETE";
+                newuploadbox.appendChild(newspan);
+                newspan.classList.add("button");
+                newspan.classList.add("deletebutton");
+                newspan.onclick = function(){
+                    var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+                    imagefilename = imageurl.split("/")[imageurl.split("/").length-1];
+                    var httpc = new XMLHttpRequest();
+                    var url = "delete-file.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=" + imagefilename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }   
+            }   
+            
+            
+        }
+    }    
+}
+</script>
+</body>
+</html>
+
+
+    
+    

@@ -40,8 +40,10 @@
  - [read-text-files.html](read-text-files.html)
  - [riff-o-tron.html](riff-o-tron.html)
  - [see.html](see.html)
+ - [sign-factory.html](sign-factory.html)
  - [text-library.html](text-library.html)
  - [touch.html](touch.html)
+ - [trash-magic.html](trash-magic.html)
  - [trash-tarot.html](trash-tarot.html)
  - [trashmagic.html](trashmagic.html)
  - [write-a-note.html](write-a-note.html)
@@ -62,11 +64,14 @@
 
 # JSON FILES
 
+ - [backgroundimage.json](backgroundimage.json)
  - [black-flag-font.json](black-flag-font.json)
  - [dna.json](dna.json)
  - [links.json](links.json)
  - [map-feed.json](map-feed.json)
  - [metaflag.json](metaflag.json)
+ - [sign.json](sign.json)
+ - [signfeed.json](signfeed.json)
  - [wheel.json](wheel.json)
 
 # MARKDOWN FILES

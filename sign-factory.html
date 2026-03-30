@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        NO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    <title>sign factory</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+    <main></main>
+    <div class = "bottombutton" id = "deletebutton">DELETE</div>
+    <div class = "bottombutton" id = "clearbutton">CLEAR</div>
+    <div class = "bottombutton" id = "postbutton">POST</div>
+    
+    
+    <img id = "mainimage" src= "">
+    <div id = "feedscroll">
+    
+        <h1>trash magic sign factory!</h1>
+    <div id ="signfeed"></div>
+
+
+    <table>
+        <tr>
+            <td>name:</td>
+            <td>
+                <input id = "nameinput">
+            </td>
+        </tr>
+        <tr>
+            <td>link url:</td>
+            <td>
+                <input id = "linkinput">
+            </td>
+        </tr>
+    </table>
+    <h1>message:</h1>
+    <textarea id = "message"></textarea>
+    <TABLE>
+        <TR ID ="colors">
+            <TD CLASS = "button">BLACK</TD>
+            <TD CLASS = "button">RED</TD>
+            <TD CLASS = "button">ORANGE</TD>
+            <TD CLASS = "button">YELLOW</TD>
+            <TD CLASS = "button">GREEN</TD>
+            <TD CLASS = "button">BLUE</TD>
+            <TD CLASS = "button">PURPLE</TD>
+        </TR>
+    </TABLE>
+    <TABLE>
+        <TR ID = "linewidth">
+            <TD CLASS = "button">1</TD>
+            <TD CLASS = "button">5</TD>
+            <TD CLASS = "button">10</TD>
+            <TD CLASS = "button">20</TD>
+            <TD CLASS = "button">30</TD>
+        </TR>
+    </TABLE>
+    <table>
+        <tr>
+            <td>color:</td>
+            <td>
+                <input id = "colorinput">
+            </td>
+            <td>stroke width [px]:</td>
+            <td>
+                <input id = "strokewidthinput">
+            </td>
+    
+        </tr>
+    </table>
+    <TABLE>
+        <TR>
+            <TD>IMAGE URL:</TD>
+            <TD>
+                <INPUT ID = "imageurlinput">
+            </TD>
+        </TR>
+        <tr>
+            <td>image left [%]:</td>
+            <td>
+                <input id = "imageleftinput">
+            </td>
+        </tr>
+        <tr>
+            <td>image top [%]:</td>
+            <td>
+                <input id = "imagetopinput">
+            </td>
+        </tr>
+        <tr>
+            <td>image width [%]<td>
+            <td>
+                <input id = "imagewidthinput">
+            </td>
+        </tr>
+        
+    </TABLE>
+    
+    <h1 class = "button">image json</h1>
+    <textarea id = "imagejsonio"></textarea>
+    <h1 class = "button">sign json</h1>
+    <textarea id = "signjsonio"></textarea>
+    <h1 class = "button">sign feed json</h1>
+    <textarea id = "signfeedjsonio"></textarea>
+    
+        <a href = "index.html">HOME</a>
+        <div id = "qrcode"></div>
+</div>
+
+<script>
+//    taco bell logo url:
+//    https://upload.wikimedia.org/wikipedia/en/b/b7/Taco_Bell_2023.svg
+
+document.getElementById("imageurlinput").value = "";
+
+document.getElementById("imageurlinput").onchange= function(){
+    document.getElementById("mainimage").src= this.value;
+    if(this.value.length > 1){
+        backgroundimage.url = this.value;
+    }
+    else{
+        
+    }
+    savebackgroundimage();
+    
+}
+
+linewidthbuttons = document.getElementById("linewidth").getElementsByClassName("button");
+
+linewidthbuttons[0].onclick = function(){
+    strokeWeight(parseInt(this.innerHTML));
+    brushstroke.strokewidth = (100*parseInt(this.innerHTML)/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;    
+}
+linewidthbuttons[1].onclick = function(){
+    strokeWeight(parseInt(this.innerHTML));
+    brushstroke.strokewidth = (100*parseInt(this.innerHTML)/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+    
+}
+linewidthbuttons[2].onclick = function(){
+    strokeWeight(parseInt(this.innerHTML));
+    brushstroke.strokewidth = (100*parseInt(this.innerHTML)/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+    
+}
+linewidthbuttons[3].onclick = function(){
+    strokeWeight(parseInt(this.innerHTML));
+    brushstroke.strokewidth = (100*parseInt(this.innerHTML)/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+    
+}
+linewidthbuttons[4].onclick = function(){
+    strokeWeight(parseInt(this.innerHTML));
+    brushstroke.strokewidth = (100*parseInt(this.innerHTML)/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+}
+
+colorbuttons = document.getElementById("colors").getElementsByClassName("button");
+
+colorbuttons[0].onclick = function(){
+    stroke("black");
+    brushstroke.color = "black";
+    document.getElementById("colorinput").value = brushstroke.color;
+
+    
+}
+colorbuttons[1].onclick = function(){
+    stroke("red");
+    brushstroke.color = "red";
+    document.getElementById("colorinput").value = brushstroke.color;
+
+}
+colorbuttons[2].onclick = function(){
+    stroke("orange");
+    brushstroke.color = "orange";
+    document.getElementById("colorinput").value = brushstroke.color;
+
+}
+colorbuttons[3].onclick = function(){
+    stroke("yellow");
+    brushstroke.color = "yellow";
+    document.getElementById("colorinput").value = brushstroke.color;
+    
+}
+colorbuttons[4].onclick = function(){
+    stroke("green");
+    brushstroke.color = "green";
+    document.getElementById("colorinput").value = brushstroke.color;
+}
+colorbuttons[5].onclick = function(){
+    stroke("blue");
+    brushstroke.color = "blue";
+    document.getElementById("colorinput").value = brushstroke.color;
+
+    
+}
+
+colorbuttons[6].onclick = function(){
+    stroke("purple");
+    brushstroke.color = "purple";
+    document.getElementById("colorinput").value = brushstroke.color;
+    
+}
+
+signfeed = [];
+sign = {};
+sign.name = "sign";
+sign.link = "https://trashrobot.net/";
+sign.message = "the medium is the message";
+sign.brushstrokes = [];
+document.getElementById("nameinput").value = sign.name;
+document.getElementById("linkinput").value = sign.link;
+document.getElementById("message").value = sign.message;
+document.getElementById("message").onkeyup = function() {
+    sign.message = this.value;
+}
+
+
+document.getElementById("linkinput").onchange = function(){
+    sign.link = this.value;
+}
+document.getElementById("nameinput").onchange = function(){
+    sign.name = this.value;
+}
+document.getElementById("colorinput").onchange = function(){
+    brushstroke.color = this.value;
+    stroke(brushstroke.color);
+}
+
+document.getElementById("strokewidthinput").onchange = function(){
+    brushstroke.strokewidth = this.value;    
+    strokeWeight(parseInt(brushstroke.strokewidth));
+    brushstroke.strokewidth = (100*parseInt(brushstroke.strokewidth)/width).toFixed(2);
+    
+    
+}
+
+brushstroke = {
+    "color":"black",
+    "strokewidth":0.05,
+    "points":[]
+};
+document.getElementById("colorinput").value = brushstroke.color;
+document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+
+
+
+//x and y points and also stroke width are in units of percent of square size of icon in sign
+//savesign();
+
+function savesign(){
+    var url = "save-file.php";        
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(sign,null,"    "))+"&filename=sign.json");//send text to filesaver.php
+    
+    signfeed.push(JSON.parse(JSON.stringify(sign)));
+    
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(signfeed,null,"    "))+"&filename=signfeed.json");//send text to filesaver.php
+    drawfeed();
+    document.getElementById("signjsonio").value = JSON.stringify(sign,null,"    ");
+    document.getElementById("signfeedjsonio").value = JSON.stringify(signfeed,null,"    ");    
+    /*
+    timestampstring = Date.now().toString();
+    var url = "save-file.php";        
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(sign,null,"    "))+"&filename=" + "sign" + timestampstring + ".json");//send text to filesaver.php
+    console.log("sign" + timestampstring + ".json");
+    */
+    
+}
+
+function drawfeed(){
+       document.getElementById("signfeed").innerHTML = "";
+//       for(var signindex = signfeed.length - 1;signindex >= 0;signindex--){
+       for(var signindex = 0;signindex < signfeed.length;signindex++){
+           var newdiv = document.createElement("DIV");//sign box
+           newdiv.className = "signbox";
+           var newa = document.createElement("A");
+           newa.innerHTML = signfeed[signindex].name;
+           newa.href = signfeed[signindex].link;
+           var newp = document.createElement("P");
+           newp.innerHTML = signfeed[signindex].message;
+           var newcan = document.createElement("CANVAS");
+
+            var new_qrcode = document.createElement("SPAN");
+        
+            qrcode = new QRCode(new_qrcode, {
+            	text: signfeed[signindex].link,
+            	width: 160,
+            	height: 160,
+            	colorDark : "#000000",
+            	colorLight : "#ffffff",
+            	correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            newdiv.appendChild(newa);
+            newdiv.appendChild(new_qrcode);
+            newdiv.appendChild(newp);
+            newdiv.appendChild(newcan);
+            document.getElementById("signfeed").appendChild(newdiv);
+           ctx = newcan.getContext("2d");
+           squaresize = 400;
+            newcan.width = squaresize;//px
+            newcan.height = squaresize;//px
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            for(var strokeindex = 0;strokeindex < signfeed[signindex].brushstrokes.length;strokeindex++){
+                ctx.lineWidth = Math.round(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].strokewidth);
+                ctx.strokeStyle = signfeed[signindex].brushstrokes[strokeindex].color;
+                ctx.beginPath(); // Start a new path
+            
+                ctx.moveTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].y); // Move the pen to (30, 50)
+                for(var pointindex = 1;pointindex < signfeed[signindex].brushstrokes[strokeindex].points.length;pointindex++){
+    
+                    ctx.lineTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].y); // Draw a line to (150, 100)    
+                }
+                ctx.stroke(); // Render the path
+                
+            }
+           
+       }
+       
+}
+
+squareWidth = 100;
+if(innerWidth > innerHeight){
+    squareWidth = innerHeight;
+}
+else{
+    squareWidth = innerWidth;
+}
+
+document.getElementById("mainimage").style.width = (squareWidth - 80).toString() + "px";
+
+
+backgroundimage = {};
+//backgroundimage.url = "https://upload.wikimedia.org/wikipedia/en/b/b7/Taco_Bell_2023.svg";
+//backgroundimage.left = 0;
+//backgroundimage.top = 0;
+//backgroundimage.width = 100;
+//savebackgroundimage();
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        backgroundimage = JSON.parse(this.responseText);
+        document.getElementById("mainimage").src = backgroundimage.url;
+        document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.width = (0.01*backgroundimage.width*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("imageurlinput").value = backgroundimage.url;
+        document.getElementById("imageleftinput").value = backgroundimage.left;
+        document.getElementById("imagetopinput").value = backgroundimage.top;        
+        document.getElementById("imagewidthinput").value = backgroundimage.width;        
+        
+        
+    }
+};
+httpc.open("GET", "load-file.php?filename=backgroundimage.json", true);
+httpc.send();
+
+document.getElementById("imageleftinput").onchange = function(){
+    backgroundimage.left = this.value;
+    savebackgroundimage();
+            document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.width = (0.01*backgroundimage.width*(squareWidth - 80)).toString()  + "px";
+}
+
+document.getElementById("imagetopinput").onchange = function(){
+    backgroundimage.top = this.value;
+    savebackgroundimage();
+            document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.width = (0.01*backgroundimage.width*(squareWidth - 80)).toString()  + "px";
+}
+
+document.getElementById("imagewidthinput").onchange = function(){
+    backgroundimage.width = this.value;
+    savebackgroundimage();
+            document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
+        document.getElementById("mainimage").style.width = (0.01*backgroundimage.width*(squareWidth - 80)).toString()  + "px";
+}
+
+function savebackgroundimage(){
+    var url = "save-file.php";        
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(backgroundimage,null,"    "))+"&filename=backgroundimage.json");//send text to filesaver.php
+    
+    document.getElementById("imagejsonio").value = JSON.stringify(backgroundimage,null,"    "); 
+}
+
+
+    
+
+function setup() {
+
+    squareWidth = 100;
+
+    if(innerWidth > innerHeight){
+        squareWidth = innerHeight;
+        document.getElementById("clearbutton").style.right = (innerWidth - squareWidth).toString() + "px";
+        document.getElementById("feedscroll").style.height = (innerHeight - 70).toString() + "px";
+        document.getElementById("feedscroll").style.width = (innerWidth - squareWidth).toString() + "px";
+    }
+    else{
+        squareWidth = innerWidth;
+        document.getElementById("feedscroll").style.width = (innerWidth - 30).toString() + "px";
+        document.getElementById("feedscroll").style.height = (innerHeight - squareWidth - 70).toString() + "px";    
+    }
+    
+    document.getElementById("postbutton").style.left = (squareWidth/2 - 100).toString() + "px";
+    
+    
+    createCanvas(squareWidth-80, squareWidth-80);
+//    background(159,135,103);
+    stroke(0);
+    strokeWeight(30);
+    brushstroke.strokewidth = (100*30/width).toFixed(2);
+    document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
+    
+//      image(img, 0, 0,squareWidth-50,squareWidth-70);
+}
+
+inLine = false;
+
+function draw() {
+  
+  if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+      if (mouseIsPressed === true) {
+        if(inLine == false){
+            var  point = {};
+            point.x = (100*mouseX/width).toFixed(1);
+            point.y = (100*mouseY/width).toFixed(1);
+            brushstroke.points.push(point);
+        }
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        inLine = true;
+        if(mouseX != pmouseX || mouseY != pmouseY){
+            var  point = {};
+            point.x = (100*mouseX/width).toFixed(1);
+            point.y = (100*mouseY/width).toFixed(1);
+            brushstroke.points.push(point);
+        }
+      }
+      else{
+          if(inLine){
+              sign.brushstrokes.push(JSON.parse(JSON.stringify(brushstroke)));
+              brushstroke.points = [];
+          }
+          inLine = false;
+      }
+  }
+}
+
+
+document.getElementById("deletebutton").onclick = function(){
+    sign.brushstrokes.pop();
+    clear();
+    //background(159,135,103);
+    for(var strokeindex = 0;strokeindex < sign.brushstrokes.length;strokeindex++){
+        for(var pointindex = 1;pointindex < sign.brushstrokes[strokeindex].points.length;pointindex++){
+            
+            stroke(sign.brushstrokes[strokeindex].color);
+            strokeWeight(Math.round(0.01*width*sign.brushstrokes[strokeindex].strokewidth));
+            line(0.01*width*sign.brushstrokes[strokeindex].points[pointindex - 1].x,0.01*width*sign.brushstrokes[strokeindex].points[pointindex - 1].y,0.01*width*sign.brushstrokes[strokeindex].points[pointindex].x,0.01*width*sign.brushstrokes[strokeindex].points[pointindex].y);
+        }
+    }
+}
+
+
+document.getElementById("clearbutton").onclick = function(){
+    sign.brushstrokes = [];
+    clear();
+   // background(159,135,103);
+}
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+document.getElementById("postbutton").onclick = function(){
+    savesign();
+}
+
+
+
+</script>
+<style>
+textarea{
+    width:80%;
+    display:block;
+    border:solid;
+    background-color:#9f8767;    
+    margin:auto;
+    font-family:Comic Sans MS;
+    
+}
+#mainimage{
+    position:absolute;
+    z-index:-1;
+}
+.button{
+    border:solid;
+    background-color:#9f8767;    
+    text-align:center;
+    width:6em;
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+
+body{
+    overflow:hidden;
+    background-color:#9f8767;    
+}
+canvas{
+    z-index:-1;
+}
+main{
+    position:absolute;
+    left:0px;
+    top:0px;
+    cursor:pointer;
+}
+input,table{
+    background-color:#9f8767;    
+    font-family:COMIC SANS MS;
+}
+h1{
+    text-align:center;
+    font-family:Comic Sans MS;
+    font-size:2em;
+}
+#defaultCanvas0{
+    border:solid;
+    border-radius:25px;
+    border-width:5px;
+}
+#feedscroll{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    overflow:scroll;
+    border:solid;
+    background-color:#9f8767;    
+    border-radius:25px;
+    border-width:5px;
+    width:100px;
+    height:100px;
+}
+#feedscroll a{
+    display:block;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    margin:10px 10px 10px 10px;
+    border-radius:20px;
+    color:blue;
+    padding-left:1em;
+    border:solid;
+}
+#feedscroll p{
+    font-family:Comic Sans MS;
+    font-size:2em;    
+}
+.imagebox{
+    margin-bottom:2em;
+    margin-top:2em;
+    padding-bottom:2em; 
+    padding-top:2em;
+    border-bottom:solid;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+.filelabel{
+    display:none;
+}
+.topbutton{
+    position:absolute;
+    top:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+}
+.topbutton:hover{
+    background-color:green;
+}
+.topbutton:active{
+    background-color:yellow;
+}
+.bottombutton{
+    position:absolute;
+    bottom:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+        background-color:#9f8767;    
+    z-index:2;
+
+}
+.bottombutton:hover{
+    background-color:green;
+}
+.bottombutton:active{
+    background-color:yellow;
+}
+.signbox{
+    border:solid;
+}
+#removebutton{
+    right:50%;
+    width:12em;
+}
+#deletebutton{
+    left:0px;
+}
+#clearbutton{
+    right:0px;
+}
+</style>
+</body>
+</html>
