@@ -116,11 +116,11 @@
         
     </TABLE>
     
-    <h1 class = "button">image json</h1>
+    <h1 class = "button" id = "imagejsonbutton">image json</h1>
     <textarea id = "imagejsonio"></textarea>
-    <h1 class = "button">sign json</h1>
+    <h1 class = "button" id = "signjsonbutton">sign json</h1>
     <textarea id = "signjsonio"></textarea>
-    <h1 class = "button">sign feed json</h1>
+    <h1 class = "button" id = "signfeedjsonbutton">sign feed json</h1>
     <textarea id = "signfeedjsonio"></textarea>
     
         <a href = "index.html">HOME</a>
@@ -234,6 +234,7 @@ document.getElementById("linkinput").value = sign.link;
 document.getElementById("message").value = sign.message;
 document.getElementById("message").onkeyup = function() {
     sign.message = this.value;
+
 }
 
 
@@ -249,7 +250,7 @@ document.getElementById("colorinput").onchange = function(){
 }
 
 document.getElementById("strokewidthinput").onchange = function(){
-    brushstroke.strokewidth = this.value;    
+    brushstroke.strokewidth = parseFloat(this.value);    
     strokeWeight(parseInt(brushstroke.strokewidth));
     brushstroke.strokewidth = (100*parseInt(brushstroke.strokewidth)/width).toFixed(2);
     
@@ -269,33 +270,46 @@ document.getElementById("strokewidthinput").value = brushstroke.strokewidth;
 //x and y points and also stroke width are in units of percent of square size of icon in sign
 //savesign();
 
+document.getElementById("signfeedjsonbutton").onclick = function(){
+    signfeed = JSON.parse(document.getElementById("signfeedjsonio").value);
+    sign = signfeed[0];
+    drawsign();
+    savefeed();
+}
+
+
+document.getElementById("signjsonbutton").onclick = function(){
+    sign = JSON.parse(document.getElementById("signjsonio").value);
+    signfeed.push(sign);
+    drawsign();
+    savesign();
+}
+
+document.getElementById("imagejsonbutton").onclick = function(){
+    drawbackgroundimage();
+    savebackgroundimage();
+   
+}
+
+function savefeed(){
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(signfeed,null,"    "))+"&filename=signfeed.json");//send text to filesaver.php
+}
+
 function savesign(){
     var url = "save-file.php";        
     var httpc = new XMLHttpRequest();
     httpc.open("POST", url, true);
     httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     httpc.send("data="+encodeURIComponent(JSON.stringify(sign,null,"    "))+"&filename=sign.json");//send text to filesaver.php
-    
     signfeed.push(JSON.parse(JSON.stringify(sign)));
-    
-    var url = "save-file.php";        
-    var httpc2 = new XMLHttpRequest();
-    httpc2.open("POST", url, true);
-    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpc2.send("data="+encodeURIComponent(JSON.stringify(signfeed,null,"    "))+"&filename=signfeed.json");//send text to filesaver.php
     drawfeed();
     document.getElementById("signjsonio").value = JSON.stringify(sign,null,"    ");
     document.getElementById("signfeedjsonio").value = JSON.stringify(signfeed,null,"    ");    
-    /*
-    timestampstring = Date.now().toString();
-    var url = "save-file.php";        
-    var httpc = new XMLHttpRequest();
-    httpc.open("POST", url, true);
-    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpc.send("data="+encodeURIComponent(JSON.stringify(sign,null,"    "))+"&filename=" + "sign" + timestampstring + ".json");//send text to filesaver.php
-    console.log("sign" + timestampstring + ".json");
-    */
-    
+    savefeed();
 }
 
 function drawfeed(){
@@ -322,10 +336,45 @@ function drawfeed(){
             	correctLevel : QRCode.CorrectLevel.H
             });
             
+            
+            var indexspan = document.createElement("SPAN");
+            indexspan.className = "index";
+            indexspan.innerHTML = signindex.toString();
+            
+            var newtable = document.createElement("TABLE");
+            var newtr = document.createElement("TR");
+            newtable.appendChild(newtr);
+
+            var delbutton = document.createElement("TD");
+            delbutton.innerHTML = "DELETE";
+            delbutton.className = "signcontrolbutton";
+            newtr.appendChild(delbutton);
+            delbutton.onclick = function(){
+                thisindex = parseInt(this.parentNode.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+                var newfeed = [];
+                for(var index = 0;index < signfeed.length;index++){
+                    if(index != thisindex){
+                        newfeed.push(signfeed[index]);
+                    }
+                }
+                signfeed = newfeed;
+                savefeed();
+                drawfeed();
+            }
+            
+
             newdiv.appendChild(newa);
             newdiv.appendChild(new_qrcode);
             newdiv.appendChild(newp);
             newdiv.appendChild(newcan);
+            newdiv.appendChild(indexspan);
+            newdiv.appendChild(newtable);
+            
+            newcan.onclick = function(){
+                thisindex = parseInt(this.parentNode.getElementsByClassName("index")[0].innerHTML);
+                sign = signfeed[thisindex];
+                drawsign();
+            }
             document.getElementById("signfeed").appendChild(newdiv);
            ctx = newcan.getContext("2d");
            squaresize = 400;
@@ -369,10 +418,7 @@ backgroundimage = {};
 //backgroundimage.width = 100;
 //savebackgroundimage();
 
-var httpc = new XMLHttpRequest();
-httpc.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200) {
-        backgroundimage = JSON.parse(this.responseText);
+function drawbackgroundimage(){
         document.getElementById("mainimage").src = backgroundimage.url;
         document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
         document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
@@ -381,15 +427,33 @@ httpc.onreadystatechange = function(){
         document.getElementById("imageleftinput").value = backgroundimage.left;
         document.getElementById("imagetopinput").value = backgroundimage.top;        
         document.getElementById("imagewidthinput").value = backgroundimage.width;        
-        
+    
+}
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        backgroundimage = JSON.parse(this.responseText);
+        drawbackgroundimage();
         
     }
 };
 httpc.open("GET", "load-file.php?filename=backgroundimage.json", true);
 httpc.send();
 
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        signfeed = JSON.parse(this.responseText);
+        drawfeed();
+        
+    }
+};
+httpc2.open("GET", "load-file.php?filename=signfeed.json", true);
+httpc2.send();
+
 document.getElementById("imageleftinput").onchange = function(){
-    backgroundimage.left = this.value;
+    backgroundimage.left = parseFloat(this.value);
     savebackgroundimage();
             document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
         document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
@@ -397,7 +461,7 @@ document.getElementById("imageleftinput").onchange = function(){
 }
 
 document.getElementById("imagetopinput").onchange = function(){
-    backgroundimage.top = this.value;
+    backgroundimage.top = parseFloat(this.value);
     savebackgroundimage();
             document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
         document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
@@ -405,7 +469,7 @@ document.getElementById("imagetopinput").onchange = function(){
 }
 
 document.getElementById("imagewidthinput").onchange = function(){
-    backgroundimage.width = this.value;
+    backgroundimage.width = parseFloat(this.value);
     savebackgroundimage();
             document.getElementById("mainimage").style.left = (0.01*backgroundimage.left*(squareWidth - 80)).toString()  + "px";
         document.getElementById("mainimage").style.top = (0.01*backgroundimage.top*(squareWidth - 80)).toString()  + "px";
@@ -485,7 +549,22 @@ function draw() {
   }
 }
 
+function drawsign(){
+    clear();
+    //background(159,135,103);
+    for(var strokeindex = 0;strokeindex < sign.brushstrokes.length;strokeindex++){
+        for(var pointindex = 1;pointindex < sign.brushstrokes[strokeindex].points.length;pointindex++){
+            
+            stroke(sign.brushstrokes[strokeindex].color);
+            strokeWeight(Math.round(0.01*width*sign.brushstrokes[strokeindex].strokewidth));
+            line(0.01*width*sign.brushstrokes[strokeindex].points[pointindex - 1].x,0.01*width*sign.brushstrokes[strokeindex].points[pointindex - 1].y,0.01*width*sign.brushstrokes[strokeindex].points[pointindex].x,0.01*width*sign.brushstrokes[strokeindex].points[pointindex].y);
+        }
+    }
+    document.getElementById("nameinput").value = sign.name;
+    document.getElementById("linkinput").value = sign.link;
+    document.getElementById("message").value = sign.message;
 
+}
 document.getElementById("deletebutton").onclick = function(){
     sign.brushstrokes.pop();
     clear();
@@ -692,6 +771,18 @@ h1{
 #clearbutton{
     right:0px;
 }
+.index{
+    display:none;
+}
+.signcontrolbutton{
+    border:solid;
+    cursor:pointer;
+    color:red;
+}
+.signcontrolbutton:hover{
+    background-color:#ff000080;
+}
+
 </style>
 </body>
 </html>
