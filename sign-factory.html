@@ -30,16 +30,35 @@
     <div class = "bottombutton" id = "deletebutton">DELETE</div>
     <div class = "bottombutton" id = "clearbutton">CLEAR</div>
     <div class = "bottombutton" id = "postbutton">POST</div>
-    
-    
     <img id = "mainimage" src= "">
     <div id = "feedscroll">
     
-        <h1>trash magic sign factory!</h1>
     <div id ="signfeed"></div>
+    <div id = "imagefeedbox">
+        <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+                <span id ="uploadspan">UPLOAD:</span>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+        </form>
+        <div id = "imagefeed"></div>  
+        <TABLE>
+            <TR>
+                <TD>NEW IMAGE URL:</TD>
+                <TD>
+                    <INPUT ID = "imagefeedurlinput">
+                </TD>
+            </TR>
+        </TABLE>
+        <div id = "imagefeed2"></div>
+    </div>
+    <div id = "controlscroll">
+        
+        <a href = "index.html">HOME</a>
+        <div id = "qrcode"></div>
+    
+        
 
-
-    <table>
+        <table>
         <tr>
             <td>name:</td>
             <td>
@@ -52,10 +71,10 @@
                 <input id = "linkinput">
             </td>
         </tr>
-    </table>
-    <h1>message:</h1>
-    <textarea id = "message"></textarea>
-    <TABLE>
+        </table>
+        <h1>message:</h1>
+        <textarea id = "message"></textarea>
+        <TABLE>
         <TR ID ="colors">
             <TD CLASS = "button">BLACK</TD>
             <TD CLASS = "button">RED</TD>
@@ -65,8 +84,8 @@
             <TD CLASS = "button">BLUE</TD>
             <TD CLASS = "button">PURPLE</TD>
         </TR>
-    </TABLE>
-    <TABLE>
+        </TABLE>
+        <TABLE>
         <TR ID = "linewidth">
             <TD CLASS = "button">1</TD>
             <TD CLASS = "button">5</TD>
@@ -74,8 +93,8 @@
             <TD CLASS = "button">20</TD>
             <TD CLASS = "button">30</TD>
         </TR>
-    </TABLE>
-    <table>
+        </TABLE>
+        <table>
         <tr>
             <td>color:</td>
             <td>
@@ -87,8 +106,8 @@
             </td>
     
         </tr>
-    </table>
-    <TABLE>
+        </table>
+        <TABLE>
         <TR>
             <TD>IMAGE URL:</TD>
             <TD>
@@ -114,17 +133,17 @@
             </td>
         </tr>
         
-    </TABLE>
+        </TABLE>
     
-    <h1 class = "button" id = "imagejsonbutton">image json</h1>
-    <textarea id = "imagejsonio"></textarea>
-    <h1 class = "button" id = "signjsonbutton">sign json</h1>
-    <textarea id = "signjsonio"></textarea>
-    <h1 class = "button" id = "signfeedjsonbutton">sign feed json</h1>
-    <textarea id = "signfeedjsonio"></textarea>
-    
-        <a href = "index.html">HOME</a>
-        <div id = "qrcode"></div>
+        <h1 class = "button" id = "imagejsonbutton">image json</h1>
+        <textarea id = "imagejsonio"></textarea>
+        <h1 class = "button" id = "signjsonbutton">sign json</h1>
+        <textarea id = "signjsonio"></textarea>
+        <h1 class = "button" id = "signfeedjsonbutton">sign feed json</h1>
+        <textarea id = "signfeedjsonio"></textarea>
+
+    </div>
+
 </div>
 
 <script>
@@ -605,7 +624,137 @@ document.getElementById("postbutton").onclick = function(){
     savesign();
 }
 
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        loadimagefeed1();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
 
+
+function loadimagefeed1(){
+    
+    for(var index = 0;index < files.length;index++) {
+        if(files[index].includes(".png") || files[index].includes(".PNG") || files[index].includes(".jpg") || files[index].includes(".JPG") ||files[index].includes(".jpeg")||files[index].includes(".SVG") ||files[index].includes(".svg") || files[index].includes(".gif") ||files[index].includes(".GIF")){
+            
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = files[index];
+            newimg.classList.add("uploadimage");
+            newimg.onclick = function(){
+                backgroundimage.url = this.src;
+                document.getElementById("mainimage").src = backgroundimage.url;
+                savebackgroundimage();
+            }
+            
+            
+            newuploadbox.appendChild(newimg);
+            document.getElementById("imagefeed").appendChild(newuploadbox);
+    
+            var newdiv = document.createElement("DIV");
+            newdiv.innerHTML = files[index];
+            newdiv.className = "filelabel";
+            newuploadbox.appendChild(newdiv);
+            var newspan = document.createElement("SPAN");
+            newspan.innerHTML = "DELETE";
+            newuploadbox.appendChild(newspan);
+            newspan.classList.add("button");
+            newspan.classList.add("deletebutton");
+            newspan.onclick = function(){
+                var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+                imagefilename = imageurl.split("/")[imageurl.split("/").length-1];
+                var httpc = new XMLHttpRequest();
+                var url = "delete-file.php";         
+                httpc.open("POST", url, true);
+                httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                httpc.send("filename=" + imagefilename);//send text to deletefile.php
+                this.parentElement.parentElement.removeChild(this.parentElement);
+            }               
+
+    
+        }
+    }    
+}
+
+imagefeed2 = [];
+
+var httpc99 = new XMLHttpRequest();
+httpc99.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        imagefeed2 = JSON.parse(this.responseText);
+        loadimagefeed2();
+        
+    }
+};
+httpc99.open("GET", "load-file.php?filename=imagefeed2.json", true);
+httpc99.send();
+
+function saveimagefeed(){
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(imagefeed2,null,"    "))+"&filename=imagefeed2.json");//send text to filesaver.php
+
+}
+
+document.getElementById("imagefeedurlinput").value = "";
+document.getElementById("imagefeedurlinput").onchange = function(){
+    imagefeed2.push(this.value);
+    loadimagefeed2();
+    saveimagefeed();
+    this.value = "";
+}
+
+function loadimagefeed2(){
+    document.getElementById("imagefeed2").innerHTML = "";
+    for(var index = 0;index < imagefeed2.length;index++){
+        var newuploadbox = document.createElement("DIV");
+        newuploadbox.classList.add("imagebox");
+        var newimg = document.createElement("IMG");
+        newimg.src = imagefeed2[index];
+        newimg.classList.add("uploadimage");
+        newimg.onclick = function(){
+            backgroundimage.url = this.src;
+            document.getElementById("mainimage").src = backgroundimage.url;
+            savebackgroundimage();
+        }
+        newuploadbox.appendChild(newimg);
+        document.getElementById("imagefeed2").appendChild(newuploadbox);
+        var newdiv = document.createElement("DIV");
+        newdiv.innerHTML = imagefeed2[index];
+        newdiv.className = "filelabel";
+        newuploadbox.appendChild(newdiv);
+        var newspan = document.createElement("SPAN");
+        newspan.innerHTML = "DELETE";
+        newuploadbox.appendChild(newspan);
+        newspan.classList.add("button");
+        newspan.classList.add("deletebutton");
+        newspan.onclick = function(){
+            var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+            var tempfeed = [];
+            for(var index = 0;index < imagefeed2.length;index++){
+                if(imagefeed2[index] != imageurl){
+                    tempfeed.push(imagefeed2[index]);
+                }
+            }
+            imagefeed2 = tempfeed; 
+            loadimagefeed2();
+            saveimagefeed();
+    
+        }       
+        
+    }
+    
+
+        
+    
+}
 
 </script>
 <style>
@@ -782,7 +931,44 @@ h1{
 .signcontrolbutton:hover{
     background-color:#ff000080;
 }
-
+#controlscroll{
+    width:30%;
+    overflow:scroll;
+    position:absolute;
+    left:0px;
+    top:0px;
+    bottom:0px;
+}
+#signfeed{
+    position:absolute;
+    overflow:scroll;
+    left:33%;
+    width:30%;
+    top:0px;
+    bottom:0px;
+}
+#signfeed canvas{
+    width:90%;
+}
+#imagefeedbox{
+    position:absolute;
+    overflow:scroll;
+    right:0px;
+    width:30%;
+    top:0px;
+    bottom:0px;
+}
+#imagefeed img{
+    width:90%;
+}
+#images{
+    width:100%;
+}
+#images img{
+    width:90%;
+    display:block;
+    margin:auto;
+}
 </style>
 </body>
 </html>
