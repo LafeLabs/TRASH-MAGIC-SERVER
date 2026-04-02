@@ -30,6 +30,7 @@
         "map-feed.html",
         "math-o-scope.html",
         "math-o-tron.html",
+        "message-factory.html",
         "organic-web-home.html",
         "oscilloscope.html",
         "pdf-library.html",
@@ -55,6 +56,7 @@
         "imagefeed2.json",
         "links.json",
         "map-feed.json",
+        "message-feed.json",
         "metaflag.json",
         "sign.json",
         "signfeed.json",
@@ -79,6 +81,7 @@
         "latex.md"
     ],
     "text": [
+        "message.txt",
         "note.txt",
         "terminal.txt",
         "wall.txt"

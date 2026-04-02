@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        NO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    <title>message factory</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<textarea id = "message"></textarea>
+<div id = "postbutton">POST MESSAGE</div>
+<div id ="messagefeed"></div>
+<style>
+#postbutton{
+    background-color:white;
+    border:solid;
+    font-size:40px;
+    border-radius:10px;
+    cursor:pointer;
+    width:10em;
+}
+#postbutton:hover{
+    background-color:green;
+}
+#postbutton:active{
+    background-color:yellow;
+}
+
+#message{
+    position:absolute;
+    left:50px;
+    top:80px;
+    border:solid;
+    border-radius:1em;
+    padding:1em 1em 1em 1em;
+    font-size:3em;
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+}
+#messagefeed{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    overflow:scroll;
+}
+body{
+    background-color:#404040;
+    font-family:Comic Sans MS;
+}
+.messagebox{
+    background-color:#9f8767;
+    margin:1em 1em 1em 1em;
+    padding:1em 1em 1em 1em;
+    border-radius:1em;
+    border:solid;
+}
+.messagediv{
+    font-family:Comic Sans MS;
+    font-size:3em;
+}
+.deletebutton{
+    color:red;
+    border:solid;
+    cursor:pointer;
+}
+.indexspan{
+    display:none;
+}
+.qrcode img{
+    margin:auto;
+    display:block;
+    border:solid;
+    border-color:white;
+    border-width:20px;
+}
+</style>
+<script>
+
+squaresize = 400;
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 200;
+    document.getElementById("messagefeed").style.width = (innerWidth - squaresize  - 200).toString() +  "px";
+    document.getElementById("messagefeed").style.height = (innerHeight).toString() +  "px";
+}
+else{
+    squaresize = innerWidth - 200;
+    document.getElementById("messagefeed").style.width = (innerWidth).toString() +  "px";
+    document.getElementById("messagefeed").style.height = (innerHeight - squaresize  - 200).toString() +  "px";    
+}
+document.getElementById("message").style.width = (squaresize).toString() + "px";
+
+document.getElementById("message").style.height = (squaresize).toString() + "px";
+
+
+message = "";
+
+messagefeed = [];
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        messagefeed = JSON.parse(this.responseText);
+        drawfeed();
+    }
+};
+httpc.open("GET", "load-file.php?filename=message-feed.json", true);
+httpc.send();
+
+document.getElementById("postbutton").onclick = function(){
+    messagefeed.push(message);
+    drawfeed();
+    savefeed();
+}
+
+function drawfeed(){
+       document.getElementById("messagefeed").innerHTML = "";
+       var new_qrcode = document.createElement("DIV");
+       new_qrcode.className = "qrcode";
+       document.getElementById("messagefeed").appendChild(new_qrcode);
+       qrcode = new QRCode(new_qrcode, {
+            	text: window.location.href,
+            	width: 160,
+            	height: 160,
+            	colorDark : "#000000",
+            	colorLight : "#ffffff",
+            	correctLevel : QRCode.CorrectLevel.H
+        });
+       
+       
+       for(var messageindex = messagefeed.length - 1;messageindex >= 0;messageindex--){
+           var messagebox = document.createElement("DIV");
+           messagebox.className = "messagebox";
+           
+           var deletebutton = document.createElement("SPAN");
+           deletebutton.className = "deletebutton";
+           deletebutton.innerHTML = "DELETE";
+           deletebutton.onclick = function(){
+               thisindex = parseInt(this.parentNode.getElementsByClassName("indexspan")[0].innerHTML);
+
+               tempfeed = [];
+               for(var index = 0;index < messagefeed.length;index++){
+                   if(index != thisindex){
+                       tempfeed.push(messagefeed[index]);
+                   }
+               }
+               messagefeed = tempfeed;
+               drawfeed();
+               savefeed();
+           }
+           var messagediv = document.createElement("div");
+           messagediv.innerHTML = messagefeed[messageindex];
+           messagediv.className = "messagediv";
+           messagediv.onclick = function(){
+                message = this.parentNode.getElementsByClassName("messagediv")[0].innerHTML;
+                savemessage();
+                document.getElementById("message").value = message;
+
+           }
+           messageindexspan = document.createElement("SPAN");
+           messageindexspan.innerHTML = messageindex.toString();
+           messageindexspan.className ="indexspan";
+           messagebox.appendChild(deletebutton);
+           messagebox.appendChild(messagediv);
+           messagebox.appendChild(messageindexspan);
+           document.getElementById("messagefeed").appendChild(messagebox);
+           
+       }
+}
+
+function savefeed(){
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(messagefeed,null,"    "))+"&filename=message-feed.json");//send text to filesaver.ph
+}
+
+function savemessage(){
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+encodeURIComponent(message)+"&filename=message.txt");//send text to save-file.php
+    
+}
+
+message = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        message = this.responseText;
+        document.getElementById("message").value = message;
+        
+    }
+};
+httpc.open("GET", "load-file.php?filename=message.txt", true);
+httpc.send();
+
+document.getElementById("message").onkeyup = function() {
+    message = this.value;
+    savemessage();
+}
+</script>
+</body>
+</html>

@@ -31,6 +31,7 @@
  - [map-feed.html](map-feed.html)
  - [math-o-scope.html](math-o-scope.html)
  - [math-o-tron.html](math-o-tron.html)
+ - [message-factory.html](message-factory.html)
  - [organic-web-home.html](organic-web-home.html)
  - [oscilloscope.html](oscilloscope.html)
  - [pdf-library.html](pdf-library.html)
@@ -71,6 +72,7 @@
  - [imagefeed2.json](imagefeed2.json)
  - [links.json](links.json)
  - [map-feed.json](map-feed.json)
+ - [message-feed.json](message-feed.json)
  - [metaflag.json](metaflag.json)
  - [sign.json](sign.json)
  - [signfeed.json](signfeed.json)
@@ -85,6 +87,7 @@
 
 # TEXT FILES
 
+ - [message.txt](message.txt)
  - [note.txt](note.txt)
  - [terminal.txt](terminal.txt)
  - [wall.txt](wall.txt)
