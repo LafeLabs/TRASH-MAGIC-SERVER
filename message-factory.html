@@ -5,8 +5,6 @@
 
     <!-- 
 
-
-
         EVERYTHING IS PHYSICAL 
         EVERYTHING IS FRACTAL
         EVERYTHING IS RECURSIVE
@@ -27,10 +25,23 @@
 </head>
 <body>
 <textarea id = "message"></textarea>
-<div id = "postbutton">POST MESSAGE</div>
+<div id = "postbutton">POST MESSAGE!</div>
+<div id = "clearbutton">CLEAR FEED!</div>
 <div id ="messagefeed"></div>
 <style>
+#clearbutton{
+    background-color:white;
+    border:solid;
+    font-size:40px;
+    border-radius:10px;
+    cursor:pointer;
+    width:10em;
+    position:absolute;
+    left:12em;
+    top:5px;
+}
 #postbutton{
+    top:5px;
     background-color:white;
     border:solid;
     font-size:40px;
@@ -42,6 +53,12 @@
     background-color:green;
 }
 #postbutton:active{
+    background-color:yellow;
+}
+#clearbutton:hover{
+    background-color:green;
+}
+#clearbutton:active{
     background-color:yellow;
 }
 
@@ -81,6 +98,7 @@ body{
     color:red;
     border:solid;
     cursor:pointer;
+    background-color:black;
 }
 .indexspan{
     display:none;
@@ -131,6 +149,13 @@ document.getElementById("postbutton").onclick = function(){
     drawfeed();
     savefeed();
 }
+
+document.getElementById("clearbutton").onclick = function(){
+    messagefeed = [];
+    drawfeed();
+    savefeed();
+}
+
 
 function drawfeed(){
        document.getElementById("messagefeed").innerHTML = "";
