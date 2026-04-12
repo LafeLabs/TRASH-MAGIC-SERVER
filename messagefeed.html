@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+MESSAGE FEED
+
+    -->
+    <title>MESSAGE FEED</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+    <a href="index.html">HOME</a>
+    <div id = "qrcode"></div>
+    <h1>MESSAGE:</h1>
+    <textarea id = "message"></textarea>
+    <div class = "button" id = "postbutton">POST MESSAGE</div>
+    <div class = "button" id = "clearbutton">CLEAR FEED</div>
+    <h1>MESSAGE FEED:</h1>
+    <div id = "messagefeed"></div>
+    <h1>JSON:</h1>
+    <textarea id = "jsonio"></textarea>
+    <div class = "button" id = "importbutton">IMPORT MESSAGE FEED JSON</div>
+    
+<script>
+
+message = "THE MEDIUM IS THE MESSAGE";
+messagefeed = [];
+messagefeed.push(message);
+document.getElementById("message").value = message;
+
+
+
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        messagefeed = JSON.parse(this.responseText);
+        loadfeed();
+    }
+};
+httpc2.open("GET", "load-file.php?filename=messagefeed.json", true);
+httpc2.send();
+
+
+function loadfeed(){
+    document.getElementById("jsonio").value = JSON.stringify(messagefeed,null,"    ");    
+    document.getElementById("messagefeed").innerHTML = "";
+    for(var index = messagefeed.length - 1;index >= 0;index--){
+        var messagebox = document.createElement("DIV");
+        messagebox.className = "messagebox";
+        var localmessage = document.createElement("DIV");
+        localmessage.innerHTML = messagefeed[index];
+        localmessage.className = "message";
+        localmessage.onclick = function(){
+            message = this.innerHTML;
+            document.getElementById("message").value = message;
+        }
+        var indexspan = document.createElement("SPAN");
+        indexspan.className = "index";
+        indexspan.innerHTML = index.toString(); 
+    
+        var delbutton = document.createElement("SPAN");
+        delbutton.innerHTML = "DELETE";
+        delbutton.className = "button";
+        delbutton.onclick = function(){
+            thisindex = parseInt(this.parentNode.getElementsByClassName("index")[0].innerHTML);
+            var newfeed = [];
+            for(var index = 0;index < messagefeed.length;index++){
+                if(index != thisindex){
+                    newfeed.push(messagefeed[index]);
+                }
+            }
+            messagefeed = newfeed;
+            savefeed();
+            loadfeed();
+        }
+        var upbutton = document.createElement("SPAN");
+        upbutton.innerHTML = "MOVE UP";
+        upbutton.className = "button";
+        upbutton.onclick = function(){
+            thisindex = parseInt(this.parentNode.getElementsByClassName("index")[0].innerHTML);
+            var newfeed = [];
+            for(var index = 0;index < thisindex;index++){
+                newfeed.push(messagefeed[index]);
+            }
+            newfeed.push(messagefeed[thisindex + 1]);
+            newfeed.push(messagefeed[thisindex]);
+            
+            for(var index = thisindex + 2;index < messagefeed.length;index++){
+                newfeed.push(messagefeed[index]);
+            }
+
+            messagefeed = newfeed;
+            savefeed();
+            loadfeed();
+        }            
+        var downbutton = document.createElement("SPAN");
+        downbutton.innerHTML = "MOVE DOWN";
+        downbutton.className = "button";
+        downbutton.onclick = function(){
+            thisindex = parseInt(this.parentNode.getElementsByClassName("index")[0].innerHTML);
+            var newfeed = [];
+            for(var index = 0;index < thisindex - 1;index++){
+                newfeed.push(messagefeed[index]);
+            }
+            newfeed.push(messagefeed[thisindex]);
+            newfeed.push(messagefeed[thisindex - 1]);
+            
+            for(var index = thisindex + 1;index < messagefeed.length;index++){
+                newfeed.push(messagefeed[index]);
+            }
+
+            messagefeed = newfeed;
+            savefeed();
+            loadfeed();
+        }                
+    
+        messagebox.appendChild(indexspan);
+        messagebox.appendChild(localmessage);
+        messagebox.appendChild(delbutton);
+        messagebox.appendChild(upbutton);
+        messagebox.appendChild(downbutton);
+        
+        document.getElementById("messagefeed").appendChild(messagebox);
+    }
+}
+
+document.getElementById("postbutton").onclick = function(){
+    message = document.getElementById("message").value;
+    messagefeed.push(message);
+    loadfeed();
+    savefeed();
+}
+
+document.getElementById("clearbutton").onclick = function(){
+    messagefeed = [];
+    loadfeed();
+    savefeed();
+}
+
+document.getElementById("importbutton").onclick = function(){
+    messagefeed = JSON.parse(document.getElementById("jsonio").value);
+    loadfeed();
+    savefeed();
+}
+
+
+
+function savefeed(){
+
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(messagefeed,null,"    "))+"&filename=messagefeed.json");//send text to filesaver.php    
+}
+
+codesquaresize = 400;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: "https://trashrobot.net",
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+</script>
+<style>
+img{
+    max-width:80%;
+}
+body{
+    font-family:Comic Sans MS;
+    background-color:#9f8767;        
+}
+textarea{
+    width:80%;
+    height:5em;
+    font-size:2em;
+    font-family:Comic Sans MS;
+    background-color:#9f8767;        
+    border:solid;
+    border-width:5px;
+    border-radius:15px;
+}
+a{
+    color:blue;
+    font-size:4em;
+    display:block;
+}
+.button{
+    border:solid;
+    border-radius:10px;
+    font-size:2em;
+    width:30%;
+    margin:auto;
+    cursor:pointer;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.index{
+    display:none;
+}
+.message{
+    border:solid;
+    width:90%;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius:0.5em;
+    border-width:5px;
+}
+.messagebox{
+    border:solid;
+    width:95%;
+}
+</style>
+</body>
+</html>

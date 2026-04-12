@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        NO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    <title>FULL STACK TRASH MAGIC</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+    <div id = "qrcode"></div>
+    <h1>WWW.TRASHROBOT.NET</h1>
+    <div id = "linkfeed"></div>
+    <div id = "messagefeed"></div>
+    <div id = "iconfeed"></div>
+
+<!--
+    <A HREF = "linkfeed.html">linkfeed.html</A>
+    <a href = "messagefeed.html">messagefeed.html</a>
+    <a href = "iconfeed.html">iconfeed.html</a>
+-->
+
+
+<script>
+
+codesquaresize = 400;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: "https://trashrobot.net",
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 200;
+}
+else{
+    squaresize = innerWidth - 200;
+    
+}
+
+messagefeed = [];
+iconfeed = [];
+linkfeed = [];
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        messagefeed = JSON.parse(this.responseText);
+        loadmessagefeed();
+    }
+};
+httpc.open("GET", "load-file.php?filename=messagefeed.json", true);
+httpc.send();
+
+
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        iconfeed = JSON.parse(this.responseText);
+        loadiconfeed();
+    }
+};
+httpc2.open("GET", "load-file.php?filename=iconfeed.json", true);
+httpc2.send();
+
+var httpc3 = new XMLHttpRequest();
+httpc3.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        linkfeed = JSON.parse(this.responseText);
+        loadlinkfeed();
+    }
+};
+httpc3.open("GET", "load-file.php?filename=linkfeed.json", true);
+httpc3.send();
+
+function loadmessagefeed(){
+
+    document.getElementById("messagefeed").innerHTML = "";
+    for(var index = messagefeed.length - 1;index >= 0;index--){
+        var localmessage = document.createElement("DIV");
+        localmessage.innerHTML = messagefeed[index];
+        localmessage.className = "message";
+        document.getElementById("messagefeed").appendChild(localmessage);
+    }
+
+}
+
+function loadiconfeed(){
+    document.getElementById("iconfeed").innerHTML = "";
+    for(var iconindex = iconfeed.length - 1;iconindex >= 0;iconindex--){
+       var newdiv = document.createElement("DIV");//sign box
+       newdiv.className = "signbox";
+       var newcan = document.createElement("CANVAS");
+       newdiv.appendChild(newcan);
+
+       
+        document.getElementById("iconfeed").appendChild(newdiv);
+       ctx = newcan.getContext("2d");
+       squaresize = 0.5*innerWidth;
+        newcan.width = squaresize;//px
+        newcan.height = squaresize;//px
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        for(var strokeindex = 0;strokeindex < iconfeed[iconindex].length;strokeindex++){
+            ctx.lineWidth = Math.round(0.01*squaresize*iconfeed[iconindex][strokeindex].strokewidth);
+            ctx.strokeStyle = iconfeed[iconindex][strokeindex].color;
+            ctx.beginPath(); // Start a new path
+        
+            ctx.moveTo(0.01*squaresize*iconfeed[iconindex][strokeindex].points[0].x,0.01*squaresize*iconfeed[iconindex][strokeindex].points[0].y); // Move the pen to (30, 50)
+            for(var pointindex = 1;pointindex < iconfeed[iconindex][strokeindex].points.length;pointindex++){
+
+                ctx.lineTo(0.01*squaresize*iconfeed[iconindex][strokeindex].points[pointindex].x,0.01*squaresize*iconfeed[iconindex][strokeindex].points[pointindex].y); // Draw a line to (150, 100)    
+            }
+            ctx.stroke(); // Render the path
+            
+        }
+       
+   }   
+}
+function loadlinkfeed(){
+    document.getElementById("linkfeed").innerHTML = "";
+    for(var index = linkfeed.length - 1;index  >= 0;index--){
+        var newlink = document.createElement("A");
+        newlink.innerHTML = linkfeed[index].text;
+        newlink.href = linkfeed[index].url;
+        document.getElementById("linkfeed").appendChild(newlink);
+    }
+}
+
+</script>
+<style>
+#qrcode img{
+    display:block;
+    margin:auto;
+}
+img{
+    max-width:80%;
+}
+body{
+    font-family:Comic Sans MS;
+    background-color:#9f8767;        
+}
+a{
+    text-align:center;
+    color:blue;
+    background-color:white;
+    font-size:4em;
+    width:80%;
+    margin:auto;
+    display:block;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+.signbox{
+    background-color:#9f8767;
+    margin:1em 1em 1em 1em;
+    padding:1em 1em 1em 1em;
+    border-radius:1em;
+}
+.signbox a{
+    color:blue;
+    font-size:4em;
+}
+.signbox p{
+    font-size:2em;
+}
+
+.message{
+    border:solid;
+    width:90%;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius:0.5em;
+    border-width:5px;
+    margin-top:1em;
+    margin-bottom:1em;
+    font-size:2em;
+}
+canvas{
+    display:block;
+    border:solid;
+    margin:auto;
+}
+H1{
+    font-size:4em;
+    text-align:center;
+}
+</style>
+</body>
+</html>
