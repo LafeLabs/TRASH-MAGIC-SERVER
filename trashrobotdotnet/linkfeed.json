@@ -1,0 +1,42 @@
+[
+    {
+        "url": "linkfeed.json",
+        "text": "linkfeed.json"
+    },
+    {
+        "url": "iconfeed.html",
+        "text": "ICON FEED!"
+    },
+    {
+        "url": "linkfeed.html",
+        "text": "LINK FEED!"
+    },
+    {
+        "url": "messagefeed.html",
+        "text": "MESSAGE FEED!"
+    },
+    {
+        "url": "https://www.openstreetmap.org/#map=19/40.000027/-105.261866",
+        "text": "TRASH MAGIC FEEED BOULDER"
+    },
+    {
+        "url": "https://www.openstreetmap.org/#map=19/39.857236/-105.054102",
+        "text": "TRASH MAGIC FEED WESTMINSTER"
+    },
+    {
+        "url": "https://www.openstreetmap.org/#map=19/39.752621/-105.000600",
+        "text": "TRASH MAGIC FEED DENVER"
+    },
+    {
+        "url": "https://trashrobot.net/",
+        "text": "https://trashrobot.net/"
+    },
+    {
+        "url": "github.com/LafeLabs/hypercube",
+        "text": "REPLICATE GEOMETRON HYPERCUBE"
+    },
+    {
+        "url": "github.com/lafelabs/TRASH-MAGIC-SERVER",
+        "text": "REPLICATE TRASH MAGIC WEB SERVER"
+    }
+]

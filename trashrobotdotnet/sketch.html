@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+SKETCH
+    -->
+    <title>SKETCH</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+<div class = "topbutton" id = "deletebutton">DELETE</div>
+<div class = "topbutton" id = "clearbutton">CLEAR</div>
+<div class = "topbutton" id = "postbutton">POST</div>
+
+<div id = "feedscroll">
+    <h1>SKETCH</h1>
+    
+    <a href = "index.html">HOME</a>
+    <div id = "qrcode"></div>
+    <img src = "sketch.png">
+
+</div>
+
+<script>
+
+
+lineArrayStack = [];
+lineArray =[];
+
+
+
+function setup() {
+
+    squareWidth = 100;
+
+    if(innerWidth > innerHeight){
+        squareWidth = innerHeight;
+        document.getElementById("clearbutton").style.right = (innerWidth - squareWidth).toString() + "px";
+        document.getElementById("feedscroll").style.height = (innerHeight - 70).toString() + "px";
+        document.getElementById("feedscroll").style.width = (innerWidth - squareWidth).toString() + "px";
+    }
+    else{
+        squareWidth = innerWidth;
+        document.getElementById("feedscroll").style.width = (innerWidth - 30).toString() + "px";
+        document.getElementById("feedscroll").style.height = (innerHeight - squareWidth - 70).toString() + "px";    
+    }
+    
+    document.getElementById("postbutton").style.left = (squareWidth/2 - 100).toString() + "px";
+    
+    
+    createCanvas(squareWidth-50, squareWidth-70);
+    background(159,135,103);
+    stroke(0);
+    strokeWeight(30);
+}
+
+inLine = false;
+
+function draw() {
+  
+  stroke(0);
+  if (mouseIsPressed === true) {
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    inLine = true;
+    var r  ={};
+    r.x = mouseX;
+    r.y = mouseY;
+    lineArray.push(r);
+  }
+  else{
+      if(inLine){
+          lineArrayStack.push(lineArray);
+          lineArray = [];
+      }
+      inLine = false;
+  }
+}
+
+
+document.getElementById("deletebutton").onclick = function(){
+    lineArrayStack.pop();
+    lineArrayStack.pop();
+    clear();
+    background(159,135,103);
+    for(var lineindex = 0;lineindex < lineArrayStack.length;lineindex++){
+        for(var pointindex = 1;pointindex < lineArrayStack[lineindex].length;pointindex++){
+            line(lineArrayStack[lineindex][pointindex - 1].x,lineArrayStack[lineindex][pointindex - 1].y,lineArrayStack[lineindex][pointindex].x,lineArrayStack[lineindex][pointindex].y);
+        }
+    }
+}
+
+
+
+document.getElementById("clearbutton").onclick = function(){
+    lineArrayStack = [];
+    clear();
+    background(159,135,103);
+}
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+document.getElementById("postbutton").onclick = function(){
+
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    
+    var url = "save-png.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=sketch.png");//send text to filesaver.php
+     //location.reload(); 
+     
+}
+
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;    
+}
+canvas{
+    z-index:-1;
+}
+main{
+    position:absolute;
+    left:10px;
+    top:50px;
+}
+input,table{
+    background-color:#9f8767;    
+    font-family:COMIC SANS MS;
+}
+h1{
+    text-align:center;
+    font-family:Comic Sans MS;
+    font-size:2em;
+}
+#defaultCanvas0{
+    border:solid;
+    border-radius:25px;
+    border-width:5px;
+}
+#feedscroll{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    overflow:scroll;
+    border:solid;
+    background-color:#9f8767;    
+    border-radius:25px;
+    border-width:5px;
+    width:100px;
+    height:100px;
+}
+#feedscroll a{
+    display:block;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    margin:10px 10px 10px 10px;
+    border-radius:20px;
+    color:black;
+    padding-left:1em;
+    border:solid;
+}
+.imagebox{
+    margin-bottom:2em;
+    margin-top:2em;
+    padding-bottom:2em; 
+    padding-top:2em;
+    border-bottom:solid;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+.filelabel{
+    display:none;
+}
+.topbutton{
+    position:absolute;
+    top:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+}
+.topbutton:hover{
+    background-color:green;
+}
+.topbutton:active{
+    background-color:yellow;
+}
+.bottombutton{
+    position:absolute;
+    bottom:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+}
+.bottombutton:hover{
+    background-color:green;
+}
+.bottombutton:active{
+    background-color:yellow;
+}
+#deletebutton{
+    left:0px;
+}
+#clearbutton{
+    right:0px;
+}
+</style>
+</body>
+</html>

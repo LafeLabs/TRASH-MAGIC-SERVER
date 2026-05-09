@@ -1,0 +1,9 @@
+{
+    "text": "BURNING  TRASH    CANS",
+    "left_margin": 0.1,
+    "top_margin": 0.1,
+    "horizontal_gap": 0.03,
+    "vertical_gap": 0.1,
+    "number_of_columns": 8,
+    "rainbow": true
+}

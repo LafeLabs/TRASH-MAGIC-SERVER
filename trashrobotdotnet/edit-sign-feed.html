@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        NO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    <title>sign factory</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+<a href= "index.html">HOME</a>
+<DIV class = "button" ID = "clearbutton">CLEAR FEED</DIV>
+<div id ="signfeed"></div>
+<script>
+
+signfeed = [];
+
+function savefeed(){
+    var url = "save-file.php";        
+    var httpc2 = new XMLHttpRequest();
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc2.send("data="+encodeURIComponent(JSON.stringify(signfeed,null,"    "))+"&filename=signfeed.json");//send text to filesaver.php
+}
+
+
+function drawfeed(){
+       document.getElementById("signfeed").innerHTML = "";
+//       for(var signindex = signfeed.length - 1;signindex >= 0;signindex--){
+       for(var signindex = signfeed.length - 1;signindex >= 0;signindex--){
+           var newdiv = document.createElement("DIV");//sign box
+           newdiv.className = "signbox";
+           var newa = document.createElement("A");
+           newa.innerHTML = signfeed[signindex].name;
+           newa.href = signfeed[signindex].link;
+           var newp = document.createElement("P");
+           newp.innerHTML = signfeed[signindex].message;
+           var newcan = document.createElement("CANVAS");
+
+            var indexspan = document.createElement("SPAN");
+            indexspan.className = "index";
+            indexspan.innerHTML = signindex.toString();
+            
+
+            var newtable = document.createElement("TABLE");
+            var newtr = document.createElement("TR");
+            newtable.appendChild(newtr);
+            
+            var delbutton = document.createElement("TD");
+            delbutton.innerHTML = "DELETE";
+            delbutton.className = "signcontrolbutton";
+            newtr.appendChild(delbutton);
+            delbutton.onclick = function(){
+                thisindex = parseInt(this.parentNode.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+                var newfeed = [];
+                for(var index = 0;index < signfeed.length;index++){
+                    if(index != thisindex){
+                        newfeed.push(signfeed[index]);
+                    }
+                }
+                signfeed = newfeed;
+                savefeed();
+                drawfeed();
+            }
+            
+            var moveupbutton = document.createElement("TD");
+            moveupbutton.innerHTML = "MOVE UP";
+            moveupbutton.className = "signcontrolbutton";
+            newtr.appendChild(moveupbutton);
+            moveupbutton.onclick = function(){
+                thisindex = parseInt(this.parentNode.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+
+                var newfeed = [];
+//                if()
+                for(var index = 0;index < signfeed.length;index++){
+                    if(index != thisindex){
+                        newfeed.push(signfeed[index]);
+                    }
+                }
+                signfeed = newfeed;
+                savefeed();
+                drawfeed();
+            }
+                        
+
+            newdiv.appendChild(newa);
+            newdiv.appendChild(newp);
+            newdiv.appendChild(newcan);
+            newdiv.appendChild(indexspan);
+            newdiv.appendChild(newtable);            
+            document.getElementById("signfeed").appendChild(newdiv);
+            ctx = newcan.getContext("2d");
+            squaresize = 400;
+            newcan.width = squaresize;//px
+            newcan.height = squaresize;//px
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            for(var strokeindex = 0;strokeindex < signfeed[signindex].brushstrokes.length;strokeindex++){
+                ctx.lineWidth = Math.round(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].strokewidth);
+                ctx.strokeStyle = signfeed[signindex].brushstrokes[strokeindex].color;
+                ctx.beginPath(); // Start a new path
+            
+                ctx.moveTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].y); // Move the pen to (30, 50)
+                for(var pointindex = 1;pointindex < signfeed[signindex].brushstrokes[strokeindex].points.length;pointindex++){
+    
+                    ctx.lineTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].y); // Draw a line to (150, 100)    
+                }
+                ctx.stroke(); // Render the path
+                
+            }
+           
+       }
+       
+}
+
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        signfeed = JSON.parse(this.responseText);
+        drawfeed();
+        
+    }
+};
+httpc2.open("GET", "load-file.php?filename=signfeed.json", true);
+httpc2.send();
+
+</script>
+<style>
+textarea{
+    width:80%;
+    display:block;
+    border:solid;
+    background-color:#9f8767;    
+    margin:auto;
+    font-family:Comic Sans MS;
+    
+}
+#mainimage{
+    position:absolute;
+    z-index:-1;
+}
+.button{
+    border:solid;
+    background-color:#9f8767;    
+    text-align:center;
+    width:6em;
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+
+body{
+    overflow:hidden;
+    background-color:#9f8767;    
+}
+canvas{
+    z-index:-1;
+}
+main{
+    position:absolute;
+    left:0px;
+    top:0px;
+    cursor:pointer;
+}
+input,table{
+    background-color:#9f8767;    
+    font-family:COMIC SANS MS;
+}
+h1{
+    text-align:center;
+    font-family:Comic Sans MS;
+    font-size:2em;
+}
+#defaultCanvas0{
+    border:solid;
+    border-radius:25px;
+    border-width:5px;
+}
+#feedscroll{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    overflow:scroll;
+    border:solid;
+    background-color:#9f8767;    
+    border-radius:25px;
+    border-width:5px;
+    width:100px;
+    height:100px;
+}
+#feedscroll a{
+    display:block;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    margin:10px 10px 10px 10px;
+    border-radius:20px;
+    color:blue;
+    padding-left:1em;
+    border:solid;
+}
+#feedscroll p{
+    font-family:Comic Sans MS;
+    font-size:2em;    
+}
+.imagebox{
+    margin-bottom:2em;
+    margin-top:2em;
+    padding-bottom:2em; 
+    padding-top:2em;
+    border-bottom:solid;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+.filelabel{
+    display:none;
+}
+.topbutton{
+    position:absolute;
+    top:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+}
+.topbutton:hover{
+    background-color:green;
+}
+.topbutton:active{
+    background-color:yellow;
+}
+.bottombutton{
+    position:absolute;
+    bottom:0px;
+    cursor:pointer;
+    width:6em;
+    z-index:100;
+    border:solid;
+    text-align:center;
+    font-size:1.8em;
+    border-width:5px;
+    border-radius:10px;
+    font-family:COMIC SANS MS;
+        background-color:#9f8767;    
+    z-index:2;
+
+}
+.bottombutton:hover{
+    background-color:green;
+}
+.bottombutton:active{
+    background-color:yellow;
+}
+.signbox{
+    border:solid;
+}
+#removebutton{
+    right:50%;
+    width:12em;
+}
+#deletebutton{
+    left:0px;
+}
+#clearbutton{
+    right:0px;
+}
+.index{
+    display:none;
+}
+.signcontrolbutton{
+    border:solid;
+    cursor:pointer;
+    color:red;
+    background-color:black;
+}
+.signcontrolbutton:hover{
+    background-color:#ff000080;
+}
+#controlscroll{
+    width:30%;
+    overflow:scroll;
+    position:absolute;
+    left:0px;
+    top:0px;
+    bottom:0px;
+}
+#signfeed{
+    position:absolute;
+    overflow:scroll;
+    left:33%;
+    width:30%;
+    top:0px;
+    bottom:0px;
+}
+#signfeed canvas{
+    width:90%;
+}
+#imagefeedbox{
+    position:absolute;
+    overflow:scroll;
+    right:0px;
+    width:30%;
+    top:0px;
+    bottom:0px;
+}
+#imagefeed img{
+    width:90%;
+}
+#images{
+    width:100%;
+}
+#images img{
+    width:90%;
+    display:block;
+    margin:auto;
+}
+</style>
+</body>
+</html>

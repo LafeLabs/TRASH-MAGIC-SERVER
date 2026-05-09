@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>HYPERSPACE</title>    
+
+
+   <script src = "trashmagic.js"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+body,input{
+    font-family:Comic Sans MS;
+}
+a{
+    font-family:Comic Sans MS;
+    COLOR:BLACK;
+}
+td{
+    padding:1em 1em 1em 1em;
+}
+</style>
+<body>    
+<table id = "maintable">
+</table>
+<script>
+
+
+codesquaresize = 170;
+numberofcolunms = 8;
+
+marginsize = 40;
+fontsize = 12;
+
+
+currentfile = "qrcode-list.txt";
+hyperspace = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        hyperspace = JSON.parse(this.responseText);
+        loadtable();
+
+    }
+};
+httpc.open("GET", "load-file.php?filename=" + currentfile, true);
+httpc.send();
+
+
+function loadtable(){
+    document.getElementById("maintable").innerHTML = "";
+    var newtr = document.createElement("TR");
+        document.getElementById("maintable").appendChild(newtr);
+        for(var index = 0;index < hyperspace.length;index++){
+            if(index > 0 && index%numberofcolunms == 0){
+                var newtr = document.createElement("TR");
+                document.getElementById("maintable").appendChild(newtr);  
+            }
+            var newtd = document.createElement("TD");
+            newtr.appendChild(newtd);
+            var newspan = document.createElement("span");
+            var newa = document.createElement("A");
+            
+            
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            var newdiv = document.createElement("span");
+            qrcode = new QRCode(newdiv,{
+            	text: hyperspace[index].url,
+            	width: codesquaresize,
+            	height: codesquaresize,
+            	colorDark : "#000000",
+            	colorLight : "#FFFFFF",
+            	correctLevel : QRCode.CorrectLevel.H
+            });
+            newspan.appendChild(newdiv);
+            newspan.appendChild(newa);
+            newtd.appendChild(newspan);
+        }
+}
+
+/*
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+//globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+*/
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

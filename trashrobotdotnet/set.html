@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+    <head>
+     <meta charset="utf-8"/>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREQEREREREREQABEREREQABEBEAARERABEQERABEREBARARAQEREREQEBAREREQEREAAREQEQAAAAAAAAABEBERAAEREBERERAQEBEREREBARARAQEREQAREBEQARERAAEQEQABERERERARERERERERAAEREREREREQEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+   <script src = "trashmagic.js"></script>
+   <title>TRASHSET</title>
+    </head>
+<body>
+
+<div id = "scroll">
+    <a href = "index.html">HOME!</a>
+    <A STYLE = "DISPLAY:NONE" href  = "edit-html.html">WEB CODE EDITOR!</A>
+    <div id = "qrcode"></div>
+</div>
+<input id = "titleinput"/>
+<textarea id = "textbox"   spellcheck="false"></textarea>
+
+<script>
+
+if(innerWidth > innerHeight){
+    document.getElementById("scroll").style.top = "10px";
+    document.getElementById("scroll").style.left = (innerHeight + 10).toString() + "px";
+    document.getElementById("textbox").style.width = (innerHeight - 20).toString() + "px";
+    document.getElementById("textbox").style.height = (innerHeight - 120).toString() + "px";    
+}
+else{
+        
+    document.getElementById("scroll").style.top = (innerWidth + 10).toString() + "px";;
+    document.getElementById("scroll").style.left = "10px";
+    
+    document.getElementById("textbox").style.width = (innerWidth - 20).toString() + "px";
+    document.getElementById("textbox").style.height = (innerWidth - 120).toString() + "px";        
+    
+}
+
+trashset = [];
+setindex = 0;
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        trashset = JSON.parse(this.responseText);
+        document.getElementById("titleinput").value = trashset[setindex].title;
+        document.getElementById("textbox").value = trashset[setindex].text;
+        for(var index = 0;index < trashset.length;index++){
+            var newdiv = document.createElement("DIV");
+            newdiv.innerHTML = trashset[index].title;
+            newdiv.className = "element";
+            document.getElementById("scroll").appendChild(newdiv);
+            newdiv.id = "e" + index.toString();
+            newdiv.onclick = function(){
+                setindex = parseInt(this.id.substring(1));
+                document.getElementById("titleinput").value = trashset[setindex].title;
+                document.getElementById("textbox").value = trashset[setindex].text;
+            }
+        }
+        elements = document.getElementsByClassName("element");
+        rainbow(elements);
+    }
+};
+httpc.open("GET", "load-file.php?filename=trashset.txt", true);
+httpc.send();
+
+
+document.getElementById("titleinput").onchange = function() {
+    trashset[setindex].title = this.value;
+    elements[setindex].innerHTML = trashset[setindex].title;    
+    savejson();
+}
+
+document.getElementById("textbox").onkeyup = function() {
+    trashset[setindex].text = this.value;
+    savejson();
+}
+
+function savejson(){
+    
+    var url = "save-file.php";        
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(trashset,null,"    "))+"&filename=trashset.txt");//send text to filesaver.php
+    
+}
+
+
+codesquaresize = 120;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#B7B1AE;
+}
+textarea,input{
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+    font-size:4em;
+}
+a{
+    display:block;
+    color:blue;
+    text-align:center;
+    font-family:Comic Sans MS;
+    background-color:white;
+    font-size:3em;
+}
+h1{
+    font-family:Comic Sans MS;
+    text-align:center;
+}
+.element{
+    cursor:pointer;
+    font-family:helvetica;
+    font-size:3em;
+    width:90%;
+    margin:auto;
+    display:block;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.25em;
+    color:black;
+    margin-top:0.5em;
+    margin-bottom:0.25em;
+    overflow-x:scroll;
+    text-align:center;    
+}
+.element:hover{
+    border-width:0.4em;
+}
+#titleinput{
+    position:absolute;
+    top:10px;
+    left:10px;
+    font-size:30px;
+}
+#textbox{
+    position:absolute;
+    top:100px;
+    left:10px;
+}
+#scroll{
+    background-color:#433f41;
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    overflow:scroll;
+}
+#qrcode img{
+    display:block;
+    margin:auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    z-index:2;
+    border:solid;
+    border-width:5px;
+    border-color:white;
+}
+        </style>
+    </body>
+</html>

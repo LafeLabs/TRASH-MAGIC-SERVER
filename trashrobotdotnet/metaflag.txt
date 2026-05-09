@@ -1,0 +1,9 @@
+{
+    "text": "THE      MAGIC    DUMP",
+    "left_margin": 0.07,
+    "top_margin": 0.15,
+    "horizontal_gap": 0.04,
+    "vertical_gap": 0.17,
+    "number_of_columns": 8,
+    "rainbow": true
+}

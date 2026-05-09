@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEREREREREAEAAAAAAAAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAAAAAAAAEAEREREREREQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+   <title>LINK!</title>    
+   <!--
+LINK
+   -->
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+   <link rel="stylesheet" href="cardboard.css">    
+</head>
+<body> 
+
+<A href = "index.html">HOME</A>
+
+<P>
+ENTER THE LINK:
+</P>
+<INPUT id = "linkinput">
+<style>
+input{
+    width:90%;
+    left:4%;
+    font-family:Comic Sans MS;
+    background-color:#9f8767;
+    font-size:1em;
+}
+</style>
+<script>
+link = "";
+var httpc = new XMLHttpRequest();
+httpc.open("GET", "load-file.php?filename=link.txt", true);
+httpc.send();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        link = this.responseText;
+        document.getElementById("linkinput").value = link;  
+    }
+};
+
+document.getElementById("linkinput").select();
+document.getElementById("linkinput").onchange = function(){
+    link = this.value;
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+link+"&filename=link.txt");//send text to save-file.php
+}
+</script>
+</body>
+</html>
+
+
+    
+    

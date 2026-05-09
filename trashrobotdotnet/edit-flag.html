@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEREREREREAEAAAAAAAAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAAAAAAAAEAEREREREREQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+
+   <title>FLAG!</title>    
+   <!--
+
+   -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+</head>
+<body> 
+<style>
+    body{
+        background-color:#9f8767;
+        font-family:Comic Sans MS;
+        font-size:2em;
+    }
+    input{
+        background-color:black;
+        font-family:Courier;
+        color:#00ff00;
+        font-size:1em;
+    }
+    a{
+        display:block;
+    }
+    main{
+        position:absolute;
+        left:0px;
+        top:0px;
+    }
+    #scroll{
+        position:absolute;
+        right:0px;
+        top:0px;
+        bottom:0px;
+        overflow:scroll;
+        padding-left:1em;
+    }
+    #flagtable input{
+        width:2em;
+    }
+    #flagprogramtable input{
+        width:4em;
+    }
+    .scrollbutton{
+        border:solid;
+        display:block;
+        text-align:center;
+        width:10em;
+        margin:auto;
+        border-radius:10px;
+        cursor:pointer;
+    }
+    .scrollbutton:hover{
+        background-color:green;
+    }
+    .scrollbutton:active{
+        background-color:yellow;
+    }
+    #jsonio{
+        background-color:black;
+        color:#00ff00;
+        font-family:Courier;
+    }
+</style>
+<div id = "scroll">
+    <A HREF = "../">../</A>
+    <a href = "edit-html.html">edit-html.html</a>
+    <a href = "index.html">index.html</a> 
+    <a href = "edit-ascii.html">edit-ascii.html</a>
+    <a href = "flag.html">flag.html</a>
+    <a href = "readme.html">readme.html</a>
+    <a href = "qrcode.html">qrcode.html</a>
+    <a href = "image-feed.html">image-feed.html</a>
+    <div class = "scrollbutton" id = "rainbowbutton">RAINBOW</div>
+    <div class = "scrollbutton" id = "postbutton">POST</div>
+JSON:    <textarea id = "jsonio"></textarea>
+    <div class = "scrollbutton" id = "importbutton">IMPORT JSON</div>
+
+    <input id = "textinput">
+    <table id ="flagprogramtable"></table>
+    <table id ="flagtable"></table>
+</div>
+
+<script>
+    
+unit = 100;
+flag = [];
+ascii = [];
+
+letterindex = 0;
+
+rainbow = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple"
+];
+
+flagprogram = {
+    "left":0.2,
+    "top":0.2,
+    "number_of_columns":6,
+    "gap_width":0.025,
+    "gap_height":0.05
+}
+
+document.getElementById("rainbowbutton").onclick = function(){
+    cycleindex = 0;
+    for(var index = 0;index < flag.length;index++){
+        if(flag[index].character != " "){
+            flag[index].color = rainbow[cycleindex%6];
+            cycleindex++;
+        }
+    }
+    drawflag();
+    loadtable();
+}
+
+document.getElementById("postbutton").onclick = function(){
+    
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+
+/*
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var httpc = new XMLHttpRequest();
+    var url = "save-png.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=flag"  + timestamp + ".png");//send text to filesaver.php
+     //location.reload(); 
+     
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(flag,null,"    "))+"&filename=flag" + timestamp + ".txt");//send text to save-file.php     
+*/
+
+    var flagsvgstring = "<svg width=\"" + unit.toString() + "\" height=\"" + unit.toString() + "\" viewbox = \"0 0 " + unit.toString() + " " + unit.toString() + "\"  xmlns=\"http://www.w3.org/2000/svg\">\n";
+    
+    flagsvgstring += "\n<!--<json>" + JSON.stringify(flag,null,"    ") + "</json>-->\n";
+    
+    flagsvgstring += "<path d = \"M 0 0 L" + unit.toString() + " 0 L" + unit.toString() + " " + unit.toString() +" L0 " + unit.toString() + " L0 0 Z\" stroke = \"black\" stroke-width = \"1\" fill = \"black\" />";
+    
+
+    for(var index = 0;index < flag.length;index++){
+        var glyph = ascii[flag[index].character.charCodeAt(0)];
+        blocksize = unit*flag[index].width;
+        
+        if(glyph.length > 0){
+            flagsvgstring += "\n<path d = \"M" + (flag[index].x*unit - 0.5*blocksize + glyph[0].x*blocksize).toString() + " " + (flag[index].y*unit - 0.5*blocksize + glyph[0].y*blocksize).toString();
+            
+            
+            for(var gindex = 1;gindex < glyph.length;gindex++){
+                    
+                flagsvgstring += "L " + (flag[index].x*unit - 0.5*blocksize + glyph[gindex].x*blocksize).toString() + " " + (flag[index].y*unit - 0.5*blocksize + glyph[gindex].y*blocksize).toString() + " ";
+                
+            }
+            flagsvgstring += "Z\" stroke = \"" + flag[index].color + "\" stroke-width = \"1\" fill = \"" + flag[index].color + "\" />";            
+        }
+
+
+    }
+    flagsvgstring += "</svg>";
+    
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data=" + encodeURIComponent(flagsvgstring)+"&filename=flag" + timestamp + ".svg");//send text to save-file.php     
+
+}
+
+document.getElementById("importbutton").onclick = function(){
+    flag = JSON.parse(document.getElementById("jsonio").value);
+    drawflag();
+    loadtable();
+
+}
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        flag = JSON.parse(this.responseText);    
+        
+        var httpc2 = new XMLHttpRequest();
+        httpc2.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                ascii = JSON.parse(this.responseText);
+                drawflag();
+                loadtable();
+                document.getElementById("jsonio").value = JSON.stringify(flag,null,"    ");
+            }
+        };
+        httpc2.open("GET", "load-file.php?filename=ascii.txt", true);
+        httpc2.send();
+
+    }
+};
+httpc.open("GET", "load-file.php?filename=flag.txt", true);
+httpc.send();
+
+
+var httpc3 = new XMLHttpRequest();
+httpc3.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        flagprogram = JSON.parse(this.responseText);    
+        for(var attribute in flagprogram){
+            console.log(attribute);
+            var newtr = document.createElement("TR");
+            var newtd = document.createElement("TD");
+            newtd.innerHTML = attribute;
+            newtr.appendChild(newtd);
+            document.getElementById("flagprogramtable").appendChild(newtr);
+            var newtd = document.createElement("TD");
+            newtr.appendChild(newtd);
+            var newinput = document.createElement("INPUT");
+            newtd.appendChild(newinput);
+            newinput.value = flagprogram[attribute];
+            newinput.className = attribute;
+            newinput.onchange = function(){
+                var thisattribute = this.className;
+                console.log(thisattribute);
+                flagprogram[thisattribute] = parseFloat(this.value);
+                saveflagprogram();
+                flagtext = document.getElementById("textinput").value;
+                flag = [];
+                for(var index = 0;index < flagtext.length;index++){
+                    var letter = {};
+                    letter.color = "#ff2cb4";
+                    letter.x = flagprogram.left + 0.1*(index%flagprogram.number_of_columns) + flagprogram.gap_width*(index%flagprogram.number_of_columns);
+                    letter.y = flagprogram.top + Math.floor(index/flagprogram.number_of_columns)*0.1 + flagprogram.gap_height*Math.floor(index/flagprogram.number_of_columns);
+                    letter.width = 0.1;
+                    letter.character = flagtext.charAt(index);
+                    flag.push(letter);
+                }
+                
+                cycleindex = 0;
+                for(var index = 0;index < flag.length;index++){
+                    if(flag[index].character != " "){
+                        flag[index].color = rainbow[cycleindex%6];
+                        cycleindex++;
+                    }
+                }
+
+                drawflag();
+                loadtable();
+            
+
+                
+            }
+        }
+    }
+};
+httpc3.open("GET", "load-file.php?filename=flag-program.txt", true);
+httpc3.send();
+
+
+function setup(){
+    if(innerWidth > innerHeight){
+        unit = innerHeight - 50;
+        document.getElementById("scroll").style.left  = unit.toString() + "px";
+    }
+    else{
+        unit = innerWidth - 50;
+    }
+    createCanvas(unit, unit);
+    background(0);
+    stroke(0);
+    strokeWeight(1);
+    stroke("red");
+    fill("red");
+
+}
+
+
+function draw() {
+  
+}
+
+function mouseClicked() {   
+
+    
+}
+
+
+function keyPressed() {
+  if (keyCode  === DELETE) {
+
+  }
+  if(key == 'k'){
+     for(var index = 0;index < flag.length;index++){
+         flag[index].width *= 1.1;
+     }
+    drawflag();
+    loadtable();
+  }
+  if(key == 'j'){
+     for(var index = 0;index < flag.length;index++){
+         flag[index].width /= 1.1;
+     }
+    drawflag();
+    loadtable();
+  }
+
+  if(key == ' '){
+
+  }
+  if(keyCode === RETURN){
+
+  }
+  if(keyCode === UP_ARROW){
+    letterindex--;
+    if(letterindex < 0){
+        letterindex = flag.length - 1;
+    }
+    drawflag();
+  }
+  if(keyCode === DOWN_ARROW){
+    letterindex++;
+    if(letterindex > flag.length - 1){
+        letterindex = 0;
+    }
+    drawflag();
+  }
+
+    
+}
+
+
+document.getElementById("textinput").value = "";
+document.getElementById("textinput").select();
+
+document.getElementById("textinput").onchange = function(){
+    flagtext = this.value;
+    flag = [];
+    for(var index = 0;index < flagtext.length;index++){
+        var letter = {};
+        letter.color = "#ff2cb4";
+        letter.x = flagprogram.left + 0.1*(index%flagprogram.number_of_columns) + flagprogram.gap_width*(index%flagprogram.number_of_columns);
+        letter.y = flagprogram.top + Math.floor(index/flagprogram.number_of_columns)*0.1 + flagprogram.gap_height*Math.floor(index/flagprogram.number_of_columns);
+        letter.width = 0.1;
+        letter.character = flagtext.charAt(index);
+        flag.push(letter);
+    }
+    
+    cycleindex = 0;
+    for(var index = 0;index < flag.length;index++){
+        if(flag[index].character != " "){
+            flag[index].color = rainbow[cycleindex%6];
+            cycleindex++;
+        }
+    }
+
+    drawflag();
+    loadtable();
+    
+}
+
+function drawflag(){
+    background(0);
+    strokeWeight(1);
+    
+    var flagstring = "";
+    for(var index = 0;index < flag.length;index++){
+        var glyph = ascii[flag[index].character.charCodeAt(0)];
+        flagstring += flag[index].character;
+        fill(flag[index].color);
+        stroke(flag[index].color);
+        blocksize = unit*flag[index].width;
+        beginShape();
+        for(var gindex = 0;gindex < glyph.length;gindex++){
+            vertex(flag[index].x*unit - 0.5*blocksize + glyph[gindex].x*blocksize,flag[index].y*unit - 0.5*blocksize + glyph[gindex].y*blocksize);
+        }
+        endShape(CLOSE);
+    }
+    document.getElementById("textinput").value = flagstring;
+    strokeWeight(6);
+    stroke("#ff2cb4");
+    noFill();
+//    rect(flag[letterindex].x*unit - 0.5*flag[letterindex].width*unit,flag[letterindex].y*unit - 0.5*flag[letterindex].width*unit,flag[letterindex].width*unit,flag[letterindex].width*unit);
+    
+    saveflag();
+}
+
+function loadtable(){
+    document.getElementById("flagtable").innerHTML = "";
+    for(var index = 0;index < flag.length;index++){
+        var newtr = document.createElement("TR");
+        document.getElementById("flagtable").appendChild(newtr);
+
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = index.toString();
+        newtd.style.display = "none";
+        newtd.className = "index";
+        newtr.appendChild(newtd);
+
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = "CHAR:";
+        newtr.appendChild(newtd);
+        var newtd = document.createElement("TD");
+        newtr.appendChild(newtd);
+        var newinput = document.createElement("INPUT");
+        newtd.appendChild(newinput);
+        newinput.value = flag[index].character;
+        newinput.onchange = function(){
+            localindex = parseInt(this.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+            flag[localindex].character = this.value;
+            drawflag();
+        }
+
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = "CLR:";
+        newtr.appendChild(newtd);
+        var newtd = document.createElement("TD");
+        newtr.appendChild(newtd);
+        var newinput = document.createElement("INPUT");
+        newtd.appendChild(newinput);
+        newinput.value = flag[index].color;
+        newinput.onchange = function(){
+            localindex = parseInt(this.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+            flag[localindex].color = this.value;
+            drawflag();
+        }
+
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = "X:";
+        newtr.appendChild(newtd);
+        var newtd = document.createElement("TD");
+        newtr.appendChild(newtd);
+        var newinput = document.createElement("INPUT");
+        newtd.appendChild(newinput);
+        newinput.value = flag[index].x;
+        newinput.onchange = function(){
+            localindex = parseInt(this.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+            flag[localindex].x = this.value;
+            drawflag();
+        }
+        
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = "Y:";
+        newtr.appendChild(newtd);
+        var newtd = document.createElement("TD");
+        newtr.appendChild(newtd);
+        var newinput = document.createElement("INPUT");
+        newtd.appendChild(newinput);
+        newinput.value = flag[index].y;
+        newinput.onchange = function(){
+            localindex = parseInt(this.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+            flag[localindex].y = this.value;
+            drawflag();
+        }
+        var newtd = document.createElement("TD");
+        newtd.innerHTML = "W:";
+        newtr.appendChild(newtd);
+        var newtd = document.createElement("TD");
+        newtr.appendChild(newtd);
+        var newinput = document.createElement("INPUT");
+        newtd.appendChild(newinput);
+        newinput.value = flag[index].width;
+        newinput.onchange = function(){
+            localindex = parseInt(this.parentNode.parentNode.getElementsByClassName("index")[0].innerHTML);
+            flag[localindex].width = this.value;
+            drawflag();
+        }
+
+    }
+}
+
+function saveflag(){
+    document.getElementById("jsonio").value = JSON.stringify(flag,null,"    ");
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(flag,null,"    "))+"&filename=flag.txt");//send text to save-file.php
+}
+
+
+function saveflagprogram(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(flagprogram,null,"    "))+"&filename=flag-program.txt");//send text to save-file.php
+
+    
+}
+
+</script>
+</body>
+</html>
+
+
+    
+    

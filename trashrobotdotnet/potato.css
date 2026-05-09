@@ -1,0 +1,84 @@
+/* General body styles */
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  user-select: none; /* Prevent text selection */
+}
+* {
+  -webkit-tap-highlight-color: transparent; /* For mobile Safari/Chrome */
+  outline: none; /* For desktop browsers */
+  user-select: none;
+}
+
+/* Disable highlight specifically for images, canvas, or buttons */
+img,
+canvas,
+button {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none; /* Prevent text/image selection */
+}
+
+/* Center the container for the p5.js sketch */
+#sketch-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Style the toggle buttons */
+button {
+  margin: 5px;
+  font-size: 12px; /* Small, reasonable font size */
+  padding: 5px 10px; /* Smaller padding */
+  background-color: #50371d;
+  color: white;
+  border: none;
+  border-radius: 3px; /* Slightly rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block; /* Prevents buttons from stretching */
+  height: 30px;
+}
+
+/* Hover effect for buttons */
+button:hover {
+  background-color: #b3814c;
+}
+
+/* Hide the buttons on mobile devices */
+@media (max-width: 600px) {
+  button {
+    display: none; /* Hide buttons on smaller screens */
+  }
+}
+
+/* On larger screens, position the buttons below the sketch */
+@media (min-width: 601px) {
+  button {
+    position: relative;
+    bottom: -20px; /* Move buttons to the bottom of the canvas */
+    font-size: 12px; /* Ensure consistent button font size */
+    padding: 5px 10px; /* Keep consistent, smaller padding */
+    display: inline-block; /* Ensure buttons are not stretched */
+  }
+}
+
+p {
+  width: 300px;
+}
+h3 {
+  font-family: "Major Mono Display", monospace;
+  font-size: 2em; /* Adjust the size of the heading */
+  color: #50371d; /* Give it a visible color */
+  margin-bottom: 20px; /* Add space below the heading */
+}

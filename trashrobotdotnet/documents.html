@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+  
+   <title>TRASH MAGIC NETWORK</title>    
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>      
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src = "trashmagic.js"></script>    
+</head>
+<body>    
+<style>
+
+body{
+    overflow:hidden;
+    font-size:1.5em;
+    font-family:Comic Sans MS;
+    background-color:#9f8767;
+}
+.deletebutton{
+    width:2em;
+    background-color:#808080;
+    border:solid;
+    border-radius:5px;
+    border-width:5px;
+    border-color:red;
+    font-family:helvetica;
+    font-size:2em;
+    color:red;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{ 
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+.filelabel{
+    color:#ff2cb4;
+    font-size:2em;
+}    
+#documentfeed{
+    position:absolute;
+    top:2em;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow:scroll;
+    padding:1em 1em 1em 1em;
+}
+#documentfeed a{
+    color:#0000ff;
+    display:block;
+}
+
+</style>
+<a href = "index.html">BACK TO MAIN PAGE</a>
+<div id = "documentfeed"></div>
+
+<script>
+
+deletemode = true;
+//deletemode = false;
+documents = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        documents = JSON.parse(this.responseText);
+        loaddocumentfeed();
+    }
+};
+httpcUpload.open("GET", "dir.php?filename=documents", true);
+httpcUpload.send();
+
+function loaddocumentfeed(){
+    for(var index = documents.length - 1;index >= 0;index--) {
+        var newlink = document.createElement("a");
+        newlink.href = "documents/" + documents[index];
+        newlink.innerHTML = "documents/" + documents[index];
+        document.getElementById("documentfeed").appendChild(newlink);
+
+    }    
+}
+
+</script>
+</body>
+</html>
+    
+    

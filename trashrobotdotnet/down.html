@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+    -->
+    <title>DOWN THE RABBIT HOLE!</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREQEREREREREQABEREREQABEBEAARERABEQERABEREBARARAQEREREQEBAREREQEREAAREQEQAAAAAAAAABEBERAAEREBERERAQEBEREREBARARAQEREQAREBEQARERAAEQEQABERERERARERERERERAAEREREREREQEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+
+</head>
+<body>
+
+    <a href = "index.html">HOME</a>
+
+    <table id = "newtable">
+        <tr>
+            <td style = "background-color:black;color:#00ff00;font-size:44px">
+                NEW PAGE NAME:
+            </td>
+            <td>
+                <input id = "newinput"/>
+            </td>
+        </tr>
+    </table>
+
+    <a id = "dirlink"></a>
+
+
+<script>
+
+board = "";
+square = 100;
+
+
+            
+
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+        for(var index = 0;index < directories.length;index++) {
+            var newa = document.createElement("A");
+            newa.innerHTML = directories[index] + "/";
+            newa.href = directories[index] + "/";
+            document.body.appendChild(newa);
+        }
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementById("dirlink").style.backgroundColor = "black";
+        document.getElementById("dirlink").style.borderColor = "#ff2cb4";
+        document.getElementById("dirlink").style.color = "#ff2cb4";
+    }
+};
+
+httpc2.open("GET", "dir.php?type=dir", true);
+httpc2.send();
+
+dirlink = document.getElementById("dirlink");
+
+document.getElementById("newinput").value = "";
+document.getElementById("newinput").onchange = function() {
+    dir = this.value;
+    dirlink.innerHTML = "CLICK ME(1/3)!";
+//    dirlink.innerHTML = "mkdir.php?dir=" + this.value;
+    dirlink.href = "mkdir.php?dir=" + this.value;
+}
+
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+
+</script>
+<style>
+table input{
+        color:#ff2cb4;
+        font-size:44px;
+        border:solid;
+        font-family:courier;
+        background-color:black;
+}
+table{
+    display:block;
+    margin:auto;
+    width:80%;
+    text-align:center;
+}
+@media only screen and (orientation: portrait) {
+}
+
+</style>
+</body>
+</html>

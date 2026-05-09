@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+     <meta charset="utf-8"/>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEREREREREAEAAAAAAAAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAREREREQEAEBERERERAQAQEREREREBABAAAAAAAAEAEREREREREQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+
+    </head>
+<body>
+    <a id ="homelink" href = "index.html">HOME</a>
+    <h1 id = "title">TEXT</h1>
+<textarea id = "wall"></textarea>
+<script>
+
+wall = "";
+currentfile = "text.txt";
+var httpc = new XMLHttpRequest();
+httpc.open("GET", "load-file.php?filename=" + currentfile, true);
+httpc.send();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        wall = this.responseText;
+        document.getElementById("wall").value = wall;  
+    }
+};
+
+
+document.getElementById("wall").onkeyup = function() {
+    wall = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=" + currentfile);//send text to filesaver.php
+}
+
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;
+}
+#title{
+    position:absolute;
+    z-index:-1;
+    width:100%;
+    text-align:center;
+    font-family:Comic Sans MS;
+    
+}
+#wall{
+    position:absolute;
+    left:10%;
+    right:10%;
+    top:10%;
+    bottom:10%;
+    width:80%;
+    height:75%;
+    padding:1em 1em 1em 1em ;
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+    font-size:2em;
+    overflow:scroll;
+    border:solid;
+    border-width:10px;
+}
+a{
+    position:absolute;
+    font-size:2em;
+    font-family:Comic Sans MS;
+    font-size:4em;
+    color:blue;
+    z-index:1;
+}
+#homelink{
+    left:0px;
+    top:0px;
+}
+#branchlink{
+    right:0px;
+    top:0px;
+}
+
+        </style>
+    </body>
+</html>

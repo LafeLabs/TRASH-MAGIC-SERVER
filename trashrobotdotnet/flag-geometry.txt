@@ -1,0 +1,7 @@
+{
+    "left": 0.1,
+    "top": 0.15,
+    "number_of_columns": 8,
+    "horizontal_gap": 0.05,
+    "vertical_gap": 0.1
+}

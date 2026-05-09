@@ -1,0 +1,110 @@
+    <!DOCTYPE HTML>
+    <HTML LANG="EN">
+    <HEAD>
+       <META CHARSET="UTF-8">
+       <!--
+    
+    TRASH MAGIC!
+    
+       -->
+       <!--STOP GOOGLE:-->
+       <META NAME="ROBOTS" CONTENT="NOINDEX,NOFOLLOW">
+  
+      <LINK HREF="DATA:IMAGE/X-ICON;BASE64,AAABAAEAEBAQAAEABAAOAQAAFGAAACGAAAAQAAAAIAAAAAEABAAAAAAAGAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///WANAP8A5DZ6ABUERWAAT/8A6BONABO86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIGRERED3DWAAB3D3D3D3D3D3D3D3D3D3D3D3D3VVVVVVVQAFVVAAVVVQIIBRAIIBEQIAIBECAAERAGAGFGIABMYCIIBMAIIGZGIIIGYCIGZMYCIAAIAAMZMZAAIIIIIIIIIIIIIIIIIIIIIIGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" REL="ICON" TYPE="IMAGE/X-ICON" />
+      
+       <TITLE>TRASH MAGIC NETWORK</TITLE>    
+       <script type="module" src="track-list.js"></script>
+       <!-- 
+track-list.js BY WEB DEV LEGEND MIRIAM SUZANNE 
+(https://www.miriamsuzanne.com/),
+AVAILABLE FREE FOR ALL OF HUMANITY AT 
+
+https://github.com/mirisuzanne/track-list/
+
+       -->
+       
+       <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    </HEAD>
+    <BODY> 
+    <H2>
+        <A href = "index.html">RETURN TO MAIN PAGE!</A>
+    </H2>
+                    <div id = "qrcode"></div>
+    <H1>TRASH MAGIC AUDIO PLAYER!</H1>
+    <P>
+        ARTIST: <a href ="editplayer.html">EDIT THIS PAGE</a> TO ADD LINKS TO ARTIST SOCIALS AND PAYMENT! WORK WITH WEB DEVELOPER FRIENDS TO MAKE THIS PAGE LOOK HOW YOU WANT! PUT THE TRACKS IN THE TRACKS FOLDER AND THEY WILL POPULATE THE PLAYER!  FORK DOWN TO MAKE MORE ALBUMS! BACK UP EVERYTHING!  NOTHING IS PRIVATE! EVERYTIHNG REPLICATES! EVERYTIHNG EVOLVES!
+    </P>
+
+
+<div id = "tracklist">
+</div>
+
+
+<script>
+
+tracks = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        tracks = JSON.parse(this.responseText);
+        listhtml = "<track-list>\n";
+        listhtml += "  <ol slot = \"tracks\">\n";
+        for(var index = 0;index < tracks.length;index++){
+            listhtml += "    <li>\n";
+            listhtml += "      <strong>" + tracks[index] + "</strong>\n";
+            listhtml += "      <audio controls src = \"tracks/" + tracks[index] + "\"></audio>\n";
+            listhtml += "    </li>\n";
+        }
+        listhtml += "  </ol>\n";
+        listhtml += "</track-list>";
+        document.getElementById("tracklist").innerHTML = listhtml;
+    }
+};
+
+httpc.open("GET", "dir.php?filename=tracks", true);
+httpc.send();
+
+ codesquaresize = 170;
+    marginsize = 40;
+    fontsize = 12;
+    //globalurl = "http://www.trashrobot.org/qrcode.html";
+    globalurl = window.location.href;
+    qrcode = new QRCode(document.getElementById("qrcode"), {
+    	text: globalurl,
+    	width: codesquaresize,
+    	height: codesquaresize,
+    	colorDark : "#000000",
+    	colorLight : "#ffffff",
+    	correctLevel : QRCode.CorrectLevel.H
+    });
+
+</script>
+<STYLE>
+    BODY{
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        FONT-SIZE:1.5EM;
+    }
+    IMG{
+        DISPLAY:BLOCK;
+        TEXT-ALIGN:CENTER;
+        max-width:80%;
+    }
+    H1{
+        TEXT-ALIGN:CENTER;
+    }
+    P{
+        PADDING: 0.5EM 1EM 0.5EM 1EM;
+    }
+    A{
+        COLOR:BLUE;
+    }
+</STYLE>
+
+    </BODY>
+    </HTML>
+    
+    
+
+
+

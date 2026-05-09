@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREBERAREREBEQEAEBEREQARAQAQEREAAAEBERAREQAAAAAAABERAAABERERERERABEREREREREBEREREREREREREREREREREREAAAAREQAAAAEREBERAREQAQAQEREBABABABAREQEAEAEREBERAREQAAAAEREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+   <title>QRCODE FEED!</title>    
+   <!--
+
+   -->
+
+</head>
+<body>    
+
+    <textarea id = "feed"></textarea>
+    
+    <div class = "button" id = "importbutton">IMPORT FEED</div>
+    <div class = "button" id = "resetbutton">RESET FEED</div>
+    <div id = "links">
+        <a href = "index.html">index.html</a>
+    </div>
+<style>
+.button{
+    cursor:pointer;
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    margin:auto;
+    display:block;
+    font-family:Comic Sans MS;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+
+#feed{
+    width:90%;
+    margin-left:4%;
+    height:40em;
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+}
+#links a{
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    margin:auto;
+    display:block;
+    font-family:Comic Sans MS;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+    
+}
+a{
+    color:#300030;
+    display:block;
+    font-family:Comic Sans MS;
+    
+}
+</style>
+<script>
+
+
+zerofeed = [
+    {
+        "url": "https://github.com/lafelabs/qrcode-feed",
+        "note": "THE ORIGIN OF THE CODE"
+    },
+    {
+        "url": "https://trashrobot.net/",
+        "note": "SELF REPLICATING MEDIA MADE OF TRASH! HYPER TRASH MARKUP LANGUAGE! FREE CARDBOARD SIGNS! DOWN BY THE HIGHWAY!"
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/QR_code",
+        "note": "QR CODE WIKIPEDIA"
+    },
+    {
+        "url": "https://davidshimjs.github.io/qrcodejs/",
+        "note": "QR CODE DOT JS"
+    },
+    {
+        "url": "https://www.qrcode.com/en/history/",
+        "note": "QR CODE HISTORY AT DENSOWAVE"
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Masahiro_Hara",
+        "note": "MASAHIRO HARA WIKIPEDIA PAGE"
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Hypertext",
+        "note": "HYPERTEXT WIKIPEDIA PAGE"
+    },
+    {
+        "url": "https://www.math.cmu.edu/~af1p/Teaching/INFONET/Papers/AsWeMayThink/bush.html",
+        "note": "AS WE MAY THINK BY VANNEVAR BUSH"
+    },
+    {
+        "url": "https://archive.org/details/DouglasAdams-Hyperland",
+        "note": "HYPERLAND WITH DOUGLAS ADAMS AND TOM BAKER"
+    },
+    {
+        "url": "https://archive.org/details/tim-berners-lee-weaving-the-web-the-original-design-and-ultimate-destiny-of-the-/mode/2up",
+        "note": "WEAVING THE WEB BY TIM BER"
+    }
+];
+
+feed = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        feed = JSON.parse(this.responseText);
+        document.getElementById("feed").value = this.responseText;
+    }
+};
+httpc.open("GET", "load-file.php?filename=feed.json", true);
+httpc.send();
+
+function savefeed(){
+    data = encodeURIComponent(JSON.stringify(feed,null,"    "));
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=feed.json");//send text to save-file.php
+}
+
+document.getElementById("resetbutton").onclick = function(){
+    feed = zerofeed;
+    savefeed();
+    document.getElementById("feed").value = JSON.stringify(feed,null,"    ");
+    
+}
+
+document.getElementById("importbutton").onclick = function(){
+    rawinput = document.getElementById("feed").value;
+    if(isJSON(rawinput)){
+        feed = JSON.parse(rawinput);
+        savefeed();
+    }
+}
+
+function isJSON(str) {
+    try {
+        return (JSON.parse(str) && !!str);
+    } catch (e) {
+        return false;
+    }
+}
+
+</script>
+</body>
+</html>
+
+
+    
+    
+ 
+    

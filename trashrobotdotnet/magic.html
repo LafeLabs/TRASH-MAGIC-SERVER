@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/wAAAAD//wAA/wAAAAD/AP8A/wAApv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFUAAARGAAIxFVUABEYAAjMRFQAARGYiIjMRAABERmZiIzEAAARERGZiMwAAAARERGYiAAAAAABERiL4PwAA+78AAPu/AAD33wAA9V8AAPVfAAD1XwAA998AAOADAADhAAAA4AAAAPAAAADwAAAA+AAAAP4AAAD/wAAA" rel="icon" type="image/x-icon" />
+    
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="geometron.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id = "qrcode"></div>
+<div id = "geometronbox">
+    <canvas id = "maincanvas"></canvas>
+</div>
+
+<script>
+maincanvas = document.getElementById("maincanvas");
+mainGVM = new GVM(maincanvas,innerWidth,innerHeight);
+
+mainGVM.importbytecode(hypercube);
+mainGVM.x0 = 0.5*innerWidth;
+mainGVM.y0 = 0.5*innerHeight;
+mainGVM.style.line1 = 20;
+mainGVM.style.line0 = 5;
+mainGVM.style.fill7 = "#ff00ff80";
+
+
+
+function setup(){
+    createCanvas(innerWidth, innerHeight);    
+}
+
+frameindex = 0;
+function draw(){
+    mainGVM.unit = 150 + 100*Math.sin(2*Math.PI*frameindex/200);
+//    mainGVM.theta0 = Math.PI/2 + 0.2*Math.sin(2*Math.PI*frameindex/100);
+
+    mainGVM.style.line1 = 20 + 10*Math.sin(2*Math.PI*frameindex/200);
+    mainGVM.style.line0 = 5 + 3*Math.sin(2*Math.PI*frameindex/200);
+        
+
+    mainGVM.drawGlyph("0327,0337,0337,0337,0337,0337,0347,0300,0306,0335,0362,0203,0335,0335,0350,0335,0312,0337,0203,0335,0335,0335,0335,0203,0335,0335,0335,0335,0336,0335,0203,0203,0334,0334,0334,0334,0334,0337,0203,0334,0334,0334,0334,0203,0334,0334,0334,0334,0334,0336,0203,0354,0334,0334,0300,0321,0311,0341,0337,0341,0337,0341,0337,0341,0337,0341,0337,0341,0337,0341,");
+    
+    
+    frameindex++;
+    if(frameindex > 10000){
+        frameindex = 0;
+    }
+}
+
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+</script>
+<style>
+#qrcode{
+    position:absolute;
+    z-index:3;
+    right:10px;
+    top:10px;
+}
+main{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+}
+#geometronbox{
+    position:absolute;
+    z-index:-2;
+    left:0px;
+    top:0px;
+}
+body{
+    overflow:hidden;
+}
+a img{
+    max-width:100px;
+    z-index:1;
+}
+</style>
+</body>
+</html>

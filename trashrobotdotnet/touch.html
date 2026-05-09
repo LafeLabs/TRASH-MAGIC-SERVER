@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+COLOR WHEEL CONTROL
+
+-->
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAEQAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAD//wAA5+cAAM/7AAC39QAAu+0AAH/+AAB//gAAHngAAH5+AAB/vgAAf94AALftAACu9QAA3vsAAOblAAD4HwAA" rel="icon" type="image/x-icon">
+   <title>Color Wheel Control Knob</title>    
+   <script src = "https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+   <script src = "rainbow.js"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>   
+</head>
+<body> 
+<div id = "qrcode"></div>
+<a id = "upperleft" href = "touch.html">TOUCH</a>
+<a id = "upperright" href = "see.html">SEE</a>
+<a id = "lowerleft" href = "feel.html">FEEL</a>
+<a id = "lowerright" href = "branch.html">BRANCH</a>
+
+<A></A>
+<style>
+body{
+    font-family:Arial;
+    background-color:#404040;
+    overflow:hidden;
+}
+#qrcode{
+    position:absolute;
+    left:100px;
+    top:100px;
+    z-index:2;
+}
+main{
+    border:solid;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+a{
+    background-color:#cccccc;
+    color:blue;
+    font-size:3em;
+    z-index:4;
+    position:absolute;
+}
+#upperleft{
+    left:0px;
+    top:0px;
+}
+#upperright{
+    right:0px;
+    top:0px;
+}
+#lowerleft{
+    left:0px;
+    bottom:0px;
+}
+#lowerright{
+    right:0px;
+    bottom:0px;
+}
+</style>
+<script>
+
+
+function setup() {
+
+  if(innerWidth > innerHeight){
+      squaresize = innerHeight;
+      createCanvas(innerWidth, innerHeight);    
+      
+  }
+  else{
+      squaresize = innerWidth;
+      createCanvas(innerWidth-10, innerHeight-100);    
+
+  }
+  createCanvas(innerWidth, innerHeight);    
+  textSize(50);
+  noFill();
+  stroke(0);
+  strokeWeight(80)
+  
+}
+
+wheel = {};
+wheel.angle = 0;//angle in degrees
+wheel.color = colorwheel(wheel.angle);
+wheel.radius = 0.5;
+
+function draw(){
+    background(wheel.color);
+    angle = Math.round(180*Math.atan2(width/2 - mouseX,mouseY - height/2)/Math.PI) + 180;
+    radius = Math.sqrt((width/2 - mouseX)*(width/2 - mouseX) + (mouseY - height/2)*(mouseY - height/2));
+    line(width/2,height/2,width/2 + squaresize*Math.cos(Math.PI*(angle - 90)/180),height/2 + squaresize*Math.sin(Math.PI*(angle - 90)/180));
+    
+    normradius = radius/squaresize;
+    if(normradius != wheel.radius){
+        wheel.radius = normradius;
+        savejson();
+    }
+    circle(width/2,height/2,2*radius);
+    if(radius )
+    if(angle != wheel.angle){
+        wheel.angle = angle;
+        wheel.color = colorwheel(wheel.angle);
+        savejson();
+    }
+
+}
+
+function savejson(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(wheel,null,"    "))+"&filename=wheel.json");//send text to save-file.php
+}
+codesquaresize = 100;
+globalurl = window.location.href;
+
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

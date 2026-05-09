@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC!</title>    
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+
+    <div id = "qrcode"></div>
+    <H1>TRASH MAGIC SERVER!</H1>
+    <a href = "media.html">MEDIA</a>
+    <A HREF = "links.html">LINK FEED</A>
+    <a href = "apps.html">TRASH MAGIC APPS</a>
+    <a href = "edit-index.html">EDIT</a>
+    <a href = "branch.html">BRANCH</a>
+    <a href = "readme.html">REPLICATE SERVER</a>
+
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+</script>
+</body>
+</html>
+
+
+    
+    

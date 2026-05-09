@@ -1,0 +1,568 @@
+ <!doctype html>
+<html>
+<head>
+ <!-- 
+ 
+RIFF O TRON
+ 
+PUBLIC DOMAIN, NO COPYRIGHTS, NO PATENTS.
+
+CC0
+
+LAWS OF GEOMETRON:
+
+EVERYTHING IS PHYSICAL
+EVERYTHING IS FRACTAL
+EVERYTHING IS RECURSIVE
+
+NO MONEY
+NO MINING 
+NO PROPERTY
+
+LOOK AT THE INSECTS
+LOOK AT THE FUNGI
+LANGUAGE IS HOW THE MIND PARSES REALITY
+
+
+LAWS OF TRASH MAGIC:
+
+EVERYTHING FREE FOR EVERYONE EVERYWHERE RIGHT NOW
+MAKE EVERYTHING FROM TRASH AND WHAT WE CAN GROW 
+EVERYTHING IS SELF-REPLICATING MEDIA
+
+LAWS OF QNS:
+
+EVERYTHING IS AN EFFECTS PEDAL
+EVERYTHING LIVES IN A WEB BROWSER
+EVERYTHING IS PUBLIC DOMAIN
+
+
+-->
+
+<!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+    
+    
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+    
+<!--
+ace.js project home:
+https://ace.c9.io/
+
+list of languages:
+https://cloud9-sdk.readme.io/docs/language-mode
+
+
+-->    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        processClass: "mathjax",
+        ignoreClass: "no-mathjax"
+        }
+    });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+        
+<title>RIFF-O-TRON</title>
+
+</head>
+<body>
+
+
+<div id="editor" contenteditable="true" spellcheck="false"></div>
+
+<div id = "scroll">
+
+<h1>RIFF-O-TRON</h1>
+<P>
+<a href = "index.html">HOME</a>
+    
+</P>
+
+<div id = "postbutton" class = "button">POST</div>
+</div>
+
+<script>
+
+var soundFile, mic, osc,fft;
+
+var analyzer;
+var numSamples = 1024;
+
+// Array of amplitude values (-1 to +1) over time.
+var samples = [];
+var currentSource = "mic";
+amp = 0;
+freq = 666;//Hz
+oscon= false;
+T = 100;//period in frames
+
+f0 = 666;
+delta = 420;
+f = f0;
+
+lineArrayStack = [];
+lineArray =[];
+
+
+
+squaresize = 700;
+margin = 100;
+if(innerWidth > innerHeight){
+    squaresize = innerHeight;
+    margin = (innerWidth - squaresize)/2;
+    document.getElementById("editor").style.right = (squaresize + margin).toString() + "px";
+    document.getElementById("editor").style.top = "150px";
+    document.getElementById("scroll").style.top = "150px";
+    document.getElementById("scroll").style.left = (squaresize + margin).toString() + "px";    
+
+}
+else{
+    squaresize = innerWidth;
+    margin = (innerHeight - squaresize)/2;
+    document.getElementById("editor").style.right = "51%";
+    document.getElementById("editor").style.top = (squaresize + margin).toString() + "px";
+    document.getElementById("scroll").style.top = (squaresize + margin).toString() + "px";
+    document.getElementById("scroll").style.left = "51%";    
+
+    
+}
+
+
+function setup() {
+
+  createCanvas(squaresize, squaresize);    
+  if(innerWidth > innerHeight){
+    document.getElementsByTagName("main")[0].style.left = margin.toString() + "px";          
+    document.getElementsByTagName("main")[0].style.top = "0px";          
+  }
+  else{
+    document.getElementsByTagName("main")[0].style.top = margin.toString() + "px";          
+    document.getElementsByTagName("main")[0].style.left = "0px";         
+  }
+
+  strokeWeight(2);  
+  background(159,135,103);
+  noFill();
+  stroke(0);
+
+//  analyzer = new p5.FFT(0, numSamples);
+
+  // set up various inputs. We'll toggle them when key "T" is pressed.
+  mic = new p5.AudioIn();
+  mic.start();
+  //analyzer.setInput(mic);
+    
+  fft = new p5.FFT();
+  fft.setInput(mic);
+
+  background(255);
+  frameRate(25);
+ 
+
+}
+
+
+frameIndex= 0;
+p = 0;
+plast = 0;
+gain = 1;
+inLine = false;
+
+function draw(){
+
+  frameRate(25);
+  
+//  background(255);
+
+  // get a buffer of 1024 samples over time.
+  spectrum = fft.analyze();
+  nyquistFreq = sampleRate() / 2;
+  binFreq = nyquistFreq / (spectrum.length);
+
+  for (let i = 0; i < spectrum.length; i++) {
+    //stroke(spectrum[i]);
+    
+        n = 256;
+        H = spectrum[i]*360/n;
+        z = 255*(1 - Math.abs((H/60)%2 - 1));
+    
+        if(H < 60){
+            red = 255;
+            green = Math.round(z);
+            blue = 0;
+        }
+        if(H >= 60 && H < 120){
+            red = Math.round(z);
+            green = 255;
+            blue = 0;
+        }
+        if(H >= 120 && H < 180){
+            red = 0;
+            green = 255;
+            blue = Math.round(z);
+        }
+        if(H >= 180 && H < 240){
+            red = 0;    
+            green = Math.round(z);
+            blue = 255;
+        }
+        if(H >= 240 && H < 300){
+            red = Math.round(z);    
+            green = 0;
+            blue = 255;
+        }
+        if(H >= 300 && H < 360){
+            red = 255;    
+            green = 0;
+            blue = Math.round(z);
+        }    
+    
+  //  stroke(0);
+//    point(frameIndex,height - 5*i);
+    
+//     stroke('rgb(' + red + ',' + green + ',' + blue + ')');
+   
+        if(spectrum[i]< 4){
+            stroke("#808080");        
+        }
+        else{
+            stroke('rgba(' + red + ',' + green + ',' + blue + ',' + spectrum[i]/10 + ')');        
+        }
+      strokeWeight(3); 
+      point(frameIndex,height - 3*i);
+  }
+
+  p = 0;
+  for(var index = 0;index < spectrum.length;index++){
+      p += spectrum[index];
+  }
+  p /= spectrum.length;
+  p *= gain*p;
+  stroke(0);
+  
+//  circle(frameIndex,map(power, 0, 255, height, 0),10);
+  strokeWeight(3); 
+
+//  line(frameIndex - 1,map(plast, 0, 255, height, 0),frameIndex,map(p, 0, 255, height, 0));
+  
+  plast = p;
+  
+
+  strokeWeight(1); 
+  textSize(25);
+  fill("purple");
+  color("purple");
+
+  color("blue");
+  fill("blue");
+
+//  text("1 tic = 1 kHz",width - 200,height - 30);  
+
+ // text("time = " + (Math.round(width/kHz)).toString() + " ms",width - 200,height-30);  
+  strokeWeight(10); 
+ 
+  if (mouseIsPressed === true) {
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    inLine = true;
+    var r  ={};
+    r.x = mouseX;
+    r.y = mouseY;
+    lineArray.push(r);
+  }
+  else{
+      if(inLine){
+          lineArrayStack.push(lineArray);
+          lineArray = [];
+      }
+      inLine = false;
+  }
+  
+
+  strokeWeight(1); 
+  fill(0);  
+  kHz = Math.round(1000/binFreq); 
+  for(var index = 1;index < height;index++){
+      if(index%(kHz) == 0){
+          line(width,height - 3*index,0,height - 3*index);
+          text((index/kHz).toString() + " kHz",10,height - 3*index - 5);
+      }
+  }
+  
+  
+   
+
+  
+  
+   frameIndex++;
+   if(frameIndex > width){
+       frameIndex = 0;
+       //background(255);
+   }
+    stroke(0);
+
+}
+
+
+function keyPressed() {
+
+    if(key == 's'){
+        post();
+    }
+
+}
+
+document.getElementById("postbutton").onclick = function(){
+    post();
+}
+
+function post(){
+            
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    var url = "save-png.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=square" + timestamp +  "-sineotron.png");//send text to filesaver.php
+     //location.reload(); 
+     
+    newfilename = "square" + timestamp +  "-sineotron.png";
+    
+    var newbox = document.createElement("DIV");
+    newbox.classList.add("imagebox");         
+    
+    var deletespan = document.createElement("SPAN");
+    deletespan.innerHTML = "X";
+    deletespan.classList.add("deletespan");
+    deletespan.onclick = function(){
+        //delete the parent div of the image
+        //delete the file
+        var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+        var httpc = new XMLHttpRequest();
+        var url = "delete-file.php";         
+        httpc.open("POST", url, true);
+        httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpc.send("filename=" + filename);//send text to deletefile.php
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    }
+    
+    newbox.appendChild(deletespan);
+
+    var newdiv = document.createElement("DIV");
+    newdiv.innerHTML = newfilename;
+    newdiv.className = "filelabel";
+    newbox.appendChild(newdiv);
+
+    var newimg = document.createElement("IMG");
+    newimg.src = png64;
+    newimg.classList.add("uploadimage");
+    newimg.classList.add("button");
+    newbox.appendChild(newimg);    
+
+
+    document.getElementById("scroll").insertBefore(newbox,document.getElementById("scroll").getElementsByClassName("imagebox")[0]);
+        
+}
+
+
+squares = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        squares = JSON.parse(this.responseText);
+        for(var index = squares.length - 1;index >= 0;index--) {
+            
+            if(squares[index].includes("-sineotron")){
+            
+                var newbox = document.createElement("DIV");
+                newbox.classList.add("imagebox");         
+                
+                var deletespan = document.createElement("SPAN");
+                deletespan.innerHTML = "X";
+                deletespan.classList.add("deletespan");
+                deletespan.onclick = function(){
+                    //delete the parent div of the image
+                    //delete the file
+                    var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+                    var httpc = new XMLHttpRequest();
+                    var url = "delete-file.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=" + filename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }
+                
+                newbox.appendChild(deletespan);
+        
+                var newdiv = document.createElement("DIV");
+                newdiv.innerHTML = squares[index];
+                newdiv.className = "filelabel";
+                newbox.appendChild(newdiv);
+            
+                
+                document.getElementById("scroll").appendChild(newbox);
+                var newimg = document.createElement("IMG");
+                newimg.src = squares[index];
+                newimg.classList.add("uploadimage");
+                newimg.classList.add("button");
+                newbox.appendChild(newimg);
+                
+            }
+            
+        }
+    }
+};
+httpc9.open("GET", "list-files.php", true);
+httpc9.send();
+
+
+document.body.style.backgroundColor = "#b0b0b0";
+document.body.style.color = "black";
+
+        
+//editor.setTheme("ace/theme/vibrant_ink");
+        
+
+function setmode(){
+    if(currentFile.substring(currentFile.length-3,currentFile.length) == ".py"){
+        editor.getSession().setMode("ace/mode/python");
+    }
+    if(currentFile.substring(currentFile.length-3,currentFile.length) == ".txt"){
+        editor.getSession().setMode("ace/mode/text");
+    }    
+    if(currentFile.substring(currentFile.length-3,currentFile.length) == ".md"){
+        editor.getSession().setMode("ace/mode/markdown");
+    }
+    if(currentFile.substring(currentFile.length-4,currentFile.length) == ".tex"){
+        editor.getSession().setMode("ace/mode/latex");
+    }
+    if(currentFile.substring(currentFile.length-3,currentFile.length) == ".js"){
+        editor.getSession().setMode("ace/mode/javascript");
+    }    
+    if(currentFile.substring(currentFile.length-4,currentFile.length) == ".ino"){
+        editor.getSession().setMode("ace/mode/java");
+    }   
+    if(currentFile.substring(currentFile.length-4,currentFile.length) == ".css"){
+        editor.getSession().setMode("ace/mode/css");
+    }       
+    if(currentFile.substring(currentFile.length-4,currentFile.length) == ".php"){
+        editor.getSession().setMode("ace/mode/php");
+    }       
+    if(currentFile.substring(currentFile.length-5,currentFile.length) == ".html"){
+        editor.getSession().setMode("ace/mode/html");
+    }   
+    if(currentFile.substring(currentFile.length-5,currentFile.length) == ".json"){
+        editor.getSession().setMode("ace/mode/json");
+    }       
+    
+}
+
+
+</script>
+<style>
+a{
+    color:blue;
+}
+body{
+    overflow:hidden;
+    font-family:Arial;
+}
+
+input{
+ width:4em;
+}
+.element{
+    width:30px;
+}
+#editor{
+    position:absolute;  
+    left:10px;
+    bottom:10px;
+    display:none;
+}
+#scroll{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    padding:1em 1em 1em 1em;
+    overflow:scroll;
+}
+
+#scroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+#prevlink{
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100px;
+}
+#prevlink img{
+    width:100%;
+}
+#nextlink{
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:100px;
+}
+#nextlink img{
+    width:100%;
+}
+main{
+    position:absolute;
+}
+.filelabel{
+    display:none;
+}
+#postbutton{
+    width:6em;
+    text-align:center;
+    border:solid;
+    border-width:4px;
+    border-radius:10px;
+    display:block;
+    margin:auto;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    font-size:20px;
+    border-radius:10px;
+    padding: 5px 5px 5px 5px;
+    cursor:pointer;
+    position:relative;
+    top:50px;
+    left:75%;
+    
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+</style>
+
+</body>
+</html>

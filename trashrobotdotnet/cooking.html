@@ -1,0 +1,207 @@
+<head>
+    <title id="reader-title">I Hired a Cooking Therapist to Deal With My Anxiety</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *; object-src 'none'">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width; user-scalable=0">
+    <link rel="stylesheet" href="chrome://global/skin/design-system/tokens-brand.css">
+    <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+    <link rel="localization" href="toolkit/about/aboutReader.ftl">
+    <link rel="localization" href="toolkit/branding/brandings.ftl">
+    <script type="module" src="chrome://global/content/reader/moz-slider.mjs"></script>
+    <script type="module" src="chrome://global/content/reader/color-input.mjs"></script>
+    <script type="module" src="chrome://global/content/elements/named-deck.js"></script>
+  <link rel="stylesheet" href="chrome://global/skin/narrate.css"><link rel="shortcut icon" href="https://getpocket.com/favicon.ico"></head>
+
+  <body class="dark loaded" style="--content-width: 30em; --font-size: 20px;">
+    <div class="top-anchor"></div>
+
+    <div id="toolbar" class="toolbar-container">
+      <div class="toolbar reader-toolbar">
+        <div class="reader-controls" articledir="ltr">
+          <button class="close-button toolbar-button" aria-labelledby="toolbar-close" data-telemetry-id="reader-close">
+            <span class="hover-label" id="toolbar-close" data-l10n-id="about-reader-toolbar-close">Close Reader View</span>
+          </button>
+          <ul class="dropdown text-layout-dropdown">
+            <li>
+              <button class="dropdown-toggle toolbar-button text-layout-button" aria-labelledby="toolbar-text-layout-controls" data-telemetry-id="reader-text-layout-controls">
+                <span class="hover-label" id="toolbar-text-layout-controls" data-l10n-id="about-reader-toolbar-text-layout-controls">Text and layout</span>
+              </button>
+            </li>
+            <li class="dropdown-popup" id="text-layout-controls" tabindex="-1">
+              <h2 data-l10n-id="about-reader-text-header" id="about-reader-text-header">Text</h2>
+              <div id="text-size-controls">
+                <span data-l10n-id="about-reader-text-size-label" id="about-reader-text-size-label">Text size</span>
+                <div class="text-size-buttons buttonrow">
+                  <button class="text-size-minus-button" data-l10n-id="about-reader-toolbar-minus" data-telemetry-id="text-size-minus-button" title="Decrease font size"></button>
+                  <button class="text-size-plus-button" data-l10n-id="about-reader-toolbar-plus" data-telemetry-id="text-size-plus-button" title="Increase font size"></button>
+                </div>
+              </div>
+              <div id="font-controls">
+                <div id="font-type-dropdown" class="dropdown-selector">
+                  <label for="font-type-selector" data-l10n-id="about-reader-font-type-selector-label">Font</label>
+                  <select name="font-type-selector" id="font-type-selector" data-telemetry-id="font-type-selector"><option data-l10n-id="about-reader-font-type-sans-serif" value="sans-serif" selected="true">Sans-serif</option><option data-l10n-id="about-reader-font-type-serif" value="serif">Serif</option><option data-l10n-id="about-reader-font-type-monospace" value="monospace">Monospace</option></select>
+                </div>
+                <div id="font-weight-dropdown" class="dropdown-selector">
+                  <label for="font-weight-selector" data-l10n-id="about-reader-font-weight-selector-label">Font weight</label>
+                  <select name="font-weight-selector" id="font-weight-selector" data-telemetry-id="font-weight-selector"><option data-l10n-id="about-reader-font-weight-regular" value="regular" selected="true">Regular</option><option data-l10n-id="about-reader-font-weight-light" value="light">Light</option><option data-l10n-id="about-reader-font-weight-bold" value="bold">Bold</option></select>
+                </div>
+              </div>
+              <hr>
+              <h2 data-l10n-id="about-reader-layout-header" id="about-reader-layout-header">Layout</h2>
+              <div id="content-width-slider" class="slider-container"><moz-slider min="1" max="9" value="3" ticks="9" tick-labels="[]" data-l10n-id="about-reader-content-width-label" data-l10n-attrs="label" slider-icon="chrome://global/skin/reader/content-width-20.svg" data-telemetry-id="content-width-slider" label="Content width"></moz-slider></div>
+              <div id="line-spacing-slider" class="slider-container"><moz-slider min="1" max="9" value="4" ticks="9" tick-labels="[]" data-l10n-id="about-reader-line-spacing-label" data-l10n-attrs="label" slider-icon="chrome://global/skin/reader/line-spacing-20.svg" data-telemetry-id="line-spacing-slider" label="Line spacing"></moz-slider></div>
+              <hr>
+              <details id="about-reader-advanced-layout">
+                <summary class="accordion-header">
+                  <h2 data-l10n-id="about-reader-advanced-layout-header" id="about-reader-advanced-layout-header">Advanced</h2>
+                  <span class="chevron-icon"></span>
+                </summary>
+                <div id="character-spacing-slider" class="slider-container"><moz-slider min="1" max="9" value="0" ticks="9" tick-labels="[&quot;Standard&quot;, &quot;Wide&quot;]" data-l10n-id="about-reader-character-spacing-label" data-l10n-attrs="label" slider-icon="chrome://global/skin/reader/character-spacing-20.svg" data-telemetry-id="character-spacing-slider" label="Character spacing"></moz-slider></div>
+                <div id="word-spacing-slider" class="slider-container"><moz-slider min="1" max="9" value="0" ticks="9" tick-labels="[&quot;Standard&quot;, &quot;Wide&quot;]" data-l10n-id="about-reader-word-spacing-label" data-l10n-attrs="label" slider-icon="chrome://global/skin/reader/word-spacing-20.svg" data-telemetry-id="word-spacing-slider" label="Word spacing"></moz-slider></div>
+                <label for="text-alignment-buttons" data-l10n-id="about-reader-text-alignment-label">Text alignment</label>
+                <div class="text-alignment-buttons radiorow" id="text-alignment-buttons"><input id="radio-itemleft-align-button" type="radio" class="radio-button" name="text-alignment" data-telemetry-id="left-align-button" checked="true"><label for="radio-itemleft-align-button" class="left-align-button" data-l10n-id="about-reader-text-alignment-left" checked="true" title="Align text left"></label><input id="radio-itemcenter-align-button" type="radio" class="radio-button" name="text-alignment" data-telemetry-id="center-align-button"><label for="radio-itemcenter-align-button" class="center-align-button" data-l10n-id="about-reader-text-alignment-center" title="Align text center"></label><input id="radio-itemright-align-button" type="radio" class="radio-button" name="text-alignment" data-telemetry-id="right-align-button"><label for="radio-itemright-align-button" class="right-align-button" data-l10n-id="about-reader-text-alignment-right" title="Align text right"></label></div>
+                <button class="text-layout-reset-button reset-button" data-l10n-id="about-reader-reset-button">Reset defaults</button>
+              </details>
+            </li>
+          </ul>
+          <ul class="dropdown colors-dropdown">
+            <li>
+              <button class="dropdown-toggle toolbar-button colors-button" aria-labelledby="toolbar-color-controls" data-telemetry-id="reader-color-controls">
+                <span class="hover-label" id="toolbar-color-controls" data-l10n-id="about-reader-toolbar-theme-controls">Theme</span>
+              </button>
+            </li>
+            <li class="dropdown-popup" id="color-controls">
+              <h2 data-l10n-id="about-reader-colors-menu-header" id="about-reader-colors-menu-header">Theme</h2>
+              <button-group aria-labelledby="about-reader-colors-menu-header" role="tablist">
+                <button is="named-deck-button" deck="tabs-deck" name="fxtheme" data-l10n-id="about-reader-fxtheme-tab" data-telemetry-id="colors-menu-default-tab" id="tabs-deck-button-fxtheme" role="tab" aria-selected="true" tabindex="0" selected="">Default</button>
+                <button is="named-deck-button" deck="tabs-deck" name="customtheme" data-l10n-id="about-reader-customtheme-tab" data-telemetry-id="colors-menu-custom-tab" id="tabs-deck-button-customtheme" role="tab" aria-selected="false" tabindex="-1">Custom</button>
+              </button-group>
+              <named-deck id="tabs-deck" is-tabbed="" selected-view="fxtheme">
+                <div name="fxtheme" class="color-scheme-buttons radiorow" aria-labelledby="tabs-deck-button-fxtheme" role="tabpanel" slot="selected"><input id="radio-itemauto-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="auto-button"><label for="radio-itemauto-button" class="auto-button" data-l10n-id="about-reader-color-auto-theme" title="Auto theme">Auto</label><input id="radio-itemlight-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="light-button"><label for="radio-itemlight-button" class="light-button" data-l10n-id="about-reader-color-light-theme" title="Light theme">Light</label><input id="radio-itemdark-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="dark-button" checked="true"><label for="radio-itemdark-button" class="dark-button" data-l10n-id="about-reader-color-dark-theme" checked="true" title="Dark theme">Dark</label><input id="radio-itemsepia-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="sepia-button"><label for="radio-itemsepia-button" class="sepia-button" data-l10n-id="about-reader-color-sepia-theme" title="Sepia theme">Sepia</label><input id="radio-itemcontrast-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="contrast-button"><label for="radio-itemcontrast-button" class="contrast-button" data-l10n-id="about-reader-color-contrast-theme" title="Contrast theme">Contrast</label><input id="radio-itemgray-button" type="radio" class="radio-button" name="color-scheme" data-telemetry-id="gray-button"><label for="radio-itemgray-button" class="gray-button" data-l10n-id="about-reader-color-gray-theme" title="Gray theme">Gray</label></div>
+                <div name="customtheme" aria-labelledby="tabs-deck-button-customtheme" role="tabpanel" slot="">
+                  <ul class="custom-colors-selection"><li><color-input prop-name="foreground" data-l10n-id="about-reader-custom-colors-foreground" color="#14151A" title="Edit color">Text</color-input></li><li><color-input prop-name="background" data-l10n-id="about-reader-custom-colors-background" color="#FFFFFF" title="Edit color">Background</color-input></li><li><color-input prop-name="unvisited-links" data-l10n-id="about-reader-custom-colors-unvisited-links" color="#0060DF" title="Edit color">Unvisited links</color-input></li><li><color-input prop-name="visited-links" data-l10n-id="about-reader-custom-colors-visited-links" color="#321C64" title="Edit color">Visited links</color-input></li><li><color-input prop-name="selection-highlight" data-l10n-id="about-reader-custom-colors-selection-highlight" color="#FFFFCC" title="Edit color">Highlighter for read aloud</color-input></li></ul>
+                  <button class="custom-colors-reset-button reset-button" data-l10n-id="about-reader-reset-button">Reset defaults</button>
+                </div>
+              </named-deck>
+            </li>
+          </ul>
+        <ul class="dropdown narrate-dropdown"><li><button class="dropdown-toggle toolbar-button narrate-toggle" data-telemetry-id="reader-listen" aria-label="Read aloud (N)"><span class="hover-label">Read aloud (N)</span></button></li><li class="dropdown-popup"><h2 id="narrate-header">Read aloud</h2><div class="narrate-row narrate-control"><button class="narrate-skip-previous" disabled="" aria-keyshortcuts="ArrowLeft" title="Back (←)"></button><button class="narrate-start-stop" aria-keyshortcuts="N" title="Start (N)"></button><button class="narrate-skip-next" disabled="" aria-keyshortcuts="ArrowRight" title="Forward (→)"></button></div><div class="narrate-row narrate-rate"><span class="narrate-rate-icon slow" title="Slow down narration"></span><input class="narrate-rate-input" value="0" step="5" max="100" min="-100" type="range" aria-label="Choose a narration speed from -100 to 100, where 0 is the default speed." title="Speed"><span class="narrate-rate-icon fast" title="Speed up narration"></span></div><hr><h2 id="voice-header">Voice</h2><div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options" aria-expanded="false" role="combobox" aria-labelledby="voice-header">
+      <span class="current-voice">Microsoft Zira Desktop - English (United States)</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox" style="max-height: 673px;"><button data-value="automatic" class="option" tabindex="-1" role="option">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Mark - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Mark - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option selected" tabindex="-1" role="option" aria-selected="true">Microsoft Zira Desktop - English (United States)</button></div></div></div></li></ul><button data-buttonid="pocket-button" data-telemetry-id="reader-save-to-pocket" class="toolbar-button pocket-button" aria-labelledby="label-pocket-button" style="background-image: url(&quot;chrome://global/skin/icons/pocket.svg&quot;);"><span class="hover-label" id="label-pocket-button" data-l10n-id="about-reader-toolbar-savetopocket">Save to Pocket</span></button></div>
+      </div>
+    </div>
+
+    <div class="container" style="--line-height: 1.6em; --letter-spacing: -0.03em; --word-spacing: -0.05em; --text-alignment: start; --block-img-margin-right: unset; --block-img-margin-left: unset;" lang="en" dir="ltr">
+      <div class="header reader-header reader-show-element">
+        <a class="domain reader-domain" href="https://getpocket.com/explore/item/i-hired-a-cooking-therapist-to-deal-with-my-anxiety">getpocket.com</a>
+        <div class="domain-border"></div>
+        <h1 class="reader-title">I Hired a Cooking Therapist to Deal With My Anxiety</h1>
+        <div class="credits reader-credits">Zan Romanoff</div>
+        <div class="meta-data">
+          <div class="reader-estimated-time" data-l10n-args="{&quot;range&quot;:&quot;12–15&quot;,&quot;rangePlural&quot;:&quot;other&quot;}" data-l10n-id="about-reader-estimated-read-time" dir="ltr">12–15 minutes</div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="content">
+        <div class="moz-reader-content reader-show-element"><div id="readability-page-1" class="page"><div><article><section data-testid="parsed-content"><div data-index="0"><p><img id="image_1" src="https://pocket-image-cache.com/direct?resize=w2000&amp;url=https%3A%2F%2Fassets.bonappetit.com%2Fphotos%2F60bf8848ee0f7f6bc3d46a5a%2F16%3A9%2Fw_2560%252Cc_limit%2Fcooking%252520therapy-healthyish-1800x2700-sarahcliff.jpg" alt="illustration of various cooking ingredients" class="moz-reader-block-img" moz-reader-center="true"></p><p><span class="caption"><span>Illustration by Sarah Cliff</span><span></span></span></p></div><p>
+    
+                                    Cooking therapy has me stressed before it even begins. After a calendar year of completely uneventful curbside pickups from my local grocery store, I get home on a spring Monday morning to discover that Vons packed only half of my order—which means that 30 minutes before I’m supposed to be in a virtual session with <strong data-highlightable="1">Debra Borden</strong>, LCSW, I have to make a last-minute grocery run. Even in normal times this would set me off—I hate being late so much that I am, instead, usually embarrassingly early—but of course I’m also worried that this trip inside my local Whole Foods will be The One That Gives Me COVID.
+                                
+</p><p>
+    
+                                    Luckily, the recipe that Debra and I selected for our session is designed to address my tendency towards anxiety. It’s something she calls From Worry to Whistling: Zip-A-Dee-Doo-Dah Zoodles.
+                                
+</p><p>
+    
+                                    I don’t think Debra knows that the song in the recipe name has <a href="https://www.independent.co.uk/arts-entertainment/films/news/disneyland-resort-splash-mountain-zip-a-dee-doo-dah-song-of-the-south-a9690941.html" target="_blank">racist origins</a>. But she does know that it’s wildly corny. “You can roll your eyes,” she tells me during our intake session. “Everyone does. It's fun, though, too—that's what I like about it. My personality is definitely not Somber Therapist. Injecting a lot of humor is very important.”
+                                
+</p><p>
+    
+                                    More than the puns, though, I’m wary of the zoodles, a food I traditionally do not eat, since I can and do enjoy real noodles in all their gluten-y glory. I could have avoided them—Debra customizes recipes based on clients’ likes and dislikes, as well as what they have in their pantries—but I decided that as long as I was trying cooking therapy, I might as well add a new ingredient to my repertoire.
+                                
+</p><p>
+    
+                                    Cooking therapy felt like a good fit for me: I regularly unwind from long days of laptop-sitting by immersing myself in some good old-fashioned chopping and stirring. After navigating the trackless wilderness of composing a new draft as a freelance writer, the guidance of a recipe is a welcome relief, and the tactility of making (and sampling) tunes me into my body after hours spent mostly ignoring it. If all goes well, I have something delicious to eat at the end of my trials, and if not, I feel grimly virtuous for literally swallowing my mistakes, and grateful that I can try again tomorrow.
+                                
+</p><p>
+    
+                                    In my session with Debra, we begin by draining my pre-packaged zoodles, which defrosted a little soggily. Debra encourages me to consider whether “something's been weighing you down, and this is the beginning of draining it out. What would you like to drain away?” As it happens, I’m two weeks out from my first vaccine shot, so we talk about trying to let go of residual Covid anxiety (hello, unnecessarily fraught grocery store trip), and trying to figure out how to allow myself to be calm after so many months of deeply ingrained worry.
+                                
+</p><p>
+    
+                                    It goes on like this—I peel a cucumber and we discuss bitter outsides and sweet insides, as well as the seeds hidden within; we talk about the tartness of olives and the hard pits we find inside of ourselves, and how sometimes, you need to let something sit for a while before it’s really at its best, the same way this dish wants to marinate in its dressing for a few hours before I have it for lunch later in the day.
+                                
+</p><hr data-reactroot=""><p>
+    
+                                    Debra has specific names for the opportunities and assets that cooking therapy offers: primarily, they are metaphor, mindfulness, and mastery. The metaphors are sometimes obvious—there’s nothing subtle about kneading my frustrations into bread dough after a trying work call—but Debra specializes in encouraging patients to see each act and ingredient as symbolic of something deeper, a kind of concentration that encourages that second M, mindfulness. And if you can pay attention to the metaphors and learn something new about yourself—or even just make a tasty lunch—you get that sense of mastery: a little thrill of accomplishment that reinforces your belief in your own competence and skill.
+                                
+</p><p>
+    
+                                    Debra came to cooking therapy somewhat by accident—as a licensed clinical social worker seeing clients in their homes, she found that people who wouldn’t open up to her in traditional therapy sessions were more willing and able to talk when they were absorbed in another task—walking, playing games, and, eventually, cooking. Today, she works with clients like me in one-on-one sessions, conducts group lessons, gives talks (“People think of it as legitimate clinical infotainment,” she says of the corporate retreats or book clubs that bring her in as a speaker), and sells an online course called <a href="https://cookyourselfhappy.com/" rel="nofollow noopener" target="_blank">Cook Yourself Happy</a>.
+                                
+</p><p>
+    
+                                    She isn’t the only cooking therapy practitioner, but she is one of the field’s best-known names. That’s in part because cooking therapy is a relatively recent development; the first educational course on the subject was <a href="https://colleague.uark.edu/2020/11/meet-michael-kocet/" rel="nofollow noopener" target="_blank">developed</a> by Michael Kocet, Ph.D. for The Chicago School of Professional Psychology in 2014. But the concept fits under the broader umbrella of experiential therapies, stuff like art or equine therapy. And experiential therapy is backed by <a href="https://www.psychologytoday.com/us/therapy-types/experiential-therapy" target="_blank">experts</a> who suggest it can augment the results of the traditional therapeutic model.
+                                
+</p><p>
+    
+                                    Even if you find cooking frustrating, Debra says, you can get something out of cooking therapy, which may be a relief for the less culinarily inclined—or even just those of us who are sick of the inside of our kitchens after a year of enforced dining in. “I can't draw—it looks like a six year old’s work when I try,” she says. “However, I can draw pain, and frustration, and joy, and that's the thing with cooking therapy—it's really not so much about the love of cooking. Everyone has to make a bowl of cereal or a sandwich. We just mine it for what it can give us.”
+                                
+</p><hr data-reactroot=""><p>
+    
+                                    Throughout the session, I toggle between enjoying myself—untangling zoodles turns out to be a surprisingly meditative activity—and finding the whole thing a little bit much. Therapy is by its very nature an earnest enterprise, and it’s hard to get earnest with someone I don’t know very well, especially in my apartment’s kitchen, which isn’t particularly private. At one point my roommate wanders in to get himself a glass of water, which is fine since this is technically a work call, but at that moment I realize that cooking therapy really isn’t ideal for those of us who share kitchens with people we met on Craigslist.
+                                
+</p><blockquote data-reactroot=""><p>Like many people raised in a culture that praises thin bodies and 
+stigmatizes fat ones, I haven’t always had a model relationship to food 
+and nutrition. <br></p></blockquote><p>
+    
+                                    So it isn’t until I sit down to eat my zoodles, later that afternoon, that I manage to identify a real revelation.
+                                
+</p><p>
+    
+                                    Like many people raised in a culture that praises thin bodies and stigmatizes fat ones, I haven’t always had a model relationship to food and nutrition. My experiences with disordered eating were brief and mild, the kind of thing I was able to overcome without dedicated therapy or medical intervention, and at this point I don’t think about them all that often. But they left me with certain behavioral tics, and one of them is that I don’t really eat salads, because they often leave me hungry, and always leave me sad. They remind me of a time when food was something I avoided and felt guilty about.
+                                
+</p><p>
+    
+                                    And so, despite all of the work Debra and I did to prepare this meal together, when I sit down to a bowl of zoodles, instead of thinking about change and growth, what I’m letting go of and what I’m cultivating, I feel a mild panic rise in my chest. I find myself thinking: <em>you only end up eating this if you’re afraid of the pasta you really want. If you eat this, it means you’re eating to be thin instead of to take care of yourself.</em></p><p>
+    
+                                    To be honest, it’s scary. I have done a lot of work to be a person who isn’t afraid of a bowl of pasta. I don’t like messing with anything that might threaten that progress even slightly.
+                                
+</p><p>
+    
+                                    Debra says she doesn’t recommend cooking therapy as a primary treatment for eating disorders; she advises it for folks with eating disorders “only after a client is in recovery and stable, and only if their primary therapist thought it was a good idea.”
+                                
+</p><p>
+    
+                                    “Cooking therapy is less about nutrition and diet (although it can be customized), and more an experiential vehicle to self-reflection and clarity,” she says. But ultimately, there’s no getting around the fact that warped values and beliefs around, say, what constitutes nutrition can be present in a cooking therapy session. My issues with zoodles aren’t the point of Debra’s session, but there they are, right on my plate.
+                                
+</p><p>
+    
+                                    But I am a Capricorn and a type-A person and an A+ student, and so I ate the zoodles. Not only that, I enjoyed them. I mean, mostly I enjoyed the feta and tomatoes and olives they were studded with, but the zoodles weren’t bad, and what’s more, eating them didn’t catapult me back to a moment when I would have deluded myself into thinking that they’d be a satisfying lunch. Instead, I went out and got a nice loaf of sourdough bread and ate a slice of that, buttered, plus some scrambled eggs. It was sort of a funny lunch, but one I enjoyed, and it kept me full until it was time to figure out what was going to be for dinner.
+                                
+</p><p>
+    
+                                    That was the real moment of mindfulness, for me: after years of thoughtless repulsion from anything I categorized as “diet food,” I was finally able to ask myself questions about that instinct. I could consider it, and name it, and start to do some work to let it go. When I was 18 and 22, getting myself to the point where I could eat so-called unhealthy foods without guilt was The Work, but now, more than a decade later, maybe it’s time for me to stop assigning value to foods altogether, and to recognize that everything I eat is doing the important work of keeping me alive, whether it’s a grain bowl or a bowl of lasagne. I might not make zoodles a regular part of my routine going forward, but maybe I’ll feel less helplessly sad whenever I consider eating a salad for lunch.
+                                
+</p><hr data-reactroot=""><p>
+    
+                                    I’ve tried plenty of therapy modalities over the years, and what I’ve learned is that, generally speaking, they only work as well as you work them. Cooking therapy certainly isn’t for everyone—it has many of the same barriers to entry as traditional therapy in terms of the cost of a private session, which begins at $250 for an individual (not to mention the cost and time spent acquiring ingredients for a particular recipe). But if you’re open to it, it can give you a new perspective on an activity you likely do multiple times a day, every day, and ask you to re-encounter yourself without the numbness of habit.
+                                
+</p><p>
+    
+                                    “You’ll find yourself doing it on your own, eating cereal and thinking, ‘this is just like me, soaking up everyone’s stuff,’” Debra tells me at the end of our session, and it’s true: often when I go to cook something now, I find myself wondering what it might mean to me, thinking about how dried beans bloom and soften after a long, slow soak, and how putting a little fat in the pot with them makes the end product taste so much better. By which I mean, don’t be afraid of zoodles, but don’t be afraid of the luxury of fat, either! Or, as Debra might ask: What small indulgences can improve your day more than you’d expect?
+                                
+</p></section></article></div></div></div>
+      </div>
+
+      <div>
+        <div class="reader-message"></div>
+      </div>
+      <div aria-owns="toolbar"></div>
+    </div>
+  
+
+</body>

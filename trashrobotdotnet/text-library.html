@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TEXT LIBRARY!</title>    
+   <script src = "rainbow.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>   
+    <A HREF="index.html">HOME</A>
+    <div id = "qrcode"></div>
+    <a HREF="write-a-note.html">WRITE A NOTE!</a>
+    <H1>TEXT LIBRARY!</H1>
+    <div id = "text-feed"></div>
+<style>
+    #image-feed img{
+        border:solid;
+        border-radius:1em;
+        border-width:5px;
+    }
+    button{
+        font-size:2em;
+    }
+    li{
+        margin-top:0.25em;
+        margin-bottom:0.25em;
+        border-radius:0.125em;
+    }
+    .link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    cursor:pointer;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:2em;
+    position:relative;
+    top:5em;
+    left:5em;
+}
+
+
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.timestampdata{
+    display:none;
+}
+table, form{
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+}
+#fileToUpload{
+    cursor:pointer;
+}
+</style>
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+files = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        loadfiles();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+function loadfiles(){
+
+
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".txt" || files[index].substring(files[index].length-4,files[index].length) == ".TXT"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("text-feed").appendChild(newa);
+        }
+
+    }
+    rainbow(document.getElementById("text-feed").getElementsByTagName("a"));
+
+}
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

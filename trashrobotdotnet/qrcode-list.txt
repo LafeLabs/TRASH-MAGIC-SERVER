@@ -1,0 +1,130 @@
+[
+    {
+        "text": "EDIT QR CODE LIST",
+        "url": "edit-qrcode-list.html"
+    },
+    {
+        "text": "qrcode-list.html",
+        "url": "qrcode-list.html"
+    },
+    {
+        "text": "index.html",
+        "url": "index.html"
+    },
+    {
+        "text": "BEAUTIFUL MATH TYPESETTING<BR>MATHJAX.JS",
+        "url": "https://www.mathjax.org/"
+    },
+    {
+        "text": "MARKDOWN TO HTML <BR>SHOWDOWN.JS",
+        "url": "https://showdownjs.com/"
+    },
+    {
+        "text": "ART! MUSIC! MAGIC! <BR>P5.JS",
+        "url": "https://p5js.org/"
+    },
+    {
+        "text": "TOUCH GESTURE CONTROL <BR>HAMMER.JS",
+        "url": "https://hammerjs.github.io/"
+    },
+    {
+        "text": "MUSIC PLAYER<BR>TRACK-LIST.JS",
+        "url": "https://github.com/mirisuzanne/track-list"
+    },
+    {
+        "text": "QRCODE.JS",
+        "url": "https://davidshimjs.github.io/qrcodejs/"
+    },
+    {
+        "text": "ACE.JS CODE SYNTAX HIGHLIGHT",
+        "url": "https://ace.c9.io/"
+    },
+    {
+        "text": "TRASHMAGIC.JS",
+        "url": "trashmagic.js"
+    },
+    {
+        "text": "GEOMETRON.JS",
+        "url": "geometron.js"
+    },
+    {
+        "text": "ORGANIC WEB",
+        "url": "https://github.com/LafeLabs/ORGANIC-WEB"
+    },
+    {
+        "text": "CARDBOARD HYPERTEXT",
+        "url": "https://github.com/LafeLabs/CARDBOARD-HYPERTEXT"
+    },
+    {
+        "text": "TRASHROBOT DOT NET",
+        "url": "https://trashrobot.net/"
+    },
+    {
+        "text": "REPLICATE TRASH MAGIC SERVER",
+        "url": "https://github.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER"
+    },
+    {
+        "text": "XAMPP LOCAL SERVER",
+        "url": "https://www.apachefriends.org/"
+    },
+    {
+        "text": "UBUNTU STUDIO FREE ART AND MUSIC SOFTWARE",
+        "url": "https://ubuntustudio.org/"
+    },
+    {
+        "text": "UBUNTU DESKTOP",
+        "url": "https://ubuntu.com/download/desktop"
+    },
+    {
+        "text": "PHP.NET",
+        "url": "https://www.php.net/"
+    },
+    {
+        "text": "APACHE.ORG",
+        "url": "https://www.apache.org/"
+    },
+    {
+        "text": "THE WORLD WIDE WEB ON WIKIPEDIA",
+        "url": "https://en.wikipedia.org/wiki/World_Wide_Web"
+    },
+    {
+        "text": "HTML TUTORIAL",
+        "url": "https://www.w3schools.com/html/"
+    },
+    {
+        "text": "HTML ON WIKIPEDIA",
+        "url": "https://en.wikipedia.org/wiki/HTML"
+    },
+    {
+        "text": "CSS ON WIKIPEDIA",
+        "url": "https://en.wikipedia.org/wiki/CSS"
+    },
+    {
+        "text": "CSS TURORIAL",
+        "url": "https://www.w3schools.com/css/"
+    },
+    {
+        "text": "CODEPEN.IO LEARN AND SHARE HTML+JS+CSS",
+        "url": "https://codepen.io/"
+    },
+    {
+        "text": "JAVASCRIPT TUTORIAL",
+        "url": "https://www.w3schools.com/js/"
+    },
+    {
+        "text": "JAVASCRIPT ON WIKIPEDIA",
+        "url": "https://en.wikipedia.org/wiki/JavaScript"
+    },
+    {
+        "text": "HYPERLAND WITH TOM BAKER AND DOUGLAS ADAMS",
+        "url": "https://archive.org/details/DouglasAdams-Hyperland"
+    },
+    {
+        "text": "HYPERLAND WITH TOM BAKER AND DOUGLAS ADAMS",
+        "url": "https://archive.org/details/DouglasAdams-Hyperland"
+    },
+    {
+        "text": "HYPERTEXT ON WIKIPEDIA",
+        "url": "https://en.wikipedia.org/wiki/Hypertext"
+    }
+]

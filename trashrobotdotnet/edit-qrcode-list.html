@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>HYPERSPACE EDITOR</title>    
+   <script src = "trashmagic.js"></script>
+   <script src = "geometron.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+    td{
+        width:100px;
+        background-color:#808080;
+    }
+    canvas{
+        border:solid;
+        border-radius:10px;
+        border-width:5px;
+        cursor:pointer;
+        display:block;
+        margin:auto;
+        background-color:#808080;
+    }
+    canvas:hover{
+        background-color:green;
+    }
+    canvas:active{
+        background-color:yellow;
+    }
+
+    #linkscroll{
+        position:Absolute;
+        right:0px;
+        top:0px;
+        bottom:0px;
+        left:50%;
+        overflow:scroll;
+    }
+</style>
+<body>    
+<table>
+    <TR>
+        <TD>TEXT:</TD>
+        <TD>
+            <INPUT id = "textinput">
+        </TD>
+    </TR>
+    <TR>
+        <TD>URL:</TD>
+        <TD>
+            <INPUT id = "urlinput">    
+        </TD>
+    </TR>
+</table>
+    <table>
+        <tr>
+            <td><canvas id = "activebackcanvas"></canvas></td>
+            <td><canvas id = "activeforwardcanvas"></canvas></td>
+        </tr>
+        <tr>
+            <td><canvas id = "movebackcanvas"></canvas></td>
+            <td><canvas id = "moveforwardcanvas"></canvas></td>
+        </tr>
+        <tr>
+            <td><canvas id = "deletecanvas"></canvas></td>
+            <td><canvas id = "copycanvas"></canvas></td>
+        </tr>
+    </table>
+    
+    <div id ="linkscroll">
+    </div>
+<script>
+
+square = 200;
+
+var activebackGVM = new GVM(document.getElementById("activebackcanvas"),square,square);
+var activeforwardGVM = new GVM(document.getElementById("activeforwardcanvas"),square,square);
+
+var movebackGVM = new GVM(document.getElementById("movebackcanvas"),square,square);
+var moveforwardGVM = new GVM(document.getElementById("moveforwardcanvas"),square,square);
+
+var deleteGVM = new GVM(document.getElementById("deletecanvas"),square,square);
+var copyGVM = new GVM(document.getElementById("copycanvas"),square,square);
+
+
+unit = 60;
+activebackGVM.importbytecode(hypercube);
+activebackGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+activebackGVM.unit = unit;
+activebackGVM.style.line0 = 5;
+activebackGVM.style.line7 = 5;
+activebackGVM.drawGlyph("0300,0336,0331,0337,0220,0330,0220,0331,0336,0330,0336,0335,0331,0336,0333,0337,0337,0350,0362,0203,0334,0334,0334,0310,0336,0203,0334,0334,0203,0363,0331,0335,0335,0335,0335,0331,0335,0337,0313,0304,0334,0336,0333,0330,0330,0336,0330,0337,0337,0327,0337,0220,");
+
+activeforwardGVM.importbytecode(hypercube);
+activeforwardGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+activeforwardGVM.unit = unit;
+activeforwardGVM.style.line0 = 5;
+activeforwardGVM.style.line7 = 5;
+activeforwardGVM.drawGlyph("0335,0335,0336,0331,0337,0220,0330,0220,0331,0336,0330,0336,0335,0331,0336,0333,0337,0337,0350,0362,0203,0334,0334,0334,0310,0336,0203,0334,0334,0203,0363,0331,0335,0335,0335,0335,0331,0335,0337,0313,0304,0334,0336,0333,0330,0330,0336,0330,0337,0337,0327,0337,0220,");
+
+
+movebackGVM.importbytecode(hypercube);
+movebackGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+movebackGVM.unit = unit;
+movebackGVM.style.line0 = 5;
+movebackGVM.style.line7 = 5;
+
+movebackGVM.drawGlyph("0335,0335,0220,0330,0220,0331,0331,0327,0220,0320,0333,0330,0335,0336,0331,0337,0350,0343,0335,0330,0334,0336,0334,0332,0335,0335,0335,0362,0203,0334,0334,0203,0364,0331,0335,0337,0331,0334,0304,0334,0336,0332,0337,0331,");
+
+
+moveforwardGVM.importbytecode(hypercube);
+moveforwardGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+moveforwardGVM.unit = unit;
+moveforwardGVM.style.line0 = 5;
+moveforwardGVM.style.line7 = 5;
+moveforwardGVM.drawGlyph("0220,0330,0220,0331,0331,0327,0220,0320,0333,0330,0335,0336,0331,0337,0350,0343,0335,0330,0334,0336,0334,0332,0335,0335,0335,0362,0203,0334,0334,0203,0364,0331,0335,0337,0331,0334,0304,0334,0336,0332,0337,0331,");
+
+
+deleteGVM.importbytecode(hypercube);
+deleteGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+deleteGVM.unit = unit;
+deleteGVM.style.line0 = 5;
+deleteGVM.style.line7 = 5;
+deleteGVM.style.line2 = 10;
+deleteGVM.drawGlyph("0220,0322,0350,0335,0342,0335,0335,0342,0335,0335,0342,0335,0335,0342,0335,");
+
+copyGVM.importbytecode(hypercube);
+copyGVM.hypercube[0220] = "0336,0336,0332,0332,0334,0330,0343,0335,0335,0330,0330,0330,0330,0330,0330,0343,0334,0334,0332,0337,0201,0201,0201,0335,0335,0332,0201,0201,0201,0334,0336,0331,0332,0332,0332,0337,0337,";
+copyGVM.unit = unit;
+copyGVM.style.line0 = 5;
+copyGVM.style.line7 = 5;
+copyGVM.drawGlyph("0330,0220,0336,0331,0331,0332,0327,0220,0333,0320,0333,0220,0331,0331,0333,0333,0337,0220,0332,0332,0332,0327,0220,0333,0333,0333,");
+
+document.getElementById("activebackcanvas").onclick = function(){
+
+    document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+    linkindex--;
+    if(linkindex < 0){
+        linkindex = document.getElementsByTagName("A").length-1;
+    }
+    rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+    document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+    document.getElementById("textinput").value = hyperspace[linkindex].text;
+    document.getElementById("urlinput").value = hyperspace[linkindex].url;
+    
+}
+
+document.getElementById("activeforwardcanvas").onclick = function(){
+
+    document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+    linkindex++;
+    if(linkindex > document.getElementsByTagName("A").length-1){
+        linkindex = 0;
+    }
+    rainbow(document.getElementsByTagName("A"));
+    document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+    document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+    document.getElementById("textinput").value = hyperspace[linkindex].text;
+    document.getElementById("urlinput").value = hyperspace[linkindex].url;
+    
+}
+
+
+document.getElementById("moveforwardcanvas").onclick = function(){
+    if(linkindex < hyperspace.length - 1){
+
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+        for(var index = 0;index < linkindex;index++){
+            temparray.push(hyperspace[index]);
+        }
+        temparray.push(hyperspace[linkindex + 1]);
+        temparray.push(hyperspace[linkindex]);
+        
+        for(var index = linkindex + 2;index < hyperspace.length;index++){
+            temparray.push(hyperspace[index]);
+        }
+        hyperspace = temparray;
+        linkindex++;
+
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;        
+    }
+    else{
+        //end of line
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+        temparray.push(hyperspace[linkindex]);
+        for(var index = 0;index < linkindex;index++){
+            temparray.push(hyperspace[index]);
+        }
+        hyperspace = temparray;
+        linkindex = 0;
+
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;                  
+            
+            
+    }
+    savejson();    
+}
+
+document.getElementById("movebackcanvas").onclick = function(){
+    if(linkindex > 0){
+
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+        for(var index = 0;index < linkindex - 1;index++){
+            temparray.push(hyperspace[index]);
+        }
+        temparray.push(hyperspace[linkindex]);
+        temparray.push(hyperspace[linkindex - 1]);
+        
+        for(var index = linkindex + 1;index < hyperspace.length;index++){
+            temparray.push(hyperspace[index]);
+        }
+        hyperspace = temparray;
+        linkindex--;
+
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;        
+    }
+    else{
+        //zero position move to end
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+
+        for(var index = 1;index < hyperspace.length;index++){
+            temparray.push(hyperspace[index]);
+        }
+        temparray.push(hyperspace[linkindex]);
+
+        hyperspace = temparray;
+        linkindex = hyperspace.length -1;
+
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;        
+    }
+    savejson();    
+}
+
+
+document.getElementById("deletecanvas").onclick = function(){
+
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+        for(var index = 0;index < linkindex;index++){
+            temparray.push(hyperspace[index]);
+        }
+        for(var index = linkindex + 1;index < hyperspace.length;index++){
+            temparray.push(hyperspace[index]);
+        }
+        hyperspace = temparray;
+        if(linkindex > hyperspace.length - 1){
+            linkindex--;
+        }
+
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;        
+        savejson();  
+}
+
+document.getElementById("copycanvas").onclick = function(){
+
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "0.5em";
+        var temparray = [];
+        for(var index = 0;index < linkindex;index++){
+            temparray.push(hyperspace[index]);
+        }
+        temparray.push(hyperspace[linkindex]);
+        temparray.push(JSON.parse(JSON.stringify(hyperspace[linkindex])))
+        for(var index = linkindex + 1;index < hyperspace.length;index++){
+            temparray.push(hyperspace[index]);
+        }
+        hyperspace = temparray;
+        linkindex++;
+        document.getElementById("linkscroll").innerHTML = "";
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+
+        rainbow(document.getElementsByTagName("A"));
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;        
+        savejson();   
+}
+
+document.getElementById("textinput").onchange = function(){
+    hyperspace[linkindex].text = this.value;
+    document.getElementById("linkscroll").innerHTML = "";
+    for(var index = 0;index < hyperspace.length;index++){
+        var newa = document.createElement("A");
+        newa.innerHTML = hyperspace[index].text;
+        newa.href = hyperspace[index].url;
+        document.getElementById("linkscroll").appendChild(newa);
+    }
+    rainbow(document.getElementsByTagName("A"));
+    document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+    document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+    savejson();    
+}
+
+document.getElementById("urlinput").onchange = function(){
+    hyperspace[linkindex].url = this.value;
+    document.getElementById("linkscroll").innerHTML = "";
+    for(var index = 0;index < hyperspace.length;index++){
+        var newa = document.createElement("A");
+        newa.innerHTML = hyperspace[index].text;
+        newa.href = hyperspace[index].url;
+        document.getElementById("linkscroll").appendChild(newa);
+    }
+    rainbow(document.getElementsByTagName("A"));
+    document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";    
+    document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+    savejson();
+}
+
+
+currentfile = "qrcode-list.txt";
+
+linkindex= 0;
+
+hyperspace = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        hyperspace = JSON.parse(this.responseText);
+        for(var index = 0;index < hyperspace.length;index++){
+            var newa = document.createElement("A");
+            newa.innerHTML = hyperspace[index].text;
+            newa.href = hyperspace[index].url;
+            document.getElementById("linkscroll").appendChild(newa);
+        }
+        rainbow(document.getElementsByTagName("A"));
+
+        document.getElementsByTagName("A")[linkindex].style.borderColor = "purple";
+        document.getElementsByTagName("A")[linkindex].style.borderWidth = "50px";
+        document.getElementById("textinput").value = hyperspace[linkindex].text;
+        document.getElementById("urlinput").value = hyperspace[linkindex].url;
+    }
+};
+httpc.open("GET", "load-file.php?filename=" + currentfile, true);
+httpc.send();
+
+
+
+function savejson(){
+    var url = "save-file.php";        
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(hyperspace,null,"    "))+"&filename=qrcode-list.txt");//send text to filesaver.php
+}
+</script>
+</body>
+</html>
+
+
+    
+    

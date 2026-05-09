@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+
+...
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+   <title>TRASH MAGIC!</title>    
+   <script src = "trashmagic.js"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+    <DIV ID  ="qrcode"></DIV>
+    <div id = "linkfeed">
+        <A HREF = "https://www.openstreetmap.org/">OPEN STREET MAP!</A>
+    </div>
+    <TABLE>
+        <TR>
+            <TD>ENTER NEW MAP:</TD>
+            <TD><INPUT ID = "NEWLINK"></TD>
+        </TR>
+    </TABLE>
+    <H1>TRASH MAGIC MAP FEED!</H1>
+    
+    <DIV ID = "mapfeed"></DIV>
+<script>
+
+mapfeed = [];
+
+//map = {};
+//map.url = "https://www.openstreetmap.org/#map=19/39.857319/-105.054174";
+//map.text = "LITTLE FREE LIBRARY DOWN BY THE HIGHWAY!"
+//mapfeed.push(map);
+
+document.getElementById("NEWLINK").value = "";
+document.getElementById("NEWLINK").select();
+
+document.getElementById("NEWLINK").onchange = function(){
+    if(this.value.substr(0,29) == "https://www.openstreetmap.org"){
+        var newmap = {};
+        newmap.url = this.value;
+        newmap.text = "WHERE IS THIS?";
+        mapfeed.push(newmap);
+        drawmapfeed();
+        savemapfeed();
+    }
+    else{
+        alert("NOT A OPEN STREET MAP LINK!");
+    }
+    this.value = "";
+    
+}
+
+var httpcmapfeed = new XMLHttpRequest();
+httpcmapfeed.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        mapfeed = JSON.parse(this.responseText);    
+        drawmapfeed();
+    }
+};
+httpcmapfeed.open("GET", "load-file.php?filename=map-feed.json", true);
+httpcmapfeed.send();
+
+function drawmapfeed(){
+    document.getElementById("mapfeed").innerHTML = "";
+    for(var index = mapfeed.length - 1;index >= 0;index--){
+        var newdiv = document.createElement("DIV");
+        newdiv.className = "cardboard-sign";
+        document.getElementById("mapfeed").appendChild(newdiv);
+        var newspan = document.createElement("SPAN");
+        newspan.innerHTML = index.toString();
+        newspan.className = "indexdata";
+        newdiv.appendChild(newspan);
+        var newdelete = document.createElement("DIV");
+        newdelete.innerHTML = "DELETE";
+        newdelete.className = "deletebutton";
+        newdelete.onclick = function(){
+            thisindex = parseInt(this.parentNode.getElementsByClassName("indexdata")[0].innerHTML);
+            var localmapfeed = [];
+            for(var localindex = 0;localindex < mapfeed.length;localindex++){
+                if(localindex != thisindex){
+                    localmapfeed.push(mapfeed[localindex]);
+                }
+            }
+            mapfeed = localmapfeed;
+            savemapfeed();
+            drawmapfeed();
+        }
+        var newqr = document.createElement("DIV");
+        
+        qrcode = new QRCode(newqr, {
+        	text: mapfeed[index].url,
+        	width: 200,
+        	height: 200,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+        
+        var newlink = document.createElement("A");
+        newlink.href = mapfeed[index].url;
+        newlink.innerHTML = mapfeed[index].url;
+        var newtext = document.createElement("INPUT");
+        newtext.value =  mapfeed[index].text;
+        newdiv.appendChild(newtext);
+        newdiv.appendChild(newlink);
+
+        newtext.onchange = function(){
+            thisindex = parseInt(this.parentNode.getElementsByClassName("indexdata")[0].innerHTML);
+            mapfeed[thisindex].text = this.value;
+            savemapfeed();
+        }
+        newdiv.appendChild(newqr);
+
+        newdiv.appendChild(newdelete);
+        
+    }
+}
+
+
+
+function savemapfeed(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(mapfeed,null,"    "))+"&filename=map-feed.json");//send text to save-file.php
+}
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+</script>
+
+<style>
+body{
+    overflow:scroll;
+    /*background-color:#9f8767;*/
+    background-color:#404040;    
+    font-family:Comic Sans MS;
+}
+pre{
+    font-family:courier;
+}
+h1{
+    text-align:center;
+    font-size:4em;
+}
+p{
+    text-align:justify;
+    padding:1em 1em 1em 1em;
+    font-size:1.5em;
+    border:solid;
+    display:block;
+    border-color:white;
+    border-width:10px;
+    border-radius:1em;
+    background-color:#0000ff;
+    color:white;
+    width:80%;
+    margin:auto;
+    margin-top:1em;
+
+}
+img{
+    display:block;
+    max-width:50%;
+    margin:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+    background-color:#B0916E;
+}
+table{
+    background-color:Black;
+    color:#00ff00;
+    max-width:90%;
+    display:block;
+    margin:auto;
+}
+.indexdata{
+    display:none;
+}
+.deletebutton{
+    color:red;
+    font-family:Comic Sans MS;
+    border:solid;
+    border-color:red;
+    width:8EM;
+    display:block;
+    text-align:center;
+    margin:auto;
+    cursor:pointer;
+    FONT-SIZE:3EM;
+}
+.deletebutton:hover{
+    background-color:#ff000080;
+}
+.deletebutton:active{
+    background-color:#ff0000;
+    color:black;
+}
+
+#mapfeed input{
+    display:block;
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+    font-size:3em;
+    width:99%;
+}
+.cardboard-sign{
+    background-color:#9f8767;
+    width:90%;
+    margin:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+}
+#mapfeed a{
+    display:block;
+    color:blue;
+    font-family:Comic Sans MS;
+    font-size:2em;
+}
+#linkfeed a{
+    text-align:center;
+    font-size:3em;
+    width:80%;
+    background-color:black;
+    margin:auto;
+    display:block;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:blue;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+#NEWLINK{
+    background-color:black;
+    color:#00ff00;
+    font-family:Comic Sans MS;
+    width:40em;
+}
+
+
+</style>
+</body>
+</html>
+
+
+    
+    
