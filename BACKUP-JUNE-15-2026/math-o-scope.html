@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI   
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>MATH-O-SCOPE</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+
+
+<div id = "feedscroll">
+    
+    <h1>MATH-O-SCOPE</h1>
+    
+    <div id = "savebutton">POST</div>
+    
+    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
+    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "cardboard-sign.html">CARDBOARD SIGN</a></h1>    
+    <p>CLICK SCREEN TO PLAY TONE!</p>
+    <P>
+        MOVE MOUSE POINTER UP AND DOWN TO CONTROL AMPLITUDE!
+    </P>
+    <P>TONE IS AT 750 HZ!</P>
+    <P>RED IS AT TONE FREQ!</P>
+    <P>BLUE IS AT DOUBLE TONE FREQ!</P>
+    <P>SEND SIGNAL THRU SYSTEM TO PROBE DOUBLING OF SYSTEM!</P>
+</div>
+
+<script>
+
+oscon = true;
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  (1025).toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+
+
+var soundFile, mic, osc;
+
+var analyzer;
+var numSamples = 1024;
+
+// Array of amplitude values (-1 to +1) over time.
+var samples = [];
+var currentSource = "mic";
+
+
+function setup() {
+
+  createCanvas(1024, innerHeight);    
+  strokeWeight(2);  
+  background(159,135,103);
+  noFill();
+  stroke(0);
+
+  analyzer = new p5.FFT(0, numSamples);
+
+  // set up various inputs. We'll toggle them when key "T" is pressed.
+  mic = new p5.AudioIn();
+  
+  mic.start();
+  analyzer.setInput(mic);
+  osc = new p5.SinOsc(); // set frequency and type
+  osc.amp(1.0);   
+ // osc.freq(sampleRate()/32);  
+  osc.freq(sampleRate()/64);  
+              osc.start();
+
+}
+
+
+gain = 1000;
+
+x1 = 0;//cosine component of f0 = 750 Hz mode
+y1 = 0;//  sine component of f0 = 750 Hz mode
+x2 = 0;//cosine component of 2*f0 = 1500 Hz mode
+y2 = 0;//  sine component of 2*f0 = 1500 Hz mode
+
+
+frameindex =0;
+
+jsondata = {};
+jsondata.p1 = [];
+jsondata.p2 = [];
+jsondata.x1 = [];
+jsondata.x2 = [];
+jsondata.y1 = [];
+jsondata.y2 = [];
+jsondata.theta1 = [];
+jsondata.theta2 = [];
+
+amp_modulation_period = 60;
+
+power_plot_gain = 0.25;
+power_plot_gain2 = 100;
+
+function draw(){
+
+  frameRate(30);
+  
+  if(oscon){
+      if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+        osc.amp((height - mouseY)/height); 
+      }
+      else{
+//          osc.amp(frameindex/4096);
+          osc.amp(0.1 + 0.25*Math.sin(frameindex/amp_modulation_period)*Math.sin(frameindex/amp_modulation_period));
+      }
+  }
+  background(159,135,103);
+    noFill();
+  // get a buffer of 1024 samples over time.
+  samples = analyzer.waveform();
+  var bufLen = samples.length;
+
+  // draw snapshot of the samples
+  strokeWeight(4);
+  stroke("red");
+/*
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = 100*Math.sin(2*Math.PI*x/128);
+    vertex(x, y + height/2);
+  }
+  endShape();
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = 100*Math.cos(2*Math.PI*x/128);
+    vertex(x, y + height/2);
+  }
+  endShape();
+  */
+
+  x1 = 0;  
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.cos(2*Math.PI*x/64);
+    vertex(x, gain*y*samples[x] + height/2);
+    x1 += y*samples[x];
+  }
+  endShape();
+  
+  y1 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.sin(2*Math.PI*x/64);
+    vertex(x, gain*y*samples[x] + height/2);
+    y1 += y*samples[x];
+  }
+  endShape();
+  stroke("blue");
+  x2 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.sin(2*Math.PI*x/32);
+    vertex(x, gain*y*samples[x] + height/2);
+    x2 += y*samples[x];
+  }
+  endShape();
+  y2 = 0;
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = Math.cos(2*Math.PI*x/32);
+    vertex(x, gain*y*samples[x] + height/2);
+    y2 += y*samples[x];
+  }
+  endShape();
+
+/*
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = 100*Math.sin(2*Math.PI*x/64);
+    vertex(x, y + height/2);
+  }
+  endShape();
+  beginShape();
+  for (var x = 0; x < 1024; x++){
+    var y = 100*Math.cos(2*Math.PI*x/64);
+    vertex(x, y + height/2);
+  }
+  endShape();
+*/
+
+  beginShape();
+  stroke(0);
+  for (var x = 0; x < 1024; x++){
+    var y = map(samples[x], -1, 1, -height/2, height/2);
+    vertex(x, y + height/2);
+  }
+  endShape();
+  strokeWeight(1);
+  stroke("red");
+  fill("red");
+  textSize(50);
+  text("p1 = " + (Math.round(x1*x1 + y1*y1)).toString(),width - 300,100);
+  text("x1 = " + (Math.round(x1)).toString(),10,100);
+  text("y1 = " + (Math.round(y1)).toString(),10,200);
+  text("theta1 = " + (Math.round(Math.atan(y1/x1)*180/Math.PI)).toString() + " deg",width - 400,200);
+  
+  jsondata.p1.push(Math.round(x1*x1 + y1*y1));
+  noFill();
+  stroke("red");
+
+  strokeWeight(10);
+  beginShape();
+  for (var index = 0; index < jsondata.p1.length; index++){
+    vertex(index, height - 5 - power_plot_gain*jsondata.p1[index]);
+    //console.log(jsondata.p1[index]);
+  }
+  endShape();
+
+  
+  
+  stroke("blue");
+  fill("blue");
+    strokeWeight(4);
+
+  text("p2 = " + (Math.round((x2*x2 + y2*y2)*100)/100).toString(),width - 300,height - 100);
+  jsondata.p2.push(Math.round(x2*x2 + y2*y2));
+
+  text("x2 = " + (Math.round(x2*100)/100).toString(),10,height - 100);
+  text("y2 = " + (Math.round(y2*100)/100).toString(),10,height - 200);
+  text("theta2 = " + (Math.round(Math.atan(y2/x2)*180/Math.PI)).toString() + " deg",width - 400,height - 200);
+  
+  noFill();
+  stroke("blue");
+  beginShape();
+  strokeWeight(10);
+  for (var index = 0; index < jsondata.p2.length; index++){
+    vertex(index, height - 5 - power_plot_gain2*jsondata.p2[index]);
+  }
+  endShape();
+ 
+  
+  frameindex++;
+  if(frameindex >= 1024){
+    frameindex = 0;
+    jsondata.p1 = [];
+    jsondata.p2 = [];
+    jsondata.x1 = [];
+    jsondata.x2 = [];
+    jsondata.y1 = [];
+    jsondata.y2 = [];
+    jsondata.theta1 = [];
+    jsondata.theta2 = [];
+  }
+    
+}
+
+
+
+
+function post(){
+            
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    var url = "save-png.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=square" + timestamp +  "-scope.png");//send text to filesaver.php
+     //location.reload(); 
+     
+    newfilename = "square" + timestamp +  "-scope.png";
+    
+    var newbox = document.createElement("DIV");
+    newbox.classList.add("imagebox");         
+    
+    var deletespan = document.createElement("SPAN");
+    deletespan.innerHTML = "X";
+    deletespan.classList.add("deletespan");
+    deletespan.onclick = function(){
+        //delete the parent div of the image
+        //delete the file
+        var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+        var httpc = new XMLHttpRequest();
+        var url = "delete-file.php";         
+        httpc.open("POST", url, true);
+        httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpc.send("filename=" + filename);//send text to deletefile.php
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    }
+    
+    newbox.appendChild(deletespan);
+
+    var newdiv = document.createElement("DIV");
+    newdiv.innerHTML = newfilename;
+    newdiv.className = "filelabel";
+    newbox.appendChild(newdiv);
+
+    var newimg = document.createElement("IMG");
+    newimg.src = png64;
+    newimg.classList.add("uploadimage");
+    newimg.classList.add("button");
+    newbox.appendChild(newimg);    
+
+
+    document.getElementById("feedscroll").insertBefore(newbox,document.getElementById("feedscroll").getElementsByClassName("imagebox")[0]);
+        
+}
+
+function keyPressed() {
+
+    if(key == 's'){
+        post();
+    }
+
+}
+
+function mouseClicked() {
+ 
+ if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+      if(!oscon){
+          osc.start();
+
+      }
+      else{
+          osc.stop();
+
+      }
+      oscon = !oscon;     
+  } 
+
+    
+}
+
+
+document.getElementById("savebutton").onclick = function(){
+    post();
+}
+
+upuploadImages = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        upuploadImages = JSON.parse(this.responseText);
+        for(var index = upuploadImages.length - 1;index >= 0;index--) {
+            
+            if(upuploadImages[index].includes("-scope")){
+            
+                var newbox = document.createElement("DIV");
+                newbox.classList.add("imagebox");         
+                
+                var deletespan = document.createElement("SPAN");
+                deletespan.innerHTML = "X";
+                deletespan.classList.add("deletespan");
+                deletespan.onclick = function(){
+                    //delete the parent div of the image
+                    //delete the file
+                    var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+                    var httpc = new XMLHttpRequest();
+                    var url = "delete-file.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=" + filename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }
+                
+                newbox.appendChild(deletespan);
+        
+                var newdiv = document.createElement("DIV");
+                newdiv.innerHTML = upuploadImages[index];
+                newdiv.className = "filelabel";
+                newbox.appendChild(newdiv);
+            
+                
+                document.getElementById("feedscroll").appendChild(newbox);
+                var newimg = document.createElement("IMG");
+                newimg.src = upuploadImages[index];
+                newimg.classList.add("uploadimage");
+                newimg.classList.add("button");
+                newbox.appendChild(newimg);
+                
+            }
+            
+        }
+    }
+};
+httpc9.open("GET", "list-files.php", true);
+httpc9.send();
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;    
+}
+main{
+    position:absolute;
+    right:0px;
+    top:0px;
+    border-left:solid;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Comic Sans MS;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Comic Sans MS;
+    text-align:center;
+        overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Comic Sans MS;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#9f8767;    
+    padding:1em 1em 1em 1em;
+}
+#savebutton{
+    text-align:center;
+    border:solid;
+    border-radius:10px;
+    border-width:4px;
+    font-family:Comic Sans MS;
+    font-size:1.5em;
+    width:5em;
+    margin:auto;
+    cursor:pointer;
+}
+#savebutton:hover{
+    background-color:green;
+}
+#savebutton:active{
+    background-color:yellow;
+}
+
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+</style>
+</body>
+</html>

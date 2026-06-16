@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+    <head>
+     <meta charset="utf-8"/>
+     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADf+wAA3/sAAAfgAACv9QAAoAUAAK/1AACv9QAAqBUAAK/1AACoFQAAr/UAAKAFAACv9QAAB+AAAN/7AADf+wAA" rel="icon" type="image/x-icon" />
+        
+            <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+
+    </head>
+<body>
+    
+    <a id ="homelink" href = "index.html">HOME</a>
+    
+    <h1 id = "title">WRITE A NOTE</h1>
+<textarea id = "maintextarea"></textarea>
+
+<div id = "postbutton">PUBLISH CURRENT NOTE AS TEXT FILE</div>
+<STYLE>
+    #postbutton{
+        position:absolute;
+        left:5px;
+        bottom:5px;
+        border:solid;
+        font-family:Comic Sans MS;
+        font-size:1.5em;
+        cursor:pointer;
+    }
+    #postbutton:hover{
+        background-color:green;
+    }
+    #postbutton:active{
+        background-color:yellow;
+    }
+</STYLE>
+<script>
+
+currentfile = "note.txt";
+
+//get readme.md, convert to html and display
+
+motd = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        motd = this.responseText;
+        document.getElementById("maintextarea").value = motd;  
+    }
+};
+httpc.open("GET", "load-file.php?filename=" + currentfile, true);
+httpc.send();
+
+document.getElementById("maintextarea").onkeyup = function() {
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=" + currentfile);//send text to filesaver.php
+}
+
+document.getElementById("postbutton").onclick = function(){
+    var timestamp = Math.round((new Date().getTime()));
+    foo = new Date(timestamp)
+    datestring = (foo.getFullYear()).toString() + "-" + (foo.getMonth() + 1).toString() + "-" + (foo.getDate()).toString();
+    
+    if(foo.getHours() < 10){
+        timestring =  "0" + (foo.getHours()).toString() + "_" + (foo.getMinutes()).toString() + "_" + (foo.getSeconds()).toString();        
+    }
+    else{
+        timestring = (foo.getHours()).toString() + "_" + (foo.getMinutes()).toString() + "_" + (foo.getSeconds()).toString();        
+    }
+    filename = "note-" + datestring + "-" + timestring + ".txt";
+    console.log(filename);
+    data =document.getElementById("maintextarea").value;
+    var httpc2 = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc2.open("POST", url, true);
+    httpc2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc2.send("data="+data+"&filename=" + filename);//send text to filesaver.php
+    
+}
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;
+}
+#title{
+    position:absolute;
+    z-index:-1;
+    width:100%;
+    text-align:center;
+    font-family:Comic Sans MS;
+    
+}
+a{
+}
+#maintextarea{
+    position:absolute;
+    left:10%;
+    right:10%;
+    top:10%;
+    bottom:10%;
+    width:80%;
+    height:75%;
+    padding:1em 1em 1em 1em ;
+    background-color:#9f8767;
+    font-family:Comic Sans MS;
+    font-size:1.5em;
+    overflow:scroll;
+    border:solid;
+    border-width:10px;
+}
+#homelink{
+    position:absolute;
+    left:0px;
+    top:0px;
+    font-size:2em;
+    font-family:Comic Sans MS;
+    font-size:4em;
+    color:blue;
+    
+}
+
+        </style>
+    </body>
+</html>

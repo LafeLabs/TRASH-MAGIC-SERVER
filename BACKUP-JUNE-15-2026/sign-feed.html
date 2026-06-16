@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        NO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+    <title>sign factory</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+<div id ="signfeed"></div>
+<script>
+
+squaresize = 400;
+
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 200;
+}
+else{
+    squaresize = innerWidth - 200;
+    
+}
+
+signfeed = [];
+
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+        signfeed = JSON.parse(this.responseText);
+        drawfeed();
+    }
+};
+httpc.open("GET", "load-file.php?filename=signfeed.json", true);
+httpc.send();
+
+function drawfeed(){
+       document.getElementById("signfeed").innerHTML = "";
+//       for(var signindex = signfeed.length - 1;signindex >= 0;signindex--){
+       for(var signindex = 0;signindex < signfeed.length;signindex++){
+           var newdiv = document.createElement("DIV");//sign box
+           newdiv.className = "signbox";
+           var newa = document.createElement("A");
+           newa.innerHTML = signfeed[signindex].name;
+           newa.href = signfeed[signindex].link;
+           var newp = document.createElement("P");
+           newp.innerHTML = signfeed[signindex].message;
+           var newcan = document.createElement("CANVAS");
+
+            var new_qrcode = document.createElement("SPAN");
+        
+            qrcode = new QRCode(new_qrcode, {
+            	text: signfeed[signindex].link,
+            	width: 160,
+            	height: 160,
+            	colorDark : "#000000",
+            	colorLight : "#ffffff",
+            	correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            newdiv.appendChild(newa);
+            newdiv.appendChild(new_qrcode);
+            newdiv.appendChild(newp);
+            newdiv.appendChild(newcan);
+            document.getElementById("signfeed").appendChild(newdiv);
+           ctx = newcan.getContext("2d");
+            newcan.width = squaresize;//px
+            newcan.height = squaresize;//px
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            for(var strokeindex = 0;strokeindex < signfeed[signindex].brushstrokes.length;strokeindex++){
+                ctx.lineWidth = Math.round(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].strokewidth);
+                ctx.strokeStyle = signfeed[signindex].brushstrokes[strokeindex].color;
+                ctx.beginPath(); // Start a new path
+            
+                ctx.moveTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[0].y); // Move the pen to (30, 50)
+                for(var pointindex = 1;pointindex < signfeed[signindex].brushstrokes[strokeindex].points.length;pointindex++){
+    
+                    ctx.lineTo(0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].x,0.01*squaresize*signfeed[signindex].brushstrokes[strokeindex].points[pointindex].y); // Draw a line to (150, 100)    
+                }
+                ctx.stroke(); // Render the path
+                
+            }
+           
+       }
+       
+}
+
+
+</script>
+<style>
+body{
+    background-color:#404040;
+    font-family:Comic Sans MS;
+}
+.signbox{
+    background-color:#9f8767;
+    margin:1em 1em 1em 1em;
+    padding:1em 1em 1em 1em;
+    border-radius:1em;
+}
+.signbox a{
+    color:blue;
+    font-size:4em;
+}
+.signbox p{
+    font-size:2em;
+}
+</style>
+</body>
+</html>

@@ -40,11 +40,12 @@
 
 <div id = "feedscroll">
     <h1>TRASH MAGIC SQUARES</h1>
-    
+
     <a href = "index.html">HOME</a>
     <a href = "geometron.html">GEOMETRON</a>
+    <A HREF = "math-o-tron.html">MATH-O-TRON!</A>
     <div id = "qrcode"></div>
-
+    
 
 </div>
 
@@ -82,7 +83,9 @@ function setup() {
     
     
     createCanvas(squareWidth-50, squareWidth-70);
-    background(159,135,103);
+//    background(159,135,103);
+        background(12,12,12);
+
     stroke(0);
     strokeWeight(30);
 //      image(img, 0, 0,squareWidth-50,squareWidth-70);
@@ -92,9 +95,13 @@ inLine = false;
 
 newimage = false;
 
+theta = 0;//angle in degrees
+deltatheta = 0.2;//angle step in degrees
+
 function draw() {
   
   stroke(0);
+  stroke(colorwheel(25*theta + index*360/20));
   if (mouseIsPressed === true) {
     line(mouseX, mouseY, pmouseX, pmouseY);
     inLine = true;
@@ -110,11 +117,63 @@ function draw() {
       }
       inLine = false;
   }
+  theta += deltatheta;
 }
 
+
+function colorwheel(angle){
+    H = angle%360;
+    z = 255*(1 - Math.abs((H/60)%2 - 1));
+    if(H < 60){
+        red = 255;
+        green = Math.round(z);
+        blue = 0;
+    }
+    if(H >= 60 && H < 120){
+        red = Math.round(z);
+        green = 255;
+        blue = 0;
+    }
+    if(H >= 120 && H < 180){
+        red = 0;
+        green = 255;
+        blue = Math.round(z);
+    }
+    if(H >= 180 && H < 240){
+        red = 0;    
+        green = Math.round(z);
+        blue = 255;
+    }
+    if(H >= 240 && H < 300){
+        red = Math.round(z);    
+        green = 0;
+        blue = 255;
+    }
+    if(H >= 300 && H < 360){
+        red = 255;    
+        green = 0;
+        blue = Math.round(z);
+    }
+    
+    redstring = red.toString(16);
+    if(redstring.length < 2){
+        redstring = "0" + redstring;    
+    }
+    greenstring = green.toString(16);
+    if(greenstring.length < 2){
+        greenstring = "0" + greenstring; 
+    }
+    bluestring = blue.toString(16);
+    if(bluestring.length < 2){
+        bluestring = "0" + bluestring; 
+    }
+    color = "#" + redstring + greenstring + bluestring;   
+    return(color);
+}
 document.getElementById("removebutton").onclick = function(){
     clear();
     background(159,135,103);
+    
     for(var lineindex = 0;lineindex < lineArrayStack.length;lineindex++){
         for(var pointindex = 1;pointindex < lineArrayStack[lineindex].length;pointindex++){
             line(lineArrayStack[lineindex][pointindex - 1].x,lineArrayStack[lineindex][pointindex - 1].y,lineArrayStack[lineindex][pointindex].x,lineArrayStack[lineindex][pointindex].y);
@@ -126,7 +185,9 @@ document.getElementById("deletebutton").onclick = function(){
     lineArrayStack.pop();
     lineArrayStack.pop();
     clear();
-    background(159,135,103);
+//    background(159,135,103);
+    background(128,128,128);
+
     for(var lineindex = 0;lineindex < lineArrayStack.length;lineindex++){
         for(var pointindex = 1;pointindex < lineArrayStack[lineindex].length;pointindex++){
             line(lineArrayStack[lineindex][pointindex - 1].x,lineArrayStack[lineindex][pointindex - 1].y,lineArrayStack[lineindex][pointindex].x,lineArrayStack[lineindex][pointindex].y);
@@ -139,7 +200,11 @@ document.getElementById("deletebutton").onclick = function(){
 document.getElementById("clearbutton").onclick = function(){
     lineArrayStack = [];
     clear();
-    background(159,135,103);
+    //background(159,135,103);
+    //background(128,128,128);
+    background(12,12,12);
+
+
 }
 
 codesquaresize = 170;

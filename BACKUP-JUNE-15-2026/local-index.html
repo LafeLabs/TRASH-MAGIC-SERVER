@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC!</title>    
+   <script src = "rainbow.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   <script type="module" src="track-list.js"></script>   
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>    
+    <H1>TRASH MAGIC SERVER!</H1>
+    <A HREF = "https://github.com/lafelabs/TRASH-MAGIC-SERVER">REPLICATOR SCROLL!</A>
+    <a HREF= "edit-readme.html">LOCAL README FILE!</a>
+    <a href = "#apps">TRASH MAGIC APPS!</a>
+    <div id = "qrcode"></div>
+    <A HREF = "edit-index.html">HOME PAGE EDITOR!</A>
+    <H1>TRASH MAGIC TREE BRANCHES!</H1>
+    <a href = "branch.html">BRANCH!</a>
+    <DIV ID = "branches"></DIV>
+    <H1>LINK FEED!</H1>
+    <table>
+        <tr>
+            <td>ENTER NEW LINK:</td>
+            <TD>
+                <INPUT ID = "newlinkinput">
+            </TD>
+        </tr>
+    </table>
+    <div id = "cardboard_sign_feed"></div>
+    <H1>PDF DOCUMENTS!</H1>
+    <div id = "pdf-feed"></div>
+    <H1>TEXT DOCUMENTS!</H1>
+    <div id = "text-feed"></div>
+    <H1>AUDIO TRACKS!</H1>
+    <div id = "track-list"></div>
+    <H1>WALL!</H1>
+    <TEXTAREA ID = "wall"></TEXTAREA>
+    <H1>TERMINAL!</H1>
+    <TEXTAREA ID = "terminal"></TEXTAREA>
+
+    <div id = "image-feed"></div>
+    <H1>IMAGES!</H1>  
+    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+            <span id ="uploadspan">UPLOAD:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+    </form>
+
+<style>
+    #image-feed img{
+        border:solid;
+        border-radius:1em;
+        border-width:5px;
+    }
+    button{
+        font-size:2em;
+    }
+    li{
+        margin-top:0.25em;
+        margin-bottom:0.25em;
+        border-radius:0.125em;
+    }
+    .link-delete-button{
+    border:solid;
+    border-radius:5px;
+    border-color:red;
+    cursor:pointer;
+    color:red;
+    text-align:center;
+    width:40%;
+    font-size:2em;
+    position:relative;
+    top:5em;
+    left:5em;
+}
+.CARDBOARD-SIGN A{
+    COLOR:black;
+}
+.CARDBOARD-SIGN{
+    MAX-WIDTH:90%;   
+    MARGIN:AUTO;
+    MARGIN-TOP:2EM;
+    border-top:solid;
+    MARGIN-BOTTOM:1EM;
+    OVERFLOW:SCROLL;
+    FONT-SIZE:1EM;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.timestampdata{
+    display:none;
+}
+table, form{
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+}
+#fileToUpload{
+    cursor:pointer;
+}
+#submitinput{
+    cursor:pointer;
+}
+#newlinkinput{
+    background-color:black;
+    color:#00ff00;
+    font-family:Courier;
+    font-size:1em;
+}
+    #wall{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+    #terminal{
+        width:80%;
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:Courier;
+        BACKGROUND-COLOR:black;
+        color:#00ff00;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+</style>
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+files = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        loadfiles();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+function loadfiles(){
+    listhtml = "<track-list>\n";
+    listhtml += "  <ol slot = \"tracks\">\n";
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".m4a" || files[index].substring(files[index].length-4,files[index].length) == ".mp3"||   files[index].substring(files[index].length-4,files[index].length) == ".wav"){
+            listhtml += "    <li>\n";
+            listhtml += "      <strong>" + files[index] + "</strong>\n";
+        listhtml += "      <audio controls src = \"" + files[index] + "\"></audio>\n";
+            listhtml += "    </li>\n";                
+        }
+
+    }
+    listhtml += "  </ol>\n";
+    listhtml += "</track-list>";
+    document.getElementById("track-list").innerHTML = listhtml;
+    rainbow(document.getElementsByTagName("li"));
+
+    for(var index = 0;index < files.length;index++) {
+        if(files[index].includes(".png") || files[index].includes(".PNG") || files[index].includes(".jpg") || files[index].includes(".JPG") ||files[index].includes(".jpeg")||files[index].includes(".SVG") ||files[index].includes(".svg") || files[index].includes(".gif") ||files[index].includes(".GIF")){
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = files[index];
+            newimg.classList.add("uploadimage");
+            newuploadbox.appendChild(newimg);
+            document.getElementById("image-feed").appendChild(newuploadbox);
+    
+        }
+    }    
+
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".pdf" || files[index].substring(files[index].length-4,files[index].length) == ".PDF"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("pdf-feed").appendChild(newa);
+        }
+
+    }
+    rainbow(document.getElementById("pdf-feed").getElementsByTagName("a"));
+
+    for(var index = 0;index < files.length;index++){
+        if(files[index].substring(files[index].length-4,files[index].length) == ".txt" || files[index].substring(files[index].length-4,files[index].length) == ".TXT"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("text-feed").appendChild(newa);
+        }
+
+    }
+    rainbow(document.getElementById("text-feed").getElementsByTagName("a"));
+
+}
+
+
+
+document.getElementById("newlinkinput").value = "";
+document.getElementById("newlinkinput").select();
+document.getElementById("newlinkinput").onchange = function(){
+    links.push(this.value);
+    drawlinkfeed();
+    savelinks();
+}
+
+function drawlinkfeed(){
+    document.getElementById("cardboard_sign_feed").innerHTML = "";
+    for(var index = links.length - 1;index >= 0;index--){
+        var new_cardboard_sign = document.createElement("DIV");
+        new_cardboard_sign.classList.add("CARDBOARD");
+        new_cardboard_sign.classList.add("CARDBOARD-SIGN");
+        document.getElementById("cardboard_sign_feed").appendChild(new_cardboard_sign);
+        var new_qrcode = document.createElement("SPAN");
+        
+        qrcode = new QRCode(new_qrcode, {
+        	text: links[index],
+        	width: 200,
+        	height: 200,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+
+        var new_link = document.createElement("A");
+        new_link.innerHTML = links[index];
+        new_link.href = links[index];
+
+        var new_delete_button = document.createElement("SPAN");
+        new_delete_button.classList.add("button");
+        new_delete_button.classList.add("link-delete-button");
+        new_delete_button.innerHTML = "DELETE";
+        new_delete_button.onclick = function(){
+            var newindex = parseInt(this.parentElement.getElementsByClassName("timestampdata")[0].innerHTML);
+            var newlinks = [];
+            for(var lindex = 0;lindex < links.length;lindex++){
+                if(lindex != newindex){
+                    newlinks.push(links[lindex]);
+                }
+            }
+            links = newlinks;
+            drawlinkfeed();
+            savelinks();
+        }
+        new_cardboard_sign.appendChild(new_delete_button);
+        new_cardboard_sign.appendChild(new_qrcode);
+        new_cardboard_sign.appendChild(new_link);
+        var indexdata = document.createElement("SPAN");
+        indexdata.classList.add("timestampdata");
+        indexdata.innerHTML = index.toString();
+        new_cardboard_sign.appendChild(indexdata);
+    }
+    rainbow(document.getElementsByTagName("A"));
+    
+}
+
+function savelinks(){
+    var httpc = new XMLHttpRequest();
+    httpc.open("POST", "save-file.php", true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(JSON.stringify(links,null,"    "))+"&filename=links.json");//send text to save-file.php
+}
+
+var httpclinks = new XMLHttpRequest();
+httpclinks.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        links = JSON.parse(this.responseText);    
+        drawlinkfeed();
+    }
+};
+httpclinks.open("GET", "load-file.php?filename=links.json", true);
+httpclinks.send();
+
+
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+
+        var newa = document.createElement("A");
+        newa.innerHTML = "UP A LEVEL ../";
+        newa.href = "../";
+        document.getElementById("branches").appendChild(newa);
+        for(var index = 0;index < directories.length;index++) {
+            var newa = document.createElement("A");
+            newa.innerHTML = directories[index] + "/";
+            newa.href = directories[index] + "/";
+            document.getElementById("branches").appendChild(newa);
+        }
+        rainbow(document.getElementById("branches").getElementsByTagName("a"));
+    }
+};
+
+httpc2.open("GET", "list-branches.php", true);
+httpc2.send();
+
+
+
+wall = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        wall = this.responseText;
+        document.getElementById("wall").value = wall;  
+    }
+};
+httpc.open("GET", "load-file.php?filename=wall.txt", true);
+httpc.send();
+
+document.getElementById("wall").onkeyup = function() {
+    wall = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=wall.txt");//send text to save-file.php
+}
+
+terminal = "";
+var httpc2 = new XMLHttpRequest();
+httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        terminal = this.responseText;
+        document.getElementById("terminal").value = terminal;  
+    }
+};
+httpc2.open("GET", "load-file.php?filename=terminal.txt", true);
+httpc2.send();
+
+document.getElementById("terminal").onkeyup = function() {
+    terminal = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "save-file.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=terminal.txt");//send text to save-file.php
+}
+
+</script>
+</body>
+</html>
+
+
+    
+    

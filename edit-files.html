@@ -1,9 +1,10 @@
-<!doctype html>
+ <!doctype html>
 <html>
 <head>
  <!-- 
-markdown file editor
+edit files in .html, .js, .json, and .css, .php, .py, .txt, .md
 -->
+
 <link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
     
 <!--
@@ -13,36 +14,30 @@ https://ace.c9.io/
 list of languages:
 https://cloud9-sdk.readme.io/docs/language-mode
 
-
 -->    
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
 
-<title>Markdown file editor</title>
+<title>Web File Editor</title>
 
 </head>
 <body>
 
 <div id = "lightdarkbutton" class = "button">LIGHT MODE</div>
 
-<a href=  "read-markdown-files.html" style = "position:absolute;right:5px;top:1.5em;font-size:2em;font-family:Arial">read-markdown-files.html</a>
-    
-<a href=  "read-markdown-latex-files.html" style = "position:absolute;right:5px;top:2.7em;font-size:2em;font-family:Arial">read-markdown-latex-files.html</a>
-    
-    
-<a href=  "generate-dna.php" style = "position:absolute;right:5px;top:4.1em;font-size:2em;font-family:Arial">generate-file-set.php</a>
+<a href=  "index.html" style = "position:absolute;right:5px;top:1.5em;font-size:2em;font-family:Arial">HOME</a>
 
-<a href=  "delete-markdown-files.html" style = "position:absolute;right:5px;top:5.5em;font-size:2em;font-family:Arial">delete-markdown-files.html</a>
+<a href=  "generate-file-set.php" style = "position:absolute;right:5px;top:3.5em;font-size:2em;font-family:Arial">generate-file-set.php</a>
+
+<a href=  "delete-files.html" style = "position:absolute;right:5px;top:5.5em;font-size:2em;font-family:Arial">delete-files.html</a>
 
 <table id = "inputtable">
     <tr>
         <td>Current File Name:</td>
-        <td>
-            <a id = "currentfilename"></a>
-        </td>
+        <td id = "currentfilename"></td>
     </tr>
     <tr>
-        <td>New File Name(end with .md):</td>
+        <td>New File Name(end with .html, .js, .css, .json, .php, .md, .txt):</td>
         <td><input id = "newscrollinput"/></td>
     </tr>
 </table>
@@ -56,17 +51,16 @@ https://cloud9-sdk.readme.io/docs/language-mode
 
 <script>
 
-prototypescroll = "name";
 
 editor = ace.edit("maineditor");
 editor.setTheme("ace/theme/github");
 //editor.setTheme("ace/theme/vibrant_ink");
-editor.getSession().setMode("ace/mode/markdown");
+editor.getSession().setMode("ace/mode/html");
 editor.getSession().setUseWrapMode(true);
 editor.$blockScrolling = Infinity;
 editor.setTheme("ace/theme/vibrant_ink");
 
-currentFile = "README.md";
+currentFile = "index.html";
 var httpc = new XMLHttpRequest();
 httpc.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -80,23 +74,35 @@ httpc.open("GET", "load-file.php?filename=" + currentFile, true);
 httpc.send();
 
 
-
-
-
 scrolls = [];
-book = [];
-
 var httpc8 = new XMLHttpRequest();
 httpc8.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         scrolls = JSON.parse(this.responseText);
         for(var index = 0;index < scrolls.length;index++) {    
-            if(scrolls[index].substring(scrolls[index].length - 3,scrolls[index].length) == ".md" || scrolls[index].substring(scrolls[index].length - 3,scrolls[index].length) == ".MD"){
+            if(scrolls[index].substring(scrolls[index].length-5,scrolls[index].length) == ".html" || scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".txt" || scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".css" || scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".php" || scrolls[index].substring(scrolls[index].length-3,scrolls[index].length) == ".js" ||scrolls[index].substring(scrolls[index].length-3,scrolls[index].length) == ".py" || scrolls[index].substring(scrolls[index].length-3,scrolls[index].length) == ".md" ||    scrolls[index].substring(scrolls[index].length-5,scrolls[index].length) == ".json"){
              
+                if(scrolls[index].substring(scrolls[index].length-5,scrolls[index].length) == ".html"){
+                    var newa = document.createElement("A");
+                    newa.innerHTML = scrolls[index];
+                    newa.href = scrolls[index];
+                    document.getElementById("filescroll").appendChild(newa);
+                 }             
                 var newscrollbutton = document.createElement("div");
                 newscrollbutton.classList.add("file");
                 newscrollbutton.classList.add("html");
-                book.push(scrolls[index]);
+                if(scrolls[index].substring(scrolls[index].length-3,scrolls[index].length) == ".js"){
+                    newscrollbutton.style.borderColor = "red";
+                }
+                if(scrolls[index].substring(scrolls[index].length-3,scrolls[index].length) == ".md"){
+                    newscrollbutton.style.borderColor = "#0000ff80";
+                }
+                if(scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".css"){
+                    newscrollbutton.style.borderColor = "yellow";
+                }
+                if(scrolls[index].substring(scrolls[index].length-4,scrolls[index].length) == ".php"){
+                    newscrollbutton.style.borderColor = "purple";
+                }
                 newscrollbutton.innerHTML =  scrolls[index];
                 document.getElementById("filescroll").appendChild(newscrollbutton);
                 newscrollbutton.onclick = function(){
@@ -160,7 +166,7 @@ document.getElementById("newscrollinput").onchange = function(){
 
     setmode();
     editor.setValue(scroll);  
-    data = encodeURIComponent("# New File\n");
+    data = encodeURIComponent(scroll);
     var httpc = new XMLHttpRequest();
     var url = "save-file.php";        
     httpc.open("POST", url, true);
@@ -248,7 +254,8 @@ document.getElementById("lightdarkbutton").onclick = function(){
         document.getElementById("filescroll").style.backgroundColor = "white";
 
         document.getElementById("filescroll").style.color = "black";        
-
+        document.getElementById("currentfilename").style.backgroundColor = "#eeeeee";
+        document.getElementById("currentfilename").style.color = "black";
         document.getElementById("newscrollinput").style.color = "black";
         document.getElementById("newscrollinput").style.backgroundColor = "white";
         document.body.style.backgroundColor = "#b0b0b0";
@@ -272,7 +279,8 @@ document.getElementById("lightdarkbutton").onclick = function(){
         document.getElementById("filescroll").style.backgroundColor = "#101010";        
         document.getElementById("filescroll").style.color = "white";        
         
-
+        document.getElementById("currentfilename").style.backgroundColor = "#101010";        
+        document.getElementById("currentfilename").style.color = "white"
         document.getElementById("newscrollinput").style.color = "white";
         document.getElementById("newscrollinput").style.backgroundColor = "black";        
         document.getElementById("lightdarkbutton").innerHTML = "LIGHT MODE";        

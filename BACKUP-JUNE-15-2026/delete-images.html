@@ -1,0 +1,183 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+       <meta charset="utf-8">
+       <!--
+    
+Delete images
+       -->
+ 
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+      
+       <title>Image feed</title>    
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    </head>
+    <body>    
+    <table id = "linktable">
+    <tr>
+        <td>
+            <a href = "index.html">
+            BACK TO MAIN PAGE
+            </a>
+        </td>
+    </tr>
+</table>    
+<div id = "imagefeedheader">
+    <form id = "uploadform" action="upload-image.php" method="post" enctype="multipart/form-data">
+                <span id ="uploadspan">UPLOAD:</span>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id ="submitinput">
+    </form>        
+</div>
+    
+<div id = "imagefeed"></div>
+
+<script>
+
+deletemode = true;
+//deletemode = false;
+
+uploadImages = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        uploadImages = JSON.parse(this.responseText);
+        loadimagefeed();
+    }
+};
+httpcUpload.open("GET", "list-files.php", true);
+httpcUpload.send();
+
+function loadimagefeed(){
+
+    for(var index = uploadImages.length - 1;index >= 0;index--) {
+        if(uploadImages[index].includes(".SVG") || uploadImages[index].includes(".svg") || uploadImages[index].includes(".png") || uploadImages[index].includes(".PNG") || uploadImages[index].includes(".jpg") || uploadImages[index].includes(".JPG") ||uploadImages[index].includes(".jpeg") || uploadImages[index].includes(".gif") ||uploadImages[index].includes(".GIF")){
+            
+            var newuploadbox = document.createElement("DIV");
+            newuploadbox.classList.add("imagebox");
+            var newimg = document.createElement("IMG");
+            newimg.src = uploadImages[index];
+            newimg.classList.add("uploadimage");
+            newuploadbox.appendChild(newimg);
+            document.getElementById("imagefeed").appendChild(newuploadbox);
+    
+            var newdiv = document.createElement("DIV");
+            newdiv.innerHTML = uploadImages[index];
+            newdiv.className = "filelabel";
+            newuploadbox.appendChild(newdiv);
+        
+            if(deletemode){
+                var newspan = document.createElement("SPAN");
+                newspan.innerHTML = "DELETE";
+                newuploadbox.appendChild(newspan);
+                newspan.classList.add("button");
+                newspan.classList.add("deletebutton");
+                newspan.onclick = function(){
+                    var imageurl =this.parentElement.getElementsByClassName("uploadimage")[0].src; 
+                    imagefilename = imageurl.split("/")[imageurl.split("/").length-1];
+                    var httpc = new XMLHttpRequest();
+                    var url = "delete-file.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=" + imagefilename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }   
+            }   
+            
+            
+        }
+    }    
+}
+
+</script>
+<style>
+#fileToUpload,#submitinput,#uploadspan{
+    font-size:2em;
+}
+#fileToUpload,#submitinput{
+    cursor:pointer;
+}
+.filelabel{
+    display:none;
+}
+body{
+    overflow:hidden;
+    font-size:1em;
+    background-color:#a0a0a0;
+    font-family:Arial;
+}
+h1{
+    text-align:center;
+}
+#linktable{
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+#linktable a{
+    color:blue;
+    font-size:2em;
+}
+#imagefeedheader{
+    position:absolute;
+    left:0px;
+    top:0px;
+    padding-top:1em;
+    padding-left:1em;
+    height:8em;
+}
+#imagefeed{
+    position:absolute;
+    top:10em;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow:scroll;
+}
+.uploadimage{
+    max-width:50%;
+    margin:auto;
+    display:block;
+    background-color:#808080;
+}
+.imagebox{
+    border-top:solid;
+    padding-bottom:1em;
+    padding-top:1em;
+    padding-left:1em;
+    
+}
+.deletebutton{
+    width:2em;
+    background-color:#808080;
+    border:solid;
+    border-radius:5px;
+    border-width:5px;
+    border-color:red;
+    font-family:helvetica;
+    font-size:2em;
+    color:red;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{ 
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+.filelabel{
+    color:#ff2cb4;
+    font-size:2em;
+}
+</style>
+</body>
+</html>
+    
+    

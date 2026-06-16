@@ -18,24 +18,17 @@ CAPS LOCK ALWAYS ON!
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEREBERABEQAREAAREAEREQERAREBERERERERERERERERAAABEREREREBEQEREREQEQEBAREBEQABAQEBEAAREBEBAQERAREREQERAREREREQAAAAEREREREQABERERERAREREQEREQAREQEREAERABEQABEQAREREREBEREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
-   <title>ALBUM!</title>    
+   <title>PDF LIBRARY!</title>    
    <script src = "rainbow.js"></script>
    <link rel="stylesheet" href="trashmagic.css">
-   <script src="track-list.js"></script>   
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body>    
+<body>
+    <A HREF="index.html">HOME</A>   
     <div id = "qrcode"></div>
-    <a href = "index.html">HOME</a>
-    <H1>TRASH MAGIC ALBUM!</H1>
-    <a href = "edit-files.html">EDIT WEB FILES</a>
-    <div id = "track-list"></div>
+    <H1>PDF LIBRARY!</H1>
+    <div id = "pdf-feed"></div>
 <style>
-    #image-feed img{
-        border:solid;
-        border-radius:1em;
-        border-width:5px;
-    }
     button{
         font-size:2em;
     }
@@ -57,8 +50,6 @@ CAPS LOCK ALWAYS ON!
     top:5em;
     left:5em;
 }
-
-
 .button{
     cursor:pointer;
 }
@@ -75,19 +66,6 @@ table, form{
     FONT-FAMILY:COMIC SANS MS;
     BACKGROUND-COLOR:#9f8767;
 }
-#fileToUpload{
-    cursor:pointer;
-}
-#submitinput{
-    cursor:pointer;
-}
-#newlinkinput{
-    background-color:black;
-    color:#00ff00;
-    font-family:Courier;
-    font-size:1em;
-}
-
 </style>
 <script>
 
@@ -124,23 +102,21 @@ httpcUpload.open("GET", "list-files.php", true);
 httpcUpload.send();
 
 function loadfiles(){
-    listhtml = "<track-list>\n";
-    listhtml += "  <ol slot = \"tracks\">\n";
+
     for(var index = 0;index < files.length;index++){
-        if(files[index].substring(files[index].length-4,files[index].length) == ".m4a" || files[index].substring(files[index].length-4,files[index].length) == ".mp3"||   files[index].substring(files[index].length-4,files[index].length) == ".wav"){
-            listhtml += "    <li>\n";
-            listhtml += "      <strong>" + files[index] + "</strong>\n";
-        listhtml += "      <audio controls src = \"" + files[index] + "\"></audio>\n";
-            listhtml += "    </li>\n";                
+        if(files[index].substring(files[index].length-4,files[index].length) == ".pdf" || files[index].substring(files[index].length-4,files[index].length) == ".PDF"){
+            var newa = document.createElement("A");
+            newa.href = files[index];
+            newa.innerHTML = files[index];
+            document.getElementById("pdf-feed").appendChild(newa);
         }
 
     }
-    listhtml += "  </ol>\n";
-    listhtml += "</track-list>";
-    document.getElementById("track-list").innerHTML = listhtml;
-    rainbow(document.getElementsByTagName("li"));
+    rainbow(document.getElementById("pdf-feed").getElementsByTagName("a"));
 
 }
+
+
 
 </script>
 </body>
