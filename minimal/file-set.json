@@ -1,0 +1,23 @@
+[
+    "README.md",
+    "branch.html",
+    "branch.php",
+    "delete-branch.php",
+    "delete-file.php",
+    "delete-files.html",
+    "edit-files.html",
+    "file-set.json",
+    "generate-file-set.php",
+    "index.html",
+    "list-branches.php",
+    "list-files.php",
+    "load-file.php",
+    "local-replicator.php",
+    "qrcode.html",
+    "readme.html",
+    "replicate-file-set.php",
+    "replicate-local-file-set.php",
+    "save-file.php",
+    "save-png.php",
+    "upload-image.php"
+]

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+BRANCHES IN THE TREE OF THE ORGANIC WEB!
+    -->
+    <title>Branch folders</title>
+
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id = "header">
+        
+    </div>
+    <div id = "linklist">
+        <table id = "newtable">
+            <tr>
+                <td>ENTER NAME OF NEW BRANCH:</td>
+                <td><input/><a id = "dirlink"></a></td>
+            </tr>
+            <tr id = "replicatorline">
+                <td>OPTIONAL EXTERNAL REPLICATOR URL:</td>
+                <td><input/></td>
+            </tr>
+        </table>
+
+        <ul id = "mainlist">
+        </ul>
+        <div id = "deleteonbutton">BECOME THE DESTROYER!</div>
+
+    </div>
+    
+    <a href = "index.html" style = "color:blue;font-size:2em;font-family:Arial;">HOME</a>
+
+
+    
+
+<div id = "qrcode"></div>
+
+<script>
+
+board = "";
+square = 100;
+
+
+globalurl = window.location.href.split("fork.html")[0];
+//globalurl = "https://www.southplatte.net";
+//urltext = globalurl;
+capsurl = globalurl.toUpperCase();
+capsurl = capsurl.replace("HTTPS://","");
+capsurl = capsurl.replace("HTTP://","");
+capsurl = capsurl.replace(/\//g,"/<BR/>");
+document.getElementById("header").innerHTML = capsurl;
+
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+
+
+
+
+deleteprotect = true;//set to false to enable deletion of directories
+
+//deleteprotect = false;//set to ture to disable deletion of directories
+
+
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+        for(var index = 0;index < directories.length;index++) {
+            var newa = document.createElement("A");
+            newa.innerHTML = directories[index] + "/";
+            newa.href = directories[index] + "/";
+            var newli = document.createElement("LI");
+            newli.appendChild(newa);
+            document.getElementById("mainlist").appendChild(newli);
+        }
+        if(!deleteprotect){
+            addDeleteButtons();
+        }
+    }
+};
+
+httpc2.open("GET", "list-branches.php", true);
+httpc2.send();
+
+
+
+inputs = document.getElementById("newtable").getElementsByTagName("input");    
+
+inputs[0].value = "";    
+inputs[1].value = "";
+
+inputs[0].onchange = function() {
+    dir = this.value;
+    dirlink.innerHTML = "<BR>CLICK ME(1/3)!";
+    dirlink.href = "branch.php?branchname=" + this.value;
+}
+
+
+inputs[1].onchange = function(){
+    dir = inputs[0].value;
+    dirlink.innerHTML = "branch.php?branchname=" + dir + "&replicator=" + this.value; 
+    dirlink.href = "branch.php?branchname=" + dir + "&replicator=" + this.value;
+    
+}
+
+
+function addDeleteButtons(){
+    dirlist = document.getElementById("mainlist").getElementsByTagName("LI");
+    for(var index = 0;index < dirlist.length;index++){
+
+        var newdeletebutton = document.createElement("span");
+        newdeletebutton.innerHTML = "DELETE";
+        newdeletebutton.className = "button";
+        dirlist[index].appendChild(newdeletebutton);
+    }
+    
+    deletebuttons = document.getElementById("mainlist").getElementsByClassName("button");
+
+    for(var index = 0;index < deletebuttons.length;index++){
+        deletebuttons[index].onclick = function() {
+            thisdir = this.parentNode.getElementsByTagName("A")[0].innerHTML;
+            var httpc = new XMLHttpRequest();
+            var url = "delete-branch.php";         
+            httpc.open("POST", url, true);
+            httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+            httpc.send("branchname=" + thisdir);//send text to deletefile.php
+            this.parentNode.parentNode.removeChild(this.parentNode);
+
+        }
+    }
+
+}
+
+document.getElementById("deleteonbutton").onclick = function(){
+    addDeleteButtons();
+    this.style.display  = "none";
+}
+
+</script>
+<style>
+body{
+    background-color:#9f8767;
+    overflow:hidden;
+}
+#linklist{
+    position:absolute;
+    background-color:black;
+    font-family:Arial;
+    font-size:3em;
+    left:5%;
+    bottom:200px;
+    width:90%;
+    height:50%;
+    border:solid;
+    border-width:8px;
+    border-radius:40px;
+    color:#00ff00;
+    overflow:scroll;
+}
+input{
+    font-size:0.8em;
+    color:#ff2cb4;
+    background-color:black;
+    border-color:#00ff00;
+    font-family:Arial;
+    
+}
+#newtable{
+    color:#00ff00;
+}
+#deleteonbutton{
+    color:red;
+    cursor:pointer;
+    border:solid;
+    border-color:red;
+    text-align:center;
+    border-radius:10px;
+    width:12em;
+    display:block;
+    margin:auto;
+}
+#linklist a{
+    color:#ff2cb4;
+}
+#header{
+    font-family:Arial;
+    font-size:3em;
+    position:absolute;
+    overflow:scroll;
+    left:200px;
+    right:200px;
+    top:0px;
+    height:300px;
+}
+#backgroundimage{
+    position:absolute;
+    left:0px;
+    top:0px;
+    overflow:hidden;
+    z-index:-1;
+}
+#qrcode{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:1;
+}
+#mainlist .button{
+    cursor:pointer;
+    color:red;
+    border:solid;
+    border-color:red;
+}
+@media only screen and (orientation: portrait) {
+}
+
+</style>
+</body>
+</html>
